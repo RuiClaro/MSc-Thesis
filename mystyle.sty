@@ -1,0 +1,37 @@
+\ProvidesPackage{mystyle}[2009/19/29 
+I wanted to have a style of my own!]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\newcounter{interactioncnt}
+\setcounter{interactioncnt}{1}
+
+\newcommand\usersystem[2]{
+\small \textbf{Interaction \theinteractioncnt:}
+\normalsize
+\begin{center}
+\begin{tabular}[h]{l@{ }l}
+\textbf{User:} &\textit{``#1''} \\
+\textbf{System:} &\textit{``#2''} \\
+\end{tabular}
+\end{center}
+\hfill{} \tiny $\blacksquare$\normalsize
+\addtocounter{interactioncnt}{1}
+}
+
+\newcommand\usersystemsystem[3]{
+\small \textbf{Interaction \theinteractioncnt:}
+\normalsize
+\begin{center}
+\begin{tabular}[h]{l@{ }l}
+\textbf{User:} &\textit{``#1''} \\
+\textbf{System$_1$:} &\textit{``#2''} \\
+\textbf{System$_2$:} &\textit{``#3''} \\
+\end{tabular}
+\end{center}
+\hfill{} \tiny $\blacksquare$\normalsize 
+\addtocounter{interactioncnt}{1}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+

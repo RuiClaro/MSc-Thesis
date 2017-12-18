@@ -1,0 +1,21 @@
+convert *.msc file to *.svg image
+--------------------------------
+mscgen -T svg -i protocols/template.msc
+
+convert *.svg image to *.pdf and *.pdf_tex files
+------------------------------------------------
+inkscape -D -z --file=protocols/template.svg --export-pdf=protocols/template.pdf --export-latex
+
+correct location of *.pdf file
+------------------------------
+sed -i 's%template.pdf%protocols/template.pdf%g' protocols/template.pdf_tex
+
+include in the desired location of the *.tex file
+-------------------------------------------------
+\begin{figure}[ht]
+\centering
+\def\svgwidth{\columnwidth}
+\input{protocols/template.pdf_tex}
+\caption{Template for MSC.}
+\label{fig:Template_MSC}
+\end{figure}

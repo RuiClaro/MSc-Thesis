@@ -1,0 +1,17 @@
+# template
+
+msc {
+ arcgradient=0;
+
+ A [label="Alice"], B [label="Bob"];
+
+ A-xA  [linecolor="white"]; # force left-hand side margin
+ |||   [label="\hspace{-33mm} left"]; # text on left-hand side margin
+ A->B  [label="message A to B"];
+ A-xB  [label="lost"];
+ A<=B  [label="method B to A"];
+ B-xB  [linecolor="white"]; # force right-hand side margin
+ |||   [label="\hspace{55mm} right"]; # text on right-hand side margin
+ A=>>B [label="callback A to B"];
+ A<-B  [label="message B to A"];
+}

@@ -1,0 +1,66 @@
+%% Creator: Inkscape inkscape 0.48.1, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'protocols/step2.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+
+\begingroup
+  \makeatletter
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}
+    \renewcommand\color[2][]{}%
+  }
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}
+    \renewcommand\transparent[1]{}%
+  }
+  \providecommand\rotatebox[2]{#2}
+  \ifx\svgwidth\undefined
+    \setlength{\unitlength}{465.19964062pt}
+  \else
+    \setlength{\unitlength}{\svgwidth}
+  \fi
+  \global\let\svgwidth\undefined
+  \makeatother
+  \begin{picture}(1,0.66552072)%
+    \put(0,0){\includegraphics[width=\unitlength]{protocols/step2.pdf}}%
+    \put(0.24204623,0.65004349){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Alice}}}%
+    \put(0.75795377,0.65004349){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Bob}}}%
+    \put(0.3108339,0.57437706){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{-44mm} $\alpha=a_{k,i}-a_{k,j}$}}}%
+    \put(0.25064469,0.55546045){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{-31mm} $=\alpha_M\alpha_{M-1}...\alpha_1$}}}%
+    \put(0.248925,0.52622569){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{-45mm} $\alfa_{m}^E=EN(\alfa_{m},keyA.pk)$}}}%
+    \put(0.26268253,0.49699093){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{ 33mm} \raisebox{1mm}{$\alpha_{m}^{E}$}}}}%
+    \put(0.31771267,0.44883956){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{ 69mm} $\beta=b_{k,j}-b_{k,i}$}}}%
+    \put(0.26096284,0.42992295){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{ 82mm} $=\beta_{M}\beta_{M-1}...\beta_1$}}}%
+    \put(0.25064469,0.40068819){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{ 80mm} $\beta_{m}^E=EN(\beta_m,keyA.pk)$}}}%
+    \put(0.26096284,0.34221867){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{79mm}$d_m^E=\ax_m^E\times(-\bx_m^E)$}}}%
+    \put(0.26096284,0.3129839){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{79mm}$f_m^E=\ax_m^E\oplus^E\bx_m^E$}}}%
+    \put(0.25408407,0.28374914){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{80mm}$\gx_m^E=(\gx_{m-1}^E)^2\tx f_m^E$}}}%
+    \put(0.25408407,0.25451438){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{80mm}$\dx_{m}^E=d_{m}^E\tx\xpra^{r_{m}}$}}}%
+    \put(0.26612192,0.22527962){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{ 33mm} \raisebox{1mm}{$\delta_{m}^{E}$}}}}%
+    \put(0.24548562,0.17712825){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{-43mm} $\delta_m=DE(\delta_{m}^E,keyA.sk)$}}}%
+    \put(0.25752346,0.11865873){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{-52mm}if $\E m:\delta_m=1$ then $\ax>\bx$}}}%
+    \put(0.24548562,0.08942397){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{-50.2mm}if $\E m:\delta_m=-1$ then $\ax<\bx$}}}%
+    \put(0.32115205,0.06018921){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{-63.3mm} else $\alpha=\beta$}}}%
+  \end{picture}%
+\endgroup

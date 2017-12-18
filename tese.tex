@@ -1,0 +1,213 @@
+% -*- coding: utf-8 -*-
+%
+
+\documentclass[a4paper,11pt,twoside,onecolumn,final,openright]{book}
+
+   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   %
+   % Definitions
+   %
+ %%%%%
+  %%%
+   %
+
+% Small margins
+\usepackage{a4wide}
+
+% UTF-8
+\usepackage[utf8]{inputenc}
+
+% Hyphenation patterns
+\usepackage[english]{babel}
+
+% Graphics
+\usepackage{graphicx,graphics}
+
+% Web addresses
+\usepackage{url}
+
+% References
+\usepackage[numbers]{natbib}
+\usepackage{bibentry}
+
+% Set spacing
+\usepackage{setspace}
+
+% Big tables
+\usepackage{supertabular}
+
+% Hyphens in mathematical mode
+\usepackage{clrscode}
+
+% Mathematical mode for equation writing (\gather)
+\usepackage{amssymb,amsmath,amsfonts}
+
+% Adaptation of David's thesis package
+% Contains definitions for initial chapter pages and stuff like that
+\usepackage{rthesis}
+
+% List of acronyms
+\usepackage{acronym}
+
+% Prettier links in the PDF file
+\usepackage[hyperindex]{hyperref}
+\RequirePackage{color}
+\definecolor{dkblue}{rgb}{0,0,0.3}
+\hypersetup{
+  colorlinks,%
+  citecolor=green,%black % citations
+  filecolor=blue,%black
+  linkcolor=blue,%black % index, sections, acronyms, figures, tables
+  urlcolor=blue,%black % URLs
+  pdftitle={Big Data Privacy by Design Computation Platform},
+  pdfauthor={Rui Nuno Lopes Claro},
+  pdfsubject={MSc Thesis},
+  pdfkeywords={}
+}
+
+% Yes/No check marks
+\usepackage{pstricks}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+
+% Reduce length of MSG expressions (use ONLY for MSG expressions)
+\newcommand{\alfa}{\alpha}
+\newcommand{\ax}{\alpha}
+\newcommand{\bx}{\beta}
+\newcommand{\gx}{\gamma}
+\newcommand{\dx}{\delta}
+
+\newcommand{\ol}{\overline}
+\newcommand{\tx}{\times}
+\newcommand{\E}{\exists}
+
+\newcommand{\xpra}{(\gx_{m}^{E}\tx(-1^{E}))}
+
+% Misc
+\usepackage{algorithmic,algorithm}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{subfigure}
+% \usepackage{tocloft}
+\usepackage{arydshln}
+\usepackage{color}
+
+
+%TODOs!
+\usepackage[draft]{todonotes}
+\newcommand{\commentPT}[1]
+{\par {\bfseries \color{blue} #1 \par}}
+
+
+   %
+  %%%
+ %%%%%
+   %
+   % Definitions
+   %
+   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   %
+   % Document
+   %
+ %%%%%
+  %%%
+   %
+
+\begin{document}
+
+% For inserting bibliographic references in the middle of the text.
+\nobibliography*
+\bibliographystyle{plainnat}
+
+  %%%%%%%%%%%%%%%
+%%% Front cover %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%                                                          %
+                                                                           %
+\input content/0000-cover.tex                                              %
+                                                                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Body text definitions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%                                                %
+                                                                           %
+% Set indentation and paragraph skip                                       %
+\parskip=9pt plus 2pt minus 1pt                                            %
+\parindent=0mm                                                             %
+                                                                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  %%%%%%%%%%%%%%%%%%%%%
+%%% Preliminary stuff %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%                                                    %
+                                                                           %
+\begin{doublespacing}                                                      %
+\input content/0100-abstract.tex                                           %
+\end{doublespacing}                                                        %
+\input content/0200-keywords.tex                                           %
+\begin{doublespacing}                                                      %
+\input content/0300-acknowledgements.tex                                   %
+%\input content/0400-dedication.tex                                         %
+\end{doublespacing}                                                        %
+                                                                           %
+\pagestyle{plain}                                                          %
+\pagenumbering{roman}                                                      %
+                                                                           %
+% Table of Contents                                                        %
+\tableofcontents                                                           %
+\newpage                                                                   %
+                                                                           %
+% List of Figures                                                          %
+\listoffigures                                                             %
+\newpage                                                                   %
+                                                                           %
+% List of Tables                                                           %
+\listoftables                                                              %
+\newpage                                                                   %
+                                                                           %
+% List of Acronyms                                                         %
+\input content/0900-list_of_acronyms.tex                                   %
+\cleardoublepage                                                           %
+                                                                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  %%%%%%%%%%%%%%%%
+%%% Main content %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%                                                         %
+                                                                           %
+\pagestyle{headings}                                                       %
+\pagenumbering{arabic}                                                     %
+                                                                           %
+\begin{doublespacing}                                                      %
+\input content/1000-introduction.tex                                       %
+\input content/2000-related_work.tex                                       %
+\input content/3000-bard.tex                                               %
+\input content/4000-evaluation.tex                                         %
+\input content/9000-conclusions_and_future_work.tex                        %
+\listoftodos                                                               %
+\appendix                                                                  %
+\end{doublespacing}                                                        %
+                                                                           %
+\cleardoublepage                                                           %
+                                                                           %
+% Resets counter because of nobibliography*                                %
+\setcounter{NAT@ctr}{0}                                                    %
+% Includes the bibliography                                                %
+\bibliography{bibliography/tese}                                           %
+                                                                           %
+\cleardoublepage                                                           %
+                                                                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+
+   %
+  %%%
+ %%%%%
+   %
+   % Document
+   %
+   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

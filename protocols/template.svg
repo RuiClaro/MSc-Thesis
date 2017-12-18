@@ -1,0 +1,82 @@
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+ width="600px" height="252px"
+ viewBox="0 0 600 252"
+ xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"
+ stroke-width="1" text-rendering="geometricPrecision">
+<polygon fill="white" points="135,7 163,7 163,16 135,16"/>
+<text x="150" y="16" textLength="26" font-family="Helvetica" font-size="12" fill="black" text-anchor="middle">
+
+Alice
+</text>
+<polygon fill="white" points="438,7 460,7 460,16 438,16"/>
+<text x="450" y="16" textLength="21" font-family="Helvetica" font-size="12" fill="black" text-anchor="middle">
+
+Bob
+</text>
+<line x1="150" y1="22" x2="150" y2="50" stroke="black"/>
+<line x1="450" y1="22" x2="450" y2="50" stroke="black"/>
+<path d="M 47 36 A146,6 0 0,1 150,26" stroke="white" fill="none"/><line x1="43" y1="32" x2="51" y2="40" stroke="white"/>
+<line x1="51" y1="32" x2="43" y2="40" stroke="white"/>
+<line x1="150" y1="50" x2="150" y2="67" stroke="black"/>
+<line x1="450" y1="50" x2="450" y2="67" stroke="black"/>
+<polygon fill="white" points="245,51 354,51 354,60 245,60"/>
+<text x="246" y="60" textLength="107" font-family="Helvetica" font-size="12" fill="black">
+\hspace{-33mm} left
+</text>
+<line x1="150" y1="67" x2="150" y2="95" stroke="black"/>
+<line x1="450" y1="67" x2="450" y2="95" stroke="black"/>
+<line x1="150" y1="78" x2="450" y2="78" stroke="black"/>
+<line x1="450" y1="78" x2="440" y2="84" stroke="black"/>
+<polygon fill="white" points="256,68 343,68 343,77 256,77"/>
+<text x="257" y="77" textLength="85" font-family="Helvetica" font-size="12" fill="black">
+message A to B
+</text>
+<line x1="150" y1="95" x2="150" y2="123" stroke="black"/>
+<line x1="450" y1="95" x2="450" y2="123" stroke="black"/>
+<line x1="150" y1="106" x2="375" y2="106" stroke="black"/>
+<line x1="371" y1="102" x2="379" y2="110" stroke="black"/>
+<line x1="379" y1="102" x2="371" y2="110" stroke="black"/>
+<polygon fill="white" points="289,96 310,96 310,105 289,105"/>
+<text x="290" y="105" textLength="19" font-family="Helvetica" font-size="12" fill="black">
+lost
+</text>
+<line x1="150" y1="123" x2="150" y2="151" stroke="black"/>
+<line x1="450" y1="123" x2="450" y2="151" stroke="black"/>
+<line x1="450" y1="134" x2="150" y2="134" stroke="black"/>
+<polygon fill="black" points="150,134 160,140 160,128"/>
+<polygon fill="white" points="260,124 338,124 338,133 260,133"/>
+<text x="261" y="133" textLength="76" font-family="Helvetica" font-size="12" fill="black">
+method B to A
+</text>
+<line x1="150" y1="151" x2="150" y2="179" stroke="black"/>
+<line x1="450" y1="151" x2="450" y2="179" stroke="black"/>
+<path d="M 450 155 A146,6 0 0,1 553,165" stroke="white" fill="none"/><line x1="549" y1="161" x2="557" y2="169" stroke="white"/>
+<line x1="557" y1="161" x2="549" y2="169" stroke="white"/>
+<line x1="150" y1="179" x2="150" y2="196" stroke="black"/>
+<line x1="450" y1="179" x2="450" y2="196" stroke="black"/>
+<polygon fill="white" points="243,180 355,180 355,189 243,189"/>
+<text x="244" y="189" textLength="110" font-family="Helvetica" font-size="12" fill="black">
+\hspace{55mm} right
+</text>
+<line x1="150" y1="196" x2="150" y2="224" stroke="black"/>
+<line x1="450" y1="196" x2="450" y2="224" stroke="black"/>
+<line x1="150" y1="207" x2="450" y2="207" stroke="black"/>
+<line x1="450" y1="207" x2="440" y2="213" stroke="black"/>
+<line x1="440" y1="201" x2="450" y2="207" stroke="black"/>
+<polygon fill="white" points="259,197 340,197 340,206 259,206"/>
+<text x="260" y="206" textLength="79" font-family="Helvetica" font-size="12" fill="black">
+callback A to B
+</text>
+<line x1="150" y1="224" x2="150" y2="252" stroke="black"/>
+<line x1="450" y1="224" x2="450" y2="252" stroke="black"/>
+<line x1="450" y1="235" x2="150" y2="235" stroke="black"/>
+<line x1="150" y1="235" x2="160" y2="241" stroke="black"/>
+<polygon fill="white" points="256,225 343,225 343,234 256,234"/>
+<text x="257" y="234" textLength="85" font-family="Helvetica" font-size="12" fill="black">
+message B to A
+</text>
+<line x1="150" y1="246" x2="150" y2="252" stroke="black"/>
+<line x1="450" y1="246" x2="450" y2="252" stroke="black"/>
+</svg>

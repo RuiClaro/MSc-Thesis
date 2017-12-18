@@ -1,0 +1,20 @@
+# Step 4: Obtaining the Desired Information
+
+msc {
+ arcgradient=0;
+
+ A [label="Alice"], B [label="Bob"];
+
+ A-xA  [linecolor="white"]; # force left-hand side margin
+
+ |||   [label="\hspace{-50mm} $l^{E}=EN(l,keyA.pk)$"];
+ A->B  [label="\hspace{ 27mm} \raisebox{1mm}{$l^{E}$}"];
+ |||   [label="\hspace{ 75mm} $u_{k}^{E}=EN(u_{k},keyA.pk)$"];
+ |||   [label="\hspace{ 70mm} $k^{E}=EN(k,keyA.pk)$"];
+ |||   [label="\hspace{ 64mm} random $r_{k}$"];
+ |||   [label="\hspace{ 80mm} $v_k^E=u_k^E\tx(l^E\tx(-k^E))^{r_k}$"]; # writing format shortened due to lack of space
+ B->A  [label="\hspace{ 30mm} \raisebox{1mm}{$v_{k}^{E}$}"];
+ |||   [label="\hspace{-47mm} $u_{l}=DE(v_{l}^{E},keyA.sk)$"];
+
+ B-xB  [linecolor="white"]; # force right-hand side margin
+}

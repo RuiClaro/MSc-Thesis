@@ -1,0 +1,62 @@
+%% Creator: Inkscape inkscape 0.48.1, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'protocols/step1.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+
+\begingroup
+  \makeatletter
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}
+    \renewcommand\color[2][]{}%
+  }
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}
+    \renewcommand\transparent[1]{}%
+  }
+  \providecommand\rotatebox[2]{#2}
+  \ifx\svgwidth\undefined
+    \setlength{\unitlength}{465.19964062pt}
+  \else
+    \setlength{\unitlength}{\svgwidth}
+  \fi
+  \global\let\svgwidth\undefined
+  \makeatother
+  \begin{picture}(1,0.51934692)%
+    \put(0,0){\includegraphics[width=\unitlength]{protocols/step1.pdf}}%
+    \put(0.24204623,0.50386969){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Alice}}}%
+    \put(0.75795377,0.50386969){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Bob}}}%
+    \put(0.32631113,0.42820325){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{-49mm} ($keyA.sk,keyA.pk$)}}}%
+    \put(0.29535668,0.39896849){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{ 24mm} \raisebox{1mm}{$keyA.pk$}}}}%
+    \put(0.28331884,0.35081712){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{-48mm} $x_{t}^{E}=EN(x_{t},keyA.pk)$}}}%
+    \put(0.29191729,0.32158236){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{ 29mm} \raisebox{1mm}{$x_{t}^{E}$}}}}%
+    \put(0.24892500,0.27343099){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{81mm}$z_{k,n}^E=\prod_t(x_t^E)^{y_{k,n+t}}$}}}%
+    \put(0.32115205,0.23419623){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{ 69mm} random $b_{k,n}^{E}$}}}%
+    \put(0.25752346,0.20496147){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{80mm}$a_{k,n}^E=z_{k,n}^E\tx(-b_{k,n}^E)$}}}%
+    \put(0.27987945,0.18572671){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{ 30mm} \raisebox{1mm}{$a_{k,n}^{E}$}}}}%
+    \put(0.25752346,0.13757534){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{-49mm} $a_{k,n}=DE(a_{k,n}^{E},keyA.sk)$}}}%
+    \put(0.26268253,0.10865873){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{-42mm} $=\sum_{t} x_{t}y_{k,n+t}-b_{k,n}$}}}%
+    \put(0.26096284,0.08942397){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{ 78mm} ${\ol b_k}=[b_{k,1},\cdots,b_{k,N}]$}}}%
+    \put(0.26096284,0.06018921){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{-40mm} ${\ol a_k}=[a_{k,1},\cdots,a_{k,N}]$}}}%
+  \end{picture}%
+\endgroup

@@ -1,0 +1,100 @@
+%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Data Privacy} 
+\label{sec:DataPrivacy}
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+Privacy is an important field in information security because it gives a person his/her personal space and defines his/her personal private information, giving the person the right to decide which personal information is for sharing and which should be kept confidential. Privacy also limits the access that other entities, being them the government or private companies, have to personal data.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Privacy definitions}
+\label{ssec:PrivacyDefinitions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+Privacy can be defined as the ability or right that an individual has of protecting his personal information and extends to the ability or right to prevent invasions on the personal space of said individual \cite{anderson2008security}.
+
+One of the prime examples of Privacy applied to information technology problems and mentioned in the literature is related to medical records \cite{Lu2014}. These records must be handled with extra care because they contain a large number of sensitive information about the patients. The Patient Record Systems should be able to disclose information only to selected personnel, but not all the information about the patient, only what is necessary to proceed in helping the patient. This example illustrates the tension between having access to the data, that can be useful, but at the same time keeping it closed to other users.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Privacy Protection Goals}
+\label{ssec:PrivacyProtectionGoals}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+New concepts have arisen in recent years for privacy specific protection goals \cite{Danezis2015}. Their definitions are as follows:
+
+\begin{itemize}
+\setlength\itemsep{1em}
+
+
+\item \textit{Unlinkability} is defined as the property that ensures privacy-relevant data cannot be linked across domains that are constituted by a common purpose and context. In other words, multiple actions from the same user/entity must be unlinkable.
+
+\item \textit{Transparency} is defined as the property that ensures all privacy-relevant data processing can be understood and reconstructed at any time. Transparency has to cover not only the actual processing but also the planned processing and after processing to fully know what has happened. Transparency is related to the principles concerning openness and it is a prerequisite to accountability. The user/entity must know and understand how his private data is being handled.
+
+\item \textit{Intervenability} is defined as the property that ensures intervention is possible concerning privacy-relevant data processing, in particular by those persons whose data is being processed. Intervenability is related to the principles concerning the rights of an individual, in a way that the owner of privacy-relevant data must have the means to rectify or erase said data.
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{European Union Legislation}
+\label{ssec:EuropeanUnionLegislation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+It is also important to mention in the context of this work the current legislation in the \ac{EU} regarding data protection.
+
+ The Data Protection Directive\footnote{\url{http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:31995L0046}} is the current law regarding privacy in the \ac{EU} and is in force since 1995.
+More recently a replacement has been proposed and accepted in the \ac{EU}, the \ac{GDPR}\footnote{\url{http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.L_.2016.119.01.0001.01.ENG&toc=OJ:L:2016:119:TOC}}, that will take effect in May 2018. Both these laws are regulated by European entities, namely the \ac{ENISA}\footnote{\url{https://www.enisa.europa.eu/}} and the Article 29 Data Protection Working Party\footnote{\url{http://ec.europa.eu/newsroom/just/item-detail.cfm?item_id=50083}}.
+
+
+ According to \ac{ENISA}, \ac{EU} data protection law applies to any processing of personal data \cite{DAcquisto2015}. This personal data is defined as any information related to an identified or identifiable natural person. In the context of Big Data analysis, the focus is more on indirect identification, which translates into three different approaches: \emph{i)} The possibility of isolating some or all records which identify an individual in a dataset; \emph{ii)} The linking of at least two records concerning the same individual in the same database or in different databases; and  \emph{iii)} The possibility to infer the value of an attribute in a dataset from the value of other attributes.
+
+
+
+Another important cornerstone of \ac{EU} data protection law are the principles relating to data quality:
+
+\begin{itemize}
+    \setlength\itemsep{1em}
+
+    \item The \textit{fairness principle} requires that personal data should never be processed without the individual being actually aware of it.
+
+    \item The \textit{purpose limitation principle} implies that data can only be collected for specified, explicit and legitimate purposes.
+
+    \item The \textit{data minimization principle} states that data processed should be the one which is necessary for the specific purpose previously determined by the data controller.
+\end{itemize}
+
+
+These three principles altogether indicate that data processing must be done with the consent of the subject, for predetermined purposes communicated to the subject, and data must only be used for those predetermined purposes.
+
+Finally, and also important to mention in the context of this work, are the rights of the data subject according to the \ac{EU} law. There are two important rights that a subject has: the \textit{right of access} and the \textit{right to object}.
+The \textit{right of access} ensures that any data subject is entitled to obtain from the data controllers communication of the data that is subjected to processing and to know the logic involved in any processing of data concerning him.
+This is particularly relevant in the context of Big Data analysis because it limits technological lock-ins and other competition impediments, and it enhances transparency and trust between users and service providers.
+The \textit{right to object} ensures that data subjects have a right to revoke any prior consent, and to object to the processing of data relating to them, giving to the subject the power to remove himself completely or partially to any data processing mechanisms using his personal data.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Examples of Data Privacy Breaches}
+\label{ssec:ExamplesDataPrivacyBreaches}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+In recent years we can find a number of attacks made to systems that handle personal information. Next are a number of examples found relevant regarding Data Privacy breaches.
+
+\begin{itemize}
+    \setlength\itemsep{1em}
+
+    \item Target Pregnancy Leak\footnote{\url{https://www.forbes.com/sites/kashmirhill/2012/02/16/how-target-figured-out-a-teen-girl-was-pregnant-before-her-father-did/\#3001668b6668}}. In 2012, Target, an American retail company, started merging data from user searches and demographics data in order to learn when their customers were pregnant, in order to approach them with a specific advertisement. This is a clear violation of private sensitive information about their customers and their private life.
+
+
+    \item Netflix Prize\footnote{\url{https://www.wired.com/2009/12/netflix-privacy-lawsuit}}. In 2007, Netflix created a contest to improve their recommendation system. For that, they released a training dataset, with all the personal information regarding customers removed and customer \textit{ids} replaced by randomized \textit{ids}. Later it was shown that it was not enough when a group of researchers linked public information in another movie-rating website (IMDB) with the released dataset and were able to partially de-anonymize the training dataset, compromising the identity of some users.
+
+    \item AOL search data leak\footnote{\url{https://techcrunch.com/2006/08/06/aol-proudly-releases-massive-amounts-of-user-search-data}}. In 2006, AOL released to the general public a text file containing search keywords for numerous of their users, intended for research purposes. The users were not identified, but personally identifiable information was present in many of the queries. These queries contained a user \textit{id} attributed by AOL, and an individual could be identified and matched to their account and search history by such information.
+
+
+
+   \item Massachusetts GIC medical encounter database\footnote{\url{https://techpinions.com/can-you-be-identified-from-anonymous-data-its-not-so-simple/7627}}. Researcher from \ac{CMU} linked the anonymized database (which contained birth date, sex and ZIP code) with voter registration and was able to link medical records with individuals.
+
+
+\end{itemize}

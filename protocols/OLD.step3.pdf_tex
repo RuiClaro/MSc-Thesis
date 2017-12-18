@@ -1,0 +1,70 @@
+%% Creator: Inkscape inkscape 0.48.1, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'protocols/step3.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+
+\begingroup
+  \makeatletter
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}
+    \renewcommand\color[2][]{}%
+  }
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}
+    \renewcommand\transparent[1]{}%
+  }
+  \providecommand\rotatebox[2]{#2}
+  \ifx\svgwidth\undefined
+    \setlength{\unitlength}{465.19964062pt}
+  \else
+    \setlength{\unitlength}{\svgwidth}
+  \fi
+  \global\let\svgwidth\undefined
+  \makeatother
+  \begin{picture}(1,0.74118716)%
+    \put(0,0){\includegraphics[width=\unitlength]{protocols/step3.pdf}}%
+    \put(0.24204623,0.72570993){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Alice}}}%
+    \put(0.24204623,0.70679332){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{($a_{k}=\max_{n} a_{k,n}$)}}}%
+    \put(0.75795377,0.72570993){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Bob}}}%
+    \put(0.75795377,0.70679332){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{($b_{k}=\max_{n} b_{k,n}$)}}}%
+    \put(0.32803082,0.63112688){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{ 67mm} ($keyB.sk,keyB.pk$)}}}%
+    \put(0.29535668,0.60189212){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{ 24mm} \raisebox{1mm}{$keyB.pk$}}}}%
+    \put(0.27815976,0.55374075){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{ 75mm} $b_{k}^{E}=EN(b_{k},keyB.pk)$}}}%
+    \put(0.28847791,0.52450599){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{ 30mm} \raisebox{1mm}{$b_{k}^{E}$}}}}%
+    \put(0.32975051,0.47635462){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{-35mm} random $s_{k}^{E}$}}}%
+    \put(0.248925,0.44711986){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{-27mm} $b_{k}^{'E}=b_{k}^E \times s_{k}^{E}$}}}%
+    \put(0.3125536,0.4178851){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{-42mm} permutation $\pi(\cdot)$}}}%
+    \put(0.27128099,0.38865034){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{-34mm} ${\hat b_{k}^{E}}=\pi(b_{k}^{'E})$}}}%
+    \put(0.26268253,0.35941558){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{ 34mm} \raisebox{1mm}{${\hat b_{k}^{E}}$}}}}%
+    \put(0.248925,0.31126421){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{ 80mm} $\hat b_{k}=DE(\hat b_k^E,keyB.pk)$}}}%
+    \put(0.33147021,0.2923476){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{ 72mm} $=\pi(b_{k}+s_{k})$}}}%
+    \put(0.36758373,0.26311284){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{-38mm} random $r$}}}%
+    \put(0.27472038,0.23387808){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{-41mm} ${\hat a_{k}}=\pi(a_{k}-s_{k})+r$}}}%
+    \put(0.27987945,0.20464332){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{ 31mm} \raisebox{1mm}{${\hat a_{k}}$}}}}%
+    \put(0.27815976,0.15649195){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{ 75mm} ${\hat k_{max}}=\arg\max_{k}$}}}%
+    \put(0.29363699,0.13757534){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{ 86mm} (${\hat a_{k}}+{\hat b_{k}}$)}}}%
+    \put(0.26784161,0.10834058){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{ 31mm} \raisebox{1mm}{${\hat k_{max}}$}}}}%
+    \put(0.26268253,0.06018921){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\hspace{-37mm} $k_{max}=\pi^{-1}({\hat k_{max}})$}}}%
+  \end{picture}%
+\endgroup

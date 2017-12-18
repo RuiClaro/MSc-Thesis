@@ -1,0 +1,10 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: tese.aux
+The style file: plainnat.bst
+Database file #1: bibliography/tese.bib
+Repeated entry---line 215 of file bibliography/tese.bib
+ : @article{rivest1978data
+ :                        ,
+I'm skipping whatever remains of this entry
+Warning--can't use both volume and number fields in agrawal2000privacy
+Warning--can't use both volume and number fields in gentry2009fully
+(There was 1 error message)

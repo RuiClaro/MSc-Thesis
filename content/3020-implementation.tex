@@ -1,0 +1,106 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Implementation}
+\label{sec:Implementation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+When building a platform in the scope of privacy-preserving \ac{ML}, we must consider not only the traditional steps in data processing, but also have an increased care when preprocessing data to incorporate the cryptographic techniques that we used.
+This section describes the implementation of \ac{BARD}. We start off with a description of the datasets chosen to evaluate our platform\ref{subsec:DatasetsImplementation}. Then, we explain the preprocessing that was done to those datasets\ref{subsec:DataPreProcessingImplementation}.
+Subsection \ref{subsec:BaselineImplementation} presents the baseline implementation of the chosen \ac{ML} algorithms, resorting to a widely used \ac{ML} toolkit for Python.
+In subsection \ref{subsec:ExpandedAlgorithmsImplementation} it is detailed the implementation of the prediction phase of the algorithms.
+Finally, in subsection \ref{subsec:CryptoDomainImplementation}, we detail which cryptographic protocols we used, why, and how we implemented them, mentioning which toolkits were used.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Datasets Used}
+\label{subsec:DatasetsImplementation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+For running the experiments, we found some datasets that are highly used in the literature, and that fitted the subjects mentioned in \ref{sec:UseCases}. A brief description of each dataset can be found in Table \ref{table:datasets}.
+
+\begin{table}[H]
+\centering
+\caption{Datasets used in \ac{BARD}.}
+\label{table:datasets}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Dataset} & \textbf{Subject} & \textbf{Instances} & \textbf{Features} \\ \hline
+ Breast Cancer Wisconsin\footnote{\url{https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)}}  &  HealthCare  & 569    & 30       \\ \hline
+ Pima Indians Diabetes\footnote{\url{https://archive.ics.uci.edu/ml/datasets/pima+indians+diabetes}}    &  HealthCare  & 768    &  8       \\ \hline
+ Credit Approval\footnote{\url{http://archive.ics.uci.edu/ml/datasets/credit+approval}}          &  Finance     & 690    & 15       \\ \hline
+ Adult Income\footnote{\url{https://archive.ics.uci.edu/ml/datasets/adult}}             &  Governance  & 48842  & 14       \\ \hline 
+\end{tabular}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Data Preprocessing}
+\label{subsec:DataPreProcessingImplementation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Although our data is obtained from publicly available data sources, it is still required to do some preprocessing on the data. The following techniques were used in the datasets described in \ref{table:datasets}.
+
+\begin{itemize}
+    \setlength\itemsep{1em}
+
+	\item\textbf{One-hot Encoding}\cite{harris2010digital} was used to expand discrete variables in a machine readable and comparable way. 
+
+	\item\textbf{Scaling(or Feature Scaling?)} was needed to "fix the size of some of the features... \todo{change description}".
+\end{itemize}
+
+
+\commentPT{
+-mencionar 1-hot-Encoding
+-mencionar scaling
+
+quais os datasets que foram visados, e porque.}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Baseline}
+\label{subsec:BaselineImplementation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The baseline approach consists on setting up ground values so that meaningful comparisons can be achieved. For understanding the overhead created by privacy-preserving technologies, we implemented a baseline for \ac{BARD} using the publicly available \ac{ML} toolkit, scikit-learn for Python\footnote{\url{http://scikit-learn.org}}.
+
+
+\commentPT{
+listar as baselines criadas, e quais os datasets que foram considerados
+}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Expanded Algorithms}
+\label{subsec:ExpandedAlgorithmsImplementation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Taking into account that the baseline implementation was done using a toolkit, we could not explicitly compare execution times, due to the fact that the operations in the toolkit were made in a "black box" mode. To solve this problem, we implemented the prediction part of the \ac{ML} algorithms without using the toolkit.
+
+We started off by extracting the coefficients of the \ac{ML} algorithms from the toolkit (example: logReg: $\beta_{0}$ and $\beta_{1}$). Then we implemented our own version of the prediction based on the definitions found in Section \todo{add reference}.
+
+
+
+
+\commentPT{
+Detalhar os algoritmos no related work? ou aqui?
+
+detalhar quais os que foram feitos, como e em que linguagem, quais os datasets.
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Cryptographic Domain}
+\label{subsec:CryptoDomainImplementation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\commentPT{
+listar os toolkits que foram testados? ou só os que surtiram resultados?
+falar de: Garbled Circuits, FHE, PHE. como foi feito, quais os toolkits, etc.
+}

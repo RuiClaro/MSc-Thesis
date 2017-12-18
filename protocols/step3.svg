@@ -1,0 +1,152 @@
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+ width="600px" height="438px"
+ viewBox="0 0 600 438"
+ xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"
+ stroke-width="1" text-rendering="geometricPrecision">
+<polygon fill="white" points="134,7 164,7 164,16 134,16"/>
+<text x="150" y="16" textLength="29" font-family="Helvetica" font-size="12" fill="black" text-anchor="middle">
+
+Alice 
+</text>
+<polygon fill="white" points="60,18 238,18 238,27 60,27"/>
+<text x="150" y="27" textLength="176" font-family="Helvetica" font-size="12" fill="black" text-anchor="middle">
+
+ ($a_{k}:z_{k}=\max_{n} z_{k,n}$)
+</text>
+<polygon fill="white" points="436,7 462,7 462,16 436,16"/>
+<text x="450" y="16" textLength="25" font-family="Helvetica" font-size="12" fill="black" text-anchor="middle">
+
+Bob 
+</text>
+<polygon fill="white" points="360,18 538,18 538,27 360,27"/>
+<text x="450" y="27" textLength="176" font-family="Helvetica" font-size="12" fill="black" text-anchor="middle">
+
+ ($b_{k}:z_{k}=\max_{n} z_{k,n}$)
+</text>
+<line x1="150" y1="33" x2="150" y2="61" stroke="black"/>
+<line x1="450" y1="33" x2="450" y2="61" stroke="black"/>
+<path d="M 47 47 A146,6 0 0,1 150,37" stroke="white" fill="none"/><line x1="43" y1="43" x2="51" y2="51" stroke="white"/>
+<line x1="51" y1="43" x2="43" y2="51" stroke="white"/>
+<line x1="150" y1="61" x2="150" y2="78" stroke="black"/>
+<line x1="450" y1="61" x2="450" y2="78" stroke="black"/>
+<polygon fill="white" points="199,62 400,62 400,71 199,71"/>
+<text x="200" y="71" textLength="199" font-family="Helvetica" font-size="12" fill="black">
+\hspace{ 67mm} ($keyB.sk,keyB.pk$)
+</text>
+<line x1="150" y1="78" x2="150" y2="106" stroke="black"/>
+<line x1="450" y1="78" x2="450" y2="106" stroke="black"/>
+<line x1="450" y1="89" x2="150" y2="89" stroke="black"/>
+<line x1="150" y1="89" x2="160" y2="95" stroke="black"/>
+<polygon fill="white" points="180,79 419,79 419,88 180,88"/>
+<text x="181" y="88" textLength="237" font-family="Helvetica" font-size="12" fill="black">
+\hspace{ 24mm} \raisebox{1mm}{$keyB.pk$}
+</text>
+<line x1="150" y1="106" x2="150" y2="123" stroke="black"/>
+<line x1="450" y1="106" x2="450" y2="123" stroke="black"/>
+<polygon fill="white" points="170,107 429,107 429,116 170,116"/>
+<text x="171" y="116" textLength="257" font-family="Helvetica" font-size="12" fill="black">
+\hspace{ 75mm} $b_{k}^{E}=EN(b_{k},keyB.pk)$
+</text>
+<line x1="150" y1="123" x2="150" y2="151" stroke="black"/>
+<line x1="450" y1="123" x2="450" y2="151" stroke="black"/>
+<line x1="450" y1="134" x2="150" y2="134" stroke="black"/>
+<line x1="150" y1="134" x2="160" y2="140" stroke="black"/>
+<polygon fill="white" points="176,124 422,124 422,133 176,133"/>
+<text x="177" y="133" textLength="244" font-family="Helvetica" font-size="12" fill="black">
+\hspace{ 30mm} \raisebox{1mm}{$b_{k}^{E}$}
+</text>
+<line x1="150" y1="151" x2="150" y2="168" stroke="black"/>
+<line x1="450" y1="151" x2="450" y2="168" stroke="black"/>
+<polygon fill="white" points="200,152 398,152 398,161 200,161"/>
+<text x="201" y="161" textLength="196" font-family="Helvetica" font-size="12" fill="black">
+\hspace{-35mm} random $s_{k}^{E}$
+</text>
+<line x1="150" y1="168" x2="150" y2="185" stroke="black"/>
+<line x1="450" y1="168" x2="450" y2="185" stroke="black"/>
+<polygon fill="white" points="153,169 446,169 446,178 153,178"/>
+<text x="154" y="178" textLength="291" font-family="Helvetica" font-size="12" fill="black">
+\hspace{-27mm} $b_{k}^{'E}=b_{k}^E \times s_{k}^{E}$
+</text>
+<line x1="150" y1="185" x2="150" y2="202" stroke="black"/>
+<line x1="450" y1="185" x2="450" y2="202" stroke="black"/>
+<polygon fill="white" points="190,186 409,186 409,195 190,195"/>
+<text x="191" y="195" textLength="217" font-family="Helvetica" font-size="12" fill="black">
+\hspace{-42mm} permutation $\pi(\cdot)$
+</text>
+<line x1="150" y1="202" x2="150" y2="219" stroke="black"/>
+<line x1="450" y1="202" x2="450" y2="219" stroke="black"/>
+<polygon fill="white" points="166,203 432,203 432,212 166,212"/>
+<text x="167" y="212" textLength="264" font-family="Helvetica" font-size="12" fill="black">
+\hspace{-34mm} ${\hat b_{k}^{E}}=\pi(b_{k}^{'E})$
+</text>
+<line x1="150" y1="219" x2="150" y2="247" stroke="black"/>
+<line x1="450" y1="219" x2="450" y2="247" stroke="black"/>
+<line x1="150" y1="230" x2="450" y2="230" stroke="black"/>
+<line x1="450" y1="230" x2="440" y2="236" stroke="black"/>
+<polygon fill="white" points="161,220 438,220 438,229 161,229"/>
+<text x="162" y="229" textLength="275" font-family="Helvetica" font-size="12" fill="black">
+\hspace{ 34mm} \raisebox{1mm}{${\hat b_{k}^{E}}$}
+</text>
+<line x1="150" y1="247" x2="150" y2="275" stroke="black"/>
+<line x1="450" y1="247" x2="450" y2="275" stroke="black"/>
+<polygon fill="white" points="153,248 446,248 446,257 153,257"/>
+<text x="154" y="257" textLength="291" font-family="Helvetica" font-size="12" fill="black">
+\hspace{ 80mm} $\hat b_{k}=DE(\hat b_k^E,keyB.pk)$ 
+</text>
+<polygon fill="white" points="201,259 398,259 398,268 201,268"/>
+<text x="202" y="268" textLength="195" font-family="Helvetica" font-size="12" fill="black">
+ \hspace{ 72mm} $=\pi(b_{k}+s_{k})$
+</text>
+<line x1="150" y1="275" x2="150" y2="292" stroke="black"/>
+<line x1="450" y1="275" x2="450" y2="292" stroke="black"/>
+<polygon fill="white" points="222,276 376,276 376,285 222,285"/>
+<text x="223" y="285" textLength="152" font-family="Helvetica" font-size="12" fill="black">
+\hspace{-38mm} random $r$
+</text>
+<line x1="150" y1="292" x2="150" y2="309" stroke="black"/>
+<line x1="450" y1="292" x2="450" y2="309" stroke="black"/>
+<polygon fill="white" points="168,293 430,293 430,302 168,302"/>
+<text x="169" y="302" textLength="260" font-family="Helvetica" font-size="12" fill="black">
+\hspace{-41mm} ${\hat a_{k}}=\pi(a_{k}-s_{k})+r$
+</text>
+<line x1="150" y1="309" x2="150" y2="337" stroke="black"/>
+<line x1="450" y1="309" x2="450" y2="337" stroke="black"/>
+<line x1="150" y1="320" x2="450" y2="320" stroke="black"/>
+<line x1="450" y1="320" x2="440" y2="326" stroke="black"/>
+<polygon fill="white" points="171,310 427,310 427,319 171,319"/>
+<text x="172" y="319" textLength="254" font-family="Helvetica" font-size="12" fill="black">
+\hspace{ 31mm} \raisebox{1mm}{${\hat a_{k}}$}
+</text>
+<line x1="150" y1="337" x2="150" y2="365" stroke="black"/>
+<line x1="450" y1="337" x2="450" y2="365" stroke="black"/>
+<polygon fill="white" points="170,338 428,338 428,347 170,347"/>
+<text x="171" y="347" textLength="256" font-family="Helvetica" font-size="12" fill="black">
+\hspace{ 75mm} ${\hat k_{max}}=\arg\max_{k}$ 
+</text>
+<polygon fill="white" points="179,349 420,349 420,358 179,358"/>
+<text x="180" y="358" textLength="239" font-family="Helvetica" font-size="12" fill="black">
+ \hspace{ 86mm} (${\hat a_{k}}+{\hat b_{k}}$)
+</text>
+<line x1="150" y1="365" x2="150" y2="393" stroke="black"/>
+<line x1="450" y1="365" x2="450" y2="393" stroke="black"/>
+<line x1="450" y1="376" x2="150" y2="376" stroke="black"/>
+<line x1="150" y1="376" x2="160" y2="382" stroke="black"/>
+<polygon fill="white" points="164,366 435,366 435,375 164,375"/>
+<text x="165" y="375" textLength="269" font-family="Helvetica" font-size="12" fill="black">
+\hspace{ 31mm} \raisebox{1mm}{${\hat k_{max}}$}
+</text>
+<line x1="150" y1="393" x2="150" y2="410" stroke="black"/>
+<line x1="450" y1="393" x2="450" y2="410" stroke="black"/>
+<polygon fill="white" points="161,394 437,394 437,403 161,403"/>
+<text x="162" y="403" textLength="274" font-family="Helvetica" font-size="12" fill="black">
+\hspace{-37mm} $k_{max}=\pi^{-1}({\hat k_{max}})$
+</text>
+<line x1="150" y1="410" x2="150" y2="438" stroke="black"/>
+<line x1="450" y1="410" x2="450" y2="438" stroke="black"/>
+<path d="M 450 414 A146,6 0 0,1 553,424" stroke="white" fill="none"/><line x1="549" y1="420" x2="557" y2="428" stroke="white"/>
+<line x1="557" y1="420" x2="549" y2="428" stroke="white"/>
+<line x1="150" y1="432" x2="150" y2="438" stroke="black"/>
+<line x1="450" y1="432" x2="450" y2="438" stroke="black"/>
+</svg>

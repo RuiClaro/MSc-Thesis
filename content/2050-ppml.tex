@@ -1,0 +1,29 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Privacy-Preserving Machine Learning}
+\label{sec:PrivacyPreservingMachineLearning}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+In the context of Data Mining, Machine Learning comes as an important addition to the data processing step. An example of that is the Classification method. Classification is a subset of the Machine Learning applications on Data Mining. It is described by a two-step process, in which a classification algorithm is employed to build a classifier for the data by analyzing a training set made of tuples of data and their associated labels, and then the classifier is used to predict class labels for new data. As such, because the large size of the datasets produced in Big Data operations, classification algorithms have a large quantity of data to learn from, making them less prone to erroneous classification of new data.
+
+The conjunction between Machine Learning and the privacy-preserving concept comes from the need to do knowledge learning over large datasets, while also maintaining an increased concern over the privacy of the data, without degrading the quality of data by using anonymization techniques.
+
+In the field of Machine Learning, we can identify a number of algorithms that can be used in Data Mining. In Table \ref{table:ppml1}, we list some of them, giving a brief description, and identifying which privacy-preserving technique could be used with it.
+
+\begin{table}[]
+\centering
+\caption{\ac{PPDM} algorithms.}
+\label{table:ppml1}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{\begin{tabular}[c]{@{}l@{}}Machine\\Learning \\ Algorithms\end{tabular}} & \textbf{\begin{tabular}[c]{@{}l@{}}Privacy-Preserving\\  Techniques\end{tabular}} & \textbf{Short summary}                                                                                                              & \textbf{References} \\ \hline
+Decision Tree                                                                   & \ac{SMPC}                                                                              & \begin{tabular}[c]{@{}l@{}}Protocol for distributed \\ learning of decision-tree classifiers.\end{tabular}                          &    \cite{brickell2009privacy}                 \\ \hline
+Naive Bayes                                                                     & \ac{DP}                                                                     & \begin{tabular}[c]{@{}l@{}}Differentially private\\ naive Bayes classifier. \\ Centralized access to the dataset.\end{tabular}      &   \cite{vaidya2013differentially}                  \\ \hline
+\acs{SVM}                                                                             & \ac{SMPC}                                                                              & \begin{tabular}[c]{@{}l@{}}Algorithm for support vector \\ machine classification over \\ vertically partitioned data.\end{tabular} &    \cite{yu2006privacy}                  \\ \hline
+\acs{k-NN}                                                                           & \ac{SMPC}                                                                              & \begin{tabular}[c]{@{}l@{}}Nearest neighbors of records in\\  horizontally distributed data.\end{tabular}    &   \cite{shaneck2006privacy}                   \\ \hline
+k-means                                                                         & \ac{SMPC}                                                                              & \begin{tabular}[c]{@{}l@{}}k-means clustering based on \\ additive secret sharing.\end{tabular}       & \cite{doganay2008distributed}                    \\ \hline
+\end{tabular}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

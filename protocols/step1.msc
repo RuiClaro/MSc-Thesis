@@ -1,0 +1,24 @@
+# Step 1: Cross-Correlation of the Music Signals
+
+msc {
+ arcgradient=0;
+
+ A [label="Alice"], B [label="Bob"];
+
+ A-xA  [linecolor="white"]; # force left-hand side margin
+
+ |||   [label="\hspace{-49mm} ($keyA.sk,keyA.pk$)"];
+ A->B  [label="\hspace{ 24mm} \raisebox{1mm}{$keyA.pk$}"];
+ |||   [label="\hspace{-48mm} $x_{t}^{E}=EN(x_{t},keyA.pk)$"];
+ A->B  [label="\hspace{ 29mm} \raisebox{1mm}{$x_{t}^{E}$}"];
+ |||   [label="\hspace{81mm}$z_{k,n}^E=\prod_t(x_t^E)^{y_{k,n+t}}$"]; # writing format shortened due to lack of space
+ |||   [label="\hspace{ 69mm} random $b_{k,n}^{E}$"];
+ |||   [label="\hspace{80mm}$a_{k,n}^E=z_{k,n}^E\tx(-b_{k,n}^E)$"]; # writing format shortened due to lack of space
+ B->A  [label="\hspace{ 30mm} \raisebox{1mm}{$a_{k,n}^{E}$}"];
+ |||   [label="\hspace{-49mm} $a_{k,n}=DE(a_{k,n}^{E},keyA.sk)$ \n
+               \hspace{-41mm} $=\sum_{t} x_{t}y_{k,n+t}-b_{k,n}$"];
+ |||   [label="\hspace{ 78mm} ${\ol b_k}=[b_{k,1},\cdots,b_{k,N}]$"]; # writing format shortened due to lack of space
+ |||   [label="\hspace{-40mm} ${\ol a_k}=[a_{k,1},\cdots,a_{k,N}]$"]; # writing format shortened due to lack of space
+
+ B-xB  [linecolor="white"]; # force right-hand side margin
+}
