@@ -4,7 +4,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
- In this section, we will describe some of the techniques used in privacy-preserving Machine Learning related to Data Privacy, namely anonymization, \ac{DP}, \ac{SMPC}, \ac{GC}, \ac{OT}, \ac{HE} and \ac{FE}.
+ In this section, we will describe some of the techniques used in preserving Data Privacy, namely anonymization, \ac{DP}, \ac{SMPC}, \ac{GC}, \ac{OT}, \ac{HE} and \ac{FE}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -48,11 +48,9 @@ Detailed information about \ac{DP} and algorithms designed to achieve it are des
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\acf{SMPC} (also known as secure computation, multi-party computation, or privacy-preserving computation) is a protocol with the goal of creating methods for parties to jointly compute a function over their inputs while keeping those inputs private. The problem of computing functions while also preserving the privacy of the inputs is referred in the literature as a \ac{SMPC} problem \cite{yao1982protocols}. Generally speaking, a \ac{SMPC} problem deals with computing any probabilistic function on any input, while also ensuring the correctness of the computation and guaranteeing that no more information is revealed to a participant in the computation that can be inferred from that participant's input and output \cite{goldwasser1997multi}. 
+\acf{SMPC} (also known as secure computation, multi-party computation, or privacy-preserving computation) is a protocol for distributed\todo{fica bem distributed aqui?} parties to jointly compute a function over their inputs while keeping those inputs private. The problem of computing functions while also preserving the privacy of the inputs is referred in the literature as a \ac{SMPC} problem \cite{yao1982protocols}. Generally speaking, a \ac{SMPC} problem deals with computing any probabilistic function on any input, while also ensuring the correctness of the computation and guaranteeing that no more information is revealed to a participant in the computation that can be inferred from that participant's input and output \cite{goldwasser1997multi}. 
 
 A strategy to solve these problems is to trust an external entity (a trusted third party), that can mediate the computation. This approach can be risky because it requires a third party that all participants agree to trust, which can sometimes be difficult to find. Sometimes, the data has such high degree of importance to the participants that even disclosing them to a trusted third party is not viable.
-
-The first implementation of secure computation was introduced as \ac{STPC} \cite{yao1982protocols}. It is a simplification of the problem of \ac{SMPC}, and a known protocol for \ac{STPC} is Yao's \ac{GC} protocol, which is detailed in subsection \ref{ssec:GarbledCircuits}. 
 
 When building a \ac{SMPC} protocol, the most important properties that must be ensured are \textit{input privacy} and \textit{correctness} \cite{goldreich1998secure}:
 
@@ -61,12 +59,16 @@ When building a \ac{SMPC} protocol, the most important properties that must be e
 
     \item \textit{Input privacy} property states that no information about the private data held by the parties can be inferred during the execution of the protocol. The only inferences about private data are those that could be inferred from seeing the output of the computation made by the protocol.
 
-    \item \textit{Correctness} property relates to the existence of malicious parties that could try to deviate from the normal functioning of the protocol. In these cases, the protocol should prevent honest parties to output incorrect results. The approach to implementing the correctness property comes in two alternatives: either the protocol guarantees that the honest parties compute the correct output, a robust protocol; or the honest parties abort the computation if they find an error during the execution of the protocol.
+    \item \textit{Correctness} property relates to the existence of malicious parties that could try to deviate from the normal functioning of the protocol. In these cases, the protocol should prevent honest parties to output incorrect results. The approach to implementing the correctness property comes in two alternatives: either the protocol is robust, \textit{i.e.} it guarantees that the honest parties compute the correct output; or the honest parties abort the computation if they find an error during the execution of the protocol.
 \end{itemize}
 
-Recent implementations of \ac{SMPC} protocols are based on \textit{secret sharing}. In 2PC there are only two participants in the computation, and usually one is responsible for starting and encoding the computation mechanism, while the other is the one responsible for evaluating the computation. In multi-party computation, the parties have no special roles and, instead, the encoding is shared amongst the parties, by secret sharing, and the evaluation is made by a protocol.
+The first implementation of secure computation was introduced as \ac{STPC} \cite{yao1982protocols}. It is a simplification of the problem of \ac{SMPC}, and a known protocol for \ac{STPC} is Yao's \ac{GC} protocol, which is detailed in subsection \ref{ssec:GarbledCircuits}. In \ac{STPC} there are only two participants in the computation, and usually one is responsible for starting and encoding the computation mechanism, while the other is the one responsible for evaluating the computation. In multi-party computation, the parties have no special roles and, instead, the encoding is shared amongst the parties, by secret sharing, and the evaluation is made by a protocol.\todo{MP:add some more text about the protocol.} 
 
-Secret sharing allows one to distribute a secret over a number of parties by distributing shares to each party. Three of the types of secret sharing techniques more commonly used are: Shamir Secret Sharing \cite{shamir1979share}, Additive Secret Sharing and Replicated Secret Sharing.
+Recent implementations of \ac{SMPC} protocols are based on \textit{secret sharing}. Secret sharing allows one party to distribute a secret over a number of parties by distributing shares to each party. Three of the types of secret sharing techniques more commonly used are: Shamir Secret Sharing \cite{shamir1979share}, Additive Secret Sharing and Replicated Secret Sharing.
+
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -75,7 +77,7 @@ Secret sharing allows one to distribute a secret over a number of parties by dis
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\acf{OT} \cite{rabin2005exchange} is a protocol in which a sender transfers one of the potentially many pieces of information he has to a receiver, but remains oblivious as to what piece has been transferred. Let $s^0$ and $s^1$ be two strings held by a sender that wants to transfer to a receiver, holding a selection bit $b$; the protocol allows for only one of the inputs $s^b$ to be transfered; the receiver learns nothing about $s^{1-b}$, and the sender does not learn $b$. 
+\acf{OT} \cite{rabin2005exchange} is a protocol in which a sender transfers one of the potentially many pieces of information he has to a receiver, but remains oblivious as to what piece has been transferred. Let $s^0$ and $s^1$ be two strings held by a sender that wants to transfer one of the strings to a receiver, holding a selection bit $b$; the protocol allows for only one of the inputs $s^b$ to be transfered; the receiver learns nothing about $s^{1-b}$, and the sender does not learn $b$. 
 
 An interesting implementation of \ac{OT} is the one done by Pinkas and Naor \cite{naor2005computationally}. In it, the authors describe an extension to the basic 1-out-of-2 \ac{OT} protocol, to a 1-out-of-\textit{N} protocol, and a \textit{k}-out-of-\textit{N} protocol.
 
@@ -97,7 +99,7 @@ Some optimizations have been proposed for Yao's \ac{GC}. Kolesnikov and Schneide
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\acf{HE} \cite{rivest1978data} is a cryptographic technique that allows computations to be carried in the ciphertext, so that, when decrypted, the resulting plaintext reflects the computation made. In other words, \ac{HE} allows to make some computation over the ciphertext, for example, addition, without decrypting it, and the result is the same as making that computation on the plaintext. This is of great importance because it allows chaining multiple services that make computations on a ciphertext, without the need to expose the data to those services. A prime example of \ac{HE} in real-world problems is electronic voting \cite{hirt2000efficient}.
+\acf{HE} \cite{rivest1978data} is a cryptographic technique that allows computations to be carried with the ciphertext, so that, when decrypted, the resulting plaintext reflects the computation made. In other words, \ac{HE} allows to make some computation over the ciphertext, for example, addition, without decrypting it, and the result is the same as making that computation on the plaintext. This is of great importance because it allows chaining multiple services that make computations on a ciphertext, without the need to expose the data to those services. A prime example of \ac{HE} in real-world problems is electronic voting \cite{hirt2000efficient}.\todo{MP:It is not clear why evoting is an example of HE}
 
 Homomorphic cryptosystems can be classified into two distinct groups: partially homomorphic cryptosystems and fully homomorphic cryptosystems.
 
