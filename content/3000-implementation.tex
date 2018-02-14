@@ -1,0 +1,50 @@
+% -*- coding: utf-8 -*-
+%
+
+% reset all acronym expansions
+\acresetall
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Implementation}
+\label{ch:Implementation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+When building a platform in the scope of privacy-preserving \ac{ML}, we must consider not only the traditional steps in data processing mentioned in section \ref{sec:PrivacyImplicationsPersonalDataProcessing} and in Figure \ref{fig:crisp-dm}, but also have an increased care when preprocessing data to incorporate the cryptographic techniques that we used.
+This chapter describes the work that was done in implementing a privacy-preserving \ac{ML} platform. We start off with a description of the datasets chosen to evaluate our platform \ref{sec:DatasetsImplementation}. Then, we explain the preprocessing that was done to those datasets \ref{sec:DataPreProcessingImplementation}.
+Section \ref{sec:BaselineImplementation} presents the baseline implementation of the chosen \ac{ML} algorithms, resorting to a widely used \ac{ML} toolkit for Python.
+In section \ref{sec:ExpandedAlgorithmsImplementation} the implementation of the prediction phase of the algorithms is detailed.
+Finally, in section \ref{sec:CryptoDomainImplementation}, we detail which cryptographic protocols we used, why, and how we implemented them, mentioning which toolkits were used.
+
+
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %
+%%%%%                        THE BEGINNING
+ %%%
+  %
+
+
+\input content/3010-implementation.tex
+\input content/3020-use_case.tex
+
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %
+%%%%%                        LAST SECTION
+ %%%
+  %
+
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+\label{sec:SummaryBARD}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\todo[inline]{Summary chapter 3.}
+
+  %
+ %%%
+%%%%%                        THE END
+  %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
