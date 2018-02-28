@@ -9,8 +9,7 @@
 \label{ch:Evaluation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
+In this chapter we describe the experiments that were conducted regarding the implementation of \ac{ML} algorithms using privacy-preserving techniques. In section \ref{sec:EvaluationMetrics}, we present the metrics used in the experiments.
 
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -19,7 +18,228 @@
  %%%
   %
 
-%\input content/4010-stuff.tex
+\section{Evaluation Metrics}
+\label{sec:EvaluationMetrics}
+
+To evaluate our implementation, it is important to understand the metrics that were considered. To define the evaluation functions bellow, we present the notation in table \ref{table:notation}. 
+
+\begin{table}[H]
+\centering
+\caption{Notation.}
+\label{table:notation}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Real label} & \textbf{Predicted label} & \textbf{Event} \\ \hline
+ +1  &  +1  & True Positive (TP)   \\ \hline
+ +1  &  -1  & False Negative (FN)  \\ \hline
+ -1  &  +1  & False Positive (FP)  \\ \hline
+ -1  &  -1  & True Negative (TN)   \\ \hline 
+\end{tabular}
+\end{table}
+
+\textit{Accuracy} is defined as how much of the measurements of a value differ to the real value. In our implementation, it represents how many times the predictions calculated by the \ac{ML} generated models match the class of the testing samples. In mathematical terms, it is represented by:
+
+\begin{equation}
+\label{eq:accuracy}
+accuracy=\frac{TP + TN} {TP + TN + FP + FN} 
+\end{equation}
+
+
+\textit{Precision} is defined by the fraction of relevant instances among the retrieved instances \ref{eq:precision}. \textit{Recall} is defined by the fraction of relevant instances that have been retrieved over the total of the relevant instances \ref{eq:recall}.
+
+
+\begin{equation}
+\label{eq:precision}
+precision=\frac{TP}{TP + FP}
+\end{equation}
+
+\begin{equation}
+\label{eq:recall}
+recall=\frac{TP}{TP + FN}
+\end{equation}
+
+\textit{F-measure} is a measure of a accuracy of a test. It considers both the precision and the recall of the test to compute the score:
+
+\begin{equation}
+\label{eq:f-measure}
+F_1=2. \frac{precision.recall}{precision + recall}
+\end{equation}
+
+
+A \textit{confusion matrix} is a specific table layout that allows visualization of the performance of a \ac{ML} algorithm. Each row of the matrix represents the instances in a predicted class while each column represents the instances in an actual class. In \ref{eq:confusionMatrix} we give an example on how to compute a confusion matrix for the binary case.
+
+\begin{equation*}
+\label{eq:confusionMatrix}
+  confusion\textunderscore matrix=
+  \begin{blockarray}{*{2}{c} l}
+    \begin{block}{*{2}{>{$\footnotesize}c<{$}} l}
+      &+1 & -1  \\
+    \end{block}
+    \begin{block}{c [*{2}{c}]}
+      +1 & TP & FN  \\
+      -1 & FP & TN \\
+    \end{block}
+  \end{blockarray}
+\end{equation*}
+
+
+Besides these metrics, we also used additional ones in order to understand how much the computational overhead due to the use of cryptography influences the system.
+We compared the results obtained by the privacy-preserving versions of \ac{ML} algorithms with the ones obtained using the baseline.S
+We also take into account the execution times of the system, which shows the overhead caused by the additional computational cost added by cryptography.
+Finally, we also show the increase in communication costs that happen when cryptography is involved, as all values must be represented by ciphertext, instead of integer or float values.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Experimental Setup}
+\label{sec:ExperimentalSetup}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+All the experiments were performed using a machine with an Inter Core i5-4300M CPU @2.60Gz with a 3MB L3 cache memory and a 12 GB RAM memory.
+
+For obtaining the experimental results, we started by applying the pre-processing techniques mentioning in \ref{sec:DataPreProcessingImplementation} in the datasets described in table \ref{table:datasets}. As mentioned, all datasets that were composed by a single file were split into three sets, training, validation and testing sets, with the proportion $70/15/15$. Each \ac{ML} model was trained using the training set, the best model configuration was chosen using the validation set, and the model performance was evaluated using the testing set.
+
+\subsection{Parameters - Baseline}
+
+For the experiments with \ac{DT}, we tested the values for \textit{max\textunderscore depth} of 5\%, 10\%, 20\%, 50\%, 100\%, 200\%, and 500\% of the total number of features, and the values for \textit{min\textunderscore samples\textunderscore leaf} of 0.001\%, 0.002\%, 0.005\%, 0.01\%, 0.02\%, 0.05\%, 0.1\%, 0.2\%, 0.5\%, 1\%, 2\% and 5\% of the total number of training samples.
+
+For the experiments with \ac{SVM}, we used \textit{kernel} values of \textit{linear}, \textit{poly} and \textit{rbf}. For all kernels, we used $C$ values of $2^{-10}$, $2^{-6}$, $2^{-2}$, $2^{2}$, $2^{6}$ and $2^{10}$. For the polynomial kernel, we used \textit{degree} values of 2, 3 and 4. For the radial basis function (\textit{rbf}) kernel, we used $\gamma$ values of $2^{-9}$, $2^{-5}$, $2^{-1}$, $2^{1}$ and $2^{3}$.
+
+For the experiments with \ac{k-M}, we tested with a variable number of clusters, \textit{i.e.}, with \textit{num\textunderscore clusters} values of 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90 and 100.
+
+For the experiments with \ac{LR}, we used the \textit{liblinear} solver with $C$ values of $2^{-10}$, $2^{-6}$, $2^{-2}$, $2^{2}$, $2^{6}$ and $2^{10}$.
+
+ These variations on parameters allowed to train models with all possible configurations without the need to specifically adapt the parameters to the different datasets.
+
+
+
+\subsection{Parameters - Garbled Circuits}
+
+In the experiments using \ac{GC}, we tested values of 8, 12, 16, 20 and 24 bits for the numeric precision of the data and model parameters. This will be reflected in the circuit size and the accuracy of the results. Larger values were not considered because 24 bits is already sufficient for an exact representation of the input values and model parameters.
+
+
+\subsection{GC toolkits}
+
+
+For the experiments with \ac{GC}, we used the toolkit developed by VIPP group from the University of Siena\url{http://clem.dii.unisi.it/~vipp/index.php/home}. This toolkit was not our first choice, since it has known issues in computation times, but the other toolkits that we tested contained limitations that we could not overcome, as stated below:
+
+\begin{itemize}
+    \setlength\itemsep{1em}
+    \item\textbf{ABY\cite{demmler2015aby}:} We found it impossible to define gate-to-gate wires, and that removed the ability for fine control on how to use and combine wires.
+
+    \item\textbf{JustGarble\url{https://github.com/irdan/justGarble}:} This toolkit could not be fully compiled due to conflicts with current versions of the GNU gcc compiler.
+
+    \item\textbf{Ciphermed\cite{bost2015machine}:} This toolkit is efficient for small \ac{DT}, but is exponentially slower for larger trees (above 10 nodes).
+
+    \item\textbf{TinyGarble\cite{songhori2015tinygarble}:} The current version of this toolkit does not support the open source synthesis tool (Yosis \url{http://www.clifford.at/yosys/}) recommended by the authors, and only supports a paid one.
+
+    \item\textbf{CompGC\cite{groce2016compgc}:} The implementation of all the examples of \ac{ML} algorithms in this toolkit are hardcoded, making it extremely difficult to adapt to our needs.
+
+\end{itemize}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Experimental Results - Baseline}
+\label{ssec:ExperimentalResultsBaseline}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+We now show the experimental results obtained by applying different \ac{ML} algorithms to the datasets mentioned above. We show in each subsection below, corresponding to each dataset, the different \ac{ML} algorithms and parameters, and mention results found in the literature. Each result that we show in the following tables are the ones obtained by the best combination of parameters, \textit{i.e.}, the parameters that provided the best accuracy or F-Measure results.
+
+\subsection{Breast Cancer Wisconsin Dataset}
+
+We present the best baseline results obtained in the testing set for the Breast Cancer Wisconsin Dataset in table \ref{table:baselineBCW}.
+
+\begin{table}[H]
+\centering
+\caption{Baseline results for Breast Cancer Wisconsin Dataset. ``A'' represents Accuracy, ``F'' represents F-Measure.}
+\label{table:baselineBCW}
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+\multirow{2}{*}{ML algorithm} & \multirow{2}{*}{DT} & \multirow{2}{*}{k-Means} & \multirow{2}{*}{LR} & \multicolumn{3}{l|}{SVM} \\ \cline{5-7} 
+ &  &  & & Linear & Poly & RBF  \\ \hline
+Baseline & \begin{tabular}[c]{@{}l@{}}A: 92.94\%\\   F: 90.91\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 91.76\%\\ F: 90.91\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 95.29\%\\   F: 93.75\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 94.12\%\\   F: 92.06\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 94.12\%\\   F: 92.31\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 94.12\%\\   F: 92.06\%\end{tabular}  \\ \hline
+
+Literature  & \begin{tabular}[c]{@{}l@{}}A: 95.13\%\\   F: 94.88\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 92.79\%\\   F: -\end{tabular}  & \begin{tabular}[c]{@{}l@{}}A: 93.50\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 97.54\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 97.13\%\\   F: 96.25\%\end{tabular} \\ \hline
+\end{tabular}
+\end{table}
+
+
+\subsection{Pima Indians Diabetes Dataset}
+
+
+\begin{table}[H]
+\centering
+\caption{Baseline results for Pima Indians Diabetes Dataset. ``A'' represents Accuracy, ``F'' represents F-Measure.}
+\label{table:baselinePID}
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+\multirow{2}{*}{ML algorithm} & \multirow{2}{*}{DT} & \multirow{2}{*}{k-Means} & \multirow{2}{*}{LR} & \multicolumn{3}{l|}{SVM} \\ \cline{5-7} 
+ &  &  & & Linear & Poly & RBF  \\ \hline
+Baseline & \begin{tabular}[c]{@{}l@{}}A: 73.04\%\\   F: 63.53\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 72.17\%\\ F: 52.94\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 75.65\%\\   F: 58.82\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 75.65\%\\   F: 61.11\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 76.52\%\\   F: 59.70\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 77.39\%\\   F: 62.86\%\end{tabular}  \\ \hline
+
+Literature  & \begin{tabular}[c]{@{}l@{}}A: 75.39\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 73.7\\   F: -\end{tabular}  & \begin{tabular}[c]{@{}l@{}}A: 77.95\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 80.2\%\\   F: -\end{tabular} \\ \hline
+\end{tabular}
+\end{table}
+
+
+\subsection{Credit Approval Dataset}
+
+\begin{table}[H]
+\centering
+\caption{Baseline results for Credit Approval Dataset. ``A'' represents Accuracy, ``F'' represents F-Measure.}
+\label{table:baselineCAD}
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+\multirow{2}{*}{ML algorithm} & \multirow{2}{*}{DT} & \multirow{2}{*}{k-Means} & \multirow{2}{*}{LR} & \multicolumn{3}{l|}{SVM} \\ \cline{5-7} 
+ &  &  & & Linear & Poly & RBF  \\ \hline
+Baseline & \begin{tabular}[c]{@{}l@{}}A: 78.64\%\\   F: 75.00\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 83.50\%\\ F: 81.32\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.44\%\\   F: 84.21\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.44\%\\   F: 84.54\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.43\%\\   F: 83.87\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.47\%\\   F: 83.33\%\end{tabular}  \\ \hline
+
+Literature  & \begin{tabular}[c]{@{}l@{}}A: 85.5\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 86.3\\   F: -\end{tabular}  & \begin{tabular}[c]{@{}l@{}}A: 87.9\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 86.2\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.8\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.5\%\\   F: -\end{tabular} \\ \hline
+\end{tabular}
+\end{table}
+
+
+
+\subsection{Adult Income Dataset}
+
+
+
+\begin{table}[H]
+\centering
+\caption{Baseline results for Adult Income Dataset. ``A'' represents Accuracy, ``F'' represents F-Measure.}
+\label{table:baselineAI}
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+\multirow{2}{*}{ML algorithm} & \multirow{2}{*}{DT} & \multirow{2}{*}{k-Means} & \multirow{2}{*}{LR} & \multicolumn{3}{l|}{SVM} \\ \cline{5-7} 
+ &  &  & & Linear & Poly & RBF  \\ \hline
+Baseline & \begin{tabular}[c]{@{}l@{}}A: 85.56\%\\   F: 67.37\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 81.95\%\\ F: 55.80\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.08\%\\   F: 66.87\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 69.67\%\\   F: 57.04\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 80.82\%\\   F: 65.91\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 82.79\%\\   F: 61.15\%\end{tabular}  \\ \hline
+
+Literature  & \begin{tabular}[c]{@{}l@{}}A: 82.20\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular}  & \begin{tabular}[c]{@{}l@{}}A: 80.00\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.55\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.93\%\\   F: -\end{tabular} \\ \hline
+\end{tabular}
+\end{table}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Experimental Results - Garbled Circuits}
+\label{ssec:ExperimentalResultsGC}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %

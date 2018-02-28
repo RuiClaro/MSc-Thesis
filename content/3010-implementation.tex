@@ -219,13 +219,13 @@ These two techniques offer different means to obtain privacy-preserving computat
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{\ac{GC} and \ac{DT}}
+\subsection{Garbled Circuits and Decision Trees}
 \label{ssec:GCandDT}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The process of evaluating a \ac{DT} in a privacy-preserving context is similar to evaluating in the usual manner, as described in \ref{ssec:DecisionTrees}. The main differences are the use of ciphered Boolean circuits instead of operations, \textit{i.e.}, basic operations such as additions, comparisons, are replaced with logic gates, and the evaluation of the \ac{DT} involves evaluating every single node in it, to disclose the least possible information due to observation of the computations.
 
-In figure \ref{fig:DTNode} we show how the computations are done inside each node of the \ac{DT}. Each node contains the \textit{featureID}, the ID of the feature to be selected from the sample to be classified, and the \textit{threshold}, the value that is compared against the selected feature and that decides which branch of the tree to follow next. The first MUX gate selects from the sample the feature to be compared. The GREATERTHAN gate compares the selected feature with the threshold. Then, the value from the comparison ($0$ or $1$) is used as a selection bit in the second MUX to choose the \textit{next\textunderscore featureID} and \textit{next\textunderscore treshold} for the next node in the tree. 
+In figure \ref{fig:DTNode} we show how the computations are done inside each node of the \ac{DT}. Each node contains the \textit{featureID}, the ID of the feature to be selected from the sample to be classified, and the \textit{threshold}, the value that is compared against the selected feature and that decides which branch of the tree to follow next. The first MUX gate selects from the sample the feature to be compared. The GREATERTHAN gate compares the selected feature with the threshold. Then, the value from the comparison ($0$ or $1$) is used as a selection bit in the second MUX to choose the \textit{next\textunderscore featureID} and \textit{next\textunderscore threshold} for the next node in the tree. 
 
 
 \begin{figure}[!ht]
@@ -236,14 +236,64 @@ In figure \ref{fig:DTNode} we show how the computations are done inside each nod
 \end{figure}
 
 
+It is also important to mention that the trees that we used are always complete, \textit{i.e.} the number of nodes $n$ is always the maximum possible, and it can be defined as $n=2^{h+1}-1$, where $h$ is the \textit{height} of the tree. We can see in figure \ref{fig:ExpansionBinaryTrees} the implications of this expansion of the binary trees.
+
+\begin{figure}
+	\centering
+	\mbox{
+		\subfigure[Original \ac{DT}.]{
+		\includegraphics[width=0.40\textwidth]{images/decision_tree.pdf}
+		\label{fig:Tree}
+		}
+		\subfigure[Complete \ac{DT}.]{
+		\includegraphics[width=0.40\textwidth]{images/decision_tree_complete.pdf}
+		\label{fig:CompleteTree}
+		}
+	}
+	\label{fig:ExpansionBinaryTrees}
+	\caption{Expansion of binary trees.}
+\end{figure}
 
 
-                    
-%Figure 1 – Example of a binary DT with depth D=3. Left: usual amount of nodes and leafs. Right: fully expanded tree, with maximum possible number of nodes and leafs
-%It is easy to verify that on the tree on the left the paths from the root (the top node) to the different leafs can have different lengths, but on the tree on the right all paths have the same length. This happens because the tree on the left is rather sparse (3 nodes, 4 leafs), while the tree on the right has maximum density (7=2D-1 nodes, 8=2D leafs). Although the use of GC effectively hides the DT evaluation process from unwanted parties, it does not hide the sparseness of the DT, which could leak some relevant information about the original data, meaning that the use of expanded DTs is preferable for preserving privacy. However, this solution implies an exponential increase in total amount of nodes that need to be evaluated, with dramatic consequences in performance.
+In figure \ref{fig:Tree} we have a binary \ac{DT} with $height=3$ and with different path lengths to the leaves, depending on the branch of the tree taken, but on the tree in figure \ref{fig:CompleteTree}, all paths have the same length. With this, we can effectively hide the sparseness of the tree, which can leak relevant information about the original data. However, this solution increases exponentially the total amount of nodes that need to be evaluated, and that decreases performance significantly, as we will see in chapter \ref{ch:Evaluation}.
+                
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Garbled Circuits and \textit{k}-means}
+\label{ssec:GCandk-M}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+As in the previous section, evaluating the \ac{k-M} algorithm in a privacy-preserving manner is similar to evaluating in the usual manner. We took the operations in the prediction step and transformed them in Boolean circuits, with logic gates such as multiplexers, adders, etc.
+
+In figure \ref{fig:kmeans} we show how we designed the circuit to represent the \ac{k-M} prediction. The ED blocks represent the operations to perform the Euclidean distance between the sample and each centroid provided by the \ac{k-M} model. The ARGMIN block represent the operations needed to choose, between all the distances calculated, which of it is the smallest.
+
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.60\textwidth]{images/k-means.pdf}
+  \caption{Circuit representing the prediction of the \ac{k-M} algorithm.}
+  \label{fig:kmeans}
+\end{figure}
+
+
+As we show in ref(evaluation-k.means), there is an exponential decrease in performance when the number of clusters increases, or the sample has a larger number of features. This is caused by the multiplications that are done calculating the Euclidean distance. Usually this is reason to use \ac{HE} instead, but the algorithm to implement comparisons is hard to implement \cite{blake2004strong}.\todo{is this justification enough?}
 
 
 
 
-%3.1.2.	K-MEANS (K-M) + GABLED CIRCUITS (GC)
-%Evaluating the k-M algorithm in a privacy-preserving manner is very similar to evaluating k-M in the usual manner. The main difference is the use of ciphered Boolean circuits for replicating all the required operations, namely Euclidean distance and argmin.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Homomorphic Encryption and Support Vector Machines}
+\label{ssec:GCandk-M}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\commentPT{
+	Estas duas secções devem estar descritas como trabalho feito? (foi implementado pelo José Portelo)
+	Ou ficam para future work? ou só mencionar noutro local da tese?
+
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Homomorphic Encryption and Logistic Regression}
+\label{ssec:GCandk-M}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
