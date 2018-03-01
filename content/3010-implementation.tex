@@ -238,7 +238,7 @@ In figure \ref{fig:DTNode} we show how the computations are done inside each nod
 
 It is also important to mention that the trees that we used are always complete, \textit{i.e.} the number of nodes $n$ is always the maximum possible, and it can be defined as $n=2^{h+1}-1$, where $h$ is the \textit{height} of the tree. We can see in figure \ref{fig:ExpansionBinaryTrees} the implications of this expansion of the binary trees.
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\mbox{
 		\subfigure[Original \ac{DT}.]{
@@ -271,7 +271,7 @@ As in the previous section, evaluating the \ac{k-M} algorithm in a privacy-prese
 In figure \ref{fig:kmeans} we show how we designed the circuit to represent the \ac{k-M} prediction. The ED blocks represent the operations to perform the Euclidean distance between the sample and each centroid provided by the \ac{k-M} model. The ARGMIN block represent the operations needed to choose, between all the distances calculated, which of it is the smallest.
 
 
-\begin{figure}[!ht]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.60\textwidth]{images/k-means.pdf}
   \caption{Circuit representing the prediction of the \ac{k-M} algorithm.}

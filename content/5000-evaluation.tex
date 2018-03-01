@@ -145,7 +145,7 @@ For the experiments with \ac{GC}, we used the toolkit developed by VIPP group fr
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-We now show the experimental results obtained by applying different \ac{ML} algorithms to the datasets mentioned above. We show in each subsection below, corresponding to each dataset, the different \ac{ML} algorithms and parameters, and mention results found in the literature. Each result that we show in the following tables are the ones obtained by the best combination of parameters, \textit{i.e.}, the parameters that provided the best accuracy or F-Measure results.
+We now show the experimental results obtained by applying different \ac{ML} algorithms to the datasets mentioned above. We show in each subsection below, corresponding to each dataset, the different \ac{ML} algorithms and parameters, and mention results found in the literature. Each result that we show in the following tables are the ones obtained by the best combination of parameters, \textit{i.e.}, the parameters that provided the best accuracy or F-Measure results with the validation set.
 
 \subsection{Breast Cancer Wisconsin Dataset}
 
@@ -165,9 +165,11 @@ Literature  & \begin{tabular}[c]{@{}l@{}}A: 95.13\%\\   F: 94.88\%\end{tabular} 
 \end{tabular}
 \end{table}
 
+As we see, our baseline results are near the ones found in the literature.
 
 \subsection{Pima Indians Diabetes Dataset}
 
+We present the best baseline results obtained in the testing set for the Pima Indians Diabetes Dataset in table \ref{table:baselinePID}.
 
 \begin{table}[H]
 \centering
@@ -183,8 +185,11 @@ Literature  & \begin{tabular}[c]{@{}l@{}}A: 75.39\%\\   F: -\end{tabular} & \beg
 \end{tabular}
 \end{table}
 
+We can see that our results are comparable to the ones found in the literature.
 
 \subsection{Credit Approval Dataset}
+
+We present the best baseline results obtained in the testing set for the Credit Approval Dataset in table \ref{table:baselineCAD}.
 
 \begin{table}[H]
 \centering
@@ -200,11 +205,11 @@ Literature  & \begin{tabular}[c]{@{}l@{}}A: 85.5\%\\   F: -\end{tabular} & \begi
 \end{tabular}
 \end{table}
 
-
+We obtained results that are similar to the ones found in the literature.
 
 \subsection{Adult Income Dataset}
 
-
+We present the best baseline results obtained in the testing set for the Adult Income Dataset in table \ref{table:baselineAI}.
 
 \begin{table}[H]
 \centering
@@ -222,10 +227,293 @@ Literature  & \begin{tabular}[c]{@{}l@{}}A: 82.20\%\\   F: -\end{tabular} & \beg
 
 
 
+\todo{Missing the references for literature in these tables. look for better results.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experimental Results - Garbled Circuits}
 \label{ssec:ExperimentalResultsGC}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In this section, we present the results of using the toolkit mentioned above, VIPP, to create a privacy-preserving prediction for all the datasets mentioned in this thesis. Firstly we will compare the results we obtained with the baseline, and afterwards we present the execution times using the toolkit for each of the \ac{ML} algorithms.
+
+
+\subsection{Comparison with the Baseline}
+
+It is important to mention that, after analyzing the results obtained using the toolkit, we verified that changing the amount of bits for the actual numeric precision of the data and model parameters affects the accuracy of the results. The degree of this error is depicted in table \ref{table:avgErrorDT} and \ref{table:avgErrorKM}, for the experiments for \ac{DT} and \ac{k-M} respectively. It is to be noted that this error is computed versus the baseline prediction results, not the prediction labels from the dataset. 
+
+\begin{table}[H]
+\centering
+\caption{Average prediction error for \ac{DT} when compared with the baseline.}
+\label{table:avgErrorDT}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+bits & Pima Indians & Breast Cancer & Credit Approval & Adult Income \\ \hline
+8    & 1.88\%       & 0.55\%        & 8.70\%          & 0.00\%       \\ \hline
+12   & 0.00\%       & 0.13\%        & 1.11\%          & 0.00\%       \\ \hline
+16   & 0.00\%       & 0.13\%        & 0.31\%          & 0.00\%       \\ \hline
+20   & 0.00\%       & 0.13\%        & 0.31\%          & 0.00\%       \\ \hline
+24   & 0.00\%       & 0.13\%        & 0.31\%          & 0.00\%       \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Average prediction error for \ac{k-M} when compared with the baseline.}
+\label{table:avgErrorKM}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+bits & Pima Indians & Breast Cancer & Credit Approval & Adult Income \\ \hline
+8    & 2.03\%       & 3.07\%        &    0.05\%       &     0.02\%   \\ \hline
+12   & 0.39\%       & 0.85\%        &    0.00\%       &     0.00\%   \\ \hline
+16   & 0.29\%       & 0.72\%        &    0.00\%       &     0.00\%   \\ \hline
+20   & 0.29\%       & 0.72\%        &    0.00\%       &     0.00\%   \\ \hline
+24   & 0.00\%       & 0.00\%        &    0.00\%       &     0.00\%   \\ \hline
+\end{tabular}
+\end{table}
+
+By observing these tables, we can conclude that the loss of prediction performance caused by using the privacy-preserving versions of the \ac{ML} algorithms is not relevant, as long as at least 16 bits are used to represent the data. Since both \ac{DT} and \ac{k-M} only output an integer representing the label, and not a real number, the visible effect of changing the amount of bits is minimal.
+
+
+
+\subsection{Execution Times - \acl{DT}}
+
+We present the execution times obtained in using the toolkit to build a \ac{GC} implementation of \ac{DT} for all the datasets in the tables below. The results are presented in terms of average pre-computation times per data sample and runtimes per data sample. Table \ref{table:avgDTAllDatasets} presents the average pre-computation times for each data sample for all datasets.
+
+
+\begin{table}[H]
+\centering
+\caption{Average pre-computation times per data sample, in seconds.}
+\label{table:avgDTAllDatasets}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{dataset}}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                             \\ \cline{2-6} 
+\multicolumn{1}{|c|}{}                                  & \textbf{8 bits} & \textbf{12 bits} & \textbf{16 bits} & \textbf{20 bits} & \textbf{24 bits} \\ \hline
+Breast                                                  & 0.205           & 0.240            & 0.281            & 0.325            & 0.356            \\ \hline
+Pima                                                    & 0.219           & 0.285            & 0.310            & 0.344            & 0.356            \\ \hline
+Credit                                                  & 0.224           & 0.253            & 0.271            & 0.290            & 0.315            \\ \hline
+Adult                                                   & 0.233           & 0.271            & 0.313            & 0.355            & 0.373            \\ \hline
+\end{tabular}
+\end{table}
+
+
+We can observe that average pre-computation times are very similar to one another despite the size of the \ac{GC} circuits, that are represented by the numeric precision, meaning that this poses no restrictions regarding the scalability of our solution.
+
+\begin{table}[H]
+\centering
+\caption{Runtime per data sample, in seconds. Breast Cancer Wisconsin Diagnostic dataset.}
+\label{table:runtimeDTBCW}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\multirow{2}{*}{DT depth} & \multicolumn{5}{c|}{numeric precision}         \\ \cline{2-6} 
+                          & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
+1                         & 1.015  & 1.383   & 1.735   & 2.082   & 2.442   \\ \hline
+3                         & 1.057  & 1.425   & 1.804   & 2.187   & 2.550   \\ \hline
+4                         & 1.107  & 1.533   & 1.920   & 2.319   & 2.724   \\ \hline
+5                         & 1.307  & 1.713   & 2.122   & 2.665   & 2.974   \\ \hline
+6                         & 1.538  & 2.030   & 2.522   & 2.939   & 3.330   \\ \hline
+7                         & 1.966  & 2.393   & 2.823   & 3.507   & 3.787   \\ \hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\caption{Runtime per data sample, in seconds. Pima Indians Diabetes dataset.}
+\label{table:runtimeDTPID}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\multirow{2}{*}{DT depth} & \multicolumn{5}{c|}{numeric precision}         \\ \cline{2-6} 
+                          & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
+1                         & 0.374  & 0.502   & 0.663   & 0.782   & 0.901   \\ \hline
+4                         & 0.457  & 0.548   & 0.677   & 0.888   & 1.087   \\ \hline
+6                         & 0.654  & 0.877   & 1.051   & 1.177   & 1.195   \\ \hline
+8                         & 1.622  & 1.689   & 1.889   & 2.099   & 2.180   \\ \hline
+10                        & 3.469  & 3.644   & 3.112   & 4.300   & 4.343   \\ \hline
+12                        & 7.884  & 9.727   & 12.459  & 16.270  & 17.488  \\ \hline
+13                        & 16.289 & 18.353  & 20.926  & 25.120  & 33.508  \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Runtime per data sample, in seconds. Credit Approval dataset.}
+\label{table:runtimeDTCA}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\multirow{2}{*}{DT depth} & \multicolumn{5}{c|}{numeric precision}         \\ \cline{2-6} 
+                          & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
+2                         & 1.598  & 2.333   & 2.956   & 3.591   & 4.190   \\ \hline
+5                         & 1.852  & 2.603   & 3.295   & 3.953   & 4.576   \\ \hline
+7                         & 2.702  & 3.600   & 4.359   & 5.743   & 5.848   \\ \hline
+8                         & 3.365  & 4.280   & 6.541   & 7.337   & 8.998   \\ \hline
+9                         & 4.511  & 6.930   & 8.202   & 10.990  & 12.227  \\ \hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\caption{Runtime per data sample, in seconds. Adult Income dataset.}
+\label{table:runtimeDTAI}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\multirow{2}{*}{DT depth} & \multicolumn{5}{c|}{numeric precision}         \\ \cline{2-6} 
+                          & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
+5                         & 3.777  & 5.169   & 6.502   & 8.171   & 9.424   \\ \hline
+6                         & 4.111  & 5.774   & 7.074   & 8.813   & 10.816  \\ \hline
+9                         & 9.256  & 13.864  & 20.294  & 24.314  & 27.236  \\ \hline
+10                        & 17.167 & 23.056  & 30.553  & 39.114  & 54.987  \\ \hline
+\end{tabular}
+\end{table}
+
+
+\todo{Finish analysis of tables and add graphs.}
+
+
+
+
+
+\subsection{Execution Times - \acl{k-M}}
+
+
+We present the execution times obtained in using the toolkit to build a \ac{GC} implementation of \ac{k-M} for all the datasets in the tables below. The results are presented in terms of average pre-computation times per data sample and runtimes per data sample. Table \ref{table:avgKMAllDatasets} presents the average pre-computation times for each data sample for all datasets.
+
+\begin{table}[H]
+\centering
+\caption{Average pre-computation times per data sample, in seconds.}
+\label{table:avgKMAllDatasets}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\multirow{2}{*}{\textbf{dataset}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                             \\ \cline{2-6} 
+                                  & \textbf{8 bits} & \textbf{12 bits} & \textbf{16 bits} & \textbf{20 bits} & \textbf{24 bits} \\ \hline
+Breast                            & 0.225           & 0.251            & 0.274            & 0.289            & 0.301            \\ \hline
+Pima                              & 0.260           & 0.283            & 0.307            & 0.331            & 0.339            \\ \hline
+Credit                            & 0.226           & 0.249            & 0.253            & 0.265            & 0.272            \\ \hline
+Adult                             & 0.214           & 0.214            & 0.232            & 0.266            & 0.262            \\ \hline
+\end{tabular}
+\end{table}
+
+We can see that average pre-computation times are all very similar to one another despite the slight dependence on the \ac{GC} size, meaning that it does not impact the scalability of our solution.
+
+\begin{table}[H]
+\centering
+\caption{Runtime per data sample, in seconds. Breast Cancer Wisconsin Diagnostic dataset.}
+\label{table:runtimeKMBCW}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\multirow{2}{*}{\textbf{number clusters}} & \multicolumn{5}{c}{\textbf{numeric precision}}                                             \\ \cline{2-6} 
+                                          & \textbf{8 bits} & \textbf{12 bits} & \textbf{16 bits} & \textbf{20 bits} & \textbf{24 bits} \\ \hline
+\textbf{2}                                & 1.619           & 2.102            & 2.788            & 3.616            & 3.838            \\ \hline
+\textbf{3}                                & 1.868           & 2.451            & 3.037            & 3.550            & 5.674            \\ \hline
+\textbf{4}                                & 1.800           & 3.082            & 3.180            & 5.028            & 5.604            \\ \hline
+\textbf{5}                                & 1.912           & 2.598            & 4.760            & 5.410            & 7.402            \\ \hline
+\textbf{6}                                & 2.062           & 2.707            & 4.872            & 5.275            & 7.951            \\ \hline
+\textbf{7}                                & 2.351           & 2.882            & 5.133            & 7.149            & 7.906            \\ \hline
+\textbf{8}                                & 2.930           & 2.805            & 4.978            & 6.946            & 9.124            \\ \hline
+\textbf{9}                                & 2.570           & 3.917            & 4.935            & 7.044            & 9.136            \\ \hline
+\textbf{10}                               & 2.291           & 4.215            & 5.990            & 7.349            & 10.802           \\ \hline
+\textbf{20}                               & 4.223           & 6.797            & 9.580            & 14.877           & 25.232           \\ \hline
+\textbf{30}                               & 5.269           & 9.234            & 15.693           & 24.228           & 36.767           \\ \hline
+\textbf{40}                               & 7.126           & 14.724           & 25.754           & 37.984           & 49.574           \\ \hline
+\textbf{50}                               & 7.885           & 14.701           & 24.245           & 40.602           & 67.651           \\ \hline
+\textbf{60}                               & 9.156           & 19.862           & 35.970           & 56.269           & -                \\ \hline
+\textbf{70}                               & 11.585          & 23.550           & 41.306           & -                & -                \\ \hline
+\textbf{80}                               & 11.433          & 23.367           & 45.067           & -                & -                \\ \hline
+\textbf{90}                               & 13.642          & 27.030           & 53.124           & -                & -                \\ \hline
+\textbf{100}                              & 16.684          & 32.046           & 59.372           & -                & -                \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Runtime per data sample, in seconds. Pima Indians Diabetes dataset.}
+\label{table:runtimeKMPID}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\multirow{2}{*}{\textbf{number clusters}} & \multicolumn{5}{c}{\textbf{numeric precision}}                                              \\ \cline{2-6}
+                                          & \textbf{8 bits} & \textbf{12 bits} & \textbf{16 bits} & \textbf{20 bits} & \textbf{24 bits} \\ \hline
+\textbf{2}                                & 0.629           & 0.848            & 1.163            & 1.350            & 1.533            \\ \hline
+\textbf{3}                                & 0.813           & 1.055            & 1.270            & 1.494            & 1.761            \\ \hline
+\textbf{4}                                & 0.852           & 1.143            & 1.429            & 1.664            & 1.969            \\ \hline
+\textbf{5}                                & 0.943           & 1.246            & 1.531            & 1.824            & 2.066            \\ \hline
+\textbf{6}                                & 1.140           & 1.261            & 1.513            & 2.266            & 2.145            \\ \hline
+\textbf{7}                                & 1.124           & 1.319            & 1.620            & 2.319            & 2.188            \\ \hline
+\textbf{8}                                & 1.178           & 1.339            & 1.697            & 2.130            & 2.337            \\ \hline
+\textbf{9}                                & 1.227           & 1.464            & 2.356            & 2.178            & 2.504            \\ \hline
+\textbf{10}                               & 1.228           & 1.544            & 2.439            & 2.497            & 3.717            \\ \hline
+\textbf{20}                               & 1.568           & 1.896            & 3.374            & 3.952            & 5.751            \\ \hline
+\textbf{30}                               & 2.142           & 2.223            & 3.794            & 5.315            & 7.346            \\ \hline
+\textbf{40}                               & 1.762           & 3.379            & 5.099            & 6.941            & 9.697            \\ \hline
+\textbf{50}                               & 1.803           & 3.670            & 5.979            & 8.300            & 12.376           \\ \hline
+\textbf{60}                               & 3.005           & 4.927            & 7.025            & 12.218           & 16.839           \\ \hline
+\textbf{70}                               & 3.420           & 5.250            & 7.616            & 15.795           & 19.339           \\ \hline
+\textbf{80}                               & 3.513           & 6.187            & 8.649            & 15.795           & 21.302           \\ \hline
+\textbf{90}                               & 3.490           & 6.239            & 12.278           & 16.691           & 23.669           \\ \hline
+\textbf{100}                              & 3.580           & 7.876            & 14.497           & 23.599           & 32.248           \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Runtime per data sample, in seconds. Credit Approval dataset.}
+\label{table:runtimeKMCA}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\multirow{2}{*}{\textbf{number clusters}} & \multicolumn{5}{c}{\textbf{numeric precision}}                                              \\ \cline{2-6}
+                                          & \textbf{8 bits} & \textbf{12 bits} & \textbf{16 bits} & \textbf{20 bits} & \textbf{24 bits} \\ \hline
+\textbf{2}                                & 2.541           & 3.652            & 4.151            & 5.729            & 6.837            \\ \hline
+\textbf{3}                                & 2.615           & 3.752            & 5.547            & 6.369            & 8.512            \\ \hline
+\textbf{4}                                & 2.902           & 3.663            & 5.934            & 8.114            & 9.692            \\ \hline
+\textbf{5}                                & 3.016           & 5.036            & 5.825            & 8.633            & 10.725           \\ \hline
+\textbf{6}                                & 3.129           & 5.359            & 7.474            & 9.820            & 12.961           \\ \hline
+\textbf{7}                                & 3.058           & 5.216            & 7.463            & 10.031           & 16.429           \\ \hline
+\textbf{8}                                & 3.033           & 5.360            & 7.912            & 11.342           & 15.633           \\ \hline
+\textbf{9}                                & 3.082           & 5.326            & 8.911            & 13.911           & 19.112           \\ \hline
+\textbf{10}                               & 4.196           & 6.569            & 9.412            & 14.731           & 18.997           \\ \hline
+\textbf{20}                               & 6.368           & 10.641           & 19.121           & 28.797           & 44.666           \\ \hline
+\textbf{30}                               & 9.060           & 17.660           & 28.409           & 49.931           & -                \\ \hline
+\textbf{40}                               & 11.152          & 25.673           & 42.835           & -                & -                \\ \hline
+\textbf{50}                               & 14.681          & 27.539           & 54.795           & -                & -                \\ \hline
+\textbf{60}                               & 18.326          & 37.088           & -                & -                & -                \\ \hline
+\textbf{70}                               & 19.318          & 41.164           & -                & -                & -                \\ \hline
+\textbf{80}                               & 23.371          & 56.422           & -                & -                & -                \\ \hline
+\textbf{90}                               & 27.361          & 62.862           & -                & -                & -                \\ \hline
+\textbf{100}                              & 27.908          & 67.835           & -                & -                & -                \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Runtime per data sample, in seconds. Adult Income dataset.}
+\label{table:runtimeKMAI}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\multirow{2}{*}{\textbf{number clusters}} & \multicolumn{5}{c}{\textbf{numeric precision}}                                              \\ \cline{2-6}
+                                          & \textbf{8 bits} & \textbf{12 bits} & \textbf{16 bits} & \textbf{20 bits} & \textbf{24 bits} \\ \hline
+\textbf{2}                                & 4.703           & 5.536            & 8.098            & 11.307           & 13.672           \\ \hline
+\textbf{3}                                & 4.361           & 7.535            & 9.620            & 14.500           & 18.896           \\ \hline
+\textbf{4}                                & 4.396           & 6.986            & 10.364           & 15.635           & 20.343           \\ \hline
+\textbf{5}                                & 6.083           & 8.688            & 11.681           & 17.928           & 25.292           \\ \hline
+\textbf{6}                                & 5.587           & 11.307           & 15.884           & 23.006           & 31.464           \\ \hline
+\textbf{7}                                & 6.441           & 10.278           & 15.981           & 24.306           & 31.277           \\ \hline
+\textbf{8}                                & 6.394           & 10.871           & 17.157           & 27.155           & 38.732           \\ \hline
+\textbf{9}                                & 8.029           & 12.958           & 21.050           & 32.607           & 48.497           \\ \hline
+\textbf{10}                               & 8.706           & 14.956           & 24.468           & 32.010           & 47.241           \\ \hline
+\textbf{20}                               & 14.834          & 24.567           & 41.386           & -                & -                \\ \hline
+\textbf{30}                               & 19.150          & 39.870           & -                & -                & -                \\ \hline
+\textbf{40}                               & 27.248          & 60.023           & -                & -                & -                \\ \hline
+\textbf{50}                               & 33.243          & -                & -                & -                & -                \\ \hline
+\textbf{60}                               & 42.933          & -                & -                & -                & -                \\ \hline
+\textbf{70}                               & 52.514          & -                & -                & -                & -                \\ \hline
+\textbf{80}                               & 61.952          & -                & -                & -                & -                \\ \hline
+\textbf{90}                               & -               & -                & -                & -                & -                \\ \hline
+\textbf{100}                              & -               & -                & -                & -                & -                \\ \hline
+\end{tabular}
+\end{table}
+
+
+
+
+
 
 
 
