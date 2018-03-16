@@ -5,28 +5,28 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-As mentioned in section \ref{sec:UseCases}, healthcare systems generate vast amounts of data every day. Processing this data can be beneficial for both the health institution (hospitals, clinics) and for the patients. However, usage of these \ac{EMR} cannot be freely done by institutions without consent of the patients and compliance with the privacy laws. As a result, this processing exists only \textit{in-house}, with only a few exceptions\footnote{\url{https://www.reuters.com/article/us-health-medicalrecords-sharing/few-u-s-hospitals-can-fully-share-electronic-medical-records-idUSKCN1C72UV}}. The problem is that, developing and/or maintaining a Data Mining infrastructure in an institution amass costs that can it may not be willing to spare.
+As mentioned in section \ref{sec:UseCases}, healthcare systems generate vast amounts of data every day. Processing this data can be beneficial for both the health institution (hospitals, clinics) and for the patients. However, usage of these \ac{emr} cannot be freely done by institutions without consent of the patients and compliance with data protection legislation. As a result, this processing is performed \textit{in-house}, with only a few exceptions\footnote{\url{https://www.reuters.com/article/us-health-medicalrecords-sharing/few-u-s-hospitals-can-fully-share-electronic-medical-records-idUSKCN1C72UV}}. The problem is that developing and/or maintaining a Data Mining infrastructure in an institution amasses costs that can it may not be willing to support.
 
-Our contribution to mitigate this standoff between the gains and costs of Data Mining \ac{EMR}, is to be able to provide a product that would remove the costs of maintenance and development from the institutions, while at the same time provide enough privacy guarantees that comply with the law.
+Our contribution to mitigate this standoff between the gains and costs of Data Mining \ac{emr}, is to provide a product that removes the costs of maintenance and development from the institutions, while at the same time provide enough privacy guarantees to comply with existing legislation.
 
 
-We now describe a typical use case scenario for privacy-preserving processing of \ac{EMR}.
+We now describe a typical use case scenario for privacy-preserving processing of \ac{emr}.
 
 \begin{itemize}
 	\setlength\itemsep{1em}
 
-	\item \textbf{Description:} Design and implementation of a platform to process \ac{EMR} in order to improve treatments and diagnoses, while maintaining identities private. This is achieved by training models using this data and then predict medical conditions for future patients. All the computations should be done resorting to privacy-preserving techniques.
+	\item \textbf{Description:} Design and implementation of a platform to process \ac{emr} in order to improve treatments and diagnoses, while maintaining identities private. This is achieved by training models using this data and then predict medical conditions for future patients. All the computations should be done resorting to privacy-preserving techniques.
 
 	\item \textbf{Actors involved:} Healthcare institutions, patients, medical staff.
 
-	\item \textbf{Preconditions:} Access to data and to \ac{EMR} of patients. Consent from each patient regarding the processing of his/her data.
+	\item \textbf{Preconditions:} Access to data and to \ac{emr} of patients. Consent from each patient regarding the processing of his/her data.
 
 	\item \textbf{Basic Flow:} 
 	
 	\begin{enumerate}
-		\item The institution supplies the platform with data to train the models for one or more \ac{ML} algorithms. This training must be done in an encrypted and/or anonymised domain.
+		\item The institution supplies the platform with data to train the models for one or more \ac{ml} algorithms. This training must be done in an encrypted and/or anonymised domain.
 
-		\item A new patient arrives at the institution and it is asked of him if he/she consents to the use of the platform to speedup his/her diagnosis. The patient agrees.
+		\item A new patient arrives at the institution and it is asked if he/she consents to the use of the platform to speedup his/her diagnosis, including consent to data collection and data processing. If the patient agrees, the process can continue.
 
 		\item Data of the patient is collected by a person from the medical staff, including his/her symptoms, medical history, etc.
 
@@ -39,7 +39,7 @@ We now describe a typical use case scenario for privacy-preserving processing of
 
 	\end{enumerate}
 
-	\item \textbf{PostConditions:} The platform has received data from the institution. The platform has trained different instantiations of \ac{ML} algorithms.
+	\item \textbf{PostConditions:} The platform has received data from the institution. The platform has trained different instantiations of \ac{ml} algorithms.
 
 \end{itemize}
 

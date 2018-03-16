@@ -2,8 +2,8 @@
 \section{Data Privacy} 
 \label{sec:DataPrivacy}
 %%%%%%%%%%%%%%%%%%%%%%%%
-
-Privacy is an important field in information security because it gives a person his/her personal space and defines his/her personal private information, giving the person the right to decide which personal information is for sharing and which should be kept confidential. Privacy also limit the access that other entities, being them the government or private companies, have to personal data.
+\todo{JP:começas a secção 2.1 com a definição de 'Data Security'. Onde está a definição de 'Data Privacy' (só vejo a de 'Privacy')}
+Privacy is an important field in information security because it gives a person his/her personal space and defines his/her personal private information, giving the person the right to decide which personal information is for sharing and which should be kept confidential. The right to privacy also limit the access that other entities, being them the government or private companies, have to personal data.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -14,16 +14,16 @@ Privacy is an important field in information security because it gives a person 
 
 Privacy can be defined as the ability or right that an individual has of protecting his/her personal information and extends to the ability or right to prevent invasions on the personal space of said individual \cite{anderson2008security}.
 
-One of the prime examples of Privacy applied to information technology problems and mentioned in the literature is related to \ac{EMR} \cite{Lu2014}. These records must be handled with extra care because they contain a large number of sensitive information about the patients. The Patient Record Systems should be able to disclose information only to selected personnel, but not all the information about the patient, only what is necessary to proceed in helping the patient. This example illustrates the tension between having access to the data, that can be useful, but at the same time keeping it closed to other users.
+One of the prime examples of Privacy applied to information technology problems and mentioned in the literature is related to \ac{emr} \cite{Lu2014}. These records must be handled with extra care because they contain a large number of sensitive information about the patients. The Patient Record Systems should be able to disclose information only to selected personnel, but not all the information about the patient, only what is necessary to proceed in helping the patient. This example illustrates the tension between having access to the data, that can be useful, but at the same time keeping it closed to other users.
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Privacy Protection Goals}
+\subsection{Privacy Protection Principles}
 \label{ssec:PrivacyProtectionGoals}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-New concepts have arisen in recent years for privacy specific protection goals \cite{Danezis2015}. Their definitions are as follows:
+New concepts have arisen in recent years for privacy specific protection principles \cite{Danezis2015}. Their definitions are as follows:
 
 \begin{itemize}
 \setlength\itemsep{1em}
@@ -39,21 +39,21 @@ New concepts have arisen in recent years for privacy specific protection goals \
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{European Union Legislation}
+\subsection{\acl{eu} Legislation}
 \label{ssec:EuropeanUnionLegislation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-It is also important to mention in the context of this work the current legislation in the \ac{EU} regarding data protection.
+It is also important to mention in the context of this work the current legislation in the \ac{eu} regarding data protection.
 
- The Data Protection Directive\footnote{\url{http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:31995L0046}} is the current law regarding privacy in the \ac{EU} and is in force since 1995.
-More recently a replacement has been proposed and accepted in the \ac{EU}, the \ac{GDPR}\footnote{\url{http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.L_.2016.119.01.0001.01.ENG&toc=OJ:L:2016:119:TOC}}, that will take effect in May 2018. Both these laws are regulated by European entities, namely the \ac{ENISA}\footnote{\url{https://www.enisa.europa.eu/}} and the Article 29 Data Protection Working Party\footnote{\url{http://ec.europa.eu/newsroom/just/item-detail.cfm?item_id=50083}}.
-
-
- According to \ac{ENISA}, \ac{EU} data protection law applies to any processing of personal data \cite{DAcquisto2015}. This personal data is defined as any information related to an identified or identifiable natural person. In the context of Big Data analysis, the focus is more on indirect identification, which translates into three different approaches: \emph{i)} The possibility of isolating some or all records which identify an individual in a dataset; \emph{ii)} The linking of at least two records concerning the same individual in the same database or in different databases; and  \emph{iii)} The possibility to infer the value of an attribute in a dataset from the value of other attributes.
+ The Data Protection Directive\footnote{\url{http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:31995L0046}} is the current law regarding privacy in the \ac{eu} and is in force since 1995.
+More recently a replacement has been proposed and accepted in the \ac{eu}, the \ac{gdpr}\footnote{\url{http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.L_.2016.119.01.0001.01.ENG&toc=OJ:L:2016:119:TOC}}, that will take effect in May 2018. Both these laws are regulated by European entities, namely the \ac{enisa}\footnote{\url{https://www.enisa.europa.eu/}} and the Article 29 Data Protection Working Party\footnote{\url{http://ec.europa.eu/newsroom/just/item-detail.cfm?item_id=50083}}.
 
 
+ According to \ac{enisa}, \ac{eu} data protection law applies to any processing of personal data \cite{DAcquisto2015}. This personal data is defined as any information related to an identified or identifiable natural person. In the context of Big Data analysis, the focus is more on indirect identification, which translates into three different approaches: \emph{i)} The possibility of isolating some or all records which identify an individual in a dataset; \emph{ii)} The linking of at least two records concerning the same individual in the same database or in different databases; and  \emph{iii)} The possibility to infer the value of an attribute in a dataset from the value of other attributes.
 
-Another important cornerstone of \ac{EU} data protection law are the principles relating to data quality:
+
+
+Another important cornerstone of \ac{eu} data protection law are the principles relating to data quality:
 
 \begin{itemize}
     \setlength\itemsep{1em}
@@ -68,7 +68,7 @@ Another important cornerstone of \ac{EU} data protection law are the principles 
 
 These three principles together mandate that data processing must be done with the consent of the subject, informing the subject of what is the purpose of the processing, and do not deviate from this purpose without informing the subject.
 
-Finally, and also important to mention in the context of this work, are the rights of the data subject according to the \ac{EU} law. There are two important rights that a subject has: the \textit{right of access} and the \textit{right to object}.
+Finally, and also important to mention in the context of this work, are the rights of the data subject according to the \ac{eu} law. There are two important rights that a subject has: the \textit{right of access} and the \textit{right to object}.
 The \textit{right of access} ensures that any data subject is entitled to obtain from the data controllers communication of the data that is subjected to processing and to know the logic involved in any processing of data concerning him/her.
 This is particularly relevant in the context of Big Data analysis because it limits technological lock-ins and other competition impediments, and it enhances transparency and trust between users and service providers.
 The \textit{right to object} ensures that data subjects have a right to revoke any prior consent, and to object to the processing of data relating to them, giving to the subject the power to remove himself completely or partially to any data processing mechanisms using his personal data.
@@ -94,7 +94,7 @@ In recent years we can find a number of attacks made to systems that handle pers
 
 
 
-   \item Massachusetts GIC medical encounter database\footnote{\url{https://techpinions.com/can-you-be-identified-from-anonymous-data-its-not-so-simple/7627}}. A researcher from \ac{CMU} linked the anonymized database (which contained birth date, sex and ZIP code) with voter registration and was able to link medical records with individuals.
+   \item Massachusetts GIC medical encounter database\footnote{\url{https://techpinions.com/can-you-be-identified-from-anonymous-data-its-not-so-simple/7627}}. A researcher from \ac{cmu} linked the anonymized database (which contained birth date, sex and ZIP code) with voter registration and was able to link medical records with individuals.
 
 
 \end{itemize}
