@@ -13,8 +13,8 @@ When building a platform in the scope of privacy-preserving \ac{ml}, we must con
 This chapter describes the work that was done in implementing a privacy-preserving \ac{ml} platform. We start off with a description of the datasets chosen to evaluate our platform \ref{sec:DatasetsImplementation}. Then, we explain the preprocessing that was done to those datasets \ref{sec:DataPreProcessingImplementation}.
 Section \ref{sec:BaselineImplementation} presents the baseline implementation of the chosen \ac{ml} algorithms, resorting to a widely used \ac{ml} toolkit for Python.
 In section \ref{sec:ExpandedAlgorithmsImplementation} the implementation of the prediction phase of the algorithms is detailed.
-Finally, in section \ref{sec:CryptoDomainImplementation}, we detail which cryptographic protocols we used, why, and how we implemented them, mentioning which toolkits were used.
-
+In section \ref{sec:CryptoDomainImplementation}, we detail which cryptographic protocols we used, why, and how we implemented them, mentioning which toolkits were used.
+For understanding the uses of the solution developed, we detail in section \ref{sec:usecaseHealthcare} a use case our implementation, and finally in section \ref{sec:components} we present a possible usage for our implementation, in the form of a toolkit that could be used in a business environment.
 
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -26,6 +26,7 @@ Finally, in section \ref{sec:CryptoDomainImplementation}, we detail which crypto
 
 \input content/3010-implementation.tex
 \input content/3020-use_case.tex
+\input content/4040-api.tex
 
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -37,11 +38,15 @@ Finally, in section \ref{sec:CryptoDomainImplementation}, we detail which crypto
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Summary}
-\label{sec:SummaryBARD}
+\label{sec:SummaryImplementation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\todo[inline]{Summary chapter 3.}
+In this chapter, we discussed the implementation of a privacy-preserving \ac{ml} platform. We started by describing the datasets chosen to evaluate the platform in section \ref{sec:DatasetsImplementation}, and then we explained the preprocessing step in section \ref{sec:DataPreProcessingImplementation}.
+Section \ref{sec:BaselineImplementation} presented the implementation of the baseline for the chosen \ac{ml} algorithms, and section \ref{sec:ExpandedAlgorithmsImplementation} detailed the implementation of the evaluation phase of those algorithms.
+In section \ref{sec:CryptoDomainImplementation}, we detailed which cryptographic protocols we used, why, and how we implemented them, mentioning which toolkits were used.
+For understanding the uses of the solution developed, we detailed in section \ref{sec:usecaseHealthcare} a use case our implementation, and finally in section \ref{sec:components} we presented a possible usage for our implementation, in the form of a toolkit that could be used in a business environment.
+
 
   %
  %%%

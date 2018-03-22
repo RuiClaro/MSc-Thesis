@@ -5,7 +5,7 @@
 \acresetall
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter[Conclusions and Future Work]{Conclusions and \\ Future Work}
+\chapter{Conclusion}
 \label{ch:ConclusionsAndFutureWork}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -15,16 +15,26 @@
  %%%
   %
 
-%%%%%%%%%%%%%%%%%%%%%%%
-\section{Conclusions}
-\label{sec:Conclusions}
-%%%%%%%%%%%%%%%%%%%%%%%
+In recent years, the amount of data collected by Internet services has been steadily increasing. This data is processed by companies in order to obtain meaningful information that is used to improve or discover new approaches in business models. But this data contains private information about individuals, and cannot be freely processed, because it leads to breaches of private information.
+
+In this thesis we have presented \acs{bard}, a privacy-preserving \ac{ml} platform to provide companies with the means to apply the privacy-preserving paradigm in their Big Data operations. We discussed the existing techniques that provide the level of privacy compliant with the laws in force, and matched those techniques with the most commonly used \ac{ml} algorithms used today.
+
+We evaluated our solution using publicly available datasets that reflect subjects of relevance. We compared two privacy-preserving techniques, \ac{gc} and \ac{he}, and identified the limitations of them, namely when computing comparisons or arithmetic operations. We were also able to observe the overhead that is caused by these techniques, when compared to a baseline.
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%
 \section{Future Work}
 \label{sec:FutureWork}
 %%%%%%%%%%%%%%%%%%%%%%
+
+
+The following tasks are proposed as future work:
+
+\begin{itemize}
+	\item Explore new \ac{ml} algorithms, for example Neural Networks, and adapt them to a privacy-preserving technique.
+	\item Implement the toolkit that we proposed, in order to provide a tool that can be used by developers to use and expand our work.
+\end{itemize}
 
 
   %

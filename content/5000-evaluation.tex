@@ -84,8 +84,7 @@ A \textit{confusion matrix} is a specific table layout that allows visualization
 
 
 Besides these metrics, we also used additional ones in order to understand how much the computational overhead due to the use of cryptography influences the system.
-We compared the results obtained by the privacy-preserving versions of \ac{ml} algorithms with the ones obtained using the baseline.S
-We also take into account the execution times of the system, which shows the overhead caused by the additional computational cost added by cryptography.
+We compared the results obtained by the privacy-preserving versions of \ac{ml} algorithms with the ones obtained using the baseline. We also take into account the execution times of the system, which shows the overhead caused by the additional computational cost added by cryptography.
 Finally, we also show the increase in communication costs that happen when cryptography is involved, as all values must be represented by ciphertext, instead of integer or float values.
 
 
@@ -130,7 +129,7 @@ For the experiments using \ac{fhe}, no parameter search was made, since adequate
 For the experiments with \ac{gc}, we used the toolkit developed by VIPP group from the University of Siena\footnote{\url{http://clem.dii.unisi.it/~vipp/index.php/home}}. This toolkit was not our first choice, since it has known issues in computation times, but the other toolkits that we tested contained limitations that we could not overcome, as stated below:
 
 \begin{itemize}
-    \setlength\itemsep{1em}
+    
     \item\textbf{ABY\cite{demmler2015aby}:} We found it impossible to define gate-to-gate wires, and that removed the ability for fine control on how to use and combine wires.
 
     \item\textbf{JustGarble\footnote{\url{https://github.com/irdan/justGarble}}:} This toolkit could not be fully compiled due to conflicts with current versions of the GNU gcc compiler.
@@ -173,7 +172,7 @@ We present the best baseline results obtained in the testing set for the Breast 
  &  &  & & Linear & Poly & RBF  \\ \hline
 Baseline & \begin{tabular}[c]{@{}l@{}}A: 92.94\%\\   F: 90.91\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 91.76\%\\ F: 90.91\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 95.29\%\\   F: 93.75\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 94.12\%\\   F: 92.06\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 94.12\%\\   F: 92.31\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 94.12\%\\   F: 92.06\%\end{tabular}  \\ \hline
 
-Literature  & \begin{tabular}[c]{@{}l@{}}A: 95.13\%\\   F: 94.88\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 92.79\%\\   F: -\end{tabular}  & \begin{tabular}[c]{@{}l@{}}A: 93.50\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 97.54\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 97.13\%\\   F: 96.25\%\end{tabular} \\ \hline
+Literature  & \begin{tabular}[c]{@{}l@{}}A: 95.13\%\cite{asri2016using}\\   F: 94.88\%\cite{asri2016using}\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 92.79\%\\   F: -\end{tabular}  & \begin{tabular}[c]{@{}l@{}}A: 93.50\%\cite{ramadevi2015evaluation}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 97.54\%\cite{you2010comparative}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 97.13\%\cite{asri2016using}\\   F: 96.25\%\cite{asri2016using}\end{tabular} \\ \hline
 \end{tabular}
 \end{table}
 
@@ -233,13 +232,11 @@ We present the best baseline results obtained in the testing set for the Adult I
  &  &  & & Linear & Poly & RBF  \\ \hline
 Baseline & \begin{tabular}[c]{@{}l@{}}A: 85.56\%\\   F: 67.37\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 81.95\%\\ F: 55.80\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.08\%\\   F: 66.87\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 69.67\%\\   F: 57.04\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 80.82\%\\   F: 65.91\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 82.79\%\\   F: 61.15\%\end{tabular}  \\ \hline
 
-Literature  & \begin{tabular}[c]{@{}l@{}}A: 82.20\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular}  & \begin{tabular}[c]{@{}l@{}}A: 80.00\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.55\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.93\%\\   F: -\end{tabular} \\ \hline
+Literature  & \begin{tabular}[c]{@{}l@{}}A: 82.20\%\cite{anwar2014global}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular}  & \begin{tabular}[c]{@{}l@{}}A: 80.00\%\cite{anwar2014global}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.55\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.93\%\\   F: -\end{tabular} \\ \hline
 \end{tabular}
 \end{table}
 
 We can see that our baseline results are comparable to the ones found in literature, and therefore are a good reference for the privacy-preserving platform.
-
-\todo{Missing the references for literature in these tables. look for better results.}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -291,8 +288,6 @@ After analyzing the results obtained using the \ac{phe} and \ac{fhe} systems, we
 
 In order to better assess the execution time required by each privacy-preserving version of the different \ac{ml} algorithms, we will analyze each of the combinations tested separately.
 
-
-%In this section, we present the results of using the toolkit mentioned above, VIPP, to create a privacy-preserving prediction for all the datasets mentioned in this thesis. Firstly we will compare the results we obtained with the baseline, and afterwards we present the execution times using the toolkit for each of the \ac{ml} algorithms.
 
 \subsection{\acl{gc} and \acl{dt}}
 
@@ -1204,7 +1199,7 @@ where $N$ is the number of samples and $n$ is the number of features per sample.
 \hline
 \multicolumn{2}{|c|}{\textbf{Pima}} & \multicolumn{2}{c|}{\textbf{Breast Cancer}}  & \multicolumn{2}{c|}{\textbf{Credit Approval}} & \multicolumn{2}{c|}{\textbf{Adult Income}}   \\ \hline
 \begin{tabular}[c]{@{}c@{}}total\\ comm \\ cost\end{tabular} & \begin{tabular}[c]{@{}c@{}}cost / \\ sample\end{tabular} & \begin{tabular}[c]{@{}c@{}}total\\ comm \\ cost\end{tabular} & \begin{tabular}[c]{@{}c@{}}cost / \\ sample\end{tabular} & \begin{tabular}[c]{@{}c@{}}total\\ comm \\ cost\end{tabular} & \begin{tabular}[c]{@{}c@{}}cost / \\ sample\end{tabular} & \begin{tabular}[c]{@{}c@{}}total\\ comm\\  cost\end{tabular} & \begin{tabular}[c]{@{}c@{}}cost / \\ sample\end{tabular} \\ \hline
-$\sim$740                                                         & $\sim$10.4                                                    & $\sim$2044                                                        & $\sim$28.0                                                    & $\sim$4206                                                        & $\sim$44.8                                                    & $\sim$632970                                                      & $\sim$90.4                                                    \\ \hline
+740                                                         & 10.4                                                    & 2044                                                        & 28.0                                                    & 4206                                                        & 44.8                                                    & 632970                                                      & 90.4                                                    \\ \hline
 \end{tabular}
 \end{table}
 
@@ -1242,8 +1237,11 @@ An important remark on our experiments with \ac{he} is when each of the techniqu
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
-
+In this chapter we detailed the experiments that were conducted in implementing our solution. In section \ref{sec:EvaluationMetrics}, we presented the metric used in evaluating the results obtained.
+Section \ref{sec:ExperimentalSetup} detailed the setup that was used to run the experiments, as well as the toolkits used.
+In section \ref{sec:ExperimentalResultsBaseline}, we presented the baseline results obtained for the datasets in question., and in section \ref{sec:ExperimentalResultsComparisonBaseline} we compared those results with the the ones obtained using the toolkits.
+In section \ref{sec:ExperimentalResultsExecutionTime}, we presented the execution times for the implementation, and in section \ref{sec:CommunicationCosts} we presented the communication costs for the implementation.
+Finally, in section \ref{sec:ExperimentalResultsConclusion}, we made the final observations on the results obtained.
 
 
   %

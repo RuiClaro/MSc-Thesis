@@ -25,8 +25,8 @@ To deal with the privacy issues in Data Mining, a sub-field known as \ac{ppdm} h
 This can be achieved by using one or more privacy-preserving techniques, such as \ac{dp} \cite{Danezis2015} or \ac{smpc} \cite{DAcquisto2015}.
 
 
-\ac{ml} algorithms in the context of Big Data processing are also producing significant results, so that it is possible to do knowledge learning from datasets in order to predict future labels ( \textit{i.e.} classes of data) or clusters ( groups of related data\todo{muito pequeno, expandir, explicar melhor}) for new data. An example of an application of \ac{ml} algorithms in Data Mining is \textit{Classification} \cite{LeiXu2014}, in which a training set is processed in order to create a classifier for data, and then that classifier is used to predict class labels for new data. These applications show a greater impact in the field of medicine as mentioned above, with Google's DeepMind building \ac{ml} algorithms to process admissions in hospitals faster\footnote{\url{https://deepmind.com/applied/deepmind-health/}}, and with IBM's Watson supporting medical personnel consider treatment options for their patients\footnote{\url{https://www.mskcc.org/about/innovative-collaborations/watson-oncology}}.
-Some examples of \ac{ml} algorithms include \ac{dt}, \ac{k-nn}, and \ac{svm} \cite{LeiXu2014}.\todo{manter esta ultima frase? ou excluir?}
+\ac{ml} algorithms in the context of Big Data processing are also producing significant results, so that it is possible to do knowledge learning from datasets in order to predict future labels ( \textit{i.e.} classes of data) or clusters ( groups of related data) for new data. An example of an application of \ac{ml} algorithms in Data Mining is \textit{Classification} \cite{LeiXu2014}, in which a training set is processed in order to create a classifier for data, and then that classifier is used to predict class labels for new data. These applications show a greater impact in the field of medicine as mentioned above, with Google's DeepMind building \ac{ml} algorithms to process admissions in hospitals faster\footnote{\url{https://deepmind.com/applied/deepmind-health/}}, and with IBM's Watson supporting medical personnel consider treatment options for their patients\footnote{\url{https://www.mskcc.org/about/innovative-collaborations/watson-oncology}}.
+Some examples of \ac{ml} algorithms include \ac{dt}, \ac{k-nn}, and \ac{svm} \cite{LeiXu2014}.
 
 By combining \ac{ml} algorithms and privacy-preserving techniques, it is possible to create Data Mining processes that, not only allow for knowledge learning on large datasets but also to maintain a level of privacy that is desirable by individuals and that complies with the laws in force \cite{DAcquisto2015}.
 
@@ -36,10 +36,13 @@ By combining \ac{ml} algorithms and privacy-preserving techniques, it is possibl
 \label{sec:Intro_Contributions}
 
 The main contribution of this thesis is the design and creation of a proof-of-concept platform for privacy-preserving distributed \ac{ml} computations without resorting to third parties. With it, we aim to give users a \ac{ml} platform without them having to build their own, meaning less maintenance costs derived of maintaining code developed or dedicated servers. Since the platform has its foundations on privacy-preserving techniques, it addresses satisfactorily the privacy demands that those users want for their data.
+We show in \ref{sec:usecaseHealthcare} possible usages of this platform, detailing the context of the data to process, the trade-offs that are required, etc. We also present in section \ref{sec:components} the possible applications of the developed solution in a business environment.
 
-We show in \todo[inline]{ref to use case} possible usages of this platform, detailing the context of the data to process, the trade-offs that are required, etc.
+We also provide in the evaluation chapter \ref{ch:Evaluation} a detailed comparison of four \ac{ml} algorithms (\ac{dt}, \ac{svm}, \ac{k-m} and \ac{lr}) combined with two privacy-preserving techniques (\ac{gc} and \ac{he}), allowing us to understand when to use each combination, depending on the context of data. 
 
-\todo{Expand Contributions}
+
+
+
 
 
 %Write a first draft of this. Use what is mentioned in the abstract.
@@ -51,11 +54,16 @@ We show in \todo[inline]{ref to use case} possible usages of this platform, deta
  %%%
   %
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%{}
 \section{Structure of this Document}
 \label{sec:Intro_StructureOfThisDocument}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The remainder of this thesis is structured as follows.
+In chapter \ref{ch:RelatedWork} we present an overview on the related work about the \ac{ppml} paradigm.
+Chapter \ref{ch:BARD} we present the project from Altran that this thesis is a part of.
+In chapter \ref{ch:Implementation} we discuss the implementation specifications of the project.
+Chapter \ref{ch:Evaluation} presents and discuss the results obtained with the implementation.
+Finally, in chapter \ref{ch:ConclusionsAndFutureWork} we wrap up the thesis with the conclusions and propose a continuation for this work.
 
   %
  %%%

@@ -1,7 +1,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Architecture}
-\label{sec:Arquitecture}
+\label{sec:Architecture}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -14,28 +14,24 @@ The Data Processing step is done in two different approaches. On one hand, \ac{s
 We now describe the internal structure that the project aims to provide.
 As stated in the objectives, the main goal of \ac{bard} is to produce a platform that will provide mechanisms so that companies can perform privacy-preserving computations for \ac{ml} algorithms, that are respectful of user privacy, and comply with the legislation. A representation of the internal structure of that platform is described by the following components: 
 \begin{itemize}
-	\setlength\itemsep{1em}
 	\item \textbf{A dataset} to train the \ac{ml} algorithm, or the values representing the already trained algorithm.
 	\item \textbf{A sample} or a set of samples that represent the input of the ``user'', to be predicted.
 	\item \textbf{A prediction algorithm} that depends on the \ac{ml} algorithm and the privacy-preserving technique chosen.
 	\item \textbf{A set of toolkits} for each of the techniques used.
 \end{itemize}
 
-These components altogether allow the user of the platform to perform privacy-preserving \ac{ml} over data of his own choosing. 
+These components altogether allow the user of the platform to perform privacy-preserving \ac{ml} over data of his own choosing.
+In figure \ref{fig:bard-architecture}, we present the architecture for \ac{bard}, showing the components and steps that were taken in the design and implementation of the platform.
 
-
-
-\missingfigure{BARD Scheme}
-\commentPT{fazer um esquema para o BARD. não só de arquitectura, mas como as pessoas interagem com o BARD.
-
-
-passos no flow geral de processamento de dados : recolha de dados, pre-processamento, etc
-}
-
-
+\begin{figure}[H]
+\centering
+\label{fig:bard-architecture}
+\includegraphics[width=1\textwidth]{images/BARDArchitecture.pdf}
+\caption{Platform architecture for \acs{bard}.}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{My Contributions to \ac{bard}}
+\section{Our Contributions to \acs{bard}}
 \label{sec:MyContributions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

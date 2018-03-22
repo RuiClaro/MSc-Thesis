@@ -9,7 +9,7 @@
 
 For running the experiments, we used datasets that are highly used in the literature, namely the Breast Cancer Wisconsin dataset\footnote{\url{https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)}}, the Pima Indians Diabetes dataset\footnote{\url{https://archive.ics.uci.edu/ml/datasets/pima+indians+diabetes}}, the Credit Approval dataset\footnote{\url{http://archive.ics.uci.edu/ml/datasets/credit+approval}}, and the Adult Income dataset \footnote{\url{https://archive.ics.uci.edu/ml/datasets/adult}}. Table \ref{table:datasets} presents a brief description of each dataset.
 
-\todo{JP:replace with short description of datasets.}
+
 \begin{table}[H]
 \centering
 \caption{Datasets used in \ac{bard}.}
@@ -35,7 +35,7 @@ Although our data is obtained from publicly available data sources, it is still 
 For example, the datasets contained missing values on some of the entries that needed to be addressed. Another example is the existence of categorical data that \ac{ml} algorithms cannot process. We now describe some of the techniques we used in the data preparation phase for the datasets described in Table \ref{table:datasets}.
 
 \begin{itemize}
-    \setlength\itemsep{1em}
+    
 
 	\item\textbf{One-hot Encoding}\cite{harris2010digital} was initially used in digital circuits in order to determine the state of a state machine without using a decoder. The binary code is converted in a group of bits in which only one bit can have the value high ($1$), and all the others low ($0$). For example, the binary $110$ is converted to $01000000$.
 	In \ac{ml}, we apply this technique to deal with the problems created by using datasets with categorical (or nominal) data. Most \ac{ml} algorithms require numerical representations in the data. A solution can be to assign an integer number to each different value present in the data, but this leads to the model assuming a natural ordering between categories that may not exist.
@@ -114,7 +114,7 @@ where the parameter $\lambda$ determines the tradeoff between increasing the mar
 For \ac{svm} non-linear classification, we employ a \textit{kernel trick}, in which the dot product is replaced by a non-linear kernel function. The most used kernels are mentioned bellow.
 
 \begin{itemize}
-    \setlength\itemsep{1em}
+    
     \item Linear: ${\displaystyle k({\vec {x_{i}}},{\vec {x_{j}}})=({\vec {x_{i}}}\cdot {\vec {x_{j}}})}$
 
     \item Polynomial: ${\displaystyle k({\vec {x_{i}}},{\vec {x_{j}}})=({\vec {x_{i}}}\cdot {\vec {x_{j}}})^{d}}$
@@ -174,7 +174,6 @@ where $t$ is the input. If we express $t$ as $t=\beta _{0}+\beta _{1}x$, we can 
 F(x)={\frac {1}{1+e^{-(\beta _{0}+\beta _{1}x)}}}
 \end{equation}
 
-\todo{acabar a seccao LR}
 
 To classify testing samples we use equation \ref{eq:LR3} to attribute a prediction label to each sample $x$.
 
@@ -195,7 +194,7 @@ Taking into account that the baseline implementation was done using scikit-learn
 We successfully recreated the prediction processes by retrieving from the toolkit the specifications for each \ac{ml} model, and we now enumerate them.
 
 \begin{itemize}
-	\setlength\itemsep{1em}
+	
     \item For the \ac{dt}, it was needed to retrieve all of the model, \textit{i.e.}, the binary tree, so that we could traverse it according to each testing sample, comparing the feature with the threshold of each node, and choosing which branch of the tree to follow, until a label is reached. 
 
     \item In the case of \ac{svm}, we retrieved from the toolkit all the coefficients needed to compute equation \ref{eq:SVM3}, namely the support vectors, the $\alpha$ coefficients for each support vector, the kernel function that was used(linear or polynomial), the exponent for the polynomial kernel if needed, and the scalar value $b$.
@@ -280,8 +279,7 @@ In figure \ref{fig:kmeans} we show how we designed the circuit to represent the 
 \end{figure}
 
 
-As we show in ref(evaluation-k.means), there is an exponential decrease in performance when the number of clusters increases, or the sample has a larger number of features. This is caused by the multiplications that are done calculating the Euclidean distance. Usually this is reason to use \ac{he} instead, but the algorithm to implement comparisons is hard to implement \cite{blake2004strong}.\todo{is this justification enough?}
-
+As we show in ref(evaluation-k.means), there is an exponential decrease in performance when the number of clusters increases, or the sample has a larger number of features. This is caused by the multiplications that are done calculating the Euclidean distance. Usually this is reason to use \ac{he} instead, but the algorithm to implement comparisons is hard to implement \cite{blake2004strong}.
 
 
 

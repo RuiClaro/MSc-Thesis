@@ -20,7 +20,6 @@ Anonymization techniques use a variety of approaches, for example, suppression, 
 The goals behind anonymization of data are tightly intertwined with the privacy goals we want to achieve for the data being processed. Usually, one or more techniques mentioned above are applied to the data until certain properties are met, for example, \textit{k-anonymity}, $\ell$\textit{-diversity} or \textit{t-closeness}.
 
 \begin{itemize}
-    \setlength\itemsep{1em}
     \item \textit{k-anonymity} property states that, for each individual whose data is released in some dataset, he must not be distinguishable from at least \textit{k} individuals that are also present in the release \cite{sweeney2002k}. 
 
     \item $\ell$\textit{-diversity} property is an extension of the \textit{k-anonymity} property, and furthers the anonymization of data by reducing the granularity of the data representation such that for any given record, there exists at least $\ell$ different sensitive attribute values, in addition to the guarantees made by \textit{k-anonymity} \cite{machanavajjhala2007diversity}.
@@ -55,14 +54,14 @@ A strategy to solve these problems is to trust an external entity (a trusted thi
 When building a \ac{smpc} protocol, the most important properties that must be ensured are \textit{input privacy} and \textit{correctness} \cite{goldreich1998secure}:
 
 \begin{itemize}
-    \setlength\itemsep{1em}
+    
 
     \item The \textit{input privacy} property states that no information about the private data held by the parties can be inferred during the execution of the protocol. The only inferences about private data are those that could be inferred from seeing the output of the computation made by the protocol.
 
     \item The \textit{correctness} property relates to the existence of malicious parties that could try to deviate from the normal functioning of the protocol. In these cases, the protocol should prevent honest parties to output incorrect results. The approach to implementing the correctness property comes in two alternatives: either the protocol is robust, \textit{i.e.} it guarantees that the honest parties compute the correct output; or the honest parties abort the computation if they find an error during the execution of the protocol.
 \end{itemize}
 
-The first implementation of secure computation was introduced as \ac{stpc} \cite{yao1982protocols}. It is a simplification of the problem of \ac{smpc}, and a known protocol for \ac{stpc} is Yao's \ac{gc} protocol, which is detailed in subsection \ref{ssec:GarbledCircuits}. In \ac{stpc} there are only two participants in the computation, and usually one is responsible for starting and encoding the computation mechanism, while the other is the one responsible for evaluating the computation. In multi-party computation, the parties have no special roles and, instead, the encoding is shared amongst the parties, by secret sharing, and the evaluation is made by a protocol.\todo{MP:add some more text about the protocol.} 
+The first implementation of secure computation was introduced as \ac{stpc} \cite{yao1982protocols}. It is a simplification of the problem of \ac{smpc}, and a known protocol for \ac{stpc} is Yao's \ac{gc} protocol, which is detailed in subsection \ref{ssec:GarbledCircuits}. In \ac{stpc} there are only two participants in the computation, and usually one is responsible for starting and encoding the computation mechanism, while the other is the one responsible for evaluating the computation. In multi-party computation, the parties have no special roles and, instead, the encoding is shared amongst the parties, by secret sharing, and the evaluation is made by a protocol.
 
 Some recent implementations of \ac{smpc} protocols are based on \textit{Secret Sharing}. Secret Sharing allows one party to distribute a secret over a number of parties by distributing shares to each party. Three of the types of secret sharing techniques more commonly used are: Shamir Secret Sharing \cite{shamir1979share}, Additive Secret Sharing and Replicated Secret Sharing.
 
@@ -106,7 +105,7 @@ Some optimizations have been proposed for Yao's \ac{gc}. Kolesnikov and Schneide
 Homomorphic cryptosystems can be classified into two distinct groups: partially homomorphic cryptosystems and fully homomorphic cryptosystems.
 
 \begin{itemize}
-    \setlength\itemsep{1em}
+    
     \item In \ac{phe}, there is only one operation, like addition, multiplication or XOR, that is allowed by the homomorphic property, but not for all possible operations. Some examples of existing partially homomorphic cryptosystems are:
     ElGamal cryptosystem \cite{elgamal1985public}; Unpadded RSA \cite{rivest1978method}; and Pailier cryptosystem \cite{paillier1999public}.
 
@@ -120,8 +119,7 @@ Homomorphic cryptosystems can be classified into two distinct groups: partially 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-In \acf{fe} systems, a decryption key allows a user to learn a specific function of the encryption data, while also stopping that same user from learning anything more about the encrypted data. In other words, having a secret key only allows for a specific computation of a function over the ciphertext \cite{boneh2011functional}. When comparing \ac{fe} with \ac{he}, the main difference is that, in \ac{he}, the result of a computation in the ciphertext remains encrypted, while in \ac{fe}, the result of the computation is available in the clear. \todo{JP:se calhar é conveniente expandir um pouco esta frase}
-
+In \acf{fe} systems, a decryption key allows a user to learn a specific function of the encryption data, while also stopping that same user from learning anything more about the encrypted data. In other words, having a secret key only allows for a specific computation of a function over the ciphertext \cite{boneh2011functional}. When comparing \ac{fe} with \ac{he}, the main difference is that, in \ac{he}, the result of a computation in the ciphertext remains encrypted, while in \ac{fe}, the result of the computation is available in the clear. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
