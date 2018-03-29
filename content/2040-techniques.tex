@@ -15,14 +15,14 @@
 
 Data anonymization is a type of information sanitization technique that has the final intent of privacy protection. This can be achieved by either removing or encrypting \ac{pii} from datasets so that the individuals whom the data describe remain anonymous \cite{raghunathan2013}.
 
-Anonymization techniques use a variety of approaches, for example, suppression, where a piece of information (\textit{e.g.}, name, age) is removed from the dataset; generalization, where data is coarsened into less refined sets; perturbation, where data is modified by adding noise; and permutation, where sensitive associations between entities in the dataset are swapped.
+Anonymization techniques use a variety of approaches, for example, suppression, where a piece of information (e.g., name, age) is removed from the dataset; generalization, where data is coarsened into less refined sets; perturbation, where data is modified by adding noise; and permutation, where sensitive associations between entities in the dataset are swapped.
 
 The goals behind anonymization of data are tightly intertwined with the privacy goals we want to achieve for the data being processed. Usually, one or more techniques mentioned above are applied to the data until certain properties are met, for example, \textit{k-anonymity}, $\ell$\textit{-diversity} or \textit{t-closeness}.
 
 \begin{itemize}
     \item \textit{k-anonymity} property states that, for each individual whose data is released in some dataset, he must not be distinguishable from at least \textit{k} individuals that are also present in the release \cite{sweeney2002k}. 
 
-    \item $\ell$\textit{-diversity} property is an extension of the \textit{k-anonymity} property, and furthers the anonymization of data by reducing the granularity of the data representation such that for any given record, there exists at least $\ell$ different sensitive attribute values, in addition to the guarantees made by \textit{k-anonymity} \cite{machanavajjhala2007diversity}.
+    \item $\ell$\textit{-diversity} property is an extension of the \textit{k-anonymity} property, and furthers the anonymization of data by reducing the granularity of the data representation such that for any given record, there exist at least $\ell$ different sensitive attribute values, in addition to the guarantees made by \textit{k-anonymity} \cite{machanavajjhala2007diversity}.
 
     \item \textit{t-closeness} property is a further refinement of $\ell$\textit{-diversity}. This property requires that the distribution of a sensitive attribute in any equivalence class is close to the distribution of the attribute in the overall table, effectively limiting the amount of individual-specific information an observer can learn \cite{li2007t}.  
 \end{itemize} 
@@ -34,7 +34,7 @@ The goals behind anonymization of data are tightly intertwined with the privacy 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-The concept of \acf{dp} arose due to recent Data Privacy breaches mentioned in section \ref{ssec:ExamplesDataPrivacyBreaches}. In \cite{Dwork2006} it is shown that the security standard for statistical databases, which states that access to a statistical database should not enable one to learn anything about an individual that could not be learned without access, is not achievable because of the existence of auxiliary information, \textit{i.e.}, information available from sources other than the statistical database.
+The concept of \acf{dp} arose due to recent Data Privacy breaches mentioned in section \ref{ssec:ExamplesDataPrivacyBreaches}. In \cite{Dwork2006} it is shown that the security standard for statistical databases, which states that access to a statistical database should not enable one to learn anything about an individual that could not be learned without access, is not achievable because of the existence of auxiliary information, i.e., information available from sources other than the statistical database.
 
 \ac{dp} is a process of maximizing the accuracy of queries in statistical databases while minimizing the chances of identifying its records. The core of the procedure is based on \textit{randomized response} \cite{warner1965randomized}, giving the possibility to infer statistical information from the dataset, while still ensuring high levels of privacy.
 
@@ -58,10 +58,10 @@ When building a \ac{smpc} protocol, the most important properties that must be e
 
     \item The \textit{input privacy} property states that no information about the private data held by the parties can be inferred during the execution of the protocol. The only inferences about private data are those that could be inferred from seeing the output of the computation made by the protocol.
 
-    \item The \textit{correctness} property relates to the existence of malicious parties that could try to deviate from the normal functioning of the protocol. In these cases, the protocol should prevent honest parties to output incorrect results. The approach to implementing the correctness property comes in two alternatives: either the protocol is robust, \textit{i.e.} it guarantees that the honest parties compute the correct output; or the honest parties abort the computation if they find an error during the execution of the protocol.
+    \item The \textit{correctness} property relates to the existence of malicious parties that could try to deviate from the normal functioning of the protocol. In these cases, the protocol should prevent honest parties to output incorrect results. The approach to implementing the correctness property comes in two alternatives: either the protocol is robust, i.e. it guarantees that the honest parties compute the correct output; or the honest parties abort the computation if they find an error during the execution of the protocol.
 \end{itemize}
 
-The first implementation of secure computation was introduced as \ac{stpc} \cite{yao1982protocols}. It is a simplification of the problem of \ac{smpc}, and a known protocol for \ac{stpc} is Yao's \ac{gc} protocol, which is detailed in subsection \ref{ssec:GarbledCircuits}. In \ac{stpc} there are only two participants in the computation, and usually one is responsible for starting and encoding the computation mechanism, while the other is the one responsible for evaluating the computation. In multi-party computation, the parties have no special roles and, instead, the encoding is shared amongst the parties, by secret sharing, and the evaluation is made by a protocol.
+The first implementation of secure computation was introduced as \ac{stpc} \cite{yao1982protocols}. It is a simplification of the problem of \ac{smpc}, and a known protocol for \ac{stpc} is Yao's \ac{gc} protocol, which is detailed in subsection \ref{ssec:GarbledCircuits}. In \ac{stpc} there are only two participants in the computation, and usually one is responsible for starting and encoding the computation mechanism, while the other is the one responsible for evaluating the computation. In multi-party computation, the parties have no special roles and, instead, the encoding is shared amongst the parties, by secret sharing, and the evaluation is made by a protocol, as shown in \cite{ben2008fairplaymp}.
 
 Some recent implementations of \ac{smpc} protocols are based on \textit{Secret Sharing}. Secret Sharing allows one party to distribute a secret over a number of parties by distributing shares to each party. Three of the types of secret sharing techniques more commonly used are: Shamir Secret Sharing \cite{shamir1979share}, Additive Secret Sharing and Replicated Secret Sharing.
 
@@ -76,7 +76,7 @@ Some recent implementations of \ac{smpc} protocols are based on \textit{Secret S
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\acf{ot} \cite{rabin2005exchange} is a protocol in which a sender transfers one of the potentially many pieces of information he has to a receiver, but remains oblivious as to what piece has been transferred. Let $s^0$ and $s^1$ be two strings held by a sender that wants to transfer one of the strings to a receiver, holding a selection bit $b$; the protocol allows for only one of the inputs $s^b$ to be transfered; the receiver learns nothing about $s^{1-b}$, and the sender does not learn $b$. 
+\acf{ot} \cite{rabin2005exchange} is a protocol in which a sender transfers one of the potentially many pieces of information he has to a receiver but remains oblivious as to what piece has been transferred. Let $s^0$ and $s^1$ be two strings held by a sender that wants to transfer one of the strings to a receiver, holding a selection bit $b$; the protocol allows for only one of the inputs $s^b$ to be transferred; the receiver learns nothing about $s^{1-b}$, and the sender does not learn $b$. 
 
 An interesting implementation of \ac{ot} is the one done by Pinkas and Naor \cite{naor2005computationally}. In it, the authors describe an extension to the basic 1-out-of-2 \ac{ot} protocol, to a 1-out-of-\textit{N} protocol, and a \textit{k}-out-of-\textit{N} protocol.
 
@@ -100,16 +100,14 @@ Some optimizations have been proposed for Yao's \ac{gc}. Kolesnikov and Schneide
 
 \acf{he} \cite{rivest1978data} is a cryptographic technique that allows computations to be carried with the ciphertext, so that, when decrypted, the resulting plaintext reflects the computation made. In other words, \ac{he} allows to make some computation over the ciphertext, for example, addition, without decrypting it, and the result is the same as making that computation on the plaintext. This is of great importance because it allows chaining multiple services that make computations on a ciphertext, without the need to expose the data to those services. 
 
-%A prime example of \ac{he} in real-world problems is electronic voting \cite{hirt2000efficient}.\todo{MP:It is not clear why evoting is an example of HE. JP: acho que aqui apenas devem aparecer definições e descrições relacionadas com os algoritmos. exemplos específicos ficam melhor mais à frente no documento.}
-
 Homomorphic cryptosystems can be classified into two distinct groups: partially homomorphic cryptosystems and fully homomorphic cryptosystems.
 
 \begin{itemize}
     
-    \item In \ac{phe}, there is only one operation, like addition, multiplication or XOR, that is allowed by the homomorphic property, but not for all possible operations. Some examples of existing partially homomorphic cryptosystems are:
+    \item In \ac{phe} there is only one operation, like addition, multiplication or XOR, that is allowed by the homomorphic property, but not for all possible operations. Some examples of existing partially homomorphic cryptosystems are:
     ElGamal cryptosystem \cite{elgamal1985public}; Unpadded RSA \cite{rivest1978method}; and Pailier cryptosystem \cite{paillier1999public}.
 
-    \item In \ac{fhe}, it is possible to make two different operations on the ciphertext, namely addition and multiplication. This concept was first introduced in \cite{rivest1978data}, and for many years it remained just as a concept, until recent years when fully homomorphic implementations were developed, for instance, Gentry's cryptosystem \cite{gentry2009fully}.
+    \item In \ac{fhe} it is possible to make two different operations on the ciphertext, namely addition, and multiplication. This concept was first introduced in \cite{rivest1978data}, and for many years it remained just as a concept, until recent years when fully homomorphic implementations were developed, for instance, Gentry's cryptosystem \cite{gentry2009fully}.
 \end{itemize}
 
 
@@ -119,7 +117,7 @@ Homomorphic cryptosystems can be classified into two distinct groups: partially 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-In \acf{fe} systems, a decryption key allows a user to learn a specific function of the encryption data, while also stopping that same user from learning anything more about the encrypted data. In other words, having a secret key only allows for a specific computation of a function over the ciphertext \cite{boneh2011functional}. When comparing \ac{fe} with \ac{he}, the main difference is that, in \ac{he}, the result of a computation in the ciphertext remains encrypted, while in \ac{fe}, the result of the computation is available in the clear. 
+In \acf{fe} systems, a decryption key allows a user to learn a specific function of the encryption data, while also stopping that same user from learning anything more about the encrypted data. In other words, having a secret key only allows for a specific computation of a function over the ciphertext \cite{boneh2011functional}. When comparing \ac{fe} with \ac{fhe}, the main difference is that, in an \ac{fhe} scheme, we compute an encryption of $f(x)$ from an encryption of $x$, whereas in an \ac{fe} scheme we compute, in the clear, $f(x)$ from an encryption of $x$. For more details refer to \cite{alwen2013relationship}. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

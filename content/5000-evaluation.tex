@@ -45,7 +45,7 @@ accuracy=\frac{TP + TN} {TP + TN + FP + FN}
 \end{equation}
 
 
-\textit{Precision} is defined by the fraction of relevant instances among the retrieved instances \ref{eq:precision}. \textit{Recall} is defined by the fraction of relevant instances that have been retrieved over the total of the relevant instances \ref{eq:recall}.
+\textit{Precision} is defined by the fraction of relevant instances among the retrieved instances. \textit{Recall} is defined by the fraction of relevant instances that have been retrieved over the total of the relevant instances.
 
 
 \begin{equation}
@@ -93,9 +93,9 @@ Finally, we also show the increase in communication costs that happen when crypt
 \label{sec:ExperimentalSetup}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-All the experiments were performed using a machine with an Inter Core i5-4300M CPU @2.60Gz with a 3MB L3 cache memory and a 12 GB RAM memory.
+All the experiments were performed using a machine with an Intel Core i5-4300M CPU @2.60Gz with a 3MB L3 cache memory and a 12 GB RAM memory.
 
-For obtaining the experimental results, we started by applying the pre-processing techniques mentioning in \ref{sec:DataPreProcessingImplementation} in the datasets described in table \ref{table:datasets}. As mentioned, all datasets that were composed by a single file were split into three sets, training, validation and testing sets, with the proportion $70/15/15$. Each \ac{ml} model was trained using the training set, the best model configuration was chosen using the validation set, and the model performance was evaluated using the testing set.
+For obtaining the experimental results, we started by applying the pre-processing techniques mentioned in \ref{sec:DataPreProcessingImplementation} to the datasets described in table \ref{table:datasets}. As described before, all datasets that were composed of a single file were split into three sets, training, validation and testing sets, with the proportion $70/15/15$. Each \ac{ml} model was trained using the training set, the best model configuration was chosen using the validation set, and the model performance was evaluated using the testing set.
 
 \subsection{Parameters - Baseline}
 
@@ -103,7 +103,7 @@ For the experiments with \ac{dt}, we tested the values for \textit{max\textunder
 
 For the experiments with \ac{svm}, we used \textit{kernel} values of \textit{linear}, \textit{poly} and \ac{rbf}. For all kernels, we used $C$ values of $2^{-10}$, $2^{-6}$, $2^{-2}$, $2^{2}$, $2^{6}$ and $2^{10}$. For the polynomial kernel, we used \textit{degree} values of 2, 3 and 4. For the \ac{rbf} kernel, we used $\gamma$ values of $2^{-9}$, $2^{-5}$, $2^{-1}$, $2^{1}$ and $2^{3}$.
 
-For the experiments with \ac{k-m}, we tested with a variable number of clusters, \textit{i.e.}, with \textit{num\textunderscore clusters} values of 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90 and 100.
+For the experiments with \ac{k-m}, we tested with a variable number of clusters, i.e., with \textit{num\textunderscore clusters} values of 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90 and 100.
 
 For the experiments with \ac{lr}, we used the \textit{liblinear} solver with $C$ values of $2^{-10}$, $2^{-6}$, $2^{-2}$, $2^{2}$, $2^{6}$ and $2^{10}$.
 
@@ -126,7 +126,7 @@ For the experiments using \ac{fhe}, no parameter search was made, since adequate
 \subsection{\acl{gc} toolkits}
 
 
-For the experiments with \ac{gc}, we used the toolkit developed by VIPP group from the University of Siena\footnote{\url{http://clem.dii.unisi.it/~vipp/index.php/home}}. This toolkit was not our first choice, since it has known issues in computation times, but the other toolkits that we tested contained limitations that we could not overcome, as stated below:
+For the experiments with \ac{gc}, we used the toolkit developed by VIPP group from the University of Siena\footnote{\url{http://clem.dii.unisi.it/~vipp/index.php/home}}. This toolkit was not our first choice since it has known issues in computation times, but the other toolkits that we tested contained limitations that we could not overcome, as stated below:
 
 \begin{itemize}
     
@@ -146,7 +146,7 @@ For the experiments with \ac{gc}, we used the toolkit developed by VIPP group fr
 
 For the experiments using \ac{phe}, we implemented our own version of the Paillier cryptosystem \cite{paillier1999public}. We decided to do this way instead of using an existing toolkit because it was both rather simple to implement and also because this provided a good learning experience on the inner workings of a cryptographic system.
 
-For the experiments using \ac{fhe}, we used the HElib toolkit \cite{halevi2014helib}. Two methods were considered in the implementation, method 1 (M1: multiply and sum arrays without packing) and method 2 (M2: use coefficient packing, invert and multiply polynomials), that were inspired in a HElib tutorial\footnote{\url{https://mshcruz.wordpress.com/2016/09/27/scalar-product-using-helib/}}. It is also important to note that, due to intrinsic limitations in HElib, we had to pre-compute $\alpha_i\centerdot x_{SV}^{(i)}$ when evaluating the \ac{svm}. However, this does not negatively affect the experiments, since these model parameters are both owned by the same party.
+For the experiments using \ac{fhe}, we used the HElib toolkit \cite{halevi2014helib}. Two methods were considered in the implementation, method 1 (M1: multiply and sum arrays without packing) and method 2 (M2: use coefficient packing, invert and multiply polynomials), that was inspired in a HElib tutorial\footnote{\url{https://mshcruz.wordpress.com/2016/09/27/scalar-product-using-helib/}}. It is also important to note that, due to intrinsic limitations in HElib, we had to pre-compute $\alpha_i\centerdot x_{SV}^{(i)}$ when evaluating the \ac{svm}. However, this does not negatively affect the experiments, since these model parameters are both owned by the same party.
 
 
 
@@ -156,7 +156,7 @@ For the experiments using \ac{fhe}, we used the HElib toolkit \cite{halevi2014he
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-We now show the experimental results obtained by applying different \ac{ml} algorithms to the datasets mentioned above. We show in each subsection below, corresponding to each dataset, the different \ac{ml} algorithms and parameters, and mention results found in the literature. Each result that we show in the following tables are the ones obtained by the best combination of parameters, \textit{i.e.}, the parameters that provided the best accuracy or F-Measure results with the validation set.
+We now show the experimental results obtained by applying different \ac{ml} algorithms to the datasets mentioned above. We show in each subsection below, corresponding to each dataset, the different \ac{ml} algorithms and parameters, and mention results found in the literature. Each result that we show in the following tables are the ones obtained by the best combination of parameters, i.e., the parameters that provided the best accuracy or F-Measure results with the validation set.
 
 \subsection{Breast Cancer Wisconsin Dataset}
 
@@ -166,9 +166,9 @@ We present the best baseline results obtained in the testing set for the Breast 
 \centering
 \caption{Baseline results for Breast Cancer Wisconsin Dataset. ``A'' represents Accuracy, ``F'' represents F-Measure.}
 \label{table:baselineBCW}
-\begin{tabular}{|l|l|l|l|l|l|l|}
+\begin{tabular}{|l|c|c|c|c|c|c|}
 \hline
-\multirow{2}{*}{ML algorithm} & \multirow{2}{*}{DT} & \multirow{2}{*}{k-Means} & \multirow{2}{*}{LR} & \multicolumn{3}{l|}{SVM} \\ \cline{5-7} 
+\multirow{2}{*}{\textbf{ML algorithm}} & \multirow{2}{*}{\textbf{DT}} & \multirow{2}{*}{\textbf{k-Means}} & \multirow{2}{*}{\textbf{LR}} & \multicolumn{3}{c|}{\textbf{SVM}} \\ \cline{5-7} 
  &  &  & & Linear & Poly & RBF  \\ \hline
 Baseline & \begin{tabular}[c]{@{}l@{}}A: 92.94\%\\   F: 90.91\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 91.76\%\\ F: 90.91\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 95.29\%\\   F: 93.75\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 94.12\%\\   F: 92.06\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 94.12\%\\   F: 92.31\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 94.12\%\\   F: 92.06\%\end{tabular}  \\ \hline
 
@@ -176,7 +176,7 @@ Literature  & \begin{tabular}[c]{@{}l@{}}A: 95.13\%\cite{asri2016using}\\   F: 9
 \end{tabular}
 \end{table}
 
-As we see, our baseline results are near the ones found in the literature.
+As we see, our baseline results are close to the ones found in the literature.
 
 \subsection{Pima Indians Diabetes Dataset}
 
@@ -186,13 +186,13 @@ We present the best baseline results obtained in the testing set for the Pima In
 \centering
 \caption{Baseline results for Pima Indians Diabetes Dataset. ``A'' represents Accuracy, ``F'' represents F-Measure.}
 \label{table:baselinePID}
-\begin{tabular}{|l|l|l|l|l|l|l|}
+\begin{tabular}{|l|c|c|c|c|c|c|}
 \hline
-\multirow{2}{*}{ML algorithm} & \multirow{2}{*}{DT} & \multirow{2}{*}{k-Means} & \multirow{2}{*}{LR} & \multicolumn{3}{l|}{SVM} \\ \cline{5-7} 
+\multirow{2}{*}{\textbf{ML algorithm}} & \multirow{2}{*}{\textbf{DT}} & \multirow{2}{*}{\textbf{k-Means}} & \multirow{2}{*}{\textbf{LR}} & \multicolumn{3}{c|}{\textbf{SVM}} \\ \cline{5-7} 
  &  &  & & Linear & Poly & RBF  \\ \hline
 Baseline & \begin{tabular}[c]{@{}l@{}}A: 73.04\%\\   F: 63.53\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 72.17\%\\ F: 52.94\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 75.65\%\\   F: 58.82\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 75.65\%\\   F: 61.11\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 76.52\%\\   F: 59.70\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 77.39\%\\   F: 62.86\%\end{tabular}  \\ \hline
 
-Literature  & \begin{tabular}[c]{@{}l@{}}A: 75.39\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 73.7\\   F: -\end{tabular}  & \begin{tabular}[c]{@{}l@{}}A: 77.95\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 80.2\%\\   F: -\end{tabular} \\ \hline
+Literature  & \begin{tabular}[c]{@{}l@{}}A: 75.39\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 73.7\%\\   F: -\end{tabular}  & \begin{tabular}[c]{@{}l@{}}A: 77.95\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 80.2\%\\   F: -\end{tabular} \\ \hline
 \end{tabular}
 \end{table}
 
@@ -206,13 +206,13 @@ We present the best baseline results obtained in the testing set for the Credit 
 \centering
 \caption{Baseline results for Credit Approval Dataset. ``A'' represents Accuracy, ``F'' represents F-Measure.}
 \label{table:baselineCAD}
-\begin{tabular}{|l|l|l|l|l|l|l|}
+\begin{tabular}{|l|c|c|c|c|c|c|}
 \hline
-\multirow{2}{*}{ML algorithm} & \multirow{2}{*}{DT} & \multirow{2}{*}{k-Means} & \multirow{2}{*}{LR} & \multicolumn{3}{l|}{SVM} \\ \cline{5-7} 
+\multirow{2}{*}{\textbf{ML algorithm}} & \multirow{2}{*}{\textbf{DT}} & \multirow{2}{*}{\textbf{k-Means}} & \multirow{2}{*}{\textbf{LR}} & \multicolumn{3}{c|}{\textbf{SVM}} \\ \cline{5-7} 
  &  &  & & Linear & Poly & RBF  \\ \hline
 Baseline & \begin{tabular}[c]{@{}l@{}}A: 78.64\%\\   F: 75.00\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 83.50\%\\ F: 81.32\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.44\%\\   F: 84.21\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.44\%\\   F: 84.54\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.43\%\\   F: 83.87\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.47\%\\   F: 83.33\%\end{tabular}  \\ \hline
 
-Literature  & \begin{tabular}[c]{@{}l@{}}A: 85.5\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 86.3\\   F: -\end{tabular}  & \begin{tabular}[c]{@{}l@{}}A: 87.9\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 86.2\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.8\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.5\%\\   F: -\end{tabular} \\ \hline
+Literature  & \begin{tabular}[c]{@{}l@{}}A: 85.5\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 86.3\%\\   F: -\end{tabular}  & \begin{tabular}[c]{@{}l@{}}A: 87.9\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 86.2\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.8\%\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.5\%\\   F: -\end{tabular} \\ \hline
 \end{tabular}
 \end{table}
 
@@ -226,9 +226,9 @@ We present the best baseline results obtained in the testing set for the Adult I
 \centering
 \caption{Baseline results for Adult Income Dataset. ``A'' represents Accuracy, ``F'' represents F-Measure.}
 \label{table:baselineAI}
-\begin{tabular}{|l|l|l|l|l|l|l|}
+\begin{tabular}{|l|c|c|c|c|c|c|}
 \hline
-\multirow{2}{*}{ML algorithm} & \multirow{2}{*}{DT} & \multirow{2}{*}{k-Means} & \multirow{2}{*}{LR} & \multicolumn{3}{l|}{SVM} \\ \cline{5-7} 
+\multirow{2}{*}{\textbf{ML algorithm}} & \multirow{2}{*}{\textbf{DT}} & \multirow{2}{*}{\textbf{k-Means}} & \multirow{2}{*}{\textbf{LR}} & \multicolumn{3}{c|}{\textbf{SVM}} \\ \cline{5-7} 
  &  &  & & Linear & Poly & RBF  \\ \hline
 Baseline & \begin{tabular}[c]{@{}l@{}}A: 85.56\%\\   F: 67.37\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 81.95\%\\ F: 55.80\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.08\%\\   F: 66.87\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 69.67\%\\   F: 57.04\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 80.82\%\\   F: 65.91\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 82.79\%\\   F: 61.15\%\end{tabular}  \\ \hline
 
@@ -253,7 +253,7 @@ It is important to mention that, after analyzing the results obtained using the 
 \label{table:avgErrorDT}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
-bits & Pima Indians & Breast Cancer & Credit Approval & Adult Income \\ \hline
+\textbf{bits} & \textbf{Pima Indians} & \textbf{Breast Cancer} & \textbf{Credit Approval} & \textbf{Adult Income} \\ \hline
 8    & 1.88\%       & 0.55\%        & 8.70\%          & 0.00\%       \\ \hline
 12   & 0.00\%       & 0.13\%        & 1.11\%          & 0.00\%       \\ \hline
 16   & 0.00\%       & 0.13\%        & 0.31\%          & 0.00\%       \\ \hline
@@ -268,7 +268,7 @@ bits & Pima Indians & Breast Cancer & Credit Approval & Adult Income \\ \hline
 \label{table:avgErrorKM}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
-bits & Pima Indians & Breast Cancer & Credit Approval & Adult Income \\ \hline
+\textbf{bits} & \textbf{Pima Indians} & \textbf{Breast Cancer} & \textbf{Credit Approval} & \textbf{Adult Income} \\ \hline
 8    & 2.03\%       & 3.07\%        &    0.05\%       &     0.02\%   \\ \hline
 12   & 0.39\%       & 0.85\%        &    0.00\%       &     0.00\%   \\ \hline
 16   & 0.29\%       & 0.72\%        &    0.00\%       &     0.00\%   \\ \hline
@@ -277,9 +277,9 @@ bits & Pima Indians & Breast Cancer & Credit Approval & Adult Income \\ \hline
 \end{tabular}
 \end{table}
 
-By observing these tables, we can conclude that the loss of prediction performance caused by using the privacy-preserving versions of the \ac{ml} algorithms is not relevant, as long as at least 16 bits are used to represent the data. Since both \ac{dt} and \ac{k-m} only output an integer representing the label, and not a real number, the visible effect of changing the amount of bits is minimal.
+By observing these tables, we can conclude that the loss of prediction performance caused by using the privacy-preserving versions of the \ac{ml} algorithms is not relevant, as long as at least 16 bits are used to represent the data. Since both \ac{dt} and \ac{k-m} only output an integer representing the label, and not a real number, the visible effect of changing the number of bits is minimal.
 
-After analyzing the results obtained using the \ac{phe} and \ac{fhe} systems, we verified that all predicted labels and almost all function evaluation outputs match the baseline. The few examples when an exact match does not happen come mostly from the \ac{svm} scoring evaluation function implemented in HElib, and are most likely caused by accumulation of the intrinsic noise generated every time an operation is performed between two ciphertexts. Therefore, we can conclude that our privacy-preserving versions of the \ac{ml} algorithms using \ac{phe} and \ac{fhe} have no relevant loss of prediction performance.
+After analyzing the results obtained using the \ac{phe} and \ac{fhe} systems, we verified that all predicted labels and almost all function evaluation outputs match the baseline. The few examples when an exact match does not happen come mostly from the \ac{svm} scoring evaluation function implemented in HElib, and are most likely caused by the accumulation of the intrinsic noise generated every time an operation is performed between two ciphertexts. Therefore, we can conclude that our privacy-preserving versions of the \ac{ml} algorithms using \ac{phe} and \ac{fhe} have no relevant loss of prediction performance.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experimental Results - Execution Time}
@@ -291,7 +291,7 @@ In order to better assess the execution time required by each privacy-preserving
 
 \subsection{\acl{gc} and \acl{dt}}
 
-We present the execution times obtained in using the toolkit to build a \ac{gc} implementation of \ac{dt} for all the datasets in the tables below. The results are presented in terms of average pre-computation times per data sample and runtimes per data sample. Table \ref{table:avgDTAllDatasets} presents the average pre-computation times for each data sample for all datasets.
+We present the execution times obtained by using the toolkit to build a \ac{gc} implementation of \ac{dt} for all the datasets in the tables below. The results are presented in terms of average pre-computation times per data sample and runtimes per data sample. Table \ref{table:avgDTAllDatasets} presents the average pre-computation times for each data sample for all datasets.
 
 
 \begin{table}[H]
@@ -301,7 +301,7 @@ We present the execution times obtained in using the toolkit to build a \ac{gc} 
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 \multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{dataset}}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                             \\ \cline{2-6} 
-\multicolumn{1}{|c|}{}                                  & \textbf{8 bits} & \textbf{12 bits} & \textbf{16 bits} & \textbf{20 bits} & \textbf{24 bits} \\ \hline
+\multicolumn{1}{|c|}{}                                  & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
 Breast                                                  & 0.205           & 0.240            & 0.281            & 0.325            & 0.356            \\ \hline
 Pima                                                    & 0.219           & 0.285            & 0.310            & 0.344            & 0.356            \\ \hline
 Credit                                                  & 0.224           & 0.253            & 0.271            & 0.290            & 0.315            \\ \hline
@@ -318,7 +318,7 @@ In table \ref{table:avgDTAllDatasets} we can observe that average pre-computatio
 \label{table:runtimeDTBCW}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
-\multirow{2}{*}{DT depth} & \multicolumn{5}{c|}{numeric precision}         \\ \cline{2-6} 
+\multirow{2}{*}{\textbf{DT depth}} & \multicolumn{5}{c|}{\textbf{numeric precision}}         \\ \cline{2-6} 
                           & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
 1                         & 1.015  & 1.383   & 1.735   & 2.082   & 2.442   \\ \hline
 3                         & 1.057  & 1.425   & 1.804   & 2.187   & 2.550   \\ \hline
@@ -336,7 +336,7 @@ In table \ref{table:avgDTAllDatasets} we can observe that average pre-computatio
 \label{table:runtimeDTPID}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
-\multirow{2}{*}{DT depth} & \multicolumn{5}{c|}{numeric precision}         \\ \cline{2-6} 
+\multirow{2}{*}{\textbf{DT depth}} & \multicolumn{5}{c|}{\textbf{numeric precision}}         \\ \cline{2-6} 
                           & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
 1                         & 0.374  & 0.502   & 0.663   & 0.782   & 0.901   \\ \hline
 4                         & 0.457  & 0.548   & 0.677   & 0.888   & 1.087   \\ \hline
@@ -354,7 +354,7 @@ In table \ref{table:avgDTAllDatasets} we can observe that average pre-computatio
 \label{table:runtimeDTCA}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
-\multirow{2}{*}{DT depth} & \multicolumn{5}{c|}{numeric precision}         \\ \cline{2-6} 
+\multirow{2}{*}{\textbf{DT depth}} & \multicolumn{5}{c|}{\textbf{numeric precision}}         \\ \cline{2-6} 
                           & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
 2                         & 1.598  & 2.333   & 2.956   & 3.591   & 4.190   \\ \hline
 5                         & 1.852  & 2.603   & 3.295   & 3.953   & 4.576   \\ \hline
@@ -371,7 +371,7 @@ In table \ref{table:avgDTAllDatasets} we can observe that average pre-computatio
 \label{table:runtimeDTAI}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
-\multirow{2}{*}{DT depth} & \multicolumn{5}{c|}{numeric precision}         \\ \cline{2-6} 
+\multirow{2}{*}{\textbf{DT depth}} & \multicolumn{5}{c|}{\textbf{numeric precision}}         \\ \cline{2-6} 
                           & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
 5                         & 3.777  & 5.169   & 6.502   & 8.171   & 9.424   \\ \hline
 6                         & 4.111  & 5.774   & 7.074   & 8.813   & 10.816  \\ \hline
@@ -406,13 +406,14 @@ In table \ref{table:avgDTAllDatasets} we can observe that average pre-computatio
 \end{figure}
 
 
-Regarding the runtimes per data sample (tables \ref{table:runtimeDTPID}, \ref{table:runtimeDTBCW}, \ref{table:runtimeDTCA}, \ref{table:runtimeDTAI}, and figure \ref{fig:dt-gc}), we can observe that the results obtained eclipse the pre-computation times. Although the scale slightly sub-linearly with the numeric precision and the number of features, they scale super-linearly with the number of nodes in the \ac{dt}. However, this does not compromise the scalability of our approach, as increasing \ac{dt} depth only leads to an exponential increase in the number of nodes when fully expanded \ac{dt} are considered.
+Regarding the runtimes per data sample (tables \ref{table:runtimeDTPID}, \ref{table:runtimeDTBCW}, \ref{table:runtimeDTCA}, \ref{table:runtimeDTAI}, and figure \ref{fig:dt-gc}), we can observe that the results obtained eclipse the pre-computation times. Although they scale slightly sub-linearly with the numeric precision and the number of features, they scale super-linearly with the number of nodes in the \ac{dt}. However, this does not compromise the scalability of our approach, as increasing \ac{dt} depth only leads to an exponential increase in the number of nodes when fully expanded \ac{dt} are considered.
 
 
 \subsection{\acl{gc} and \acl{k-m}}
+\label{ssec:gcandKM}
 
 
-We present the execution times obtained in using the toolkit to build a \ac{gc} implementation of \ac{k-m} for all the datasets in the tables below. The results are presented in terms of average pre-computation times per data sample and runtimes per data sample. Table \ref{table:avgKMAllDatasets} presents the average pre-computation times for each data sample for all datasets.
+We present the execution times obtained by using the toolkit to build a \ac{gc} implementation of \ac{k-m} for all the datasets in the tables below. The results are presented in terms of average pre-computation times per data sample and runtimes per data sample. Table \ref{table:avgKMAllDatasets} presents the average pre-computation times for each data sample for all datasets.
 
 \begin{table}[H]
 \centering
@@ -421,7 +422,7 @@ We present the execution times obtained in using the toolkit to build a \ac{gc} 
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 \multirow{2}{*}{\textbf{dataset}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                             \\ \cline{2-6} 
-                                  & \textbf{8 bits} & \textbf{12 bits} & \textbf{16 bits} & \textbf{20 bits} & \textbf{24 bits} \\ \hline
+                                  & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
 Breast                            & 0.225           & 0.251            & 0.274            & 0.289            & 0.301            \\ \hline
 Pima                              & 0.260           & 0.283            & 0.307            & 0.331            & 0.339            \\ \hline
 Credit                            & 0.226           & 0.249            & 0.253            & 0.265            & 0.272            \\ \hline
@@ -438,25 +439,25 @@ We can see in table \ref{table:avgKMAllDatasets} that average pre-computation ti
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 \multirow{2}{*}{\textbf{number clusters}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                             \\ \cline{2-6} 
-                                          & \textbf{8 bits} & \textbf{12 bits} & \textbf{16 bits} & \textbf{20 bits} & \textbf{24 bits} \\ \hline
-\textbf{2}                                & 1.619           & 2.102            & 2.788            & 3.616            & 3.838            \\ \hline
-\textbf{3}                                & 1.868           & 2.451            & 3.037            & 3.550            & 5.674            \\ \hline
-\textbf{4}                                & 1.800           & 3.082            & 3.180            & 5.028            & 5.604            \\ \hline
-\textbf{5}                                & 1.912           & 2.598            & 4.760            & 5.410            & 7.402            \\ \hline
-\textbf{6}                                & 2.062           & 2.707            & 4.872            & 5.275            & 7.951            \\ \hline
-\textbf{7}                                & 2.351           & 2.882            & 5.133            & 7.149            & 7.906            \\ \hline
-\textbf{8}                                & 2.930           & 2.805            & 4.978            & 6.946            & 9.124            \\ \hline
-\textbf{9}                                & 2.570           & 3.917            & 4.935            & 7.044            & 9.136            \\ \hline
-\textbf{10}                               & 2.291           & 4.215            & 5.990            & 7.349            & 10.802           \\ \hline
-\textbf{20}                               & 4.223           & 6.797            & 9.580            & 14.877           & 25.232           \\ \hline
-\textbf{30}                               & 5.269           & 9.234            & 15.693           & 24.228           & 36.767           \\ \hline
-\textbf{40}                               & 7.126           & 14.724           & 25.754           & 37.984           & 49.574           \\ \hline
-\textbf{50}                               & 7.885           & 14.701           & 24.245           & 40.602           & 67.651           \\ \hline
-\textbf{60}                               & 9.156           & 19.862           & 35.970           & 56.269           & -                \\ \hline
-\textbf{70}                               & 11.585          & 23.550           & 41.306           & -                & -                \\ \hline
-\textbf{80}                               & 11.433          & 23.367           & 45.067           & -                & -                \\ \hline
-\textbf{90}                               & 13.642          & 27.030           & 53.124           & -                & -                \\ \hline
-\textbf{100}                              & 16.684          & 32.046           & 59.372           & -                & -                \\ \hline
+                                          & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
+2                                & 1.619           & 2.102            & 2.788            & 3.616            & 3.838            \\ \hline
+3                                & 1.868           & 2.451            & 3.037            & 3.550            & 5.674            \\ \hline
+4                                & 1.800           & 3.082            & 3.180            & 5.028            & 5.604            \\ \hline
+5                                & 1.912           & 2.598            & 4.760            & 5.410            & 7.402            \\ \hline
+6                                & 2.062           & 2.707            & 4.872            & 5.275            & 7.951            \\ \hline
+7                                & 2.351           & 2.882            & 5.133            & 7.149            & 7.906            \\ \hline
+8                                & 2.930           & 2.805            & 4.978            & 6.946            & 9.124            \\ \hline
+9                                & 2.570           & 3.917            & 4.935            & 7.044            & 9.136            \\ \hline
+10                               & 2.291           & 4.215            & 5.990            & 7.349            & 10.802           \\ \hline
+20                               & 4.223           & 6.797            & 9.580            & 14.877           & 25.232           \\ \hline
+30                               & 5.269           & 9.234            & 15.693           & 24.228           & 36.767           \\ \hline
+40                               & 7.126           & 14.724           & 25.754           & 37.984           & 49.574           \\ \hline
+50                               & 7.885           & 14.701           & 24.245           & 40.602           & 67.651           \\ \hline
+60                               & 9.156           & 19.862           & 35.970           & 56.269           & -                \\ \hline
+70                               & 11.585          & 23.550           & 41.306           & -                & -                \\ \hline
+80                               & 11.433          & 23.367           & 45.067           & -                & -                \\ \hline
+90                               & 13.642          & 27.030           & 53.124           & -                & -                \\ \hline
+100                              & 16.684          & 32.046           & 59.372           & -                & -                \\ \hline
 \end{tabular}
 \end{table}
 
@@ -467,25 +468,25 @@ We can see in table \ref{table:avgKMAllDatasets} that average pre-computation ti
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 \multirow{2}{*}{\textbf{number clusters}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                              \\ \cline{2-6}
-                                          & \textbf{8 bits} & \textbf{12 bits} & \textbf{16 bits} & \textbf{20 bits} & \textbf{24 bits} \\ \hline
-\textbf{2}                                & 0.629           & 0.848            & 1.163            & 1.350            & 1.533            \\ \hline
-\textbf{3}                                & 0.813           & 1.055            & 1.270            & 1.494            & 1.761            \\ \hline
-\textbf{4}                                & 0.852           & 1.143            & 1.429            & 1.664            & 1.969            \\ \hline
-\textbf{5}                                & 0.943           & 1.246            & 1.531            & 1.824            & 2.066            \\ \hline
-\textbf{6}                                & 1.140           & 1.261            & 1.513            & 2.266            & 2.145            \\ \hline
-\textbf{7}                                & 1.124           & 1.319            & 1.620            & 2.319            & 2.188            \\ \hline
-\textbf{8}                                & 1.178           & 1.339            & 1.697            & 2.130            & 2.337            \\ \hline
-\textbf{9}                                & 1.227           & 1.464            & 2.356            & 2.178            & 2.504            \\ \hline
-\textbf{10}                               & 1.228           & 1.544            & 2.439            & 2.497            & 3.717            \\ \hline
-\textbf{20}                               & 1.568           & 1.896            & 3.374            & 3.952            & 5.751            \\ \hline
-\textbf{30}                               & 2.142           & 2.223            & 3.794            & 5.315            & 7.346            \\ \hline
-\textbf{40}                               & 1.762           & 3.379            & 5.099            & 6.941            & 9.697            \\ \hline
-\textbf{50}                               & 1.803           & 3.670            & 5.979            & 8.300            & 12.376           \\ \hline
-\textbf{60}                               & 3.005           & 4.927            & 7.025            & 12.218           & 16.839           \\ \hline
-\textbf{70}                               & 3.420           & 5.250            & 7.616            & 15.795           & 19.339           \\ \hline
-\textbf{80}                               & 3.513           & 6.187            & 8.649            & 15.795           & 21.302           \\ \hline
-\textbf{90}                               & 3.490           & 6.239            & 12.278           & 16.691           & 23.669           \\ \hline
-\textbf{100}                              & 3.580           & 7.876            & 14.497           & 23.599           & 32.248           \\ \hline
+                                          & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
+2                                & 0.629           & 0.848            & 1.163            & 1.350            & 1.533            \\ \hline
+3                                & 0.813           & 1.055            & 1.270            & 1.494            & 1.761            \\ \hline
+4                                & 0.852           & 1.143            & 1.429            & 1.664            & 1.969            \\ \hline
+5                                & 0.943           & 1.246            & 1.531            & 1.824            & 2.066            \\ \hline
+6                                & 1.140           & 1.261            & 1.513            & 2.266            & 2.145            \\ \hline
+7                                & 1.124           & 1.319            & 1.620            & 2.319            & 2.188            \\ \hline
+8                                & 1.178           & 1.339            & 1.697            & 2.130            & 2.337            \\ \hline
+9                                & 1.227           & 1.464            & 2.356            & 2.178            & 2.504            \\ \hline
+10                               & 1.228           & 1.544            & 2.439            & 2.497            & 3.717            \\ \hline
+20                               & 1.568           & 1.896            & 3.374            & 3.952            & 5.751            \\ \hline
+30                               & 2.142           & 2.223            & 3.794            & 5.315            & 7.346            \\ \hline
+40                               & 1.762           & 3.379            & 5.099            & 6.941            & 9.697            \\ \hline
+50                               & 1.803           & 3.670            & 5.979            & 8.300            & 12.376           \\ \hline
+60                               & 3.005           & 4.927            & 7.025            & 12.218           & 16.839           \\ \hline
+70                               & 3.420           & 5.250            & 7.616            & 15.795           & 19.339           \\ \hline
+80                               & 3.513           & 6.187            & 8.649            & 15.795           & 21.302           \\ \hline
+90                               & 3.490           & 6.239            & 12.278           & 16.691           & 23.669           \\ \hline
+100                              & 3.580           & 7.876            & 14.497           & 23.599           & 32.248           \\ \hline
 \end{tabular}
 \end{table}
 
@@ -496,25 +497,25 @@ We can see in table \ref{table:avgKMAllDatasets} that average pre-computation ti
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 \multirow{2}{*}{\textbf{number clusters}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                              \\ \cline{2-6}
-                                          & \textbf{8 bits} & \textbf{12 bits} & \textbf{16 bits} & \textbf{20 bits} & \textbf{24 bits} \\ \hline
-\textbf{2}                                & 2.541           & 3.652            & 4.151            & 5.729            & 6.837            \\ \hline
-\textbf{3}                                & 2.615           & 3.752            & 5.547            & 6.369            & 8.512            \\ \hline
-\textbf{4}                                & 2.902           & 3.663            & 5.934            & 8.114            & 9.692            \\ \hline
-\textbf{5}                                & 3.016           & 5.036            & 5.825            & 8.633            & 10.725           \\ \hline
-\textbf{6}                                & 3.129           & 5.359            & 7.474            & 9.820            & 12.961           \\ \hline
-\textbf{7}                                & 3.058           & 5.216            & 7.463            & 10.031           & 16.429           \\ \hline
-\textbf{8}                                & 3.033           & 5.360            & 7.912            & 11.342           & 15.633           \\ \hline
-\textbf{9}                                & 3.082           & 5.326            & 8.911            & 13.911           & 19.112           \\ \hline
-\textbf{10}                               & 4.196           & 6.569            & 9.412            & 14.731           & 18.997           \\ \hline
-\textbf{20}                               & 6.368           & 10.641           & 19.121           & 28.797           & 44.666           \\ \hline
-\textbf{30}                               & 9.060           & 17.660           & 28.409           & 49.931           & -                \\ \hline
-\textbf{40}                               & 11.152          & 25.673           & 42.835           & -                & -                \\ \hline
-\textbf{50}                               & 14.681          & 27.539           & 54.795           & -                & -                \\ \hline
-\textbf{60}                               & 18.326          & 37.088           & -                & -                & -                \\ \hline
-\textbf{70}                               & 19.318          & 41.164           & -                & -                & -                \\ \hline
-\textbf{80}                               & 23.371          & 56.422           & -                & -                & -                \\ \hline
-\textbf{90}                               & 27.361          & 62.862           & -                & -                & -                \\ \hline
-\textbf{100}                              & 27.908          & 67.835           & -                & -                & -                \\ \hline
+                                          & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
+2                                & 2.541           & 3.652            & 4.151            & 5.729            & 6.837            \\ \hline
+3                                & 2.615           & 3.752            & 5.547            & 6.369            & 8.512            \\ \hline
+4                                & 2.902           & 3.663            & 5.934            & 8.114            & 9.692            \\ \hline
+5                                & 3.016           & 5.036            & 5.825            & 8.633            & 10.725           \\ \hline
+6                                & 3.129           & 5.359            & 7.474            & 9.820            & 12.961           \\ \hline
+7                                & 3.058           & 5.216            & 7.463            & 10.031           & 16.429           \\ \hline
+8                                & 3.033           & 5.360            & 7.912            & 11.342           & 15.633           \\ \hline
+9                                & 3.082           & 5.326            & 8.911            & 13.911           & 19.112           \\ \hline
+10                               & 4.196           & 6.569            & 9.412            & 14.731           & 18.997           \\ \hline
+20                               & 6.368           & 10.641           & 19.121           & 28.797           & 44.666           \\ \hline
+30                               & 9.060           & 17.660           & 28.409           & 49.931           & -                \\ \hline
+40                               & 11.152          & 25.673           & 42.835           & -                & -                \\ \hline
+50                               & 14.681          & 27.539           & 54.795           & -                & -                \\ \hline
+60                               & 18.326          & 37.088           & -                & -                & -                \\ \hline
+70                               & 19.318          & 41.164           & -                & -                & -                \\ \hline
+80                               & 23.371          & 56.422           & -                & -                & -                \\ \hline
+90                               & 27.361          & 62.862           & -                & -                & -                \\ \hline
+100                              & 27.908          & 67.835           & -                & -                & -                \\ \hline
 \end{tabular}
 \end{table}
 
@@ -525,25 +526,25 @@ We can see in table \ref{table:avgKMAllDatasets} that average pre-computation ti
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 \multirow{2}{*}{\textbf{number clusters}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                              \\ \cline{2-6}
-                                          & \textbf{8 bits} & \textbf{12 bits} & \textbf{16 bits} & \textbf{20 bits} & \textbf{24 bits} \\ \hline
-\textbf{2}                                & 4.703           & 5.536            & 8.098            & 11.307           & 13.672           \\ \hline
-\textbf{3}                                & 4.361           & 7.535            & 9.620            & 14.500           & 18.896           \\ \hline
-\textbf{4}                                & 4.396           & 6.986            & 10.364           & 15.635           & 20.343           \\ \hline
-\textbf{5}                                & 6.083           & 8.688            & 11.681           & 17.928           & 25.292           \\ \hline
-\textbf{6}                                & 5.587           & 11.307           & 15.884           & 23.006           & 31.464           \\ \hline
-\textbf{7}                                & 6.441           & 10.278           & 15.981           & 24.306           & 31.277           \\ \hline
-\textbf{8}                                & 6.394           & 10.871           & 17.157           & 27.155           & 38.732           \\ \hline
-\textbf{9}                                & 8.029           & 12.958           & 21.050           & 32.607           & 48.497           \\ \hline
-\textbf{10}                               & 8.706           & 14.956           & 24.468           & 32.010           & 47.241           \\ \hline
-\textbf{20}                               & 14.834          & 24.567           & 41.386           & -                & -                \\ \hline
-\textbf{30}                               & 19.150          & 39.870           & -                & -                & -                \\ \hline
-\textbf{40}                               & 27.248          & 60.023           & -                & -                & -                \\ \hline
-\textbf{50}                               & 33.243          & -                & -                & -                & -                \\ \hline
-\textbf{60}                               & 42.933          & -                & -                & -                & -                \\ \hline
-\textbf{70}                               & 52.514          & -                & -                & -                & -                \\ \hline
-\textbf{80}                               & 61.952          & -                & -                & -                & -                \\ \hline
-\textbf{90}                               & -               & -                & -                & -                & -                \\ \hline
-\textbf{100}                              & -               & -                & -                & -                & -                \\ \hline
+                                          & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
+2                                & 4.703           & 5.536            & 8.098            & 11.307           & 13.672           \\ \hline
+3                                & 4.361           & 7.535            & 9.620            & 14.500           & 18.896           \\ \hline
+4                                & 4.396           & 6.986            & 10.364           & 15.635           & 20.343           \\ \hline
+5                                & 6.083           & 8.688            & 11.681           & 17.928           & 25.292           \\ \hline
+6                                & 5.587           & 11.307           & 15.884           & 23.006           & 31.464           \\ \hline
+7                                & 6.441           & 10.278           & 15.981           & 24.306           & 31.277           \\ \hline
+8                                & 6.394           & 10.871           & 17.157           & 27.155           & 38.732           \\ \hline
+9                                & 8.029           & 12.958           & 21.050           & 32.607           & 48.497           \\ \hline
+10                               & 8.706           & 14.956           & 24.468           & 32.010           & 47.241           \\ \hline
+20                               & 14.834          & 24.567           & 41.386           & -                & -                \\ \hline
+30                               & 19.150          & 39.870           & -                & -                & -                \\ \hline
+40                               & 27.248          & 60.023           & -                & -                & -                \\ \hline
+50                               & 33.243          & -                & -                & -                & -                \\ \hline
+60                               & 42.933          & -                & -                & -                & -                \\ \hline
+70                               & 52.514          & -                & -                & -                & -                \\ \hline
+80                               & 61.952          & -                & -                & -                & -                \\ \hline
+90                               & -               & -                & -                & -                & -                \\ \hline
+100                              & -               & -                & -                & -                & -                \\ \hline
 \end{tabular}
 \end{table}
 
@@ -571,14 +572,17 @@ We can see in table \ref{table:avgKMAllDatasets} that average pre-computation ti
 \label{fig:km-gc}%
 \end{figure}
 
-Regarding the runtimes per data sample (tables \ref{table:runtimeKMPID}, \ref{table:runtimeKMBCW}, \ref{table:runtimeKMCA}, \ref{table:runtimeKMAI}, and figure \ref{fig:km-gc}), we observe again that the results are much larger that the pre-computation times. They scale linearly with the number of features and slightly super-linearly with the number of clusters, none of which compromises the scalability of our approach. However, runtimes scale quadratically with the numeric precision, which is caused by the multiplications required to compute the Euclidean distances. Although this causes scalability issues for larges values of numeric precision, the results in table \ref{table:avgErrorKM} showed that the loss of accuracy is negligible even when only 12 bits are considered, allowing us to safely ignore this issue. The runtimes per data sample are also considerably large for the instances with a large numbber of clusters, but in our baseline system we verified that the best results were always obtained when less than 10 clusters were considered. Even if this was not the case, we could sacrifice a bit of accuracy by lowering the amount of clusters considered in order to obtain much faster runtimes.
+Regarding the runtimes per data sample (tables \ref{table:runtimeKMPID}, \ref{table:runtimeKMBCW}, \ref{table:runtimeKMCA}, \ref{table:runtimeKMAI}, and figure \ref{fig:km-gc}), we observe again that the results are much larger that the pre-computation times. They scale linearly with the number of features and slightly super-linearly with the number of clusters, none of which compromises the scalability of our approach. However, runtimes scale quadratically with the numeric precision, which is caused by the multiplications required to compute the Euclidean distances. Although this causes scalability issues for larges values of numeric precision, the results in table \ref{table:avgErrorKM} showed that the loss of accuracy is negligible even when only 12 bits are considered, allowing us to safely ignore this issue. The runtimes per data sample are also considerably large for the instances with a large number of clusters, but in our baseline system, we verified that the best results were always obtained when less than 10 clusters were considered. Even if this was not the case, we could sacrifice a bit of accuracy by lowering the number of clusters considered in order to obtain much faster runtimes.
 
 
 
 \subsection{\acl{he} and \acl{lr}}
 
+This section of the work was not developed by us but is presented for completeness purposes.
 
-We present the execution times obtained in using the \ac{phe} and \ac{fhe} systems for all datasets in the tables bellow. For the \ac{fhe} system, we present the times for methods 1 (M1) and 2 (M2) in the same cell, for ease of comparison. The results are presented in terms of total execution time for the whole datasets and execution time per data sample. 
+
+We present the execution times obtained by using the \ac{phe} and \ac{fhe} systems for all datasets in the tables bellow. For the \ac{fhe} system, we present the times for methods 1 (M1) and 2 (M2) in the same cell, for ease of comparison. The results are presented in terms of total execution time for the whole datasets and execution time per data sample. 
+
 
 \begin{table}[H]
 \centering
@@ -586,13 +590,13 @@ We present the execution times obtained in using the \ac{phe} and \ac{fhe} syste
 \label{table:LR_PHE_PIMA}
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}} & \multicolumn{3}{c|}{Total execution time (seconds)}                                                  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}Execution time /\\   data sample (seconds)\end{tabular}} \\ \cline{2-7} 
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}} & \multicolumn{3}{c|}{\textbf{Total execution time}}                                                  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\   \textbf{data sample} \end{tabular}} \\ \cline{2-7} 
 \multicolumn{1}{|c|}{}                                & \multicolumn{1}{c|}{encryption} & \multicolumn{1}{c|}{computation} & \multicolumn{1}{c|}{decryption} & \multicolumn{1}{c|}{encryption}  & \multicolumn{1}{c|}{computation}  & \multicolumn{1}{c|}{decryption}  \\ \hline
-\textbf{128}                                          & 0.224                           & 0.088                            & 0.023                           & 0.002                            & 0.001                             & 0.000                            \\ \hline
-\textbf{256}                                          & 0.528                           & 0.167                            & 0.051                           & 0.005                            & 0.001                             & 0.000                            \\ \hline
-\textbf{512}                                          & 1.563                           & 0.329                            & 0.189                           & 0.014                            & 0.003                             & 0.002                            \\ \hline
-\textbf{1024}                                         & 4.010                           & 0.482                            & 0.595                           & 0.035                            & 0.004                             & 0.005                            \\ \hline
-\textbf{2048}                                         & 19.330                          & 1.569                            & 2.828                           & 0.168                            & 0.014                             & 0.025                            \\ \hline
+128                                          & 0.224                           & 0.088                            & 0.023                           & 0.002                            & 0.001                             & 0.000                            \\ \hline
+256                                          & 0.528                           & 0.167                            & 0.051                           & 0.005                            & 0.001                             & 0.000                            \\ \hline
+512                                          & 1.563                           & 0.329                            & 0.189                           & 0.014                            & 0.003                             & 0.002                            \\ \hline
+1024                                         & 4.010                           & 0.482                            & 0.595                           & 0.035                            & 0.004                             & 0.005                            \\ \hline
+2048                                         & 19.330                          & 1.569                            & 2.828                           & 0.168                            & 0.014                             & 0.025                            \\ \hline
 \end{tabular}
 \end{table}
 
@@ -603,13 +607,13 @@ We present the execution times obtained in using the \ac{phe} and \ac{fhe} syste
 \label{table:LR_PHE_BCWD}
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}} & \multicolumn{3}{c|}{Total execution time (seconds)}                                                  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}Execution time /\\   data sample (seconds)\end{tabular}} \\ \cline{2-7} 
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}} & \multicolumn{3}{c|}{\textbf{Total execution time}}                                                  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\   \textbf{data sample} \end{tabular}} \\ \cline{2-7} 
 \multicolumn{1}{|c|}{}                                & \multicolumn{1}{c|}{encryption} & \multicolumn{1}{c|}{computation} & \multicolumn{1}{c|}{decryption} & \multicolumn{1}{c|}{encryption}  & \multicolumn{1}{c|}{computation}  & \multicolumn{1}{c|}{decryption}  \\ \hline
-\textbf{128}                                          & 0.466                           & 0.164                            & 0.010                           & 0.005                            & 0.002                             & 0.000                            \\ \hline
-\textbf{256}                                          & 1.137                           & 0.345                            & 0.035                           & 0.013                            & 0.004                             & 0.000                            \\ \hline
-\textbf{512}                                          & 2.020                           & 0.434                            & 0.082                           & 0.024                            & 0.005                             & 0.001                            \\ \hline
-\textbf{1024}                                         & 8.467                           & 1.491                            & 0.434                           & 0.100                            & 0.018                             & 0.005                            \\ \hline
-\textbf{2048}                                         & 48.454                          & 2.410                            & 1.716                           & 0.570                            & 0.028                             & 0.020                            \\ \hline
+128                                          & 0.466                           & 0.164                            & 0.010                           & 0.005                            & 0.002                             & 0.000                            \\ \hline
+256                                          & 1.137                           & 0.345                            & 0.035                           & 0.013                            & 0.004                             & 0.000                            \\ \hline
+512                                          & 2.020                           & 0.434                            & 0.082                           & 0.024                            & 0.005                             & 0.001                            \\ \hline
+1024                                         & 8.467                           & 1.491                            & 0.434                           & 0.100                            & 0.018                             & 0.005                            \\ \hline
+2048                                         & 48.454                          & 2.410                            & 1.716                           & 0.570                            & 0.028                             & 0.020                            \\ \hline
 \end{tabular}
 \end{table}
 
@@ -619,13 +623,13 @@ We present the execution times obtained in using the \ac{phe} and \ac{fhe} syste
 \label{table:LR_PHE_CAD}
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}} & \multicolumn{3}{c|}{Total execution time (seconds)}                                                  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}Execution time /\\   data sample (seconds)\end{tabular}} \\ \cline{2-7} 
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}} & \multicolumn{3}{c|}{\textbf{Total execution time}}                                                  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\   \textbf{data sample} \end{tabular}} \\ \cline{2-7} 
 \multicolumn{1}{|c|}{}                                & \multicolumn{1}{c|}{encryption} & \multicolumn{1}{c|}{computation} & \multicolumn{1}{c|}{decryption} & \multicolumn{1}{c|}{encryption}  & \multicolumn{1}{c|}{computation}  & \multicolumn{1}{c|}{decryption}  \\ \hline
-\textbf{128}                                          & 0.825                           & 0.388                            & 0.012                           & 0.008                            & 0.004                             & 0.000                            \\ \hline
-\textbf{256}                                          & 1.253                           & 0.636                            & 0.025                           & 0.012                            & 0.006                             & 0.000                            \\ \hline
-\textbf{512}                                          & 3.614                           & 1.299                            & 0.084                           & 0.035                            & 0.013                             & 0.001                            \\ \hline
-\textbf{1024}                                         & 17.526                          & 2.707                            & 0.393                           & 0.170                            & 0.026                             & 0.004                            \\ \hline
-\textbf{2048}                                         & 99.917                          & 4.598                            & 1.890                           & 0.970                            & 0.045                             & 0.018                            \\ \hline
+128                                          & 0.825                           & 0.388                            & 0.012                           & 0.008                            & 0.004                             & 0.000                            \\ \hline
+256                                          & 1.253                           & 0.636                            & 0.025                           & 0.012                            & 0.006                             & 0.000                            \\ \hline
+512                                          & 3.614                           & 1.299                            & 0.084                           & 0.035                            & 0.013                             & 0.001                            \\ \hline
+1024                                         & 17.526                          & 2.707                            & 0.393                           & 0.170                            & 0.026                             & 0.004                            \\ \hline
+2048                                         & 99.917                          & 4.598                            & 1.890                           & 0.970                            & 0.045                             & 0.018                            \\ \hline
 \end{tabular}
 \end{table}
 
@@ -635,13 +639,13 @@ We present the execution times obtained in using the \ac{phe} and \ac{fhe} syste
 \label{table:LR_PHE_AID}
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}} & \multicolumn{3}{c|}{Total execution time (seconds)}                                                  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}Execution time /\\   data sample (seconds)\end{tabular}} \\ \cline{2-7} 
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}} & \multicolumn{3}{c|}{\textbf{Total execution time}}                                                  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\   \textbf{data sample} \end{tabular}} \\ \cline{2-7} 
 \multicolumn{1}{|c|}{}                                & \multicolumn{1}{c|}{encryption} & \multicolumn{1}{c|}{computation} & \multicolumn{1}{c|}{decryption} & \multicolumn{1}{c|}{encryption}  & \multicolumn{1}{c|}{computation}  & \multicolumn{1}{c|}{decryption}  \\ \hline
-\textbf{128}                                          & 78.530                          & 59.299                           & 0.667                           & 0.011                            & 0.008                             & 0.000                            \\ \hline
-\textbf{256}                                          & 149.288                         & 115.984                          & 1.479                           & 0.020                            & 0.016                             & 0.000                            \\ \hline
-\textbf{512}                                          & 512.082                         & 171.196                          & 4.963                           & 0.070                            & 0.023                             & 0.001                            \\ \hline
-\textbf{1024}                                         & 2446.53                         & 423.473                          & 22.342                          & 0.334                            & 0.058                             & 0.003                            \\ \hline
-\textbf{2048}                                         & 15430.6                         & 907.304                          & 139.051                         & 2.106                            & 0.124                             & 0.019                            \\ \hline
+128                                          & 78.530                          & 59.299                           & 0.667                           & 0.011                            & 0.008                             & 0.000                            \\ \hline
+256                                          & 149.288                         & 115.984                          & 1.479                           & 0.020                            & 0.016                             & 0.000                            \\ \hline
+512                                          & 512.082                         & 171.196                          & 4.963                           & 0.070                            & 0.023                             & 0.001                            \\ \hline
+1024                                         & 2446.53                         & 423.473                          & 22.342                          & 0.334                            & 0.058                             & 0.003                            \\ \hline
+2048                                         & 15430.6                         & 907.304                          & 139.051                         & 2.106                            & 0.124                             & 0.019                            \\ \hline
 \end{tabular}
 \end{table}
 
@@ -680,35 +684,36 @@ We can also observe a linear increase in computation times, and a super-linear i
 \label{table:LR_FHE}
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{dataset}}} & \multicolumn{3}{c|}{Total execution time (seconds)}                                                                                                                                                           & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}Execution time /\\   data sample (seconds)\end{tabular}}                                                                                              \\ \cline{2-7} 
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{dataset}}} & \multicolumn{3}{c|}{\textbf{Total execution time}}                                                                                                                                                           & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\   \textbf{data sample}\end{tabular}}                                                                                              \\ \cline{2-7} 
 \multicolumn{1}{|c|}{}                                  & \multicolumn{1}{c|}{encryption}                                    & \multicolumn{1}{c|}{computation}                                   & \multicolumn{1}{c|}{decryption}                                     & \multicolumn{1}{c|}{encryption}                                  & \multicolumn{1}{c|}{computation}                                & \multicolumn{1}{c|}{decryption}                                 \\ \hline
-\textbf{Pima}                                           & \begin{tabular}[c]{@{}l@{}}M1: 252.211\\   M2: 19.303\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 5.657\\   M2: 0.630\end{tabular}    & \begin{tabular}[c]{@{}l@{}}M1: 4.087\\   M2: 4.116\end{tabular}     & \begin{tabular}[c]{@{}l@{}}M1: 2.193\\   M2: 0.168\end{tabular}  & \begin{tabular}[c]{@{}l@{}}M1: 0.049\\   M2: 0.005\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.036\\   M2: 0.036\end{tabular} \\ \hline
-\textbf{Breast}                                         & \begin{tabular}[c]{@{}l@{}}M1: 636.954\\   M2: 14.254\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 14.352\\   M2: 0.460\end{tabular}   & \begin{tabular}[c]{@{}l@{}}M1: 3.032\\   M2: 3.021\end{tabular}     & \begin{tabular}[c]{@{}l@{}}M1: 7.494\\   M2: 0.168\end{tabular}  & \begin{tabular}[c]{@{}l@{}}M1: 0.169\\   M2: 0.005\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.036\\   M2: 0.036\end{tabular} \\ \hline
-\textbf{Credit}                                         & \begin{tabular}[c]{@{}l@{}}M1: 1284.14\\   M2: 18.500\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 30.441\\   M2: 0.581\end{tabular}   & \begin{tabular}[c]{@{}l@{}}M1: 3.921\\   M2: 3.951\end{tabular}     & \begin{tabular}[c]{@{}l@{}}M1: 12.467\\   M2: 0.180\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.296\\   M2: 0.006\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.038\\   M2: 0.038\end{tabular} \\ \hline
-\textbf{Adult}                                          & \begin{tabular}[c]{@{}l@{}}M1: 177675\\   M2: 1235.73\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 4322.36\\   M2: 39.835\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 262.462\\   M2: 260.562\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 24.253\\   M2: 0.169\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.590\\   M2: 0.005\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.036\\   M2: 0.036\end{tabular} \\ \hline
+Pima                                           & \begin{tabular}[c]{@{}l@{}}M1: 252.211\\   M2: 19.303\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 5.657\\   M2: 0.630\end{tabular}    & \begin{tabular}[c]{@{}l@{}}M1: 4.087\\   M2: 4.116\end{tabular}     & \begin{tabular}[c]{@{}l@{}}M1: 2.193\\   M2: 0.168\end{tabular}  & \begin{tabular}[c]{@{}l@{}}M1: 0.049\\   M2: 0.005\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.036\\   M2: 0.036\end{tabular} \\ \hline
+Breast                                         & \begin{tabular}[c]{@{}l@{}}M1: 636.954\\   M2: 14.254\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 14.352\\   M2: 0.460\end{tabular}   & \begin{tabular}[c]{@{}l@{}}M1: 3.032\\   M2: 3.021\end{tabular}     & \begin{tabular}[c]{@{}l@{}}M1: 7.494\\   M2: 0.168\end{tabular}  & \begin{tabular}[c]{@{}l@{}}M1: 0.169\\   M2: 0.005\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.036\\   M2: 0.036\end{tabular} \\ \hline
+Credit                                         & \begin{tabular}[c]{@{}l@{}}M1: 1284.14\\   M2: 18.500\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 30.441\\   M2: 0.581\end{tabular}   & \begin{tabular}[c]{@{}l@{}}M1: 3.921\\   M2: 3.951\end{tabular}     & \begin{tabular}[c]{@{}l@{}}M1: 12.467\\   M2: 0.180\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.296\\   M2: 0.006\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.038\\   M2: 0.038\end{tabular} \\ \hline
+Adult                                          & \begin{tabular}[c]{@{}l@{}}M1: 177675\\   M2: 1235.73\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 4322.36\\   M2: 39.835\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 262.462\\   M2: 260.562\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 24.253\\   M2: 0.169\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.590\\   M2: 0.005\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.036\\   M2: 0.036\end{tabular} \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{figure}[H]
 \centering
-\label{fig:lr-fhe}
 \includegraphics{images/graphs/lr_fhe.pdf}
 \caption[\acl{fhe} and \acl{lr}. Execution time per data sample, in seconds. All datasets.]{All Datasets. Execution time per data sample, in seconds.}
+\label{fig:lr-fhe}
 \end{figure}
 
 
 When analyzing the results obtained using \ac{fhe} (table \ref{table:LR_FHE} and figure \ref{fig:lr-fhe}), we can observe that the packing used by method M2 greatly decreases the encryption and computation times, when compared to method M1. We also observe that method M2 makes the encryption and computation times independent from the number of features.
-Overall, we see that method M2 is much more efficient that method M1, showing the obvious advantage of packing packing the features for each dataset in a single ciphertext before performing any computation.
+Overall, we see that method M2 is much more efficient that method M1, showing the obvious advantage of packing the features for each dataset in a single ciphertext before performing any computation.
 
-When comparing \ac{phe} and \ac{fhe}, we observe that method M2 of \ac{fhe} has lower execution times than \ac{phe}, despite the complexity of the algorithm behind it. The only possible justification for this is the positive effect cause by feature packing, especially due to the gains in encryption time.
+When comparing \ac{phe} and \ac{fhe}, we observe that method M2 of \ac{fhe} has lower execution times than \ac{phe}, despite the complexity of the algorithm behind it. The only possible justification for this is the positive effect caused by feature packing, especially due to the gains in encryption time.
 
 
 
 
 \subsection{\acl{he} and \acl{svm}}
 
+This section of the work was not developed by us but is presented for completeness purposes.
 
-We present the execution times obtained for using the \ac{phe} and \ac{fhe} systems for all datasets in the tables below. For the \ac{fhe} system, we present the times for methods 1 (M1) and 2 (M2) in the same cell, for ease of comparison. The results are presented in terms of total execution time for the whole datasets and execution time per data sample for the \ac{phe} case, and execution time per sample and support vector for the \ac{fhe} case.
+We present the execution times obtained by using the \ac{phe} and \ac{fhe} systems for all datasets in the tables below. For the \ac{fhe} system, we present the times for methods 1 (M1) and 2 (M2) in the same cell, for ease of comparison. The results are presented in terms of total execution time for the whole datasets and execution time per data sample for the \ac{phe} case, and execution time per sample and support vector for the \ac{fhe} case.
 
 
 \begin{table}[H]
@@ -717,13 +722,13 @@ We present the execution times obtained for using the \ac{phe} and \ac{fhe} syst
 \label{table:SVM_PHE_PIMA}
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{dataset}}} & \multicolumn{3}{c|}{Total execution time (seconds)}                                                  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}Execution time /\\   data sample (seconds)\end{tabular}} \\ \cline{2-7} 
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}} & \multicolumn{3}{c|}{\textbf{Total execution time}}                                                  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\   \textbf{data sample}\end{tabular}} \\ \cline{2-7} 
 \multicolumn{1}{|c|}{}                                  & \multicolumn{1}{c|}{encryption} & \multicolumn{1}{c|}{computation} & \multicolumn{1}{c|}{decryption} & \multicolumn{1}{c|}{encryption}  & \multicolumn{1}{c|}{computation}  & \multicolumn{1}{c|}{decryption}  \\ \hline
-\textbf{128}                                            & 0.080                           & 3.783                            & 0.006                           & 0.001                            & 0.033                             & 0.000                            \\ \hline
-\textbf{256}                                            & 0.143                           & 6.207                            & 0.015                           & 0.001                            & 0.054                             & 0.000                            \\ \hline
-\textbf{512}                                            & 0.537                           & 10.987                           & 0.064                           & 0.005                            & 0.096                             & 0.001                            \\ \hline
-\textbf{1024}                                           & 2.787                           & 25.419                           & 0.352                           & 0.024                            & 0.221                             & 0.003                            \\ \hline
-\textbf{2048}                                           & 21.330                          & 85.946                           & 2.835                           & 0.185                            & 0.747                             & 0.025                            \\ \hline
+128                                            & 0.080                           & 3.783                            & 0.006                           & 0.001                            & 0.033                             & 0.000                            \\ \hline
+256                                            & 0.143                           & 6.207                            & 0.015                           & 0.001                            & 0.054                             & 0.000                            \\ \hline
+512                                            & 0.537                           & 10.987                           & 0.064                           & 0.005                            & 0.096                             & 0.001                            \\ \hline
+1024                                           & 2.787                           & 25.419                           & 0.352                           & 0.024                            & 0.221                             & 0.003                            \\ \hline
+2048                                           & 21.330                          & 85.946                           & 2.835                           & 0.185                            & 0.747                             & 0.025                            \\ \hline
 \end{tabular}
 \end{table}
 
@@ -733,13 +738,13 @@ We present the execution times obtained for using the \ac{phe} and \ac{fhe} syst
 \label{table:SVM_PHE_BCWD}
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{dataset}}} & \multicolumn{3}{c|}{Total execution time (seconds)}                                                  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}Execution time /\\   data sample (seconds)\end{tabular}} \\ \cline{2-7} 
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}} & \multicolumn{3}{c|}{\textbf{Total execution time}}                                                  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\   \textbf{data sample}\end{tabular}} \\ \cline{2-7} 
 \multicolumn{1}{|c|}{}                                  & \multicolumn{1}{c|}{encryption} & \multicolumn{1}{c|}{computation} & \multicolumn{1}{c|}{decryption} & \multicolumn{1}{c|}{encryption}  & \multicolumn{1}{c|}{computation}  & \multicolumn{1}{c|}{decryption}  \\ \hline
-\textbf{128}                                            & 0.178                           & 2.182                            & 0.004                           & 0.002                            & 0.026                             & 0.000                            \\ \hline
-\textbf{256}                                            & 0.408                           & 3.661                            & 0.012                           & 0.005                            & 0.043                             & 0.000                            \\ \hline
-\textbf{512}                                            & 1.556                           & 7.235                            & 0.050                           & 0.018                            & 0.085                             & 0.001                            \\ \hline
-\textbf{1024}                                           & 7.872                           & 18.094                           & 0.258                           & 0.093                            & 0.213                             & 0.003                            \\ \hline
-\textbf{2048}                                           & 48.600                          & 53.822                           & 1.598                           & 0.572                            & 0.663                             & 0.019                            \\ \hline
+128                                            & 0.178                           & 2.182                            & 0.004                           & 0.002                            & 0.026                             & 0.000                            \\ \hline
+256                                            & 0.408                           & 3.661                            & 0.012                           & 0.005                            & 0.043                             & 0.000                            \\ \hline
+512                                            & 1.556                           & 7.235                            & 0.050                           & 0.018                            & 0.085                             & 0.001                            \\ \hline
+1024                                           & 7.872                           & 18.094                           & 0.258                           & 0.093                            & 0.213                             & 0.003                            \\ \hline
+2048                                           & 48.600                          & 53.822                           & 1.598                           & 0.572                            & 0.663                             & 0.019                            \\ \hline
 \end{tabular}
 \end{table}
 
@@ -749,13 +754,13 @@ We present the execution times obtained for using the \ac{phe} and \ac{fhe} syst
 \label{table:SVM_PHE_CAD}
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{dataset}}} & \multicolumn{3}{c|}{Total execution time (seconds)}                                                  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}Execution time /\\   data sample (seconds)\end{tabular}} \\ \cline{2-7} 
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}} & \multicolumn{3}{c|}{\textbf{Total execution time}}                                                  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\   \textbf{data sample}\end{tabular}} \\ \cline{2-7} 
 \multicolumn{1}{|c|}{}                                  & \multicolumn{1}{c|}{encryption} & \multicolumn{1}{c|}{computation} & \multicolumn{1}{c|}{decryption} & \multicolumn{1}{c|}{encryption}  & \multicolumn{1}{c|}{computation}  & \multicolumn{1}{c|}{decryption}  \\ \hline
-\textbf{128}                                            & 0.347                           & 2.637                            & 0.005                           & 0.003                            & 0.026                             & 0.000                            \\ \hline
-\textbf{256}                                            & 0.783                           & 4.371                            & 0.015                           & 0.008                            & 0.042                             & 0.000                            \\ \hline
-\textbf{512}                                            & 3.117                           & 8.703                            & 0.059                           & 0.030                            & 0.084                             & 0.001                            \\ \hline
-\textbf{1024}                                           & 16.010                          & 21.413                           & 0.314                           & 0.155                            & 0.208                             & 0.003                            \\ \hline
-\textbf{2048}                                           & 99.340                          & 61.076                           & 1.927                           & 0.964                            & 0.593                             & 0.019                            \\ \hline
+128                                            & 0.347                           & 2.637                            & 0.005                           & 0.003                            & 0.026                             & 0.000                            \\ \hline
+256                                            & 0.783                           & 4.371                            & 0.015                           & 0.008                            & 0.042                             & 0.000                            \\ \hline
+512                                            & 3.117                           & 8.703                            & 0.059                           & 0.030                            & 0.084                             & 0.001                            \\ \hline
+1024                                           & 16.010                          & 21.413                           & 0.314                           & 0.155                            & 0.208                             & 0.003                            \\ \hline
+2048                                           & 99.340                          & 61.076                           & 1.927                           & 0.964                            & 0.593                             & 0.019                            \\ \hline
 \end{tabular}
 \end{table}
 
@@ -765,13 +770,13 @@ We present the execution times obtained for using the \ac{phe} and \ac{fhe} syst
 \label{table:SVM_PHE_AID}
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{dataset}}} & \multicolumn{3}{c|}{Total execution time (seconds)}                                                  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}Execution time /\\   data sample (seconds)\end{tabular}} \\ \cline{2-7} 
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}} & \multicolumn{3}{c|}{\textbf{Total execution time}}                                                  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\   \textbf{data sample}\end{tabular}} \\ \cline{2-7} 
 \multicolumn{1}{|c|}{}                                  & \multicolumn{1}{c|}{encryption} & \multicolumn{1}{c|}{computation} & \multicolumn{1}{c|}{decryption} & \multicolumn{1}{c|}{encryption}  & \multicolumn{1}{c|}{computation}  & \multicolumn{1}{c|}{decryption}  \\ \hline
-\textbf{128}                                            & 48.270                          & 2322.71                          & 0.372                           & 0.007                            & 0.317                             & 0.000                            \\ \hline
-\textbf{256}                                            & 118.029                         & 3603.13                          & 1.020                           & 0.016                            & 0.492                             & 0.000                            \\ \hline
-\textbf{512}                                            & 484.839                         & 7702.16                          & 4.363                           & 0.066                            & 1.051                             & 0.001                            \\ \hline
-\textbf{1024}                                           & 2522.01                         & 18342.4                          & 22.714                          & 0.344                            & 2.504                             & 0.003                            \\ \hline
-\textbf{2048}                                           & 14920.8                         & 51150.3                          & 138.389                         & 2.057                            & 6.982                             & 0.019                            \\ \hline
+128                                            & 48.270                          & 2322.71                          & 0.372                           & 0.007                            & 0.317                             & 0.000                            \\ \hline
+256                                            & 118.029                         & 3603.13                          & 1.020                           & 0.016                            & 0.492                             & 0.000                            \\ \hline
+512                                            & 484.839                         & 7702.16                          & 4.363                           & 0.066                            & 1.051                             & 0.001                            \\ \hline
+1024                                           & 2522.01                         & 18342.4                          & 22.714                          & 0.344                            & 2.504                             & 0.003                            \\ \hline
+2048                                           & 14920.8                         & 51150.3                          & 138.389                         & 2.057                            & 6.982                             & 0.019                            \\ \hline
 \end{tabular}
 \end{table}
 
@@ -805,10 +810,10 @@ We present the execution times obtained for using the \ac{phe} and \ac{fhe} syst
 
 
 When observing the execution times obtained using \ac{phe} (tables \ref{table:SVM_PHE_PIMA}, \ref{table:SVM_PHE_BCWD}, \ref{table:SVM_PHE_CAD}, \ref{table:SVM_PHE_AID}, and figure \ref{fig:svm-phe}), we can see that computation times have a significant overhead for small amounts of number of features and number of Support Vectors, as they only affect the results in the Adult Income Dataset, where they seem to have a linear dependency. 
-We also observe a linear increase in encryption times with increasing the number of features, and a linear increase in computation times with increasing the key length ($NBits$).
-Finally, we can see that decryption times are constant with increasing number of features and number of Support Vectors, but we verify that the is a slightly super-linear increase in encryption and decryption times with increasing $NBits$. This can cause a problem of scalability, but it can be safely ignored since the execution times per sample are still very small.
+We also observe a linear increase in encryption times with increasing the number of features and a linear increase in computation times with increasing the key length ($NBits$).
+Finally, we can see that decryption times are constant with increasing number of features and number of Support Vectors, but we verify that there is a slightly super-linear increase in encryption and decryption times with increasing $NBits$. This can cause a problem of scalability, but it can be safely ignored since the execution times per sample are still very small.
 
-Additionally, for \ac{svm} we obtained similar encryption times to the ones obtained for \ac{lr}, which is not surprising since the encryption is only done in one side of the protocol. Also, we can observe that decryption times are comparable in both cases, as decryption only occurs once, when all operations have been performed.
+Additionally, for \ac{svm} we obtained similar encryption times to the ones obtained for \ac{lr}, which is not surprising since the encryption is only done on one side of the protocol. Also, we can observe that decryption times are comparable in both cases, as decryption only occurs once when all operations have been performed.
 Additionally, for SVM we obtained similar encryption times to the ones obtained for LR, which is not surprising since only Alice’s data needs to be encrypted (due to the way the Paillier cryptosystem works). Also, the decryption times are also comparable in both cases, as decryption only occurs once (when all operations have been performed).
 
 
@@ -818,29 +823,29 @@ Additionally, for SVM we obtained similar encryption times to the ones obtained 
 \label{table:SVM_FHE}
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{dataset}}} & \multicolumn{3}{c|}{Total execution time (seconds)}                                                                                                                                                         & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}Execution time /\\   data sample (seconds)\end{tabular}}                                                                                              \\ \cline{2-7} 
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{dataset}}} & \multicolumn{3}{c|}{\textbf{Total execution time}}                                                                                                                                                         & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\   \textbf{data sample}\end{tabular}}                                                                                              \\ \cline{2-7} 
 \multicolumn{1}{|c|}{}                                  & \multicolumn{1}{c|}{encryption}                                     & \multicolumn{1}{c|}{computation}                                    & \multicolumn{1}{c|}{decryption}                                 & \multicolumn{1}{c|}{encryption/SV}                               & \multicolumn{1}{c|}{computation/SV}                             & \multicolumn{1}{c|}{decryption}                                 \\ \hline
-\textbf{Pima}                                           & \begin{tabular}[c]{@{}l@{}}M1: 39253.9\\   M2: 8038.90\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 3583.28\\   M2: 6884.06\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 6.652\\   M2: 6.035\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 1.127\\   M2: 0.231\end{tabular}  & \begin{tabular}[c]{@{}l@{}}M1: 0.104\\   M2: 0.199\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.058\\   M2: 0.052\end{tabular} \\ \hline
-\textbf{Breast}                                         & \begin{tabular}[c]{@{}l@{}}M1: 35625.5\\   M2: 2072.25\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 3143.37\\   M2: 1751.68\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 4.900\\   M2: 4.503\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 4.100\\   M2: 0.233\end{tabular}  & \begin{tabular}[c]{@{}l@{}}M1: 0.359\\   M2: 0.200\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.058\\   M2: 0.053\end{tabular} \\ \hline
-\textbf{Credit}                                         & \begin{tabular}[c]{@{}l@{}}M1: 113455\\   M2: 4512.37\end{tabular}  & \begin{tabular}[c]{@{}l@{}}M1: 11714.2\\   M2: 3838.78\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 6.120\\   M2: 5.472\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 5.892\\   M2: 0.235\end{tabular}  & \begin{tabular}[c]{@{}l@{}}M1: 0.615\\   M2: 0.201\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.059\\   M2: 0.053\end{tabular} \\ \hline
-\textbf{Adult}                                          & \begin{tabular}[c]{@{}l@{}}M1: N/A\\   M2: N/A\end{tabular}         & \begin{tabular}[c]{@{}l@{}}M1: N/A\\   M2: N/A\end{tabular}         & \begin{tabular}[c]{@{}l@{}}M1: N/A\\   M2: N/A\end{tabular}     & \begin{tabular}[c]{@{}l@{}}M1: 11.895\\   M2: 0.232\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 1.296\\   M2: 0.199\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.057\\   M2: 0.053\end{tabular} \\ \hline
+Pima                                          & \begin{tabular}[c]{@{}l@{}}M1: 39253.9\\   M2: 8038.90\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 3583.28\\   M2: 6884.06\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 6.652\\   M2: 6.035\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 1.127\\   M2: 0.231\end{tabular}  & \begin{tabular}[c]{@{}l@{}}M1: 0.104\\   M2: 0.199\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.058\\   M2: 0.052\end{tabular} \\ \hline
+Breast                                        & \begin{tabular}[c]{@{}l@{}}M1: 35625.5\\   M2: 2072.25\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 3143.37\\   M2: 1751.68\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 4.900\\   M2: 4.503\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 4.100\\   M2: 0.233\end{tabular}  & \begin{tabular}[c]{@{}l@{}}M1: 0.359\\   M2: 0.200\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.058\\   M2: 0.053\end{tabular} \\ \hline
+Credit                                        & \begin{tabular}[c]{@{}l@{}}M1: 113455\\   M2: 4512.37\end{tabular}  & \begin{tabular}[c]{@{}l@{}}M1: 11714.2\\   M2: 3838.78\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 6.120\\   M2: 5.472\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 5.892\\   M2: 0.235\end{tabular}  & \begin{tabular}[c]{@{}l@{}}M1: 0.615\\   M2: 0.201\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.059\\   M2: 0.053\end{tabular} \\ \hline
+Adult                                          & \begin{tabular}[c]{@{}l@{}}M1: N/A\\   M2: N/A\end{tabular}         & \begin{tabular}[c]{@{}l@{}}M1: N/A\\   M2: N/A\end{tabular}         & \begin{tabular}[c]{@{}l@{}}M1: N/A\\   M2: N/A\end{tabular}     & \begin{tabular}[c]{@{}l@{}}M1: 11.895\\   M2: 0.232\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 1.296\\   M2: 0.199\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.057\\   M2: 0.053\end{tabular} \\ \hline
 \end{tabular}
 \end{table}
 
 
 \begin{figure}[H]
 \centering
-\label{fig:svm-fhe}
 \includegraphics{images/graphs/svm_fhe.pdf}
 \caption[\acl{fhe} and \acl{svm}. Execution time per data sample, in seconds. All datasets.]{All Datasets. Execution time per data sample, in seconds.}
+\label{fig:svm-fhe}
 \end{figure}
 
 When observing the execution times obtained using \ac{phe} (table \ref{table:SVM_FHE} and figure \ref{fig:svm-fhe}), we can see similar results to those obtained for \ac{lr}. In particular, we see that the packing used by method M2 greatly decreases the encryption and computation times, when compared with method M1, as well as making the encryption and computation times independent from both the number of features and the number of Support Vectors. 
-We can also observe that the decryption times are independent on the method used, the number of features and the number of Support Vectors.
+We can also observe that the decryption times are independent of the method used, the number of features and the number of Support Vectors.
 
 Once again, we can see that the method M2 is much more efficient than method M1, showing the obvious advantage of packing the features for each dataset in a single ciphertext before performing the computation.
 
-When comparing \ac{phe} and \ac{fhe}, unlike what was observed for \ac{lr}, here the former has lower execution times that the latter. Even considering the feature packing of method M2, the fact that still many multiplications have to be made (one for each Support Vector) overwhelms \ac{fhe} when compared with \ac{phe} for evaluating an \ac{svm}.
+When comparing \ac{phe} and \ac{fhe}, unlike what was observed for \ac{lr}, here the former has lower execution times that the latter. Even considering the feature packing of method M2, the fact that many multiplications have to be made (one for each Support Vector) overwhelms \ac{fhe} when compared with \ac{phe} for evaluating an \ac{svm}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -853,7 +858,7 @@ Given that the communication cost is primarily defined by the cryptographic tech
 
 \subsection{\acl{gc} and \acl{dt}}
 
-We present the communication costs obtained for using a \ac{gc} implementation of \ac{dt} for all datasets in the tables below. We present results in terms of average amount of bytes per data sample sent during pre-computation, received during pre-computation and sent during runtime, and the amount of bytes per data sample received during runtime by the \ac{gc} evaluator. We do not present total communication costs for the whole datasets because communication costs per sample are independent from the dataset size, and communication costs per sample are the expected costs in a real-life scenario where a large computer cluster is available and data samples are supplied in a continuous fashion.
+We present the communication costs obtained by using a \ac{gc} implementation of \ac{dt} for all datasets in the tables below. We present results in terms of average amount of bytes per data sample sent during pre-computation, received during pre-computation and sent during runtime, and the number of bytes per data sample received during runtime by the \ac{gc} evaluator. We do not present total communication costs for the whole datasets because communication costs per sample are independent of the dataset size, and communication costs per sample are the expected costs in a real-life scenario where a large computer cluster is available and data samples are supplied in a continuous fashion.
 
 
 \begin{table}[H]
@@ -863,11 +868,11 @@ We present the communication costs obtained for using a \ac{gc} implementation o
 \begin{tabular}{|c|l|l|l|l|l|}
 \hline
 \multirow{2}{*}{\textbf{dataset}} & \multicolumn{5}{c|}{\textbf{numeric precision}}  \\ \cline{2-6} 
- & \multicolumn{1}{c|}{\textbf{8 bits}}  & \multicolumn{1}{c|}{\textbf{12 bits}}   & \multicolumn{1}{c|}{\textbf{16 bits}}    & \multicolumn{1}{c|}{\textbf{20 bits}}  & \multicolumn{1}{c|}{\textbf{24 bits}} \\ \hline
-\textbf{Pima}                     & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.342\\   R-S: 8.441\end{tabular}   & \begin{tabular}[c]{@{}l@{}}PC-S: 1.583\\   PC-R: 3.513\\   R-S: 12.662\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.110\\   PC-R: 4.685\\   R-S: 16.883\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.638\\   PC-R: 5.856\\   R-S: 21.104\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 3.166\\   PC-R: 7.027\\   R-S: 25.324\end{tabular}  \\ \hline
-\textbf{Breast}                   & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.342\\   R-S: 31.656\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 1.583\\   PC-R: 3.514\\   R-S: 47.483\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.110\\   PC-R: 4.685\\   R-S: 63.311\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.638\\   PC-R: 5.856\\   R-S: 79.139\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 3.165\\   PC-R: 7.027\\   R-S: 94.967\end{tabular}  \\ \hline
-\textbf{Credit}                   & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.342\\   R-S: 53.815\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 1.583\\   PC-R: 3.514\\   R-S: 80.722\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.110\\   PC-R: 4.685\\   R-S: 107.628\end{tabular} & \begin{tabular}[c]{@{}l@{}}PC-S: 2.638\\   PC-R: 5.812\\   R-S: 134.536\end{tabular} & \begin{tabular}[c]{@{}l@{}}PC-S: 3.166\\   PC-R: 7.027\\   R-S: 161.444\end{tabular} \\ \hline
-\textbf{Adult}                    & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.342\\   R-S: 113.961\end{tabular} & \begin{tabular}[c]{@{}l@{}}PC-S: 1.583\\   PC-R: 3.514\\   R-S: 170.940\end{tabular} & \begin{tabular}[c]{@{}l@{}}PC-S: 2.110\\   PC-R: 4.685\\   R-S: 227.919\end{tabular} & \begin{tabular}[c]{@{}l@{}}PC-S: 2.638\\   PC-R: 5.855\\   R-S: 284.901\end{tabular} & \begin{tabular}[c]{@{}l@{}}PC-S: 3.166\\   PC-R: 7.027\\   R-S: 341.881\end{tabular} \\ \hline
+ & \multicolumn{1}{c|}{8 bits}  & \multicolumn{1}{c|}{12 bits}   & \multicolumn{1}{c|}{16 bits}    & \multicolumn{1}{c|}{20 bits}  & \multicolumn{1}{c|}{24 bits} \\ \hline
+Pima                     & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.342\\   R-S: 8.441\end{tabular}   & \begin{tabular}[c]{@{}l@{}}PC-S: 1.583\\   PC-R: 3.513\\   R-S: 12.662\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.110\\   PC-R: 4.685\\   R-S: 16.883\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.638\\   PC-R: 5.856\\   R-S: 21.104\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 3.166\\   PC-R: 7.027\\   R-S: 25.324\end{tabular}  \\ \hline
+Breast                   & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.342\\   R-S: 31.656\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 1.583\\   PC-R: 3.514\\   R-S: 47.483\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.110\\   PC-R: 4.685\\   R-S: 63.311\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.638\\   PC-R: 5.856\\   R-S: 79.139\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 3.165\\   PC-R: 7.027\\   R-S: 94.967\end{tabular}  \\ \hline
+Credit                   & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.342\\   R-S: 53.815\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 1.583\\   PC-R: 3.514\\   R-S: 80.722\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.110\\   PC-R: 4.685\\   R-S: 107.628\end{tabular} & \begin{tabular}[c]{@{}l@{}}PC-S: 2.638\\   PC-R: 5.812\\   R-S: 134.536\end{tabular} & \begin{tabular}[c]{@{}l@{}}PC-S: 3.166\\   PC-R: 7.027\\   R-S: 161.444\end{tabular} \\ \hline
+Adult                    & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.342\\   R-S: 113.961\end{tabular} & \begin{tabular}[c]{@{}l@{}}PC-S: 1.583\\   PC-R: 3.514\\   R-S: 170.940\end{tabular} & \begin{tabular}[c]{@{}l@{}}PC-S: 2.110\\   PC-R: 4.685\\   R-S: 227.919\end{tabular} & \begin{tabular}[c]{@{}l@{}}PC-S: 2.638\\   PC-R: 5.855\\   R-S: 284.901\end{tabular} & \begin{tabular}[c]{@{}l@{}}PC-S: 3.166\\   PC-R: 7.027\\   R-S: 341.881\end{tabular} \\ \hline
 \end{tabular}
 \end{table}
 
@@ -879,14 +884,14 @@ We present the communication costs obtained for using a \ac{gc} implementation o
 \begin{tabular}{|c|l|l|l|l|l|}
 \hline
 \multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}DT\\ depth\end{tabular}}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                                                                                                                                    \\ \cline{2-6} 
- & \multicolumn{1}{c|}{\textbf{8 bits}} & \multicolumn{1}{c|}{\textbf{12 bits}} & \multicolumn{1}{c|}{\textbf{16 bits}} & \multicolumn{1}{c|}{\textbf{20 bits}} & \multicolumn{1}{c|}{\textbf{24 bits}} \\ \hline
-\textbf{1}                                                                   & 23.542                               & 34.941                                & 46.339                                & 57.743                                & 69.137                                \\ \hline
-\textbf{4}                                                                   & 90.858                               & 131.485                               & 172.120                               & 212.741                               & 253.369                               \\ \hline
-\textbf{6}                                                                   & 321.667                              & 462.496                               & 603.318                               & 744.170                               & 885.012                               \\ \hline
-\textbf{8}                                                                   & 1244.83                              & 1786.52                               & 2328.19                               & 2869.91                               & 3411.55                               \\ \hline
-\textbf{10}                                                                  & 4937.70                              & 7082.78                               & 9227.74                               & 11372.8                               & 13517.9                               \\ \hline
-\textbf{12}                                                                  & 19708.8                              & 28267.3                               & 36825.7                               & 45384.2                               & 53942.9                               \\ \hline
-\textbf{13}                                                                  & 39403.7                              & 56513.5                               & 73623.3                               & 90733.1                               & 107843                                \\ \hline
+ & \multicolumn{1}{c|}{8 bits} & \multicolumn{1}{c|}{12 bits} & \multicolumn{1}{c|}{16 bits} & \multicolumn{1}{c|}{20 bits} & \multicolumn{1}{c|}{24 bits} \\ \hline
+1                                                                   & 23.542                               & 34.941                                & 46.339                                & 57.743                                & 69.137                                \\ \hline
+4                                                                   & 90.858                               & 131.485                               & 172.120                               & 212.741                               & 253.369                               \\ \hline
+6                                                                   & 321.667                              & 462.496                               & 603.318                               & 744.170                               & 885.012                               \\ \hline
+8                                                                   & 1244.83                              & 1786.52                               & 2328.19                               & 2869.91                               & 3411.55                               \\ \hline
+10                                                                  & 4937.70                              & 7082.78                               & 9227.74                               & 11372.8                               & 13517.9                               \\ \hline
+12                                                                  & 19708.8                              & 28267.3                               & 36825.7                               & 45384.2                               & 53942.9                               \\ \hline
+13                                                                  & 39403.7                              & 56513.5                               & 73623.3                               & 90733.1                               & 107843                                \\ \hline
 \end{tabular}
 \end{table}
 
@@ -897,13 +902,13 @@ We present the communication costs obtained for using a \ac{gc} implementation o
 \begin{tabular}{|c|l|l|l|l|l|}
 \hline
 \multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}DT\\ depth\end{tabular}}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                                                                                                                                      \\ \cline{2-6} 
- & \multicolumn{1}{c|}{\textbf{8 bits}} & \multicolumn{1}{c|}{\textbf{12 bits}} & \multicolumn{1}{c|}{\textbf{16 bits}} & \multicolumn{1}{c|}{\textbf{20 bits}} & \multicolumn{1}{c|}{\textbf{24 bits}} \\ \hline
-\textbf{1}                                                                   & 85.280                               & 127.547                               & 169.814                               & 212.084                               & 254.348                               \\ \hline
-\textbf{3}                                                                   & 175.738                              & 261.128                               & 346.551                               & 431.980                               & 517.377                               \\ \hline
-\textbf{4}                                                                   & 296.296                              & 439.239                               & 582.210                               & 725.153                               & 868.094                               \\ \hline
-\textbf{5}                                                      & 537.460                              & 795.483                               & 1053.44                               & 1311.47                               & 1569.51                               \\ \hline
-\textbf{6}                                                                   & 1019.83                              & 1507.91                               & 1996.08                               & 2484.10                               & 2972.24                               \\ \hline
-\textbf{7}                                                                   & 1984.46                              & 2932.86                               & 3881.12                               & 4829.36                               & 5777.78                               \\ \hline
+ & \multicolumn{1}{c|}{8 bits} & \multicolumn{1}{c|}{12 bits} & \multicolumn{1}{c|}{16 bits} & \multicolumn{1}{c|}{20 bits} & \multicolumn{1}{c|}{24 bits} \\ \hline
+1                                                                   & 85.280                               & 127.547                               & 169.814                               & 212.084                               & 254.348                               \\ \hline
+3                                                                   & 175.738                              & 261.128                               & 346.551                               & 431.980                               & 517.377                               \\ \hline
+4                                                                   & 296.296                              & 439.239                               & 582.210                               & 725.153                               & 868.094                               \\ \hline
+5                                                      & 537.460                              & 795.483                               & 1053.44                               & 1311.47                               & 1569.51                               \\ \hline
+6                                                                   & 1019.83                              & 1507.91                               & 1996.08                               & 2484.10                               & 2972.24                               \\ \hline
+7                                                                   & 1984.46                              & 2932.86                               & 3881.12                               & 4829.36                               & 5777.78                               \\ \hline
 \end{tabular}
 \end{table}
 
@@ -915,12 +920,12 @@ We present the communication costs obtained for using a \ac{gc} implementation o
 \begin{tabular}{|c|l|l|l|l|l|}
 \hline
 \multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}DT\\ depth\end{tabular}}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                                                                                                                                      \\ \cline{2-6} 
- & \multicolumn{1}{c|}{\textbf{8 bits}} & \multicolumn{1}{c|}{\textbf{12 bits}} & \multicolumn{1}{c|}{\textbf{16 bits}} & \multicolumn{1}{c|}{\textbf{20 bits}} & \multicolumn{1}{c|}{\textbf{24 bits}} \\ \hline
-\textbf{2}                                                                   & 193.908                              & 289.759                               & 385.628                               & 481.480                               & 577.331                               \\ \hline
-\textbf{5}                                                                   & 889.564                              & 1323.15                               & 1756.74                               & 2190.37                               & 2623.99                               \\ \hline
-\textbf{7}                                                                   & 3274.64                              & 4866.18                               & 6457.81                               & 8049.41                               & 9640.96                               \\ \hline
-\textbf{8}                                                                   & 6454.73                              & 9590.25                               & 12725.9                               & 15861.4                               & 18997.0                               \\ \hline
-\textbf{9}                                                                   & 12815.1                              & 19038.6                               & 25262.1                               & 31485.6                               & 37709.3                               \\ \hline
+ & \multicolumn{1}{c|}{8 bits} & \multicolumn{1}{c|}{12 bits} & \multicolumn{1}{c|}{16 bits} & \multicolumn{1}{c|}{20 bits} & \multicolumn{1}{c|}{24 bits} \\ \hline
+2                                                                   & 193.908                              & 289.759                               & 385.628                               & 481.480                               & 577.331                               \\ \hline
+5                                                                   & 889.564                              & 1323.15                               & 1756.74                               & 2190.37                               & 2623.99                               \\ \hline
+7                                                                   & 3274.64                              & 4866.18                               & 6457.81                               & 8049.41                               & 9640.96                               \\ \hline
+8                                                                   & 6454.73                              & 9590.25                               & 12725.9                               & 15861.4                               & 18997.0                               \\ \hline
+9                                                                   & 12815.1                              & 19038.6                               & 25262.1                               & 31485.6                               & 37709.3                               \\ \hline
 \end{tabular}
 \end{table}
 
@@ -932,11 +937,11 @@ We present the communication costs obtained for using a \ac{gc} implementation o
 \begin{tabular}{|c|l|l|l|l|l|}
 \hline
 \multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}DT\\ depth\end{tabular}}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                                                                                                                                      \\ \cline{2-6} 
- & \multicolumn{1}{c|}{\textbf{8 bits}} & \multicolumn{1}{c|}{\textbf{12 bits}} & \multicolumn{1}{c|}{\textbf{16 bits}} & \multicolumn{1}{c|}{\textbf{20 bits}} & \multicolumn{1}{c|}{\textbf{24 bits}} \\ \hline
-\textbf{5}                                                                   & 1843.72                              & 2753.97                               & 3664.21                               & 4574.43                               & 5484.64                               \\ \hline
-\textbf{6}                                                                   & 3485.83                              & 5205.30                               & 6924.63                               & 8643.95                               & 10363.3                               \\ \hline
-\textbf{9}                                                                   & 26476.2                              & 39523.2                               & 52569.9                               & 65617.1                               & 78663.8                               \\ \hline
-\textbf{10}                                                                  & 52751.1                              & 78743.8                               & 104736                                & 130729                                & 156721                                \\ \hline
+ & \multicolumn{1}{c|}{8 bits} & \multicolumn{1}{c|}{12 bits} & \multicolumn{1}{c|}{16 bits} & \multicolumn{1}{c|}{20 bits} & \multicolumn{1}{c|}{24 bits} \\ \hline
+5                                                                   & 1843.72                              & 2753.97                               & 3664.21                               & 4574.43                               & 5484.64                               \\ \hline
+6                                                                   & 3485.83                              & 5205.30                               & 6924.63                               & 8643.95                               & 10363.3                               \\ \hline
+9                                                                   & 26476.2                              & 39523.2                               & 52569.9                               & 65617.1                               & 78663.8                               \\ \hline
+10                                                                  & 52751.1                              & 78743.8                               & 104736                                & 130729                                & 156721                                \\ \hline
 \end{tabular}
 \end{table}
 
@@ -965,16 +970,16 @@ We present the communication costs obtained for using a \ac{gc} implementation o
 \label{fig:dt-gc-comm}%
 \end{figure}
 
-In table \ref{table:computationCostsDT}, we can see that all communication costs per data sample increase linearly with the variables of interest. Both the amount of bytes sent and received by the \ac{gc} evaluator during pre-computation depend only on the numeric precision, and the amount of bytes sent during runtime depends only on the numeric precision and the number of features.
+In table \ref{table:computationCostsDT}, we can see that all communication costs per data sample increase linearly with the variables of interest. Both the number of bytes sent and received by the \ac{gc} evaluator during pre-computation depend only on the numeric precision, and the amount of bytes sent during runtime depends only on the numeric precision and the number of features.
 
-Regarding the amount of bytes per data sample received during runtime ( tables \ref{table:computationCostsDT_PIMA}, \ref{table:computationCostsDT_BCWD}, \ref{table:computationCostsDT_CAD}, \ref{table:computationCostsDT_AID}, and figure \ref{fig:dt-gc-comm}), they depend linearly on the numeric precision, the number of features and on the number of \ac{dt} nodes, and therefore do not compromise the scalability of our approach. For larger \ac{dt}, the communication cost gets considerable large, but can be easily minimized by using the original \ac{dt} instead of the fully expanded ones.
+Regarding the amount of bytes per data sample received during runtime (tables \ref{table:computationCostsDT_PIMA}, \ref{table:computationCostsDT_BCWD}, \ref{table:computationCostsDT_CAD}, \ref{table:computationCostsDT_AID}, and figure \ref{fig:dt-gc-comm}), they depend linearly on the numeric precision, on the number of features and on the number of \ac{dt} nodes, and therefore do not compromise the scalability of our approach. For larger \ac{dt}, the communication cost gets considerably large, but can be easily minimized by using the original \ac{dt} instead of the fully expanded ones.
 
 
 
 
 \subsection{\acl{gc} and \acl{k-m}}
 
-We present the communication costs obtained for using a \ac{gc} implementation of \ac{k-m} for all datasets in the tables below. We present results in terms of the average amount of bytes per data sample sent during pre-computation, received during pre-computation and sent during runtime, and the amount of bytes per data sample received during runtime by the \ac{gc} evaluator. We do not present total communication costs for the whole datasets because communication costs per sample are independent from the dataset size, and communication costs per sample are the expected costs in a real-life scenario where a large computer cluster is available and data samples are supplied in a continuous fashion.
+We present the communication costs obtained by using a \ac{gc} implementation of \ac{k-m} for all datasets in the tables below. We present results in terms of the average number of bytes per data sample sent during pre-computation, received during pre-computation and sent during runtime, and the number of bytes per data sample received during runtime by the \ac{gc} evaluator. We do not present total communication costs for the whole datasets because communication costs per sample are independent of the dataset size, and communication costs per sample are the expected costs in a real-life scenario where a large computer cluster is available and data samples are supplied in a continuous fashion.
 
 
 \begin{table}[H]
@@ -984,11 +989,11 @@ We present the communication costs obtained for using a \ac{gc} implementation o
 \begin{tabular}{|c|l|l|l|l|l|}
 \hline
 \multirow{2}{*}{\textbf{dataset}} & \multicolumn{5}{c|}{\textbf{numeric precision}} \\ \cline{2-6} 
-& \multicolumn{1}{c|}{\textbf{8 bits}}                                                 & \multicolumn{1}{c|}{\textbf{12 bits}}                                                & \multicolumn{1}{c|}{\textbf{16 bits}}                                                & \multicolumn{1}{c|}{\textbf{20 bits}}                                                & \multicolumn{1}{c|}{\textbf{24 bits}}                                                \\ \hline
-\textbf{Pima}                     & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.342\\   R-S: 8.442\end{tabular}   & \begin{tabular}[c]{@{}l@{}}PC-S: 1.583\\   PC-R: 3.514\\   R-S: 12.662\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.110\\   PC-R: 4.685\\   R-S: 16.883\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.638\\   PC-R: 5.856\\   R-S: 21.104\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 3.166\\   PC-R: 7.027\\   R-S: 25.324\end{tabular}  \\ \hline
-\textbf{Breast}                   & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.342\\   R-S: 31.656\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 1.583\\   PC-R: 3.514\\   R-S: 47.483\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.110\\   PC-R: 4.685\\   R-S: 63.311\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.638\\   PC-R: 5.856\\   R-S: 79.139\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 3.166\\   PC-R: 7.027\\   R-S: 94.967\end{tabular}  \\ \hline
-\textbf{Credit}                   & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.342\\   R-S: 53.815\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 1.583\\   PC-R: 3.514\\   R-S: 80.722\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.110\\   PC-R: 4.685\\   R-S: 107.629\end{tabular} & \begin{tabular}[c]{@{}l@{}}PC-S: 2.638\\   PC-R: 5.856\\   R-S: 134.536\end{tabular} & \begin{tabular}[c]{@{}l@{}}PC-S: 3.166\\   PC-R: 7.027\\   R-S: 161.444\end{tabular} \\ \hline
-\textbf{Adult}                    & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.342\\   R-S: 113.960\end{tabular} & \begin{tabular}[c]{@{}l@{}}PC-S: 1.583\\   PC-R: 3.514\\   R-S: 170.941\end{tabular} & \begin{tabular}[c]{@{}l@{}}PC-S: 2.110\\   PC-R: 4.685\\   R-S: 227.921\end{tabular} & \begin{tabular}[c]{@{}l@{}}PC-S: 2.638\\   PC-R: 5.856\\   R-S: 284.901\end{tabular} & \begin{tabular}[c]{@{}l@{}}PC-S: 3.166\\   PC-R: 7.027\\   R-S: 341.881\end{tabular} \\ \hline
+& \multicolumn{1}{c|}{8 bits}                                                 & \multicolumn{1}{c|}{12 bits}                                                & \multicolumn{1}{c|}{16 bits}                                                & \multicolumn{1}{c|}{20 bits}                                                & \multicolumn{1}{c|}{24 bits}                                                \\ \hline
+Pima                     & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.342\\   R-S: 8.442\end{tabular}   & \begin{tabular}[c]{@{}l@{}}PC-S: 1.583\\   PC-R: 3.514\\   R-S: 12.662\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.110\\   PC-R: 4.685\\   R-S: 16.883\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.638\\   PC-R: 5.856\\   R-S: 21.104\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 3.166\\   PC-R: 7.027\\   R-S: 25.324\end{tabular}  \\ \hline
+Breast                   & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.342\\   R-S: 31.656\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 1.583\\   PC-R: 3.514\\   R-S: 47.483\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.110\\   PC-R: 4.685\\   R-S: 63.311\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.638\\   PC-R: 5.856\\   R-S: 79.139\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 3.166\\   PC-R: 7.027\\   R-S: 94.967\end{tabular}  \\ \hline
+Credit                   & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.342\\   R-S: 53.815\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 1.583\\   PC-R: 3.514\\   R-S: 80.722\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.110\\   PC-R: 4.685\\   R-S: 107.629\end{tabular} & \begin{tabular}[c]{@{}l@{}}PC-S: 2.638\\   PC-R: 5.856\\   R-S: 134.536\end{tabular} & \begin{tabular}[c]{@{}l@{}}PC-S: 3.166\\   PC-R: 7.027\\   R-S: 161.444\end{tabular} \\ \hline
+Adult                    & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.342\\   R-S: 113.960\end{tabular} & \begin{tabular}[c]{@{}l@{}}PC-S: 1.583\\   PC-R: 3.514\\   R-S: 170.941\end{tabular} & \begin{tabular}[c]{@{}l@{}}PC-S: 2.110\\   PC-R: 4.685\\   R-S: 227.921\end{tabular} & \begin{tabular}[c]{@{}l@{}}PC-S: 2.638\\   PC-R: 5.856\\   R-S: 284.901\end{tabular} & \begin{tabular}[c]{@{}l@{}}PC-S: 3.166\\   PC-R: 7.027\\   R-S: 341.881\end{tabular} \\ \hline
 \end{tabular}
 \end{table}
 
@@ -999,25 +1004,25 @@ We present the communication costs obtained for using a \ac{gc} implementation o
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 \multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}l@{}}number\\ clusters\end{tabular}}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                             \\ \cline{2-6} 
-& \textbf{8 bits} & \textbf{12 bits} & \textbf{16 bits} & \textbf{20 bits} & \textbf{24 bits} \\ \hline
-\textbf{2}                                                                          & 309.849         & 591.326          & 961.850          & 1421.45          & 1970.15          \\ \hline
-\textbf{3}                                                                          & 456.502         & 874.347          & 1425.81          & 2110.88          & 2929.57          \\ \hline
-\textbf{4}                                                                          & 603.113         & 1157.36          & 1889.79          & 2800.34          & 3889.04          \\ \hline
-\textbf{5}                                                                          & 749.726         & 1440.35          & 2353.72          & 3489.77          & 4848.50          \\ \hline
-\textbf{6}                                                                          & 896.376         & 1723.41          & 2817.74          & 4179.15          & 5807.92          \\ \hline
-\textbf{7}                                                                          & 1042.96         & 2006.43          & 3281.61          & 4868.58          & 6767.40          \\ \hline
-\textbf{8}                                                                          & 1189.58         & 2289.42          & 3745.53          & 5557.99          & 7726.80          \\ \hline
-\textbf{9}                                                                          & 1336.19         & 2572.47          & 4209.50          & 6247.40          & 8686.30          \\ \hline
-\textbf{10}                                                                         & 1482.85         & 2855.49          & 4673.53          & 6936.81          & 9645.61          \\ \hline
-\textbf{20}                                                                         & 2949.03         & 5685.65          & 9312.94          & 13831.1          & 19240.0          \\ \hline
-\textbf{30}                                                                         & 4415.20         & 8515.81          & 13952.4          & 20725.3          & 28834.3          \\ \hline
-\textbf{40}                                                                         & 5881.34         & 11345.9          & 18592.0          & 27619.6          & 38428.7          \\ \hline
-\textbf{50}                                                                         & 7347.55         & 14176.2          & 23231.6          & 34514.1          & 48023.0          \\ \hline
-\textbf{60}                                                                         & 8813.84         & 17006.3          & 27871.1          & 41408.0          & 57617.9          \\ \hline
-\textbf{70}                                                                         & 10280.0         & 19836.4          & 32510.5          & 48302.4          & 67211.9          \\ \hline
-\textbf{80}                                                                         & 11746.1         & 22665.5          & 37510.1          & 55196.6          & 76806.3          \\ \hline
-\textbf{90}                                                                         & 13212.4         & 25496.9          & 41789.7          & 62090.9          & 86400.4          \\ \hline
-\textbf{100}                                                                        & 14678.6         & 28326.8          & 46429.1          & 68985.2          & 95995.1          \\ \hline
+& 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
+2                                                                          & 309.849         & 591.326          & 961.850          & 1421.45          & 1970.15          \\ \hline
+3                                                                          & 456.502         & 874.347          & 1425.81          & 2110.88          & 2929.57          \\ \hline
+4                                                                          & 603.113         & 1157.36          & 1889.79          & 2800.34          & 3889.04          \\ \hline
+5                                                                          & 749.726         & 1440.35          & 2353.72          & 3489.77          & 4848.50          \\ \hline
+6                                                                          & 896.376         & 1723.41          & 2817.74          & 4179.15          & 5807.92          \\ \hline
+7                                                                          & 1042.96         & 2006.43          & 3281.61          & 4868.58          & 6767.40          \\ \hline
+8                                                                          & 1189.58         & 2289.42          & 3745.53          & 5557.99          & 7726.80          \\ \hline
+9                                                                          & 1336.19         & 2572.47          & 4209.50          & 6247.40          & 8686.30          \\ \hline
+10                                                                         & 1482.85         & 2855.49          & 4673.53          & 6936.81          & 9645.61          \\ \hline
+20                                                                         & 2949.03         & 5685.65          & 9312.94          & 13831.1          & 19240.0          \\ \hline
+30                                                                         & 4415.20         & 8515.81          & 13952.4          & 20725.3          & 28834.3          \\ \hline
+40                                                                         & 5881.34         & 11345.9          & 18592.0          & 27619.6          & 38428.7          \\ \hline
+50                                                                         & 7347.55         & 14176.2          & 23231.6          & 34514.1          & 48023.0          \\ \hline
+60                                                                         & 8813.84         & 17006.3          & 27871.1          & 41408.0          & 57617.9          \\ \hline
+70                                                                         & 10280.0         & 19836.4          & 32510.5          & 48302.4          & 67211.9          \\ \hline
+80                                                                         & 11746.1         & 22665.5          & 37510.1          & 55196.6          & 76806.3          \\ \hline
+90                                                                         & 13212.4         & 25496.9          & 41789.7          & 62090.9          & 86400.4          \\ \hline
+100                                                                        & 14678.6         & 28326.8          & 46429.1          & 68985.2          & 95995.1          \\ \hline
 \end{tabular}
 \end{table}
 
@@ -1029,25 +1034,25 @@ We present the communication costs obtained for using a \ac{gc} implementation o
 \begin{tabular}{|c|l|l|l|l|l|}
 \hline
 \multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}number\\ clusters\end{tabular}}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                                                                                                                                      \\ \cline{2-6} 
-& \multicolumn{1}{c|}{\textbf{8 bits}} & \multicolumn{1}{c|}{\textbf{12 bits}} & \multicolumn{1}{c|}{\textbf{16 bits}} & \multicolumn{1}{c|}{\textbf{20 bits}} & \multicolumn{1}{c|}{\textbf{24 bits}} \\ \hline
-\textbf{2}                                                                          & 1160.22                              & 2215.08                               & 3604.00                               & 5326.97                               & 7383.92                               \\ \hline
-\textbf{3}                                                                          & 1706.36                              & 3271.44                               & 5337.51                               & 7904.74                               & 10973.1                               \\ \hline
-\textbf{4}                                                                          & 2252.49                              & 4327.76                               & 7071.10                               & 10482.5                               & 14562.2                               \\ \hline
-\textbf{5}                                                                          & 2798.68                              & 5384.18                               & 8804.74                               & 13060.4                               & 18151.1                               \\ \hline
-\textbf{6}                                                                          & 3344.74                              & 6440.50                               & 10538.2                               & 15638.3                               & 21740.2                               \\ \hline
-\textbf{7}                                                                          & 3890.90                              & 7496.85                               & 12271.9                               & 18215.9                               & 25329.3                               \\ \hline
-\textbf{8}                                                                          & 4437.04                              & 8553.14                               & 14005.4                               & 20793.9                               & 28918.7                               \\ \hline
-\textbf{9}                                                                          & 4983.15                              & 9609.47                               & 15739.1                               & 23371.7                               & 32507.7                               \\ \hline
-\textbf{10}                                                                         & 5529.26                              & 10666.0                               & 17472.6                               & 25949.5                               & 36096.7                               \\ \hline
-\textbf{20}                                                                         & 10990.4                              & 21229.2                               & 34808.3                               & 51728.0                               & 71987.3                               \\ \hline
-\textbf{30}                                                                         & 16451.7                              & 31792.6                               & 52144.1                               & 77506.3                               & 107878                                \\ \hline
-\textbf{40}                                                                         & 21913.0                              & 42356.3                               & 69479.9                               & 103284                                & 143769                                \\ \hline
-\textbf{50}                                                                         & 27374.2                              & 52919.6                               & 86815.3                               & 129062                                & 179660                                \\ \hline
-\textbf{60}                                                                         & 32835.5                              & 63482.7                               & 104151                                & 154841                                & -                                     \\ \hline
-\textbf{70}                                                                         & 38296.9                              & 74046.3                               & 121487                                & -                                     & -                                     \\ \hline
-\textbf{80}                                                                         & 43758.2                              & 84609.9                               & 138822                                & -                                     & -                                     \\ \hline
-\textbf{90}                                                                         & 49219.1                              & 95173.1                               & 156159                                & -                                     & -                                     \\ \hline
-\textbf{100}                                                                        & 54680.5                              & 105737                                & 173494                                & -                                     & -                                     \\ \hline
+& \multicolumn{1}{c|}{8 bits} & \multicolumn{1}{c|}{12 bits} & \multicolumn{1}{c|}{16 bits} & \multicolumn{1}{c|}{20 bits} & \multicolumn{1}{c|}{24 bits} \\ \hline
+2                                                                          & 1160.22                              & 2215.08                               & 3604.00                               & 5326.97                               & 7383.92                               \\ \hline
+3                                                                          & 1706.36                              & 3271.44                               & 5337.51                               & 7904.74                               & 10973.1                               \\ \hline
+4                                                                          & 2252.49                              & 4327.76                               & 7071.10                               & 10482.5                               & 14562.2                               \\ \hline
+5                                                                          & 2798.68                              & 5384.18                               & 8804.74                               & 13060.4                               & 18151.1                               \\ \hline
+6                                                                          & 3344.74                              & 6440.50                               & 10538.2                               & 15638.3                               & 21740.2                               \\ \hline
+7                                                                          & 3890.90                              & 7496.85                               & 12271.9                               & 18215.9                               & 25329.3                               \\ \hline
+8                                                                          & 4437.04                              & 8553.14                               & 14005.4                               & 20793.9                               & 28918.7                               \\ \hline
+9                                                                          & 4983.15                              & 9609.47                               & 15739.1                               & 23371.7                               & 32507.7                               \\ \hline
+10                                                                         & 5529.26                              & 10666.0                               & 17472.6                               & 25949.5                               & 36096.7                               \\ \hline
+20                                                                         & 10990.4                              & 21229.2                               & 34808.3                               & 51728.0                               & 71987.3                               \\ \hline
+30                                                                         & 16451.7                              & 31792.6                               & 52144.1                               & 77506.3                               & 107878                                \\ \hline
+40                                                                         & 21913.0                              & 42356.3                               & 69479.9                               & 103284                                & 143769                                \\ \hline
+50                                                                         & 27374.2                              & 52919.6                               & 86815.3                               & 129062                                & 179660                                \\ \hline
+60                                                                         & 32835.5                              & 63482.7                               & 104151                                & 154841                                & -                                     \\ \hline
+70                                                                         & 38296.9                              & 74046.3                               & 121487                                & -                                     & -                                     \\ \hline
+80                                                                         & 43758.2                              & 84609.9                               & 138822                                & -                                     & -                                     \\ \hline
+90                                                                         & 49219.1                              & 95173.1                               & 156159                                & -                                     & -                                     \\ \hline
+100                                                                        & 54680.5                              & 105737                                & 173494                                & -                                     & -                                     \\ \hline
 \end{tabular}
 \end{table}
 
@@ -1058,25 +1063,25 @@ We present the communication costs obtained for using a \ac{gc} implementation o
 \begin{tabular}{|c|l|l|l|l|l|}
 \hline
 \multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}number\\ clusters\end{tabular}}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                                                                                                                                      \\ \cline{2-6} 
-& \multicolumn{1}{c|}{\textbf{8 bits}} & \multicolumn{1}{c|}{\textbf{12 bits}} & \multicolumn{1}{c|}{\textbf{16 bits}} & \multicolumn{1}{c|}{\textbf{20 bits}} & \multicolumn{1}{c|}{\textbf{24 bits}} \\ \hline
-\textbf{2}                                                                          & 1972.05                              & 3765.09                               & 6126.07                               & 9054.88                               & 12551.6                               \\ \hline
-\textbf{3}                                                                          & 2899.50                              & 5559.67                               & 9071.71                               & 13435.4                               & 18650.7                               \\ \hline
-\textbf{4}                                                                          & 3827.13                              & 7354.19                               & 12017.0                               & 17815.7                               & 24750.1                               \\ \hline
-\textbf{5}                                                                          & 4754.49                              & 9148.68                               & 14962.5                               & 22196.1                               & 30849.3                               \\ \hline
-\textbf{6}                                                                          & 5682.00                              & 10943.2                               & 17908.1                               & 26576.5                               & 36948.4                               \\ \hline
-\textbf{7}                                                                          & 6609.56                              & 12737.8                               & 20853.7                               & 30956.8                               & 43047.6                               \\ \hline
-\textbf{8}                                                                          & 7536.99                              & 14532.3                               & 23799.2                               & 35337.2                               & 49146.9                               \\ \hline
-\textbf{9}                                                                          & 8464.34                              & 16326.9                               & 26744.6                               & 39717.9                               & 55246.2                               \\ \hline
-\textbf{10}                                                                         & 9391.91                              & 18121.3                               & 29690.1                               & 44098.0                               & 61345.4                               \\ \hline
-\textbf{20}                                                                         & 18666.6                              & 36066.6                               & 59145.0                               & 87901.8                               & 122338                                \\ \hline
-\textbf{30}                                                                         & 27941.7                              & 54011.9                               & 88600.0                               & 131706                                & -                                     \\ \hline
-\textbf{40}                                                                         & 37216.4                              & 71957.2                               & 118055                                & -                                     & -                                     \\ \hline
-\textbf{50}                                                                         & 46491.1                              & 89902.4                               & 147510                                & -                                     & -                                     \\ \hline
-\textbf{60}                                                                         & 55765.9                              & 107848                                & -                                     & -                                     & -                                     \\ \hline
-\textbf{70}                                                                         & 65040.7                              & 125793                                & -                                     & -                                     & -                                     \\ \hline
-\textbf{80}                                                                         & 74315.8                              & 143738                                & -                                     & -                                     & -                                     \\ \hline
-\textbf{90}                                                                         & 83590.5                              & 161683                                & -                                     & -                                     & -                                     \\ \hline
-\textbf{100}                                                                        & 92865.1                              & 179629                                & -                                     & -                                     & -                                     \\ \hline
+& \multicolumn{1}{c|}{8 bits} & \multicolumn{1}{c|}{12 bits} & \multicolumn{1}{c|}{16 bits} & \multicolumn{1}{c|}{20 bits} & \multicolumn{1}{c|}{24 bits} \\ \hline
+2                                                                          & 1972.05                              & 3765.09                               & 6126.07                               & 9054.88                               & 12551.6                               \\ \hline
+3                                                                          & 2899.50                              & 5559.67                               & 9071.71                               & 13435.4                               & 18650.7                               \\ \hline
+4                                                                          & 3827.13                              & 7354.19                               & 12017.0                               & 17815.7                               & 24750.1                               \\ \hline
+5                                                                          & 4754.49                              & 9148.68                               & 14962.5                               & 22196.1                               & 30849.3                               \\ \hline
+6                                                                          & 5682.00                              & 10943.2                               & 17908.1                               & 26576.5                               & 36948.4                               \\ \hline
+7                                                                          & 6609.56                              & 12737.8                               & 20853.7                               & 30956.8                               & 43047.6                               \\ \hline
+8                                                                          & 7536.99                              & 14532.3                               & 23799.2                               & 35337.2                               & 49146.9                               \\ \hline
+9                                                                          & 8464.34                              & 16326.9                               & 26744.6                               & 39717.9                               & 55246.2                               \\ \hline
+10                                                                         & 9391.91                              & 18121.3                               & 29690.1                               & 44098.0                               & 61345.4                               \\ \hline
+20                                                                         & 18666.6                              & 36066.6                               & 59145.0                               & 87901.8                               & 122338                                \\ \hline
+30                                                                         & 27941.7                              & 54011.9                               & 88600.0                               & 131706                                & -                                     \\ \hline
+40                                                                         & 37216.4                              & 71957.2                               & 118055                                & -                                     & -                                     \\ \hline
+50                                                                         & 46491.1                              & 89902.4                               & 147510                                & -                                     & -                                     \\ \hline
+60                                                                         & 55765.9                              & 107848                                & -                                     & -                                     & -                                     \\ \hline
+70                                                                         & 65040.7                              & 125793                                & -                                     & -                                     & -                                     \\ \hline
+80                                                                         & 74315.8                              & 143738                                & -                                     & -                                     & -                                     \\ \hline
+90                                                                         & 83590.5                              & 161683                                & -                                     & -                                     & -                                     \\ \hline
+100                                                                        & 92865.1                              & 179629                                & -                                     & -                                     & -                                     \\ \hline
 \end{tabular}
 \end{table}
 
@@ -1088,25 +1093,25 @@ We present the communication costs obtained for using a \ac{gc} implementation o
 \begin{tabular}{|c|l|l|l|l|l|}
 \hline
 \multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}number\\ clusters\end{tabular}}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                                                                                                                                      \\ \cline{2-6} 
-& \multicolumn{1}{c|}{\textbf{8 bits}} & \multicolumn{1}{c|}{\textbf{12 bits}} & \multicolumn{1}{c|}{\textbf{16 bits}} & \multicolumn{1}{c|}{\textbf{20 bits}} & \multicolumn{1}{c|}{\textbf{24 bits}} \\ \hline
-\textbf{2}                                                                          & 4174.78                              & 7971.66                               & 12971.1                               & 19173.0                               & 26577.5                               \\ \hline
-\textbf{3}                                                                          & 6136.87                              & 11769.3                               & 19205.7                               & 28445.8                               & 39489.5                               \\ \hline
-\textbf{4}                                                                          & 8098.94                              & 15567.1                               & 25440.1                               & 37718.2                               & 52401.5                               \\ \hline
-\textbf{5}                                                                          & 10061.2                              & 19364.8                               & 31675.0                               & 46990.8                               & 65313.5                               \\ \hline
-\textbf{6}                                                                          & 12023.2                              & 23162.6                               & 37909.2                               & 56263.7                               & 78225.4                               \\ \hline
-\textbf{7}                                                                          & 13985.3                              & 26960.3                               & 44143.4                               & 65536.3                               & 91137.4                               \\ \hline
-\textbf{8}                                                                          & 15947.4                              & 30757.9                               & 50378.0                               & 74808.8                               & 104049                                \\ \hline
-\textbf{9}                                                                          & 17909.6                              & 34555.5                               & 56612.9                               & 84081.3                               & 116961                                \\ \hline
-\textbf{10}                                                                         & 19871.7                              & 38353.1                               & 62847.2                               & 93354.2                               & 129873                                \\ \hline
-\textbf{20}                                                                         & 39493.0                              & 76330.2                               & 125193                                & -                                     & -                                     \\ \hline
-\textbf{30}                                                                         & 59114.1                              & 114307                                & -                                     & -                                     & -                                     \\ \hline
-\textbf{40}                                                                         & 78735.3                              & 152284                                & -                                     & -                                     & -                                     \\ \hline
-\textbf{50}                                                                         & 98356.6                              & -                                     & -                                     & -                                     & -                                     \\ \hline
-\textbf{60}                                                                         & 117978                               & -                                     & -                                     & -                                     & -                                     \\ \hline
-\textbf{70}                                                                         & 137598                               & -                                     & -                                     & -                                     & -                                     \\ \hline
-\textbf{80}                                                                         & 157221                               & -                                     & -                                     & -                                     & -                                     \\ \hline
-\textbf{90}                                                                         & -                                    & -                                     & -                                     & -                                     & -                                     \\ \hline
-\textbf{100}                                                                        & -                                    & -                                     & -                                     & -                                     & -                                     \\ \hline
+& \multicolumn{1}{c|}{8 bits} & \multicolumn{1}{c|}{12 bits} & \multicolumn{1}{c|}{16 bits} & \multicolumn{1}{c|}{20 bits} & \multicolumn{1}{c|}{24 bits} \\ \hline
+2                                                                          & 4174.78                              & 7971.66                               & 12971.1                               & 19173.0                               & 26577.5                               \\ \hline
+3                                                                          & 6136.87                              & 11769.3                               & 19205.7                               & 28445.8                               & 39489.5                               \\ \hline
+4                                                                          & 8098.94                              & 15567.1                               & 25440.1                               & 37718.2                               & 52401.5                               \\ \hline
+5                                                                          & 10061.2                              & 19364.8                               & 31675.0                               & 46990.8                               & 65313.5                               \\ \hline
+6                                                                          & 12023.2                              & 23162.6                               & 37909.2                               & 56263.7                               & 78225.4                               \\ \hline
+7                                                                          & 13985.3                              & 26960.3                               & 44143.4                               & 65536.3                               & 91137.4                               \\ \hline
+8                                                                          & 15947.4                              & 30757.9                               & 50378.0                               & 74808.8                               & 104049                                \\ \hline
+9                                                                          & 17909.6                              & 34555.5                               & 56612.9                               & 84081.3                               & 116961                                \\ \hline
+10                                                                         & 19871.7                              & 38353.1                               & 62847.2                               & 93354.2                               & 129873                                \\ \hline
+20                                                                         & 39493.0                              & 76330.2                               & 125193                                & -                                     & -                                     \\ \hline
+30                                                                         & 59114.1                              & 114307                                & -                                     & -                                     & -                                     \\ \hline
+40                                                                         & 78735.3                              & 152284                                & -                                     & -                                     & -                                     \\ \hline
+50                                                                         & 98356.6                              & -                                     & -                                     & -                                     & -                                     \\ \hline
+60                                                                         & 117978                               & -                                     & -                                     & -                                     & -                                     \\ \hline
+70                                                                         & 137598                               & -                                     & -                                     & -                                     & -                                     \\ \hline
+80                                                                         & 157221                               & -                                     & -                                     & -                                     & -                                     \\ \hline
+90                                                                         & -                                    & -                                     & -                                     & -                                     & -                                     \\ \hline
+100                                                                        & -                                    & -                                     & -                                     & -                                     & -                                     \\ \hline
 \end{tabular}
 \end{table}
 
@@ -1136,16 +1141,18 @@ We present the communication costs obtained for using a \ac{gc} implementation o
 \end{figure}
 
 
-In table \ref{table:computationCostsKM}, we can see that all communication costs per data sample increase linearly with the variables of interest. Both the amount of bytes sent and received by the \ac{gc} evaluator during pre-computation depend only on the numeric precision, and the amount of bytes sent during runtime depends only on the numeric precision and the number of features.
+In table \ref{table:computationCostsKM}, we can see that all communication costs per data sample increase linearly with the variables of interest. Both the number of bytes sent and received by the \ac{gc} evaluator during pre-computation depend only on the numeric precision, and the amount of bytes sent during runtime depends only on the numeric precision and the number of features.
 
 Regarding the amount of bytes per data sample received during runtime (tables \ref{table:computationCostsKM_PIMA}, \ref{table:computationCostsKM_BCWD}, \ref{table:computationCostsKM_CAD}, \ref{table:computationCostsKM_AID}, and figure \ref{fig:km-gc-comm}), they depend linearly on the number of features and the number of clusters, and quadratically on the numeric precision. However, as we have seen before, the results on table \ref{table:avgErrorKM} showed that the loss of accuracy is negligible even when only 12 bits are considered, meaning we can easily minimize its effects.
 
 
 \subsection{\acl{phe}}
 
+This section of the work was not developed by us, but is presented for completeness purposes.
+
 For the \ac{phe} systems, both the key size and the ciphertexts size depend only on the number of bits chosen ($NBits$). For the Paillier cryptosystem in particular, both the public and private keys are composed of two $2*NBits$ numbers and any ciphertext is a $2*NBits$ number.
 
-Under the assumption that one of the parties owns the data to be evaluated and the other owns the evaluation model and has the computational power to perform the evaluation, we only need to determine the communication cost of transmitting the data to be evaluated from one party to the other. This cost is independent from the \ac{ml} algorithm considered.
+Under the assumption that one of the parties owns the data to be evaluated and the other owns the evaluation model and has the computational power to perform the evaluation, we only need to determine the communication cost of transmitting the data to be evaluated from one party to the other. This cost is independent of the \ac{ml} algorithm considered.
 
 For each of the data samples, each individual feature value needs to be encrypted. The communication cost, in bits, is therefore given by:
 
@@ -1163,11 +1170,11 @@ where $N$ is the number of samples and $n$ is the number of features per sample.
 \hline
 \multirow{2}{*}{\textbf{NBits}} & \multicolumn{2}{c|}{\textbf{Pima}}                                                                                                                              & \multicolumn{2}{c|}{\textbf{Breast Cancer}}                                                                                                                     & \multicolumn{2}{c|}{\textbf{Credit Approval}}                                                                                                                   & \multicolumn{2}{c|}{\textbf{Adult Income}}                                                                                                                      \\ \cline{2-9} 
 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}total\\ comm\\ cost\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}cost /\\ sample\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}total\\ comm\\ cost\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}cost /\\ sample\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}total\\ comm\\ cost\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}cost /\\ sample\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}total\\ comm\\ cost\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}cost /\\ sample\end{tabular}} \\ \hline
-\textbf{128}                    & 29.536                                                                           & 0.352                                                                        & 81.696                                                                           & 1.056                                                                        & 168.192                                                                          & 1.728                                                                        & 25318.75                                                                         & 3.552                                                                        \\ \hline
-\textbf{256}                    & 59.072                                                                           & 0.704                                                                        & 163.392                                                                          & 2.112                                                                        & 336.384                                                                          & 3.456                                                                        & 50637.50                                                                         & 7.104                                                                        \\ \hline
-\textbf{512}                    & 118.144                                                                          & 1.408                                                                        & 326.784                                                                          & 4.224                                                                        & 672.768                                                                          & 6.912                                                                        & 101275.1                                                                         & 14.208                                                                       \\ \hline
-\textbf{1024}                   & 236.288                                                                          & 2.816                                                                        & 635.568                                                                          & 8.448                                                                        & 1345.536                                                                         & 13.824                                                                       & 202550.0                                                                         & 28.416                                                                       \\ \hline
-\textbf{2048}                   & 472.576                                                                          & 5.632                                                                        & 1307.136                                                                         & 16.896                                                                       & 2691.072                                                                         & 27.648                                                                       & 405100.0                                                                         & 56.832                                                                       \\ \hline
+128                    & 29.536                                                                           & 0.352                                                                        & 81.696                                                                           & 1.056                                                                        & 168.192                                                                          & 1.728                                                                        & 25318.75                                                                         & 3.552                                                                        \\ \hline
+256                    & 59.072                                                                           & 0.704                                                                        & 163.392                                                                          & 2.112                                                                        & 336.384                                                                          & 3.456                                                                        & 50637.50                                                                         & 7.104                                                                        \\ \hline
+512                    & 118.144                                                                          & 1.408                                                                        & 326.784                                                                          & 4.224                                                                        & 672.768                                                                          & 6.912                                                                        & 101275.1                                                                         & 14.208                                                                       \\ \hline
+1024                   & 236.288                                                                          & 2.816                                                                        & 635.568                                                                          & 8.448                                                                        & 1345.536                                                                         & 13.824                                                                       & 202550.0                                                                         & 28.416                                                                       \\ \hline
+2048                   & 472.576                                                                          & 5.632                                                                        & 1307.136                                                                         & 16.896                                                                       & 2691.072                                                                         & 27.648                                                                       & 405100.0                                                                         & 56.832                                                                       \\ \hline
 \end{tabular}
 \end{table}
 
@@ -1178,9 +1185,11 @@ As expected, the communication costs increase linearly with increasing the numbe
 
 \subsection{\acl{fhe}}
 
+This section of the work was not developed by us but is presented for completeness purposes.
+
 Considering the \ac{fhe} system used by the HElib toolkit, there was no easy way to precisely compute the total communication cost. The details of the cryptographic key generation process are not included in the toolkit documentation, and both the cryptographic keys and the ciphertexts are represented using their own structure. By printing several examples of cryptographic keys and ciphertexts, we estimated that each key is composed of approximately $400,000$ 64-bit values (total:$w_{key}\approx 3200kB=3.2MB$) and each ciphertext is composed of approximately $100,000$ 64-bit values (total:$w_{ciphertext}\approx 800kB=0.8MB$).
 
-Under the assumption that one of the parties owns the data to be evaluated and the other owns the evaluation model and has the computational power to perform the evaluation, we only need to determine the communication cost of transmitting the data to be evaluated from one party to the other. This cost is independent from the \ac{ml} algorithm considered.
+Under the assumption that one of the parties owns the data to be evaluated and the other owns the evaluation model and has the computational power to perform the evaluation, we only need to determine the communication cost of transmitting the data to be evaluated from one party to the other. This cost is independent of the \ac{ml} algorithm considered.
 
 For each of the data samples, each individual feature value needs to be encrypted. The communication cost, in bits, is therefore given by:
 
@@ -1193,7 +1202,7 @@ where $N$ is the number of samples and $n$ is the number of features per sample.
 
 \begin{table}[H]
 \centering
-\caption{\ac{fhe}. All datasets. Communication costs in kilobytes (kB).}
+\caption{\ac{fhe}. All datasets. Communication costs in Megabytes (MB).}
 \label{table:FHECommCost}
 \begin{tabular}{|c|c|c|c|c|c|c|c|}
 \hline
@@ -1215,12 +1224,12 @@ Once again, the communication costs increase linearly with increasing the number
 
 To conclude this chapter, we now make some final observations on the obtained results, analyzing the pros and cons of our \ac{gc} and \ac{he} approaches.
 
-Although we did not compare the performance of \ac{gc} and \ac{he} directly, for instance by choosing a \ac{ml} algorithm and implementing it using both privacy-preserving techniques, it is clear that the \ac{he} approach is more adequate for \ac{ml} algorithms that rely on arithmetic operations, and the \ac{gc} approach is more adequate for \ac{ml} algorithms that rely on non-arithmetic operations. An example pointing in this direction is the quadratic increase in runtime verified in the \ac{k-m}+\ac{gc} experiments, due to the need to perform multiplications to compute the Euclidean distance.
+Although we did not compare the performance of \ac{gc} and \ac{he} directly, for instance by choosing a \ac{ml} algorithm and implementing it using both privacy-preserving techniques, it is clear that the \ac{he} approach is adequate for \ac{ml} algorithms that rely on arithmetic operations, and the \ac{gc} approach is adequate for \ac{ml} algorithms that rely on non-arithmetic operations. An example pointing in this direction is the quadratic increase in runtime verified in the \ac{k-m}+\ac{gc} experiments, due to the need to perform multiplications to compute the Euclidean distance.
 
-An important remark on our experiments with \ac{gc} is related to our choice to only analyze fully expanded \ac{dt} instead of the original ones \ref{fig:ExpansionBinaryTrees}, in order to prevent any information leakage regarding the shape of the original tree. However, in most cases this causes an exponential growth of the number of nodes with increasing tree depths, leading to proportional increases in both the execution times and the communication costs.
+An important remark on our experiments with \ac{gc} is related to our choice to only analyze fully expanded \ac{dt} instead of the original ones, in order to prevent any information leakage regarding the shape of the original tree. However, in most cases this causes an exponential growth of the number of nodes with increasing tree depths, leading to proportional increases in both the execution times and the communication costs.
   
 
-An important remark on our experiments with \ac{he} is when each of the techniques should be used. We verified that \ac{phe} is in fact usable in practice but under some restrictions (\textit{e.g.}: if there is no need for complex composition of operations, if data is separated between client and server), while \ac{fhe} is more flexible but still too computationally expensive. However, due to the data packing ``trick'', \ac{fhe} can be more efficient than \ac{phe} for evaluating some \ac{ml} algorithms (\textit{e.g.}: \ac{lr}).
+An important remark on our experiments with \ac{he} is when each of the techniques should be used. We verified that \ac{phe} is, in fact, usable in practice but under some restrictions (e.g.: if there is no need for complex composition of operations and if data is separated between client and server), while \ac{fhe} is more flexible but still too computationally expensive. However, due to the data packing ``trick'', \ac{fhe} can be more efficient than \ac{phe} for evaluating some \ac{ml} algorithms (e.g.: \ac{lr}).
 
 
 
@@ -1237,9 +1246,9 @@ An important remark on our experiments with \ac{he} is when each of the techniqu
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-In this chapter we detailed the experiments that were conducted in implementing our solution. In section \ref{sec:EvaluationMetrics}, we presented the metric used in evaluating the results obtained.
+In this chapter, we detailed the experiments that were conducted in implementing our solution. In section \ref{sec:EvaluationMetrics}, we presented the metric used in evaluating the results obtained.
 Section \ref{sec:ExperimentalSetup} detailed the setup that was used to run the experiments, as well as the toolkits used.
-In section \ref{sec:ExperimentalResultsBaseline}, we presented the baseline results obtained for the datasets in question., and in section \ref{sec:ExperimentalResultsComparisonBaseline} we compared those results with the the ones obtained using the toolkits.
+In section \ref{sec:ExperimentalResultsBaseline}, we presented the baseline results obtained for the datasets in question, and in section \ref{sec:ExperimentalResultsComparisonBaseline} we compared those results with the ones obtained using the toolkits.
 In section \ref{sec:ExperimentalResultsExecutionTime}, we presented the execution times for the implementation, and in section \ref{sec:CommunicationCosts} we presented the communication costs for the implementation.
 Finally, in section \ref{sec:ExperimentalResultsConclusion}, we made the final observations on the results obtained.
 

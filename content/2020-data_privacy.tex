@@ -3,7 +3,9 @@
 \label{sec:DataPrivacy}
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-Privacy is an important field in information security because it gives a person his/her personal space and defines his/her personal private information, giving the person the right to decide which personal information is for sharing and which should be kept confidential. The right to privacy also limit the access that other entities, being them the government or private companies, have to personal data.
+Information privacy, or Data Privacy, is the relationship between the collection and dissemination of data, and the legal issues surrounding it. It refers to the measures taken in providing individuals with defenses for their personal data.
+
+Privacy is an important field in information security because it gives a person his/her personal space and defines his/her personal private information, giving the person the right to decide which personal information is for sharing and which should be kept confidential. The right to privacy also limits the access that other entities, being them the government or private companies, have to personal data.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -47,15 +49,15 @@ It is also important to mention in the context of this work the current legislat
 More recently a replacement has been proposed and accepted in the \ac{eu}, the \ac{gdpr}\footnote{\url{http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.L_.2016.119.01.0001.01.ENG&toc=OJ:L:2016:119:TOC}}, that will take effect in May 2018. Both these laws are regulated by European entities, namely the \ac{enisa}\footnote{\url{https://www.enisa.europa.eu/}} and the Article 29 Data Protection Working Party\footnote{\url{http://ec.europa.eu/newsroom/just/item-detail.cfm?item_id=50083}}.
 
 
- According to \ac{enisa}, \ac{eu} data protection law applies to any processing of personal data \cite{DAcquisto2015}. This personal data is defined as any information related to an identified or identifiable natural person. In the context of Big Data analysis, the focus is more on indirect identification, which translates into three different approaches: \emph{i)} The possibility of isolating some or all records which identify an individual in a dataset; \emph{ii)} The linking of at least two records concerning the same individual in the same database or in different databases; and  \emph{iii)} The possibility to infer the value of an attribute in a dataset from the value of other attributes.
+ According to \ac{enisa}, \ac{eu} data protection law applies to any processing of personal data \cite{DAcquisto2015}. This personal data is defined as any information related to an identified or identifiable natural person. In the context of Big Data analytics, the focus is more on indirect identification, which translates into three different approaches: \emph{i)} The possibility of isolating some or all records which identify an individual in a dataset; \emph{ii)} The linking of at least two records concerning the same individual in the same database or in different databases; and  \emph{iii)} The possibility to infer the value of an attribute in a dataset from the value of other attributes.
 
 
 
-Another important cornerstone of \ac{eu} data protection law are the principles relating to data quality:
+Another important cornerstone of \ac{eu} data protection law is the principles relating to data quality:
 
 \begin{itemize}
 
-    \item The \textit{fairness principle} requires that personal data should never be processed without the individual being actually aware of it.
+    \item The \textit{fairness principle} requires that personal data should never be processed without the individual actually being aware of it.
 
     \item The \textit{purpose limitation principle} implies that data can only be collected for specified, explicit and legitimate purposes.
 
@@ -67,7 +69,7 @@ These three principles together mandate that data processing must be done with t
 
 Finally, and also important to mention in the context of this work, are the rights of the data subject according to the \ac{eu} law. There are two important rights that a subject has: the \textit{right of access} and the \textit{right to object}.
 The \textit{right of access} ensures that any data subject is entitled to obtain from the data controllers communication of the data that is subjected to processing and to know the logic involved in any processing of data concerning him/her.
-This is particularly relevant in the context of Big Data analysis because it limits technological lock-ins and other competition impediments, and it enhances transparency and trust between users and service providers.
+This is particularly relevant in the context of Big Data analytics because it limits technological lock-ins and other competition impediments, and it enhances transparency and trust between users and service providers.
 The \textit{right to object} ensures that data subjects have a right to revoke any prior consent, and to object to the processing of data relating to them, giving to the subject the power to remove himself completely or partially to any data processing mechanisms using his personal data.
 
 
@@ -86,11 +88,11 @@ In recent years we can find a number of attacks made to systems that handle pers
 
     \item Netflix Prize\footnote{\url{https://www.wired.com/2009/12/netflix-privacy-lawsuit}}. In 2007, Netflix created a contest to improve their recommendation system. For that, they released a training dataset, with all the personal information regarding customers removed and customer \textit{ids} replaced by randomized \textit{ids}. Later it was shown that it was not enough when a group of researchers linked public information in another movie-rating website (IMDB) with the released dataset and were able to partially de-anonymize the training dataset, compromising the identity of some users.
 
-    \item AOL search data leak\footnote{\url{https://techcrunch.com/2006/08/06/aol-proudly-releases-massive-amounts-of-user-search-data}}. In 2006, AOL released to the general public a text file containing search keywords for numerous of their users, intended for research purposes. The users were not identified, but personally identifiable information was present in many of the queries. These queries contained a user \textit{id} attributed by AOL, and an individual could be identified and matched to their account and search history by such information.
+    \item AOL search data leak\footnote{\url{https://techcrunch.com/2006/08/06/aol-proudly-releases-massive-amounts-of-user-search-data}}. In 2006, AOL released to the general public a text file containing search keywords for numerous of their users, intended for research purposes. The users were not identified, but \ac{pii} was present in many of the queries. These queries contained a user \textit{id} attributed by AOL, and an individual could be identified and matched to their account and search history by such information.
 
 
 
-   \item Massachusetts GIC medical encounter database\footnote{\url{https://techpinions.com/can-you-be-identified-from-anonymous-data-its-not-so-simple/7627}}. A researcher from \ac{cmu} linked the anonymized database (which contained birth date, sex and ZIP code) with voter registration and was able to link medical records with individuals.
+   \item Massachusetts GIC medical encounter database\footnote{\url{https://techpinions.com/can-you-be-identified-from-anonymous-data-its-not-so-simple/7627}}. A researcher from \ac{cmu} linked the anonymized database (which contained birth date, sex, and ZIP code) with voter registration and was able to link medical records with individuals.
 
 
 \end{itemize}

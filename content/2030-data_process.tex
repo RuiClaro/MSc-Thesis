@@ -11,7 +11,7 @@ Data Mining is the process of discovering interesting patterns and knowledge fro
 
 \begin{itemize}
 
-    \item\textbf{Business Understanding:} In this initial phase, the project goals and requirements must be understood from a business perspective, and then converted into a Data Mining problem.
+    \item\textbf{Business Understanding:} In this initial phase, the project goals and requirements must be understood from a business perspective and then converted into a Data Mining problem.
 
     \item\textbf{Data Understanding:} During this phase, an initial data collection is done, followed by a number of activities in order to get familiar with the data, to understand how the data is organized, to identify if the data has quality problems, or even to detect interesting subsets in the data collected.
 
@@ -43,7 +43,8 @@ In the Data Mining process, we must be aware that, sometimes, private informatio
 \label{ssec:AttackModels}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-When considering the security of a system, one must have into account the concepts of threat model, attack model, and the two types of adversaries, \textit{honest-but-curious} and \textit{malicious}, to understand how to better implement an efficient and trustworthy security layer.
+When considering the security of a system, one must have into account the concepts of threat model, attack model, and type of adversary, to understand how to better implement an efficient and trustworthy security layer. The honest-but-curious adversary follows the protocol in plan, but he will try to extract information from his viewpoint of the protocol to gain some form of advantage or gain access to confidential information.
+The malicious adversary is one that can deviate from the protocol specification as he desires, and will try to disrupt and/or collect as many information as he can.
 
 A threat model specifies the potential threats that can be used against a system, by identifying, enumerating and prioritizing them. A well known and defined threat assessment model is the STRIDE model developed by Microsoft \cite{hafiz2007organizing}.
 
@@ -61,9 +62,6 @@ Cryptographic attacks are used whenever the target system relies on cryptography
 \end{itemize}
 
 
-We can also classify the types of adversaries according to their strategies in two major groups: \textit{honest-but-curious} and \textit{malicious} adversaries.
-The honest-but-curious adversary follows the protocol in plan, but he will try to extract information from his viewpoint of the protocol to gain some form of advantage or gain access to confidential information.
-The malicious adversary is one that can deviate from the protocol specification as he desires, and will try to disrupt and/or collect as many information as he can.
 
 %
 %Two different trust models can be considered when developing a system: \textit{semi-honest(honest-but-curious) security}, where we assume corrupted parties just gather information they can reach, they do not deviate from the protocol; and \textit{malicious security}, in which we assume corrupted parties can disrupt the protocol execution.

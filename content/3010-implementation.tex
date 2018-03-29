@@ -12,7 +12,7 @@ For running the experiments, we used datasets that are highly used in the litera
 
 \begin{table}[H]
 \centering
-\caption{Datasets used in \ac{bard}.}
+\caption{Datasets used in the evaluation of \acs{bard}. Healthcare (Pima Indians Diabetes and Breadt Cancer Wisconsin), Finance (Credit Approval) and Governance (Adult Income).}
 \label{table:datasets}
 \begin{tabular}{|l|l|l|l|}
 \hline
@@ -31,17 +31,17 @@ For running the experiments, we used datasets that are highly used in the litera
 \label{sec:DataPreProcessingImplementation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Although our data is obtained from publicly available data sources, it is still required to do some preprocessing on the data.
-For example, the datasets contained missing values on some of the entries that needed to be addressed. Another example is the existence of categorical data that \ac{ml} algorithms cannot process. We now describe some of the techniques we used in the data preparation phase for the datasets described in Table \ref{table:datasets}.
+Although our data is obtained from publicly available data sources, some preprocessing on the data is still required.
+For example, the datasets contain missing values on some of the entries that needed to be addressed. Another example is the existence of categorical data that \ac{ml} algorithms cannot process. We now describe some of the techniques we used in the data preparation phase for the datasets described in Table \ref{table:datasets}.
 
 \begin{itemize}
     
 
 	\item\textbf{One-hot Encoding}\cite{harris2010digital} was initially used in digital circuits in order to determine the state of a state machine without using a decoder. The binary code is converted in a group of bits in which only one bit can have the value high ($1$), and all the others low ($0$). For example, the binary $110$ is converted to $01000000$.
-	In \ac{ml}, we apply this technique to deal with the problems created by using datasets with categorical (or nominal) data. Most \ac{ml} algorithms require numerical representations in the data. A solution can be to assign an integer number to each different value present in the data, but this leads to the model assuming a natural ordering between categories that may not exist.
-	Using one-hot encoding in categorical data allows us to circumvent this problem, creating additional binary variables for each unique value, \textit{e.g.} if a variable describing pets has the values ``dog'', ``cat'' and ``fish'', after encoding three more variables will be added to the dataset, each representing a possible value. Then, a high ($1$) will be placed on the binary variable that represents the original value, and low ($0$) on all the others. Using the pets example, if the original value was ``dog'', the resulting three binary variables will be high on the binary variable representing ``dog'', and low on the other two (``dog'' becomes $1,0,0$).
+	In \ac{ml}, we apply this technique to deal with the problems created in using datasets with categorical (or nominal) data. Most \ac{ml} algorithms require numerical representations in the data. A solution can be to assign an integer number to each different value present in the data, but this leads to the model assuming a natural ordering between categories that may not exist.
+	Using one-hot encoding in categorical data allows us to circumvent this problem, creating additional binary variables for each unique value, e.g., if a variable describing pets has the values ``dog'', ``cat'' and ``fish'', after encoding, three more variables will be added to the dataset, each representing a possible value. Then, a high ($1$) will be placed on the binary variable that represents the original value, and low ($0$) on all the others. Using the pets example, if the original value was ``dog'', the resulting three binary variables will be high on the binary variable representing ``dog'', and low on the other two (``dog'' becomes $1,0,0$).
 
-	\item\textbf{Feature Scaling} is a technique to normalize the range of data. For some \ac{ml} algorithms, having broad range of values in one of the features may cause this feature to govern the modeling. There are different ways of achieving this, for example, \textit{rescaling}, where the range of values is scaled to a target range (usually $[0,1]$ or $[-1,1]$), or \textit{standardization}, where the features are rescaled so that they have the properties of a standard normal distribution, \textit{i.e.} the mean average at zero and the standard deviation from the mean at one.
+	\item\textbf{Feature Scaling} is a technique to normalize the range of data. For some \ac{ml} algorithms, having a broad range of values in one of the features may cause this feature to govern the modeling. There are different ways of achieving this, for example, \textit{rescaling}, where the range of values is scaled to a target range (usually $[0,1]$ or $[-1,1]$), or \textit{standardization}, where the features are rescaled so that they have the properties of a standard normal distribution, i.e. the mean average at $0$ and the standard deviation from the mean at $1$.
 
 
 
@@ -49,7 +49,7 @@ For example, the datasets contained missing values on some of the entries that n
 
 In our implementation, we used one-hot encoding in the Adult Income dataset and in the Credit Approval dataset. These two datasets contain categorical features that required the use of encoding to be processed by the \ac{ml} algorithms.
 
-In the Adult Income dataset, we have multiple examples of categorical features, namely the \textit{workclass}, \textit{education}, \textit{marital-status}, \textit{occupation}, \textit{relationship}, \textit{race}, \textit{sex} and \textit{native-country}. these were all encoded so that only numerical values were left. Of course, this caused a exponential growth on the number of features, going from the initial $14$ to $108$.
+In the Adult Income dataset, we have multiple examples of categorical features, namely the \textit{work-class}, \textit{education}, \textit{marital-status}, \textit{occupation}, \textit{relationship}, \textit{race}, \textit{sex} and \textit{native-country}. These were all encoded so that only numerical features remained, causing a large growth on the number of features, going from the initial $14$ to $108$.
 In the Credit Approval dataset, we encoded all the non-numerical features, changing the number of features from $15$ to $51$.
 Feature scaling was used in all of the datasets, in order to reduce the errors caused by wide ranges. We used rescaling of all values to numbers between $0$ and $1$.
 
@@ -63,7 +63,7 @@ Finally, it was required for our setup a validation and a testing set, which som
 \label{sec:BaselineImplementation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The baseline approach consists on setting up ground values so that meaningful comparisons can be achieved. For understanding the overhead created by privacy-preserving technologies, we implemented the baseline using the publicly available \ac{ml} toolkit, scikit-learn for Python\footnote{\url{http://scikit-learn.org}}.
+The baseline approach consists of setting up ground values so that meaningful comparisons can be achieved. For understanding the overhead created by privacy-preserving technologies, we implemented the baseline using the publicly available \ac{ml} toolkit, scikit-learn for Python\footnote{\url{http://scikit-learn.org}}.
 
 In order to understand and explain what was done and why, we detail next the \ac{ml} algorithms that were implemented in the baseline and in sections \ref{sec:ExpandedAlgorithmsImplementation} and \ref{sec:CryptoDomainImplementation}.
 
@@ -75,20 +75,19 @@ In order to understand and explain what was done and why, we detail next the \ac
 \ac{dt} are a decision support tool that uses a tree-like graph that represents decisions and possible outcomes of those decisions. It is an algorithm that is composed of conditional control sequences. \ac{dt} learning uses \ac{dt} as a predictive model for classification.
 These \ac{dt} are composed of nodes and leaves. The nodes represent decisions to take, or more specifically, thresholds that a feature is compared against, in order to decide which branch of the tree to follow. The leaves represent class labels.
 
-To build a \ac{dt} classifier there are a number of algorithms that can be used, each with different approaches and benefits. For example, ID3, C4.5, C5.0 and CART \cite{strobl2009introduction}. These algorithms focus in maximizing one or more metrics, such as Gini impurity or information gain.
+To build a \ac{dt} classifier there are a number of algorithms that can be used, each with different approaches and benefits. For example, ID3, C4.5, C5.0 and CART \cite{strobl2009introduction}. These algorithms focus on maximizing one or more metrics, such as Gini impurity or information gain.
 
-The classification process of a sample in \ac{dt} is an intuitive method. Each node of the tree has the information on which feature in the sample to compare against the threshold. So, classifying a sample in \ac{dt} is done by traversing the tree from the top, comparing the values selected on each node with it's respective threshold, and depending on the result, choose one child node or the other. When a leaf is reached, a class label is retrieved from the leaf and assigned to the sample, ending the classification process.
+The classification process of a sample in \ac{dt} is an intuitive method. Each node of the tree has the information on which feature in the sample to compare against the threshold. So, classifying a sample in \ac{dt} is done by traversing the tree from the top, comparing the values selected on each node with its respective threshold, and depending on the result, choose one child node or the other. When a leaf is reached, a class label is retrieved from the leaf and assigned to the sample, ending the classification process.
 
-%In the baseline implementation, we used \ac{dt} with the CART algorithm with the Gini impurity.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\acl{svm}}
 \label{ssec:SuportVectorMachines}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ac{svm} are supervised learning models that analyze data used for classification and regression analysis. An \ac{svm} model represents the examples as points in space, mapped so that the margin between the two classes for the data is as wide as possible. The vectors that define this margin, or \textit{hyperplane}, are called support vectors. For classifying new samples, one maps them in that space, and predicts which class they belong based on which side of the gap they lie.
+\ac{svm} are supervised learning models used for classification and regression analysis. A \ac{svm} model represents the examples as points in space, mapped so that the margin between the two classes for the data is as wide as possible. The vectors that define this margin, or \textit{hyperplane}, are called support vectors. For classifying new samples, one maps them in that space and predicts which class they belong based on which side of the gap they lie.
 
-For calculating the \ac{svm} for linear classification, and in the case of a \textit{hard-margin}, \textit{i.e.}, when the training data is linearly separable, we select two parallel hyperplanes so that the distance between them is as large as possible.
+For calculating the \ac{svm} for linear classification, and in the case of a \textit{hard-margin}, i.e., when the training data is linearly separable, we select two parallel hyperplanes so that the distance between them is as large as possible.
 These hyperplanes can be described by the equations in \ref{eq:SVM1}.
 
 \begin{equation}
@@ -111,7 +110,7 @@ f(w,\lambda)={\displaystyle \left[{\frac {1}{n}}\sum _{i=1}^{n}\max \left(0,1-y_
 
 where the parameter $\lambda$ determines the tradeoff between increasing the margin-size and ensuring that the ${\vec {x}}_{i}$ lie on the correct side of the margin.
 
-For \ac{svm} non-linear classification, we employ a \textit{kernel trick}, in which the dot product is replaced by a non-linear kernel function. The most used kernels are mentioned bellow.
+For \ac{svm} non-linear classification, we employ a \textit{kernel trick}, in which the dot product is replaced by a non-linear kernel function. The most used kernels are mentioned below.
 
 \begin{itemize}
     
@@ -137,7 +136,7 @@ where $\alpha_i$ is the coefficient associated with the support vector $x_{SV}^{
 \label{ssec:kNearestNeighbors}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ac{k-nn} learning algorithm is based in the principles of pattern recognition. This algorithm is among the simplest of all \ac{ml} algorithms, since it does not require a training step. To classify a new sample, we calculate the Euclidean Distance of it with the training samples, and discover the \textit{k} samples that are close to it. Then, by majority vote of its {k} neighbors, the class label is assigned to the new sample.
+\ac{k-nn} learning algorithm is based on the principles of pattern recognition. This algorithm is among the simplest of all \ac{ml} algorithms since it does not require a training step. To classify a new sample, we calculate the Euclidean Distance of it with the training samples, and discover the \textit{k} samples that are close to it. Then, by a majority vote of its {k} neighbors, the class label is assigned to the new sample.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -145,10 +144,10 @@ where $\alpha_i$ is the coefficient associated with the support vector $x_{SV}^{
 \label{ssec:kMeans}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ac{k-m} clustering is a method commonly used to partition a dataset into \textit{k} groups. It proceeds by selecting \textit{k} initial cluster centers (centroids) and then iteratively refining them. this refining is done in two distinct steps. 1) Each instance is assigned to its closest cluster. This is done by calculating the Euclidean Distance between each instance and each cluster center.Then, the lowest distance indicates which cluster the instance must be assigned to. 2) Each cluster center is updated to be the mean of all the instances assigned to it.
+\ac{k-m} clustering is a method commonly used to partition a dataset into \textit{k} groups. It proceeds by selecting \textit{k} initial cluster centers (centroids) and then iteratively refining them. This refining is done in two distinct steps. 1) Each instance is assigned to its closest cluster. This is done by calculating the Euclidean Distance between each instance and each cluster center. Then, the lowest distance indicates which cluster the instance must be assigned to. 2) Each cluster center is updated to be the mean of all the instances assigned to it.
 The algorithm stops when the centroids no longer change position. This means that, depending on the data, it is not guaranteed that the optimal solution is found.
 
-The classification of each testing sample is done similarly as the first step,\textit{i.e.}, by computing the Euclidean Distance of the new sample with each centroid discovering the cluster whose centroid is closest to it. The label of the cluster becomes the predicted label of the sample.
+The classification of each testing sample is done similarly as step 1), i.e., by computing the Euclidean Distance of the new sample with each centroid, discovering the cluster whose centroid is closest to it. The label of the cluster becomes the predicted label of the sample.
 
 
 
@@ -158,7 +157,7 @@ The classification of each testing sample is done similarly as the first step,\t
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\ac{lr} is a regression model in which the dependent variable is categorical. This variable is usually binary, \textit{i.e.}, it can only take two values, usually $0$ or $1$ that represents opposite outcomes such as ``win/lose'' or ``healthy/sick''.
+\ac{lr} is a regression model in which the dependent variable is categorical. This variable is usually binary, i.e., it can only take two values, usually $0$ or $1$ that represents opposite outcomes such as ``win/lose'' or ``healthy/sick''.
 This binary logistic model is used to estimate the probability of a binary response based on one or more variables.
 To define \ac{lr}, one must begin with the Logistic function, which in turn is given by equation \ref{eq:LR1}.
 
@@ -188,14 +187,13 @@ f(x)=\beta_0+\sum_{i=1}^m \beta_i x_i
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
-Taking into account that the baseline implementation was done using scikit-learn, we could not explicitly compare execution times, due to the fact that the operations in the toolkit were made in a ``black box'' mode. To solve this problem, we implemented the evaluation prediction processes of the \ac{ml} algorithms without using the toolkit, \textit{i.e.}, directly from the algorithm equations.
+Taking into account that the baseline implementation was done using scikit-learn, we could not explicitly observe the operations done in the toolkit since they were made in a ``black box'' mode. This could lead to an inability to distinguish prediction errors caused by the privacy-preserving systems and caused by the implementation of the prediction equations. To solve this problem, we implemented the evaluation prediction processes of the \ac{ml} algorithms without using the toolkit, i.e., directly from the algorithm equations.
 
 We successfully recreated the prediction processes by retrieving from the toolkit the specifications for each \ac{ml} model, and we now enumerate them.
 
 \begin{itemize}
 	
-    \item For the \ac{dt}, it was needed to retrieve all of the model, \textit{i.e.}, the binary tree, so that we could traverse it according to each testing sample, comparing the feature with the threshold of each node, and choosing which branch of the tree to follow, until a label is reached. 
+    \item For the \ac{dt}, we needed to retrieve all of the model, i.e., the binary tree, so that we could traverse it according to each testing sample, comparing the feature with the threshold of each node, and choosing which branch of the tree to follow, until a label is reached. 
 
     \item In the case of \ac{svm}, we retrieved from the toolkit all the coefficients needed to compute equation \ref{eq:SVM3}, namely the support vectors, the $\alpha$ coefficients for each support vector, the kernel function that was used(linear or polynomial), the exponent for the polynomial kernel if needed, and the scalar value $b$.
 
@@ -205,7 +203,7 @@ We successfully recreated the prediction processes by retrieving from the toolki
 
 \end{itemize}
 
-In the case of \ac{k-nn}, since training does not exist, there was no need to use the toolkit, so no information was retrieved from it, and it was not required to do a expanded version of the algorithm.
+In the case of \ac{k-nn}, since training does not exist, there was no need to use the toolkit, so no information was retrieved from it, and it was not required to do an expanded version of the algorithm.
 
 
 
@@ -215,7 +213,7 @@ In the case of \ac{k-nn}, since training does not exist, there was no need to us
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 In the final step of our implementation, we made adjustments to the evaluation processes of the \ac{ml} algorithms discussed above so that we could apply two privacy-preserving techniques, \ac{gc} (described in section \ref{ssec:GarbledCircuits}) and \ac{he} (described in section \ref{ssec:HomomorphicEncryption}).
-These two techniques offer different means to obtain privacy-preserving computations, and we must consider them when choosing which \ac{ml} algorithm to use with each cryptographic algorithm. \ac{gc} builds ciphered Boolean circuits, which means that most of the computations are possible to implement on them. However, arithmetic computations require a large number of logic gates, creating a overhead that makes \ac{gc} very slow. So, for some of the \ac{ml} algorithms, we used a \ac{he} system, since it offers arithmetic operations as a core operation. Due to these constrains, we decided to adapt the \ac{dt} and \ac{k-m} to be evaluated using \ac{gc}, and \ac{svm} and \ac{lr} to be evaluated using \ac{he}.
+These two techniques offer different means to obtain privacy-preserving computations, and we must consider them when choosing which \ac{ml} algorithm to use with each cryptographic algorithm. \ac{gc} builds ciphered Boolean circuits, which means that most of the computations are possible to implement on them. However, arithmetic computations require a large number of logic gates, creating an overhead that makes \ac{gc} very slow. So, for some of the \ac{ml} algorithms, we used a \ac{he} system, since it offers arithmetic operations as a core operation. Due to these constraints, we decided to adapt the \ac{dt} and \ac{k-m} to be evaluated using \ac{gc}, and \ac{svm} and \ac{lr} to be evaluated using \ac{he}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -223,7 +221,7 @@ These two techniques offer different means to obtain privacy-preserving computat
 \label{ssec:GCandDT}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The process of evaluating a \ac{dt} in a privacy-preserving context is similar to evaluating in the usual manner, as described in \ref{ssec:DecisionTrees}. The main differences are the use of ciphered Boolean circuits instead of operations, \textit{i.e.}, basic operations such as additions, comparisons, are replaced with logic gates, and the evaluation of the \ac{dt} involves evaluating every single node in it, to disclose the least possible information due to observation of the computations.
+The process of evaluating a \ac{dt} in a privacy-preserving context is similar to evaluating in the usual manner, as described in \ref{ssec:DecisionTrees}. The main differences are the use of ciphered Boolean circuits instead of operations, i.e., basic operations such as additions, comparisons, are replaced with logic gates, and the evaluation of the \ac{dt} involves evaluating every single node in it, to disclose the least possible information caused by observation of the computations.
 
 In figure \ref{fig:DTNode} we show how the computations are done inside each node of the \ac{dt}. Each node contains the \textit{featureID}, the ID of the feature to be selected from the sample to be classified, and the \textit{threshold}, the value that is compared against the selected feature and that decides which branch of the tree to follow next. The first MUX gate selects from the sample the feature to be compared. The GREATERTHAN gate compares the selected feature with the threshold. Then, the value from the comparison ($0$ or $1$) is used as a selection bit in the second MUX to choose the \textit{next\textunderscore featureID} and \textit{next\textunderscore threshold} for the next node in the tree. 
 
@@ -236,7 +234,7 @@ In figure \ref{fig:DTNode} we show how the computations are done inside each nod
 \end{figure}
 
 
-It is also important to mention that the trees that we used are always complete, \textit{i.e.} the number of nodes $n$ is always the maximum possible, and it can be defined as $n=2^{h+1}-1$, where $h$ is the \textit{height} of the tree. We can see in figure \ref{fig:ExpansionBinaryTrees} the implications of this expansion of the binary trees.
+It is also important to mention that the trees that we used are always complete, i.e. the number of nodes $n$ is always the maximum possible, and it can be defined as $n=2^{h+1}-1$, where $h$ is the \textit{height} of the tree. We can see in figure \ref{fig:ExpansionBinaryTrees} the implications of this expansion of the binary trees.
 
 \begin{figure}[H]
 	\centering
@@ -250,8 +248,8 @@ It is also important to mention that the trees that we used are always complete,
 		\label{fig:CompleteTree}
 		}
 	}
-	\label{fig:ExpansionBinaryTrees}
 	\caption{Expansion of binary trees.}
+    \label{fig:ExpansionBinaryTrees}
 \end{figure}
 
 
@@ -268,7 +266,7 @@ In figure \ref{fig:Tree} we have a binary \ac{dt} with $height=3$ and with diffe
 
 As in the previous section, evaluating the \ac{k-m} algorithm in a privacy-preserving manner is similar to evaluating in the usual manner. We took the operations in the prediction step and transformed them in Boolean circuits, with logic gates such as multiplexers, adders, etc.
 
-In figure \ref{fig:kmeans} we show how we designed the circuit to represent the \ac{k-m} prediction. The ED blocks represent the operations to perform the Euclidean distance between the sample and each centroid provided by the \ac{k-m} model. The ARGMIN block represent the operations needed to choose, between all the distances calculated, which of it is the smallest.
+In figure \ref{fig:kmeans} we show how we designed the circuit to represent the \ac{k-m} prediction. The ED blocks represent the operations to perform the Euclidean distance between the sample and each centroid provided by the \ac{k-m} model. The ARGMIN block represents the operations needed to choose, between all the distances calculated, which of it is the smallest.
 
 
 \begin{figure}[H]
@@ -279,7 +277,7 @@ In figure \ref{fig:kmeans} we show how we designed the circuit to represent the 
 \end{figure}
 
 
-As we show in ref(evaluation-k.means), there is an exponential decrease in performance when the number of clusters increases, or the sample has a larger number of features. This is caused by the multiplications that are done calculating the Euclidean distance. Usually this is reason to use \ac{he} instead, but the algorithm to implement comparisons is hard to implement \cite{blake2004strong}.
+As we show in \ref{ssec:gcandKM}, there is an exponential decrease in performance when the number of clusters increases or the sample has a larger number of features. This is caused by the multiplications that are done calculating the Euclidean distance. Usually, this is a reason to use \ac{he} instead, but the algorithm to implement comparisons is very complex to implement and requires considerable computational power \cite{blake2004strong}.
 
 
 
