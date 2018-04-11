@@ -5,9 +5,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-As mentioned in section \ref{sec:UseCases}, healthcare systems generate vast amounts of data every day. Processing this data can be beneficial for both the health institution (hospitals, clinics) and for the patients. However, usage of \ac{emr} cannot be freely done by institutions without the consent of the patients and compliance with data protection legislation. As a result, this processing is performed \textit{in-house}, with only a few exceptions\footnote{\url{https://www.reuters.com/article/us-health-medicalrecords-sharing/few-u-s-hospitals-can-fully-share-electronic-medical-records-idUSKCN1C72UV}}. The problem is that developing and/or maintaining a Data Mining infrastructure in an institution amasses costs that it may not be willing to support.
+As mentioned in Section \ref{sec:UseCases}, healthcare systems generate vast amounts of data every day. Processing this data can be beneficial for both the health institution (hospitals, clinics) and for the patients. However, the usage of \ac{emr} cannot be freely done by institutions without the consent of the patients and in compliance with data protection legislation. As a result, this processing is performed \textit{in-house}, with only a few exceptions\footnote{\url{https://www.reuters.com/article/us-health-medicalrecords-sharing/few-u-s-hospitals-can-fully-share-electronic-medical-records-idUSKCN1C72UV}}. The problem is that developing and/or maintaining a \ac{dm} infrastructure in an institution amasses costs that it may not be willing to support.
 
-Our contribution to mitigating this standoff between the gains and costs of Data Mining \ac{emr} is to provide a product that removes the costs of maintenance and development from the institutions, while at the same time provide enough privacy guarantees to comply with existing legislation.
+Our contribution to mitigating this standoff between the gains and costs of \ac{dm} \ac{emr} is to provide a product that removes the costs of maintenance and development from the institutions, while at the same time provides enough privacy guarantees to comply with existing legislation.
 
 
 We now describe a typical use case scenario for privacy-preserving processing of \ac{emr}.
@@ -15,7 +15,7 @@ We now describe a typical use case scenario for privacy-preserving processing of
 \begin{itemize}
 	
 
-	\item \textbf{Description:} Design and implementation of a platform to process \ac{emr} in order to improve treatments and diagnoses, while maintaining identities private. This is achieved by training models using this data and then predict medical conditions for future patients. All the computations should be done resorting to privacy-preserving techniques.
+	\item \textbf{Description:} Design and implementation of a platform to process \ac{emr} in order to improve treatments and diagnoses, while maintaining identities private. This is achieved by training models using these data and then predict medical conditions for future patients. All the computations should be done resorting to privacy-preserving techniques.
 
 	\item \textbf{Actors involved:} Healthcare institutions, patients, medical staff.
 
@@ -28,11 +28,11 @@ We now describe a typical use case scenario for privacy-preserving processing of
 
 		\item A new patient arrives at the institution and it is asked if he/she consents to the use of the platform to speed up his/her diagnosis, including consent to data collection and data processing. If the patient agrees, the process can continue.
 
-		\item Data of the patient is collected by a person from the medical staff, including his/her symptoms, medical history, etc.
+		\item Patient data are collected by the medical staff, including his/her symptoms, medical history, etc.
 
-		\item This data is supplied to the platform, and the platform performs one or more predictions, depending on the number of models the platform has, using privacy-preserving techniques to do so.
+		\item These data are supplied to the platform, and the platform performs one or more predictions, depending on the number of models the platform has, using privacy-preserving techniques to do so.
 
-		\item The platform informs the doctor of what are the results of the predictions.
+		\item The platform informs the doctor of what are the prediction results.
 
 		\item The doctor decides on the appropriate medical action, taking into account his medical background and the information supplied by the platform.
 

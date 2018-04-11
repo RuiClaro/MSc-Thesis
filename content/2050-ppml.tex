@@ -4,13 +4,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-In the context of knowledge learning, \ac{ml} techniques come as an important addition to the data processing step. An example of that is the \textit{Classification} method. Classification is described by a two-step process, in which a classification algorithm is employed to build a classifier for the data by analyzing a training set made of tuples of data and their associated labels, and then the classifier is used to predict class labels for new data. As such, because the large size of the datasets produced in Big Data operations, classification algorithms have a large quantity of data to learn from, making them less prone to erroneous classification of new data.
+In the context of knowledge learning, \ac{ml} techniques come as an important addition to the data processing step. An example of that is the \textit{Classification} method. Classification is described by a two-step process: a classification algorithm is employed to build a classifier for the data by analyzing a training set made of tuples of data and their associated labels, and then the classifier is used to predict class labels for new data. As such, because the large size of the datasets produced in Big Data operations, classification algorithms have a large quantity of data to learn from, making them less prone to erroneous classification of new data.
 
-The conjunction between \ac{ml} and privacy-preserving comes from the need to do knowledge learning over large datasets, while also maintaining protection over the privacy of the data, without degrading the quality of data by using anonymization techniques.
+The conjunction between \ac{ml} and privacy-preserving techniques comes from the need to do knowledge learning over large datasets, while also maintaining protection over the privacy of the data, without degrading the quality of data by using anonymization techniques.
 
-In the field of \ac{ml}, we can identify a number of algorithms that can be used in knowledge learning. In Table \ref{table:ppml1}, we list some of them, giving a brief description, and identifying a privacy-preserving technique that has been implemented with it.
+In the field of \ac{ml}, we can identify a number of algorithms that can be used in knowledge learning. In Table \ref{table:ppml1}, we list some of them, giving a brief description, and identifying a privacy-preserving technique that has been implemented with it in the literature.
 
-\begin{table}[H]
+\begin{table}[htp]
 \centering
 \caption{\ac{ppml} algorithms.}
 \label{table:ppml1}
@@ -18,10 +18,10 @@ In the field of \ac{ml}, we can identify a number of algorithms that can be used
 \hline
 \textbf{Machine Learning Algorithm} & \textbf{Short summary} & \textbf{Privacy-Preserving Technique} 
 & \textbf{Reference} \\ \hline
-\acs{dt} & Protocol for distributed learning of decision-tree classifiers. & \ac{smpc} & \cite{brickell2009privacy} \\ \hline
+\acs{dt} & Protocol for distributed learning of Decision-Tree classifiers. & \ac{smpc} & \cite{brickell2009privacy} \\ \hline
 Naive Bayes & Differentially private naive Bayes classifier. Centralized access to the dataset. & \ac{dp} &\cite{vaidya2013differentially} \\ \hline
 \acs{svm}  &Algorithm for \acl{svm} classification over vertically partitioned data. & \ac{smpc} & \cite{yu2006privacy} \\ \hline
-\acs{k-nn}  & Nearest neighbors of records in horizontally distributed data. & \ac{smpc}  & \cite{shaneck2006privacy} \\ \hline
+\acs{k-nn}  & Nearest Neighbors of records in horizontally distributed data. & \ac{smpc}  & \cite{shaneck2006privacy} \\ \hline
 \acs{k-m} & \acl{k-m} clustering based on additive secret sharing. & \ac{smpc}  & \cite{doganay2008distributed} \\\hline
 \acs{lr} & \acl{lr} based on \acl{dp}.    &  \ac{dp} & \cite{chaudhuri2009privacy} \\\hline
 \end{tabular}

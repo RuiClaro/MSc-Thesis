@@ -3,20 +3,14 @@
 \label{sec:DataPrivacy}
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-Information privacy, or Data Privacy, is the relationship between the collection and dissemination of data, and the legal issues surrounding it. It refers to the measures taken in providing individuals with defenses for their personal data.
 
-Privacy is an important field in information security because it gives a person his/her personal space and defines his/her personal private information, giving the person the right to decide which personal information is for sharing and which should be kept confidential. The right to privacy also limits the access that other entities, being them the government or private companies, have to personal data.
+Data Privacy, also known as Information privacy, is the relationship between the collection and dissemination of data, and the legal issues surrounding them. It refers to the measures taken in providing individuals with defenses for their personal data.
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Privacy Definitions}
-\label{ssec:PrivacyDefinitions}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Privacy can be defined as the ability or right that an individual has of protecting his/her personal information and extends the ability or right to prevent invasions on the personal space of said individual \cite{anderson2008security}.
+Privacy is an important field in information security because it gives an individual his/her personal space and defines his/her personal private information, giving the individual the right to decide which information is for sharing and which should be kept confidential. The right to privacy also limits the access that other entities, being them the government or private companies, have to personal data.
 
 
-Privacy can be defined as the ability or right that an individual has of protecting his/her personal information and extends to the ability or right to prevent invasions on the personal space of said individual \cite{anderson2008security}.
-
-One of the prime examples of Privacy applied to information technology problems and mentioned in the literature is related to \ac{emr} \cite{Lu2014}. These records must be handled with extra care because they contain a large number of sensitive information about the patients. The Patient Record Systems should be able to disclose information only to selected personnel, but not all the information about the patient, only what is necessary to proceed in helping the patient. This example illustrates the tension between having access to the data, that can be useful, but at the same time keeping it closed to other users.
+One of the prime examples of Privacy applied to information technology problems mentioned in the literature is related to \ac{emr} \cite{Lu2014}. These records must be handled with extra care because they contain a large number of sensitive information about patients. The Patient Record Systems should be able to disclose information only to selected personnel, but not all the information about the patient, only what is necessary to proceed in helping the patient. This example illustrates the tension between having access to the data, which can be useful, but at the same time keeping them closed to other users.
 
 
 
@@ -31,9 +25,9 @@ New concepts have arisen in recent years for privacy specific protection princip
 
 \item \textit{Unlinkability} is defined as the property that ensures privacy-relevant data cannot be linked across domains that are constituted by a common purpose and context. In other words, multiple actions from the same user/entity must be unlinkable.
 
-\item \textit{Transparency} is defined as the property that ensures all privacy-relevant data processing can be understood and reconstructed at any time. Transparency has to cover not only the actual processing but also the planned processing and after processing to fully know what has happened and which entities were involved. Transparency is related to the principles concerning openness and it is a prerequisite to accountability. The user/entity must know and understand how his/her private data is being handled.
+\item \textit{Transparency} is defined as the property that ensures all privacy-relevant data processing can be understood and reconstructed at any time. Transparency has to cover not only the actual processing but also the planned processing and after processing to fully know what has happened and which entities were involved. Transparency is related to the principles concerning openness and it is a prerequisite to accountability. The individual must know and understand how his/her private data is being handled.
 
-\item \textit{Intervenability} is defined as the property that ensures mediation is possible concerning privacy-relevant data processing, in particular by those persons whose data is being processed. Intervenability is related to the rights of an individual, in a way that the owner of privacy-relevant data must have the means to rectify or erase said data.
+\item \textit{Intervenability} is defined as the property that ensures mediation is possible concerning privacy-relevant data processing, in particular by the people whose data is being processed. Intervenability is related to the rights of an individual, in a way that the owner of privacy-relevant data must have the means to rectify or erase said data.
 
 \end{itemize}
 
@@ -46,14 +40,19 @@ New concepts have arisen in recent years for privacy specific protection princip
 It is also important to mention in the context of this work the current legislation in the \ac{eu} regarding data protection.
 
  The Data Protection Directive\footnote{\url{http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:31995L0046}} is the current law regarding privacy in the \ac{eu} and is in force since 1995.
-More recently a replacement has been proposed and accepted in the \ac{eu}, the \ac{gdpr}\footnote{\url{http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.L_.2016.119.01.0001.01.ENG&toc=OJ:L:2016:119:TOC}}, that will take effect in May 2018. Both these laws are regulated by European entities, namely the \ac{enisa}\footnote{\url{https://www.enisa.europa.eu/}} and the Article 29 Data Protection Working Party\footnote{\url{http://ec.europa.eu/newsroom/just/item-detail.cfm?item_id=50083}}.
+More recently, a replacement has been proposed and accepted in the \ac{eu}, the \ac{gdpr}\footnote{\url{http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.L_.2016.119.01.0001.01.ENG&toc=OJ:L:2016:119:TOC}}, that will take effect in May 2018. Both these laws are advised by European entities, namely the \ac{enisa}\footnote{\url{https://www.enisa.europa.eu/}} for the \ac{gdpr}, and the Article 29 Data Protection Working Party\footnote{\url{http://ec.europa.eu/newsroom/just/item-detail.cfm?item_id=50083}} for the Data Protection Directive.
 
 
- According to \ac{enisa}, \ac{eu} data protection law applies to any processing of personal data \cite{DAcquisto2015}. This personal data is defined as any information related to an identified or identifiable natural person. In the context of Big Data analytics, the focus is more on indirect identification, which translates into three different approaches: \emph{i)} The possibility of isolating some or all records which identify an individual in a dataset; \emph{ii)} The linking of at least two records concerning the same individual in the same database or in different databases; and  \emph{iii)} The possibility to infer the value of an attribute in a dataset from the value of other attributes.
+ According to \ac{enisa}, \ac{eu} data protections law applies to any processing of personal data \cite{DAcquisto2015}. This personal data are defined as any information related to an identified or identifiable natural person. In the context of Big Data analytics, the focus is more on indirect identification, which translates into three different approaches:
+
+\begin{itemize}
+	\item The possibility of isolating some or all records which identify an individual in a dataset.
+	\item The linking of at least two records concerning the same individual in the same database or in different databases.
+	\item The possibility to infer the value of an attribute in a dataset from the value of other attributes.
+\end{itemize}
 
 
-
-Another important cornerstone of \ac{eu} data protection law is the principles relating to data quality:
+Another important cornerstone of \ac{gdpr} is the principles relating to data quality:
 
 \begin{itemize}
 
@@ -67,10 +66,10 @@ Another important cornerstone of \ac{eu} data protection law is the principles r
 
 These three principles together mandate that data processing must be done with the consent of the subject, informing the subject of what is the purpose of the processing, and do not deviate from this purpose without informing the subject.
 
-Finally, and also important to mention in the context of this work, are the rights of the data subject according to the \ac{eu} law. There are two important rights that a subject has: the \textit{right of access} and the \textit{right to object}.
+Finally, and also important to mention in the context of this work, are the rights of the data subject according to the \ac{gdpr}. There are two important rights that a subject has: the \textit{right of access} and the \textit{right to object}.
 The \textit{right of access} ensures that any data subject is entitled to obtain from the data controllers communication of the data that is subjected to processing and to know the logic involved in any processing of data concerning him/her.
 This is particularly relevant in the context of Big Data analytics because it limits technological lock-ins and other competition impediments, and it enhances transparency and trust between users and service providers.
-The \textit{right to object} ensures that data subjects have a right to revoke any prior consent, and to object to the processing of data relating to them, giving to the subject the power to remove himself completely or partially to any data processing mechanisms using his personal data.
+The \textit{right to object} ensures that data subjects have a right to revoke any prior consent, and to object to the processing of data relating to them, giving them the power to remove himself completely or partially to any data processing mechanisms using their personal data.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -79,20 +78,17 @@ The \textit{right to object} ensures that data subjects have a right to revoke a
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-In recent years we can find a number of attacks made to systems that handle personal information. Next are a number of examples found relevant regarding Data Privacy breaches.
+In recent years we can find a number of attacks made to systems that handle personal information. Next are a number of examples regarding Data Privacy breaches.
 
 \begin{itemize}
 	
-    \item Target Pregnancy Leak\footnote{\url{https://www.forbes.com/sites/kashmirhill/2012/02/16/how-target-figured-out-a-teen-girl-was-pregnant-before-her-father-did/\#3001668b6668}}. In 2012, Target, an American retail company, started merging data from user searches and demographics data in order to learn when their customers were pregnant, in order to approach them with a specific advertisement. This is a clear violation of private sensitive information about their customers and their private life.
+	\item \textit{Massachusetts GIC medical encounter database}\footnote{\url{https://techpinions.com/can-you-be-identified-from-anonymous-data-its-not-so-simple/7627}}. In 1997, a researcher from Carnegie Mellon University linked the anonymized database (which contained birth date, sex, and ZIP code) with voter registration and was able to link medical records with individuals.
 
+	\item \textit{AOL search data leak}\footnote{\url{https://techcrunch.com/2006/08/06/aol-proudly-releases-massive-amounts-of-user-search-data}}. In 2006, AOL released to the general public a text file containing search keywords from a large amount of users, intended for research purposes. The users were not identified, but \ac{pii} was present in many of the queries. These queries contained a user \textit{id} attributed by AOL, and an individual could be identified and matched to their account and search history using such information when combined with ``voting lists''.
 
-    \item Netflix Prize\footnote{\url{https://www.wired.com/2009/12/netflix-privacy-lawsuit}}. In 2007, Netflix created a contest to improve their recommendation system. For that, they released a training dataset, with all the personal information regarding customers removed and customer \textit{ids} replaced by randomized \textit{ids}. Later it was shown that it was not enough when a group of researchers linked public information in another movie-rating website (IMDB) with the released dataset and were able to partially de-anonymize the training dataset, compromising the identity of some users.
+	\item \textit{Netflix Prize}\footnote{\url{https://www.wired.com/2009/12/netflix-privacy-lawsuit}}. In 2007, Netflix created a contest to improve their recommendation system. To do that, they released a training dataset, with all the personal information regarding customers removed and customer \textit{ids} replaced by randomized \textit{ids}. Later, it was shown that this was not enough when a group of researchers linked public information in another movie-rating website (IMDb) with the released dataset and were able to partially de-anonymize the training dataset, compromising the identity of some users.
 
-    \item AOL search data leak\footnote{\url{https://techcrunch.com/2006/08/06/aol-proudly-releases-massive-amounts-of-user-search-data}}. In 2006, AOL released to the general public a text file containing search keywords for numerous of their users, intended for research purposes. The users were not identified, but \ac{pii} was present in many of the queries. These queries contained a user \textit{id} attributed by AOL, and an individual could be identified and matched to their account and search history by such information.
-
-
-
-   \item Massachusetts GIC medical encounter database\footnote{\url{https://techpinions.com/can-you-be-identified-from-anonymous-data-its-not-so-simple/7627}}. A researcher from \ac{cmu} linked the anonymized database (which contained birth date, sex, and ZIP code) with voter registration and was able to link medical records with individuals.
+	\item \textit{Target Pregnancy Leak}\footnote{\url{https://www.forbes.com/sites/kashmirhill/2012/02/16/how-target-figured-out-a-teen-girl-was-pregnant-before-her-father-did/\#3001668b6668}}. In 2012, Target, an American retail company, started merging data from user searches and demographics data in order to learn when their customers were pregnant, to approach them with a specific advertisement. This constituted a clear violation of private sensitive information about their customers and their private life.
 
 
 \end{itemize}
