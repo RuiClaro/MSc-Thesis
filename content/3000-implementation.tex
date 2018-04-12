@@ -11,7 +11,8 @@
 
 When building a platform for \ac{ppml}, we must not only consider the traditional steps in data processing mentioned in Section \ref{sec:PrivacyImplicationsPersonalDataProcessing} and in Figure \ref{fig:crisp-dm}, but also have an increased care when preprocessing data to incorporate the cryptographic techniques.
 
-This Chapterdescribes the work that was done in implementing a \ac{ppml} platform. In Section \ref{sec:DatasetsImplementation}, we start off with a description of the datasets chosen to test our platform. Then, we explain the preprocessing that was done to those datasets, in Section \ref{sec:DataPreProcessingImplementation}.
+This Chapter describes the work that was done in implementing a \ac{ppml} platform. In Section \ref{sec:StructureImplementation}, we start off with a description of the structure we followed in implementing and evaluating the platform.
+In Section \ref{sec:DatasetsImplementation}, we offer a description of the datasets chosen to test our platform. Then, we explain the preprocessing that was done to those datasets, in Section \ref{sec:DataPreProcessingImplementation}.
 Section \ref{sec:BaselineImplementation} presents the baseline implementation of the chosen \ac{ml} algorithms, resorting to a widely used \ac{ml} toolkit for Python.
 In Section \ref{sec:ExpandedAlgorithmsImplementation} we detail the implementation of the prediction phase of the algorithms.
 In Section \ref{sec:CryptoDomainImplementation}, we present the cryptographic protocols used, why we used them, and how we implemented them, mentioning which toolkits were used.
@@ -24,6 +25,36 @@ For understanding the applicability of the solution developed, we detail in Sect
  %%%
   %
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Structure}
+\label{sec:StructureImplementation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The process of implementing and testing a \ac{ppml} platform can be achieved in a number of steps. The plan we designed is composed of three steps, each with three processes that are repeated for all steps.
+
+\begin{itemize}
+
+	\item \textbf{Step 1}: Use a toolkit (\textit{scikit-learn}) to implement baseline versions of the chosen \ac{ml} algorithms. Each of the processes were performed in black boxes supplied by the toolkit:
+	\begin{enumerate}
+		\item Compute the model using the training set.
+		\item Use the model to predict the labels of the testing set.
+		\item Evaluate the performance of the model by comparing predicted labels with the real ones.
+	\end{enumerate}
+	\item \textbf{Step 2}: Write scripts implementing the \ac{ml} algorithms that explicitly contain all the equations for the processes described above.
+	\item \textbf{Step 3}: Rewrite the scripts from Step 2 using cryptographic techniques to perform the necessary computations, for all the processes described above.
+\end{itemize}
+
+It is important to mention that the processes in Steps 2 and 3 where implemented in reverse order, not only because training is more complex that prediction, which in turn is more complex that evaluation, but also because this new ordering matches better the purpose and logic of implementing them using cryptographic techniques for privacy-preserving purposes. Figure \ref{fig:steps} presents a visual representation of the structure we followed, and show what was left for future work.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.80\textwidth]{images/ImplementationSteps.pdf}
+    \caption{Steps and Processes of the implementation.}
+    \label{fig:steps}
+ \end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input content/3010-implementation.tex
 \input content/3020-use_case.tex
