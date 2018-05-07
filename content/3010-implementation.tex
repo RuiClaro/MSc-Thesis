@@ -7,12 +7,12 @@
 \label{sec:DatasetsImplementation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-For running the experiments, we used datasets that are normally considered in the literature, namely the Breast Cancer Wisconsin Diagnostic dataset\footnote{\url{https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)}}, the Pima Indians Diabetes dataset\footnote{\url{https://archive.ics.uci.edu/ml/datasets/pima+indians+diabetes}}, the Credit Approval dataset\footnote{\url{http://archive.ics.uci.edu/ml/datasets/credit+approval}}, and the Adult Income dataset \footnote{\url{https://archive.ics.uci.edu/ml/datasets/adult}}. Table \ref{table:datasets} presents a brief description of each dataset.
+For running the experiments, we used datasets that are normally considered in the literature, namely the \emph{Breast Cancer Wisconsin Diagnostic} dataset\footnote{\url{https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)}}, the \emph{Pima Indians Diabetes} dataset\footnote{\url{https://archive.ics.uci.edu/ml/datasets/pima+indians+diabetes}}, the \emph{Credit Approval} dataset\footnote{\url{http://archive.ics.uci.edu/ml/datasets/credit+approval}}, and the \emph{Adult Income} dataset \footnote{\url{https://archive.ics.uci.edu/ml/datasets/adult}}. Table \ref{table:datasets} presents a brief description of each dataset, and the number of features after the preprocessing techniques presented in Subsection \ref{sec:DataPreProcessingImplementation}.
 
 
 \begin{table}[ht]
 \centering
-\caption{Datasets used in the evaluation of \acs{bard}. Healthcare (Pima Indians Diabetes and Breast Cancer Wisconsin), Finance (Credit Approval) and Governance (Adult Income).}
+\caption{Datasets used in the evaluation of \acs{bard}.}
 \label{table:datasets}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -32,14 +32,14 @@ Adult Income            & Governance       & 48842              & 14            
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Although our data is obtained from publicly available data sources, some preprocessing on the data is still required.
-For example, all datasets contain missing values on some of the entries, which requires some attention. Another example is the existence of categorical data that some \ac{ml} algorithms cannot process directly. We now describe some of the techniques we used in the data preparation phase for the datasets described in Table \ref{table:datasets}.
+For example, the existence of categorical data, that some \ac{ml} algorithms cannot process directly, must be addressed. We now describe some of the techniques we used in the data preparation phase for the datasets described in Table \ref{table:datasets}.
 
 \begin{itemize}
     
 
-	\item\textbf{One-hot Encoding}\cite{harris2010digital} was initially used in digital circuits in order to determine the state of a state machine without using a decoder. The binary code is converted in a group of bits in which only one bit can have the value high ($1$), and all the others low ($0$). For example, the binary $110$ is converted to $01000000$.
+	\item\textbf{One-hot Encoding}\cite{harris2010digital} was initially used in digital circuits in order to determine the state of a state machine without using a decoder. The binary code is converted in a group of bits in which only one bit can have the value high ($1$), and all the others low ($0$).
 	In \ac{ml}, we apply this technique to deal with the problems created in using datasets with categorical (or nominal) data. Most \ac{ml} algorithms require numerical representations in the data. A solution can be to assign an integer number to each different value present in the data, but this leads to the model assuming a natural ordering between categories that may not exist.
-	Using one-hot encoding in categorical data allows us to circumvent this problem, creating additional binary variables for each unique value, e.g., if a variable describing pets has the values ``dog'', ``cat'' and ``fish'', after encoding, three more variables will be added to the dataset, each representing a possible value. Then, a high ($1$) will be placed on the binary variable that represents the original value, and low ($0$) on all the others. Using the pets example, if the original value was ``dog'', the resulting three binary variables will be high on the binary variable representing ``dog'', and low on the other two (``dog'' becomes $(1,0,0)$).
+	Using one-hot encoding in categorical data allows us to circumvent this problem, creating additional binary variables for each unique value, e.g., if a variable describing pets has the values ``dog'', ``cat'' and ``fish'', after encoding, three more variables will be added to the dataset, each representing a possible value. Then, a high ($1$) will be placed on the binary variable that represents the original value, and low ($0$) on all the others. Using the pets example, if the original value was ``dog'', the resulting three binary variables will be high on the binary variable representing ``dog'', and low on the other two, i.e. ``dog'' becomes $(1,0,0)$.
 
 	\item\textbf{Feature Scaling} is a technique to normalize the range of data. For some \ac{ml} algorithms, having a broad range of values in one of the features may cause this feature to govern the modeling. There are different ways of achieving this, for example, \textit{rescaling}, where the range of values is scaled to a target range (usually $[0,1]$ or $[-1,1]$), or \textit{standardization}, where the features are rescaled so that they have the properties of a standard normal distribution, i.e. mean average equal to $0$ and standard deviation equal to $1$.
 
@@ -47,37 +47,42 @@ For example, all datasets contain missing values on some of the entries, which r
 
 \end{itemize}
 
-In our implementation, we used one-hot encoding in the Adult Income dataset and in the Credit Approval dataset. These two datasets contain categorical features that required the use of encoding to be processed by the \ac{ml} algorithms.
+In our implementation, we used one-hot encoding in the \emph{Adult Income} dataset and in the \emph{Credit Approval} dataset. These two datasets contain categorical features that required the use of encoding to be processed by the \ac{ml} algorithms.
 
-In the Adult Income dataset, we have multiple examples of categorical features, namely the \textit{work-class}, \textit{education}, \textit{marital-status}, \textit{occupation}, \textit{relationship}, \textit{race}, \textit{sex} and \textit{native-country}. These were all encoded so that only numerical features remained, causing a large growth on the number of features, going from the initial $14$ to $108$.
-In the Credit Approval dataset, we encoded all the non-numerical features, changing the number of features from $15$ to $51$.
+In the \emph{Adult Income} dataset, we have multiple examples of categorical features, namely the \textit{work-class}, \textit{education}, \textit{marital-status}, \textit{occupation}, \textit{relationship}, \textit{race}, \textit{sex} and \textit{native-country}. These were all encoded so that only numerical features remained, causing a large growth on the number of features, going from the initial $14$ to $108$.
+In the \emph{Credit Approval} dataset, we encoded all the non-numerical features, changing the number of features from $15$ to $51$.
 Feature scaling was used in all of the datasets, in order to reduce the errors caused by wide ranges. We used rescaling of all values to numbers between $0$ and $1$.
 
-Besides the techniques mentioned above, it was also necessary to deal with the missing values that existed in the datasets. These values must be dealt with, since many \ac{ml} algorithms cannot work with them. So, for the numerical features, we replaced those missing values with the median of the other existing values. In the case of the categorical features, the missing values are considered as another valid value for that feature, in order to make the calculation of one-hot encoding to the whole dataset easy. 
+Besides the techniques mentioned above, it was also necessary to deal with the missing values that existed in the datasets. So, for the numerical features, we replaced those missing values with the median of the other existing values. In the case of the categorical features, the missing values are considered as another valid value for that feature, in order to make the calculation of one-hot encoding to the whole dataset easy. 
 
-Finally, for our setup we required a validation and a testing set, which some of the datasets did not contain originally. We divided those datasets into training, validation and testing sets, using a proportion of $70/15/15$. When a testing set already existed, the validation set was created from the training set, and forced to have the same size as the testing set.
+Finally, for our setup we required a validation and a testing set, which some of the datasets did not contain originally. We divided those datasets into training, validation and testing sets, using a proportion of $70/15/15$, respectively. In the cases where a testing set already existed, the validation set was created from the training set, and forced to have the same size as the testing set.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Baseline}
+\section{ML Algorithms}
 \label{sec:BaselineImplementation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The baseline approach consists of setting up reference values so that meaningful comparisons can be achieved. For understanding the overhead created by privacy-preserving technologies, we implemented the baseline using the publicly available \ac{ml} toolkit for Python, \textit{scikit-learn}\footnote{\url{http://scikit-learn.org}}.
 
-In order to understand and explain what was done and why, next we detail the \ac{ml} algorithms that were implemented in the baseline and in sections \ref{sec:ExpandedAlgorithmsImplementation} and \ref{sec:CryptoDomainImplementation}.
+In order to understand and explain what was done and why, next we detail the \ac{ml} algorithms that were implemented in the baseline and in Section \ref{sec:CryptoDomainImplementation}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\acl{dt}}
 \label{ssec:DecisionTrees}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ac{dt} are a decision support tool that uses a tree-like graph to represent decisions and possible outcomes of those decisions. It is an algorithm that is composed of conditional control sequences. \ac{dt} learning uses \ac{dt} as a predictive model for classification.
+\ac{dt} \cite{quinlan1987simplifying} are a decision support tool that uses a tree-like graph to represent decisions and possible outcomes of those decisions. It is an algorithm that is composed of conditional control sequences. \ac{dt} learning uses \ac{dt} as a predictive model for classification.
 These \ac{dt} are composed of nodes and leaves. The nodes represent decisions to take, or more specifically, thresholds that a feature is compared against in order to decide which branch of the tree to follow. The leaves represent class labels.
 
-To build a \ac{dt} classifier there are a number of algorithms that can be used, each with different approaches and benefits. Examples include ID3, C4.5, C5.0 and CART \cite{strobl2009introduction}. These algorithms focus on maximizing one or more metrics, such as Gini impurity or information gain.
+To build a \ac{dt} classifier there are a number of algorithms that can be used, each with different approaches and benefits. Examples include ID3, C4.5, C5.0 and CART \cite{strobl2009introduction}. These algorithms focus on maximizing one or more metrics, such as Gini impurity or information gain \cite{rokach2005top}.
 
-The classification process of a sample in \ac{dt} is an intuitive method. Each node of the tree has the information on which feature in the sample to compare against the threshold. Classifying a sample in \ac{dt} is done by traversing the tree starting at the top, comparing the values selected on each node with its respective threshold, and, depending on the result, choosing one child node or the other. When a leaf is reached, a class label is retrieved from the leaf and assigned to the sample, ending the classification process.
+The classification process of a sample in \ac{dt} is an intuitive method. Each node of the tree has the information on which feature in the sample to compare against the threshold. Classifying a sample in \ac{dt} is done by traversing the tree starting at the top, comparing the values selected on each node with its respective threshold, and, depending on the result, choosing one child node or the other. When a leaf is reached, a class label is retrieved from the leaf and assigned to the sample, ending the classification process. At each tree node, a decision is computed using:
+\begin{equation}
+\label{eq:dt}
+f_{\text{DT}}(x_{i}) = x_{i} \stackrel{?}{\geq} \theta_{j}
+\end{equation}
+where $x_i$ is the feature value of interest of the testing sample and $\theta_{j}$ is the decision threshold of node $j$. If the output is 0, the left hand child is selected; if it is 1, the right hand child is selected.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -85,11 +90,10 @@ The classification process of a sample in \ac{dt} is an intuitive method. Each n
 \label{ssec:SuportVectorMachines}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ac{svm} are supervised learning models used for classification and regression analysis. A \ac{svm} model represents the examples as points in space, mapped so that the margin between the two classes for the data is as wide as possible. The vectors that define this margin, or \textit{hyperplane}, are called support vectors. For classifying new samples, one maps them in that space and predicts which class they belong to based on which side of the gap they lie.
+\ac{svm} \cite{cortes1995support} are supervised learning models used for classification and regression analysis. A \ac{svm} model represents the examples as points in space, mapped so that the margin between the two classes for the data is as wide as possible. The vectors that define this margin, or \textit{hyperplane}, are called support vectors. For classifying new samples, they are mapped in that space and predicts which class they belong to based on which side of the gap they lie.
 
-For calculating the \ac{svm} for linear classification, and in the case of a \textit{hard-margin}, i.e., when the training data is linearly separable, we select two parallel hyperplanes so that the distance between them is as large as possible.
-These hyperplanes can be described by the Equations in \ref{eq:SVM1}.
-
+For calculating the \ac{svm} for linear classification, and in the case of a \textit{hard-margin}, i.e. when the training data is linearly separable, we select two parallel hyperplanes so that the distance between them is as large as possible.
+These hyperplanes can be described by the Equations (\ref{eq:SVM1}).
 \begin{equation}
 \label{eq:SVM1}
 \begin{split}
@@ -99,9 +103,8 @@ These hyperplanes can be described by the Equations in \ref{eq:SVM1}.
 \end{equation}
 
 where $\vec{w}$ is the normal vector to each hyperplane, $\vec{x}$ is the training set and $b$ is a scalar number.
-To maximize the distance between hyperplanes, we minimize the value of $||\vec{w}||$ subject to ${\displaystyle y_{i}({\vec {w}}\cdot {\vec {x}}_{i}-b)\geq 1,} for$ ${\displaystyle i=1,\,\ldots ,\,n} $, where the $y_{i}$ are either $1$ or $-1$, depending on the class label, and $n$ is the number of samples in the training set.
-
-In the case where the data is not linearly separable (\textit{soft-margin}), we minimize instead the \textit{hinge} loss function given by the Equation in \ref{eq:SVM2}.
+To maximize the distance between hyperplanes, we minimize the value of $||\vec{w}||$ subject to ${\displaystyle y_{i}({\vec {w}}\cdot {\vec {x}}_{i}-b)\geq 1,}$ for ${\displaystyle i=1,\,\ldots ,\,n} $, where the $y_{i}$ are either $1$ or $-1$, depending on the class label, and $n$ is the number of samples in the training set.
+In the case where the data is not linearly separable (\textit{soft-margin}), we minimize instead the \textit{hinge} loss function given by the Equation (\ref{eq:SVM2}).
 
 \begin{equation}
 \label{eq:SVM2}
@@ -110,7 +113,7 @@ f(w,\lambda)={\displaystyle \left[{\frac {1}{n}}\sum _{i=1}^{n}\max \left(0,1-y_
 
 where the parameter $\lambda$ determines the tradeoff between increasing the margin size and ensuring that the ${\vec {x}}_{i}$ lie on the correct side of the margin.
 
-For \ac{svm} non-linear classification, we employ a \textit{kernel trick}, in which the dot product is replaced by a non-linear kernel function. The most used kernels are mentioned below.
+For \ac{svm} non-linear classification, we use a \textit{kernel trick} \cite{scholkopf2001kernel}, in which the dot product is replaced by a non-linear kernel function. The most used kernels are:
 
 \begin{itemize}
     
@@ -122,39 +125,41 @@ For \ac{svm} non-linear classification, we employ a \textit{kernel trick}, in wh
 \end{itemize}
 
 
-The classification of new samples in \ac{svm} is done using the scoring function in \ref{eq:SVM3}, where each testing sample $x$ is attributed to a prediction label.
+The classification of new samples in \ac{svm} is done using the scoring function in (\ref{eq:SVM3}), where each testing sample $x$ is attributed to a prediction label.
 
 \begin{equation}
 \label{eq:SVM3}
-f(x)=\sum_{i=1}^m \alpha_i K (x_{SV}^{(i)},x)+b
+f_{\text{SVM}}(x)=\sum_{i=1}^m \alpha_i K (x_{SV}^{(i)},x)+b
 \end{equation}
 where $\alpha_i$ is the coefficient associated with the support vector $x_{SV}^{(i)}$, $K$ is the kernel function chosen, and $b$ is a scalar number.
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{\textit{k}-Nearest Neighbors}
-\label{ssec:kNearestNeighbors}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \subsection{\textit{k}-Nearest Neighbors}
+% \label{ssec:kNearestNeighbors}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The \ac{k-nn} learning algorithm is based on the principles of pattern recognition. This algorithm is among the simplest of all \ac{ml} algorithms since it does not require a training step. To classify a new sample, we calculate the \ac{ed} of it with the training samples, and discover the \textit{k} samples that are closer to it. Then, by a majority vote of its \textit{k} neighbors, the class label is assigned to the new sample.
-
+% The \ac{k-nn} \cite{altman1992introduction} learning algorithm is based on the principles of pattern recognition. This algorithm is among the simplest of all \ac{ml} algorithms since it does not require a training step. To classify a new sample, we calculate the \ac{ed} of it with all the other samples, and discover the \textit{k} samples that are closer to it. Then, by a majority vote of its \textit{k} neighbors, the new sample is assigned to the class most common among its \textit{k} nearest neighbors. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\textit{k}-Means}
 \label{ssec:kMeans}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ac{k-m} clustering is a method commonly used to partition a dataset into \textit{k} groups. It proceeds by selecting \textit{k} initial cluster centers (centroids) and then iteratively refining them. This refining is done in two distinct steps:
+\ac{k-m} clustering \cite{lloyd1982least} is a method commonly used to partition a dataset into \textit{k} groups. It proceeds by selecting \textit{k} initial cluster centers (centroids) and then iteratively refine them. This refining is done in two distinct steps:
 
 \begin{enumerate}
-    \item Each instance is assigned to its closest cluster. This is done by calculating the Euclidean Distance between each instance and each cluster center. Then, the lowest distance indicates which cluster the instance must be assigned to.
+    \item Each instance is assigned to its closest cluster. This is done by calculating the \ac{ed} between each instance and each cluster center. Then, the lowest distance indicates which cluster the instance must be assigned to.
     \item Each cluster center is updated to be the mean of all the instances assigned to it.
 \end{enumerate}
 The algorithm stops when the centroids no longer change position. This means that, depending on the data, it is not guaranteed that the optimal solution is found.
 
-The classification of each testing sample is done similarly to step 1), i.e., by computing the \ac{ed} of the new sample with each centroid, discovering the cluster whose centroid is closest to it. The label of the cluster becomes the predicted label of the sample.
-
-
+The classification of each testing sample is done similarly to step 1., i.e. by computing the \ac{ed} of the new sample with each centroid, discovering the cluster whose centroid is closest to it. The label of the cluster becomes the predicted label of the sample. Equation (\ref{eq:kmeans}) describes the prediction:
+\begin{equation}
+\label{eq:kmeans}
+f_{\text{k-M}}(x)= \operatorname*{argmin}_C d_{E}(x,C_j)
+\end{equation}
+where $C$ are the centroids of each cluster, $x$ is the testing sample and $d_E$ is the \ac{ed}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\acl{lr}}
@@ -162,16 +167,16 @@ The classification of each testing sample is done similarly to step 1), i.e., by
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\ac{lr} is a regression model in which the dependent variable is categorical. This variable is usually binary, i.e., it can only take two values, usually $0$ or $1$ that represents opposite outcomes such as ``win/lose'' or ``healthy/sick''.
+\ac{lr} \cite{walker1967estimation} is a regression model in which the dependent variable is categorical. This variable is usually binary, i.e. it can only take two values, usually $0$ or $1$ that represents opposite outcomes such as ``win/lose'' or ``healthy/sick''.
 This binary logistic model is used to estimate the probability of a binary response based on one or more variables.
-To define \ac{lr}, one must begin with the logistic function, which in turn is given by Equation \ref{eq:LR1}.
+To define \ac{lr}, one must begin with the logistic function, which in turn is given by Equation (\ref{eq:LR1}).
 
 \begin{equation}
 \label{eq:LR1}
 \sigma (t)={\frac {e^{t}}{e^{t}+1}}={\frac {1}{1+e^{-t}}}
 \end{equation}
 
-where $t$ is the input. If we express $t$ as $t=\beta _{0}+\beta _{1}x$, we can write the logistic function as in Equation \ref{eq:LR2}.
+where $t$ is the input. If we express $t$ as $t=\beta _{0}+\beta _{1}x$, we can write the logistic function as in Equation (\ref{eq:LR2}).
 
 \begin{equation}
 \label{eq:LR2}
@@ -179,47 +184,21 @@ F(x)={\frac {1}{1+e^{-(\beta _{0}+\beta _{1}x)}}}
 \end{equation}
 
 
-To classify testing samples we use Equation \ref{eq:LR3} to attribute a prediction label to each sample $x$.
+To classify testing samples we use Equation (\ref{eq:LR3}) to attribute a prediction label to each sample $x$.
 
 \begin{equation}
 \label{eq:LR3}
-f(x)=\beta_0+\sum_{i=1}^m \beta_i x_i
+f_{\text{LR}}(x)=\beta_0+\sum_{i=1}^m \beta_i x_i
 \end{equation}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Expanded Algorithms}
-\label{sec:ExpandedAlgorithmsImplementation}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-Taking into account that the baseline implementation was done using \textit{scikit-learn}, we could not explicitly observe the operations done in the toolkit since they were made in a ``black box'' mode. This could lead to an inability to distinguish prediction errors caused by the privacy-preserving systems and caused by the implementation of the prediction equations. To solve this problem, we implemented the evaluation prediction processes of the \ac{ml} algorithms without using the toolkit, i.e., directly from the algorithm equations.
-
-We successfully recreated the prediction processes by retrieving from the toolkit the specifications for each \ac{ml} model.
-
-\begin{itemize}
-	
-    \item For the \ac{dt}, we needed to retrieve all of the model, i.e., the binary tree, so that we could traverse it according to each testing sample, comparing the feature with the threshold of each node, and choosing which branch of the tree to follow, until a label is reached. 
-
-    \item In the case of \ac{svm}, we retrieved from the toolkit all the coefficients needed to compute Equation \ref{eq:SVM3}, namely the support vectors $x_{SV}^{(i)}$, the $\alpha_i$ coefficients for each support vector, the kernel function $k({\vec {x_{i}}},{\vec {x_{j}}})$ that was used(linear or polynomial), the exponent for the polynomial kernel if needed, and the scalar value $b$.
-
-    \item In the case of \ac{k-nn}, since training does not exist, there was no need to use the toolkit, so no information was retrieved from it, and it was not required to do an expanded version of the algorithm.
-
-    \item For \ac{k-m}, we just required from the toolkit the centroids for each cluster, as well as the prediction labels associated with each one. The classification of each testing sample was done by discovering which centroid was closest to it.
-
-    \item In \ac{lr}, we extracted the $\beta=(\beta_0,\beta_1,...,\beta_n)$ that appear in Equation \ref{eq:LR3}. $\beta_0$ is the intercept from the linear regression, and $\beta_i$ are each regression coefficient that are multiplied by each feature of the sample.
-
-\end{itemize}
-
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Cryptographic Domain}
+\section{Privacy-preserving Algorithms}
 \label{sec:CryptoDomainImplementation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In the final step of our implementation, we made adjustments to the evaluation processes of the \ac{ml} algorithms discussed above, so that we could apply two privacy-preserving techniques, namely \ac{gc} (described in Section \ref{ssec:GarbledCircuits}) and \ac{he} (described in Section \ref{ssec:HomomorphicEncryption}).
+In the final step of our implementation, we made adjustments to the evaluation processes of the \ac{ml} algorithms discussed above, so that we could apply two privacy-preserving techniques, namely \ac{gc}, described in Section \ref{ssec:GarbledCircuits}, and \ac{he}, described in Section \ref{ssec:HomomorphicEncryption}.
 These two techniques offer different means to obtain privacy-preserving computations, and we must consider them when choosing which \ac{ml} algorithm to use with each cryptographic algorithm. \ac{gc} builds ciphered Boolean circuits, which means that most of the computations are possible to implement on them. However, arithmetic computations require a large number of logic gates, creating an overhead that makes \ac{gc} very slow. So, for some of the \ac{ml} algorithms, we used a \ac{he} system, since it offers arithmetic operations as a core operation. Due to these constraints, we decided to adapt the \ac{dt} and \ac{k-m} to be evaluated using \ac{gc}, and \ac{svm} and \ac{lr} to be evaluated using \ac{he}.
 
 
@@ -228,22 +207,19 @@ These two techniques offer different means to obtain privacy-preserving computat
 \label{ssec:GCandDT}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The process of evaluating a \ac{dt} in a privacy-preserving context is similar to evaluating in the usual manner, as described in \ref{ssec:DecisionTrees}. The main differences are the use of ciphered Boolean circuits instead of operations, i.e., basic operations such as additions, comparisons, are replaced with logic gates, and the evaluation of the \ac{dt} involves evaluating every single node in it. Although the use of \ac{gc} effectively hides the \ac{dt} evaluation process from unwanted parties, it does not hide the sparseness of the \ac{dt}, which could leak some relevant information about the original data, meaning that the use of expanded \ac{dt} is preferable for preserving privacy.
+The process of evaluating a \ac{dt} in a privacy-preserving context is similar to evaluating in the usual manner, as described in Section \ref{ssec:DecisionTrees}. The main differences are the use of ciphered Boolean circuits instead of operations, i.e. basic operations such as additions, comparisons, are replaced with logic gates, and the evaluation of the \ac{dt} involves evaluating every single node in it. Although the use of \ac{gc} effectively hides the \ac{dt} evaluation process from unwanted parties, it does not hide the sparseness of the \ac{dt}, which could leak some relevant information about the original data, meaning that the use of expanded \ac{dt} is preferable for preserving privacy.
 
 
 In Figure \ref{fig:DTNode} we show how the computations are done inside each node of the \ac{dt}. Each node contains the \textit{featureID}, the ID of the feature to be selected from the sample to be classified, and the \textit{threshold}, the value that is compared against the selected feature and that decides which branch of the tree to follow next. The first \ac{mux} gate selects from the sample the feature to be compared. The greater-than gate compares the selected feature with the threshold. Then, the value from the comparison ($0$ or $1$) is used as a selection bit in the second \ac{mux} to choose the \textit{next\textunderscore featureID} and \textit{next\textunderscore threshold} for the next node in the tree. 
-
-
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.60\textwidth]{images/decision_tree_node.pdf}
+  \includegraphics[width=0.50\textwidth]{images/decision_tree_node.pdf}
   \caption{Boolean circuit of each node in a \acs{dt}.}
   \label{fig:DTNode}
 \end{figure}
 
 
 It is also important to mention that the trees that we used are always complete, i.e. the number of nodes $n$ is always the maximum possible, and it can be defined as $n=2^{h+1}-1$, where $h$ is the \textit{height} of the tree. We can see in Figure \ref{fig:ExpansionBinaryTrees} the implications of this expansion of the binary trees.
-
 \begin{figure}[ht]
 	\centering
 	\mbox{
@@ -272,20 +248,20 @@ In Figure \ref{fig:Tree} we have a binary \ac{dt} with $height=3$ and with diffe
 
 
 
-As in the previous section, evaluating the \ac{k-m} algorithm in a privacy-preserving manner is similar to evaluating in the usual manner. We took the operations in the prediction step and transformed them in Boolean circuits, with logic gates such as multiplexers, adders, etc.
+As in the previous section, evaluating the \ac{k-m} algorithm in a privacy-preserving manner is similar to evaluating it in the usual manner. We took the operations in the prediction step and transformed them into Boolean circuits, with logic gates such as multiplexers, adders, etc.
 
-In Figure \ref{fig:kmeans} we show how we designed the circuit to represent the \ac{k-m} prediction. The \ac{ed} blocks represent the operations to calculate distances between the sample and each centroid provided by the \ac{k-m} model. The ARGMIN block determines which of the \ac{ed} is the smallest.
+In Figure \ref{fig:kmeans} we show how we designed the circuit to represent the \ac{k-m} prediction. The $d_E$ blocks represent the operations to calculate the \ac{ed} between the sample and each centroid provided by the \ac{k-m} model. The ARGMIN block determines which of the \ac{ed} is the smallest.
 
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.60\textwidth]{images/k-means.pdf}
+  \includegraphics[width=0.50\textwidth]{images/k-means.pdf}
   \caption{Boolean Circuit of the prediction of the \ac{k-m} algorithm.}
   \label{fig:kmeans}
 \end{figure}
 
 
-As shown in \ref{ssec:gcandKM}, there is an exponential decrease in performance when the number of clusters increases or the sample has a larger number of features. This is caused by the multiplications necessary for computing the \ac{ed}. Usually, this is a reason to use \ac{he} instead, but the algorithm to implement comparisons using \ac{he} is very complex to implement and requires considerable computational power \cite{blake2004strong}.
+As shown in the results in Section \ref{ssec:gcandKM}, there is an exponential decrease in performance when the number of clusters increases or the sample has a larger number of features. This is caused by the multiplications necessary for computing the \ac{ed}. Usually, this is a reason to use \ac{he} instead, but the algorithm to implement comparisons using \ac{he} is very complex to implement and requires considerable computational power \cite{blake2004strong}.
 
 
 
@@ -295,14 +271,13 @@ As shown in \ref{ssec:gcandKM}, there is an exponential decrease in performance 
 \label{ssec:HEandLR}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-For the \ac{lr} algorithm, in order to use a \ac{fhe} system, the prediction function described in \ref{eq:LR3} must be converted to:
+For the \ac{lr} algorithm, in order to use a \ac{fhe} system, the prediction function described in (\ref{eq:LR3}) must be converted to:
 \begin{equation}
 \label{eq:he_lr1}
 f_{FHE}(x) = D_k \Bigg( E_k(\beta_0) + \sum_{i=0}^m E_k(\beta_i) \centerdot E_k(x_i) \Bigg)
 \end{equation}
 where $E_k$ represents the encryption operation and $D_k$ represents the decryption operation using the key $k$.
-
-Like in the previous subsection, converting it to be computed using a \ac{phe} system is equally straightforward, but this can only be done under the same two assumptions: 1) the data to be evaluated ($x$) and the model parameters ($\beta_0,\beta_1,\ldots,\beta_m$) must come from two different parties, and 2) the owner of the model parameters must be the one processing the data. Under these assumptions, the linear prediction function for a multiplicative \ac{phe} system becomes:
+Converting Equation (\ref{eq:he_lr1}) to be computed using a \ac{phe} system is straightforward, but this can only be done under two assumptions: 1) the data to be evaluated ($x$) and the model parameters ($\beta_0,\beta_1,\ldots,\beta_m$) must come from two different parties, and 2) the owner of the model parameters must be the one processing the data. Under these assumptions, the linear prediction function for a multiplicative \ac{phe} system becomes:
 \begin{equation}
 \label{eq:he_lr2}
 f_{PHE}(x) = D_k \Bigg(E_k(\beta_0) \centerdot \prod_{i=1}^m E_k(x_i)^{\beta_i}         \Bigg)
@@ -314,7 +289,7 @@ f_{PHE}(x) = D_k \Bigg(E_k(\beta_0) \centerdot \prod_{i=1}^m E_k(x_i)^{\beta_i} 
 \label{ssec:HEandSVM}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-For the \ac{svm} algorithm, we only considered the linear kernel, as it simplifies the scoring function. The Equation \ref{eq:SVM3} is then simplified to the following:
+For the \ac{svm} algorithm, we only considered the linear kernel, as it simplifies the scoring function. The Equation (\ref{eq:SVM3}) is then simplified to the following:
 \begin{equation}
 \label{eq:he_svm1}
 f(x)=\sum_{i=1}^m \alpha_i x_{SV}^{(i)}x+b = \sum_{i=1}^m \alpha_i \sum_{j=1}^n x_j x_{SV}^{(i,j)} + b
@@ -325,8 +300,7 @@ To compute this function using a \ac{fhe} system, we must convert it to:
 f_{FHE}(x) = D_k\Bigg( \sum_{i=1}^m E_k(\alpha_i) \centerdot \sum_{j=i}^n E_k(x_j) \centerdot E_k(x_{SV}^{(i,j)}) + E_k(b)\Bigg)
 \end{equation}
 where $E_k$ represents the encryption operation and $D_k$ represents the decryption operation using the key $k$.
-
-Converting Equation \ref{eq:he_svm2} to be computed using a \ac{phe} system is equally straightforward, but this must be done under two assumptions: 1) the data to be evaluated ($x$) and the model parameters ($\alpha_i$,$x_{SV}^{(i,j)}$,$b$) must come from two different parties, and 2) the owner of the model parameters must be the one processing the data. Under these assumptions, the scoring function for a multiplicative \ac{phe} system becomes:
+Like in the previous Subsection, converting it to be computed using a \ac{phe} system is equally straightforward, but this must be done under the same two assumptions: 1) the data to be evaluated ($x$) and the model parameters ($\alpha_i$,$x_{SV}^{(i,j)}$,$b$) must come from two different parties, and 2) the owner of the model parameters must be the one processing the data. Under these assumptions, the scoring function for a multiplicative \ac{phe} system becomes:
 \begin{equation}
 \label{eq:he_svm3}
 f_{FHE}(x) = D_k\Bigg( \prod_{i=1}^m \bigg(\prod_{j=1}^n E_k(x_i)^{x_{SV}^{(i,j)}} \bigg)^{\alpha_i} \centerdot E_k(b) \Bigg)

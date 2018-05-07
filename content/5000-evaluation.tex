@@ -9,7 +9,7 @@
 \label{ch:Evaluation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this Chapterwe describe the experiments that were conducted regarding the implementation of \ac{ml} algorithms using privacy-preserving techniques. In Section \ref{sec:EvaluationMetrics}, we present the metrics used in the experiments. Section \ref{sec:ExperimentalSetup} describes the setup that was used to run the experiments, as well as the toolkits used and the parameters chosen for those toolkits. In Section \ref{sec:ExperimentalResultsBaseline}, we present the best baseline results obtained for the datasets in question and in Section \ref{sec:ExperimentalResultsComparisonBaseline} we compare those results with the ones obtained using the toolkits. In Section \ref{sec:ExperimentalResultsExecutionTime}, we present the execution times for the combinations of \ac{ml} algorithms and privacy-preserving techniques that were implemented, and in Section \ref{sec:CommunicationCosts} we present the communication costs for those combinations. Finally, in Section \ref{sec:ExperimentalResultsConclusion} we make some final observations about the results obtained.
+In this Chapter we describe the experiments that were conducted regarding the implementation of \ac{ml} algorithms using privacy-preserving techniques made to prove the concept of the platform. In Section \ref{sec:EvaluationMetrics}, we present the metrics used in the experiments. Section \ref{sec:ExperimentalSetup} describes the setup that was used to run the experiments, as well as the toolkits used and the parameters chosen for those toolkits. In Section \ref{sec:ExperimentalResultsBaseline}, we present the best baseline results obtained for the datasets in question and in Section \ref{sec:ExperimentalResultsComparisonBaseline} we compare those results with the ones obtained using the toolkits. In Section \ref{sec:ExperimentalResultsExecutionTime}, we present the execution times for the combinations of \ac{ml} algorithms and privacy-preserving techniques that were implemented, and in Section \ref{sec:CommunicationCosts} we present the communication costs for those combinations. Finally, in Section \ref{sec:ExperimentalResultsConclusion} we make some final observations about the obtained results.
 
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -21,24 +21,28 @@ In this Chapterwe describe the experiments that were conducted regarding the imp
 \section{Evaluation Metrics}
 \label{sec:EvaluationMetrics}
 
-To evaluate our implementation, it is important to understand the metrics that were considered. To define the evaluation functions bellow, we present the notation in Table \ref{table:notation}. 
-
+To evaluate our implementation, a set of metrics was considered, namely: \emph{accuracy}, \emph{precision}, \emph{recall}, and \emph{F-measure}. For the definition of the metrics, we need to define the events that can occur when making predictions, shown in Table \ref{table:notation} below. 
 \begin{table}[htp]
 \centering
-\caption{Notation.}
+\caption{Binary confusion matrix.}
 \label{table:notation}
-\begin{tabular}{|l|l|l|}
+\begin{tabular}{cc|c|c|} 
+\cline{3-3}\cline{4-4}
+                                                         &    & \multicolumn{2}{c|}{\textbf{Real label}}                             \\ 
+\cline{3-3}\cline{4-4}
+                                                         &    & +1                              & -1                        \\ 
 \hline
-\textbf{Real label} & \textbf{Predicted label} & \textbf{Event} \\ \hline
- +1  &  +1  & \ac{tp}   \\ \hline
- +1  &  -1  & \ac{fn}   \\ \hline
- -1  &  +1  & \ac{fp}   \\ \hline
- -1  &  -1  & \ac{tn}   \\ \hline 
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{Predicted label}~~}} & +1 & \ac{tp}        & \ac{fp}  \\ 
+\cline{2-4}
+\multicolumn{1}{|l|}{}                                   & -1 & \ac{fn}        & \ac{tn}  \\
+\hline
 \end{tabular}
 \end{table}
 
-\textit{Accuracy} is defined as how much of the measurements of a value differ to the real value. In our implementation, it represents how many times the predictions calculated by the \ac{ml} generated models match the class of the testing samples. In mathematical terms, it is represented by:
 
+
+
+\textit{Accuracy} is defined as how much of the measurements of a value differ to the real value. In our implementation, it represents how many times the predictions calculated by the \ac{ml} generated models match the class of the testing samples. In mathematical terms, it is represented by:
 \begin{equation}
 \label{eq:accuracy}
 accuracy=\frac{TP + TN} {TP + TN + FP + FN} 
@@ -46,46 +50,26 @@ accuracy=\frac{TP + TN} {TP + TN + FP + FN}
 
 
 \textit{Precision} is defined by the fraction of relevant instances among the retrieved instances. \textit{Recall} is defined by the fraction of relevant instances that have been retrieved over the total of the relevant instances.
-
-
 \begin{equation}
 \label{eq:precision}
 precision=\frac{TP}{TP + FP}
 \end{equation}
-
 \begin{equation}
 \label{eq:recall}
 recall=\frac{TP}{TP + FN}
 \end{equation}
 
-\textit{F-measure} is a measure of a accuracy of a test. It considers both the precision and the recall of the test to compute the score:
-
+\textit{F-measure} is a measure of the accuracy of a test. It considers both the precision and the recall of the test to compute the score:
 \begin{equation}
 \label{eq:f-measure}
 F_1=2\centerdot \frac{precision\centerdot recall}{precision + recall}
 \end{equation}
 
 
-A \textit{confusion matrix} is a specific table layout that allows visualization of the performance of a \ac{ml} algorithm. Each row of the matrix represents the instances in a predicted class while each column represents the instances in an actual class. In \ref{eq:confusionMatrix} we give an example on how to compute a confusion matrix for the binary case.
-
-\begin{equation*}
-\label{eq:confusionMatrix}
-  confusion\textunderscore matrix=
-  \begin{blockarray}{*{2}{c} l}
-    \begin{block}{*{2}{>{$\footnotesize}c<{$}} l}
-      &+1 & -1  \\
-    \end{block}
-    \begin{block}{c [*{2}{c}]}
-      +1 & TP & FN  \\
-      -1 & FP & TN \\
-    \end{block}
-  \end{blockarray}
-\end{equation*}
-
 
 Besides these metrics, we also used additional ones in order to understand how much the computational overhead due to the use of cryptography influences the system.
-We compared the results obtained by the privacy-preserving versions of \ac{ml} algorithms with the ones obtained using the baseline. We also take into account the execution times of the system, which shows the overhead caused by the additional computational cost added by cryptography.
-Finally, we also show the increase in communication costs that happen when cryptography is involved, as all values must be represented by ciphertext, instead of integer or float values.
+We compared the \emph{results} obtained by the privacy-preserving versions of \ac{ml} algorithms with the ones obtained using the baseline. We also take into account the \emph{execution times} of the system, which shows the overhead caused by the additional computational cost added by cryptography.
+Finally, we also show the increase in communication costs that happen when cryptography is involved, as all values must be represented by ciphertext, instead of plaintext integer or float values.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -93,11 +77,29 @@ Finally, we also show the increase in communication costs that happen when crypt
 \label{sec:ExperimentalSetup}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-All the experiments were performed using a machine with an Intel Core i5-4300M CPU @2.60Gz with a 3MB L3 cache memory and a 12 GB RAM memory.
+All the experiments were performed using a machine with an Intel Core i5-4300M CPU @2.60Gz with 3MB L3 cache memory and 12 GB RAM memory.
 
-For obtaining the experimental results, we started by applying the preprocessing techniques mentioned in \ref{sec:DataPreProcessingImplementation} to the datasets described in Table \ref{table:datasets}. As described before, all datasets that were composed of a single file were split into three sets: training, validation and testing sets, with the proportion $70/15/15$. Each \ac{ml} model was trained using the training set, the best model configuration was chosen using the validation set, and the model performance was evaluated using the testing set.
+For obtaining the experimental results, we started by applying the preprocessing techniques mentioned in Section \ref{sec:DataPreProcessingImplementation} to the datasets described in Table \ref{table:datasets}. As described before, all datasets that were composed of a single file were split into three sets: training, validation and testing sets, with the proportion $70/15/15$. Each \ac{ml} model was trained using the training set, the best model configuration was chosen using the validation set, and the model performance was evaluated using the testing set.
 
-\subsection{Parameters - Baseline}
+Taking into account that the baseline implementation was done using \textit{scikit-learn}, we could not explicitly observe the operations done in the toolkit since they were made in a ``black box'' mode. This could lead to an inability to distinguish prediction errors caused by the privacy-preserving systems and caused by the implementation of the prediction equations. To solve this problem, we implemented the evaluation prediction processes of the \ac{ml} algorithms without using the toolkit, i.e. directly from the algorithm equations.
+We successfully recreated the prediction processes by retrieving from the toolkit the specifications for each \ac{ml} model.
+
+\begin{itemize}
+  
+    \item For the \ac{dt}, we needed to retrieve all of the model, i.e. the binary tree, so that we could traverse it according to each testing sample, comparing the feature with the threshold of each node, and choosing which branch of the tree to follow, until a label is reached. 
+
+    \item In the case of \ac{svm}, we retrieved from the toolkit all the coefficients needed to compute Equation (\ref{eq:SVM3}), namely the support vectors $x_{SV}^{(i)}$, the $\alpha_i$ coefficients for each support vector, the kernel function $k({\vec {x_{i}}},{\vec {x_{j}}})$ that was used (linear or polynomial), the exponent for the polynomial kernel if needed, and the scalar value $b$.
+
+    %\item In the case of \ac{k-nn}, since training does not exist, there was no need to use the toolkit, so no information was retrieved from it, and it was not required to do an expanded version of the algorithm.
+
+    \item For \ac{k-m}, we just required from the toolkit the centroids for each cluster, as well as the prediction labels associated with each one. The classification of each testing sample was done by discovering which centroid was closest to it.
+
+    \item In \ac{lr}, we extracted the $\beta=(\beta_0,\beta_1,...,\beta_n)$ that appear in Equation (\ref{eq:LR3}). $\beta_0$ is the intercept from the linear regression, and $\beta_i$ are each regression coefficient that are multiplied by each feature of the sample.
+
+\end{itemize}
+
+
+\subsection{Baseline Parameters}
 
 The following parameters are the ones used in the \textit{scikit-learn} toolkit.
 
@@ -105,7 +107,7 @@ For the experiments with \ac{dt}, we tested the values for \textit{max\textunder
 
 For the experiments with \ac{svm}, we used \textit{kernel} values of \textit{linear}, \textit{poly} and \textit{rbf}. For all kernels, we used $C$ values of $2^{-10}$, $2^{-6}$, $2^{-2}$, $2^{2}$, $2^{6}$ and $2^{10}$. For the polynomial kernel, we used \textit{degree} values of 2, 3 and 4. For the \ac{rbf} kernel, we used $\gamma$ values of $2^{-9}$, $2^{-5}$, $2^{-1}$, $2^{1}$ and $2^{3}$.
 
-For the experiments with \ac{k-m}, we tested with a variable number of clusters, i.e., with \textit{num\textunderscore clusters} values of 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90 and 100.
+For the experiments with \ac{k-m}, we tested with a variable number of clusters, i.e. with \textit{num\textunderscore clusters} values of 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90 and 100.
 
 For the experiments with \ac{lr}, we used the \textit{liblinear} solver with $C$ values of $2^{-10}$, $2^{-6}$, $2^{-2}$, $2^{2}$, $2^{6}$ and $2^{10}$.
 
@@ -113,23 +115,11 @@ For the experiments with \ac{lr}, we used the \textit{liblinear} solver with $C$
 
 
 
-\subsection{Parameters - \acl{gc}}
-
-In the experiments using \ac{gc}, we tested values of 8, 12, 16, 20 and 24 bits for the numeric precision of the data and model parameters. This will be reflected in the circuit size and the accuracy of the results. Larger values were not considered because 24 bits are already sufficient for an exact representation of the input values and model parameters.
-
-\subsection{Parameters - \acl{he}}
-
-For the experiments using \ac{phe}, we used the values of 128, 256, 512, 1024 and 2048 bits (NBits) for the length of the cryptographic keys.
-
-For the experiments using \ac{fhe}, no parameter search was made, since adequate default values were pre-determined for most parameters, and we chose a large enough number for the modulus ($(2^{15})^4=2^{60}$). Changing these parameters should not affect the obtained predicted labels in any way, although they may have minimal effects on the actual output of the evaluation functions of \ac{lr} and \ac{svm} algorithms. The values considered are too large to affect the results and correspond to a cryptographic security factor.
 
 
-
-\subsection{\acl{gc} toolkits}
-
+\subsection{\acl{gc} toolkits and parameters}
 
 For the experiments with \ac{gc}, we used the toolkit developed by VIPP group from the University of Siena\footnote{\url{http://clem.dii.unisi.it/~vipp/index.php/home}}. This toolkit was not our first choice since it has known issues in computation times, but the other toolkits that we tested contained limitations that we could not overcome, as stated below:
-
 \begin{itemize}
     
     \item\textbf{ABY\cite{demmler2015aby}:} We found it impossible to define gate-to-gate wires, and that removed the ability for fine control on how to use and combine wires.
@@ -144,12 +134,17 @@ For the experiments with \ac{gc}, we used the toolkit developed by VIPP group fr
 
 \end{itemize}
 
-\subsection{\acl{he} toolkits}
+In the experiments using \ac{gc}, we tested values of 8, 12, 16, 20 and 24 bits for the numeric precision of the data and model parameters. This will be reflected in the circuit size and the accuracy of the results. Larger values were not considered because 24 bits are already sufficient for an exact representation of the input values and model parameters.
 
-For the experiments using \ac{phe}, we implemented our own version of the Paillier cryptosystem \cite{paillier1999public}. We decided to do this way instead of using an existing toolkit because it was both rather simple to implement and also because this provided a good learning experience on the inner workings of a cryptographic system.
+\subsection{\acl{he} toolkits and parameters}
 
-For the experiments using \ac{fhe}, we used the HElib toolkit \cite{halevi2014helib}. Two methods were considered in the implementation, method 1 (M1: multiply and sum arrays without packing) and method 2 (M2: use coefficient packing, invert and multiply polynomials), that was inspired in a HElib tutorial\footnote{\url{https://mshcruz.wordpress.com/2016/09/27/scalar-product-using-helib/}}. It is also important to note that, due to intrinsic limitations in HElib, we had to pre-compute $\alpha_i\centerdot x_{SV}^{(i)}$ when evaluating the \ac{svm}. However, this does not negatively affect the experiments, since these model parameters are both owned by the same party.
+For the experiments using \ac{phe}, we implemented our own version of the Paillier cryptosystem \cite{paillier1999public}. We decided to do this way instead of using an existing toolkit because it was simple to implement and because it provided a good learning experience on the inner workings of a cryptographic system.
 
+For the experiments using \ac{fhe}, we used the HElib toolkit \cite{halevi2014helib}. Two methods were considered in the implementation, method M1: multiply and sum arrays without packing, and method M2: use coefficient packing, invert and multiply polynomials, that was inspired in a HElib tutorial\footnote{\url{https://mshcruz.wordpress.com/2016/09/27/scalar-product-using-helib/}}. It is also important to note that, due to intrinsic limitations in HElib, we had to pre-compute $\alpha_i\centerdot x_{SV}^{(i)}$ when evaluating the \ac{svm}. However, this does not negatively affect the experiments, since these model parameters are both owned by the same party.
+
+For the experiments using \ac{phe}, we used the values of 128, 256, 512, 1024 and 2048 bits (NBits) for the length of the cryptographic keys.
+
+For the experiments using \ac{fhe}, no parameter search was made, since adequate default values were pre-determined for most parameters, and we chose a large enough number for the modulus ($(2^{15})^4=2^{60}$). Changing these parameters should not affect the obtained predicted labels in any way, although they may have minimal effects on the actual output of the evaluation functions of \ac{lr} and \ac{svm} algorithms. The values considered are too large to affect the results and correspond to a cryptographic security factor.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -160,13 +155,13 @@ For the experiments using \ac{fhe}, we used the HElib toolkit \cite{halevi2014he
 
 We now show the experimental results obtained by applying different \ac{ml} algorithms to the datasets mentioned above. In each Subsection below, for each dataset, we present the different \ac{ml} algorithms and parameters. The results shown in the following tables are the ones obtained in the testing sets using the parameters that provided the best accuracy or F-Measure results with the validation set. We also present results found in the literature, for comparison.
 
-\subsection{Pima Indians Diabetes Dataset}
+\subsection{\emph{Pima Indians Diabetes} Dataset}
 
-We present the best baseline results obtained in the testing set for the Pima Indians Diabetes Dataset in Table \ref{table:baselinePID}.
+We present the best baseline results obtained in the testing set for the \emph{Pima Indians Diabetes} Dataset in Table \ref{table:baselinePID}. We can see that our results are comparable to the ones found in the literature.
 
 \begin{table}[htp]
 \centering
-\caption{Baseline results. Pima Indians Diabetes Dataset. ``A'' represents Accuracy, ``F'' represents F-Measure.}
+\caption{Baseline results. \emph{Pima Indians Diabetes} Dataset. ``A'' represents Accuracy, ``F'' represents F-Measure.}
 \label{table:baselinePID}
 \begin{tabular}{|l|c|c|c|c|c|c|}
 \hline
@@ -178,15 +173,13 @@ Literature  & \begin{tabular}[c]{@{}l@{}}A: 75.39\%\cite{anwar2014global}\\   F:
 \end{tabular}
 \end{table}
 
-We can see that our results are comparable to the ones found in the literature.
+\subsection{\emph{Breast Cancer Wisconsin Diagnostic} Dataset}
 
-\subsection{Breast Cancer Wisconsin Diagnostic Dataset}
-
-We present the best baseline results obtained in the testing set for the Breast Cancer Wisconsin Diagnostic Dataset in Table \ref{table:baselineBCW}.
+We present the best baseline results obtained in the testing set for the \emph{Breast Cancer Wisconsin Diagnostic} Dataset in Table \ref{table:baselineBCW}. As we see, our baseline results are, again, close to the ones found in the literature.
 
 \begin{table}[htp]
 \centering
-\caption{Baseline results. Breast Cancer Wisconsin Diagnostic Dataset. ``A'' represents Accuracy, ``F'' represents F-Measure.}
+\caption{Baseline results. \emph{Breast Cancer Wisconsin Diagnostic} Dataset. ``A'' represents Accuracy, ``F'' represents F-Measure.}
 \label{table:baselineBCW}
 \begin{tabular}{|l|c|c|c|c|c|c|}
 \hline
@@ -198,16 +191,12 @@ Literature  & \begin{tabular}[c]{@{}l@{}}A: 95.13\%\cite{asri2016using}\\   F: 9
 \end{tabular}
 \end{table}
 
-As we see, our baseline results are close to the ones found in the literature.
+\subsection{\emph{Credit Approval} Dataset}
 
-
-\subsection{Credit Approval Dataset}
-
-We present the best baseline results obtained in the testing set for the Credit Approval Dataset in Table \ref{table:baselineCAD}.
-
+We present the best baseline results obtained in the testing set for the \emph{Credit Approval} Dataset in Table \ref{table:baselineCAD}. We obtained results that are similar to the ones found in the literature.
 \begin{table}[htp]
 \centering
-\caption{Baseline results. Credit Approval Dataset. ``A'' represents Accuracy, ``F'' represents F-Measure.}
+\caption{Baseline results. \emph{Credit Approval} Dataset. ``A'' represents Accuracy, ``F'' represents F-Measure.}
 \label{table:baselineCAD}
 \begin{tabular}{|l|c|c|c|c|c|c|}
 \hline
@@ -215,19 +204,17 @@ We present the best baseline results obtained in the testing set for the Credit 
  &  &  & & Linear & Poly & RBF  \\ \hline
 Baseline & \begin{tabular}[c]{@{}l@{}}A: 78.64\%\\   F: 75.00\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 83.50\%\\ F: 81.32\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.44\%\\   F: 84.21\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.44\%\\   F: 84.54\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.43\%\\   F: 83.87\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.47\%\\   F: 83.33\%\end{tabular}  \\ \hline
 
-Literature  & \begin{tabular}[c]{@{}l@{}}A: 85.5\%\tablefootnote{\url{http://docplayer.net/storage/53/32532528/1505920161/lql-Akt2A2T_EvaGfgnQww/32532528.pdf}}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 86.3\%\cite{eggermont2004genetic}\\   F: -\end{tabular}  & \begin{tabular}[c]{@{}l@{}}A: 87.9\%\cite{chitra2013automatic}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 86.2\%\tablefootnote{\url{http://docplayer.net/storage/53/32532528/1505920161/lql-Akt2A2T_EvaGfgnQww/32532528.pdf}}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.8\%\cite{chitra2013automatic}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.5\%\tablefootnote{\url{http://docplayer.net/storage/53/32532528/1505920161/lql-Akt2A2T_EvaGfgnQww/32532528.pdf}}\\   F: -\end{tabular} \\ \hline
+Literature  & \begin{tabular}[c]{@{}l@{}}A: 85.5\%\tablefootnote{\label{refref}\url{http://docplayer.net/storage/53/32532528/1505920161/lql-Akt2A2T_EvaGfgnQww/32532528.pdf}}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 86.3\%\cite{eggermont2004genetic}\\   F: -\end{tabular}  & \begin{tabular}[c]{@{}l@{}}A: 87.9\%\cite{chitra2013automatic}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 86.2\%\footref{refref}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.8\%\cite{chitra2013automatic}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.5\%\footref{refref}\\   F: -\end{tabular} \\ \hline
 \end{tabular}
 \end{table}
 
-We obtained results that are similar to the ones found in the literature.
+\subsection{\emph{Adult Income} Dataset}
 
-\subsection{Adult Income Dataset}
-
-We present the best baseline results obtained in the testing set for the Adult Income Dataset in Table \ref{table:baselineAI}.
+We present the best baseline results obtained in the testing set for the \emph{Adult Income} Dataset in Table \ref{table:baselineAI}. We can see that our baseline results are comparable to the ones found in literature, and therefore are a good reference for the privacy-preserving platform.
 
 \begin{table}[htp]
 \centering
-\caption{Baseline results. Adult Income Dataset. ``A'' represents Accuracy, ``F'' represents F-Measure.}
+\caption{Baseline results. \emph{Adult Income} Dataset. ``A'' represents Accuracy, ``F'' represents F-Measure.}
 \label{table:baselineAI}
 \begin{tabular}{|l|c|c|c|c|c|c|}
 \hline
@@ -235,20 +222,18 @@ We present the best baseline results obtained in the testing set for the Adult I
  &  &  & & Linear & Poly & RBF  \\ \hline
 Baseline & \begin{tabular}[c]{@{}l@{}}A: 85.56\%\\   F: 67.37\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 81.95\%\\ F: 55.80\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.08\%\\   F: 66.87\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 69.67\%\\   F: 57.04\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 80.82\%\\   F: 65.91\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 82.79\%\\   F: 61.15\%\end{tabular}  \\ \hline
 
-Literature  & \begin{tabular}[c]{@{}l@{}}A: 82.20\%\cite{anwar2014global}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular}  & \begin{tabular}[c]{@{}l@{}}A: 80.00\%\cite{anwar2014global}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.55\%\tablefootnote{\url{http://www.dudonwai.com/docs/gt-omscs-cs7641-a1.pdf?pdf=gt-omscs-cs7641-a1}}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.93\%\tablefootnote{\url{http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.387.5068\&rep=rep1\&type=pdf}}\\   F: -\end{tabular} \\ \hline
+Literature  & \begin{tabular}[c]{@{}l@{}}A: 82.20\%\cite{anwar2014global}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular}  & \begin{tabular}[c]{@{}l@{}}A: 80.00\%\cite{anwar2014global}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.55\%\tablefootnote{\url{http://www.dudonwai.com/docs/gt-omscs-cs7641-a1.pdf?pdf=gt-omscs-cs7641-a1}}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.93\%\cite{lazar2004income}\\   F: -\end{tabular} \\ \hline
 \end{tabular}
 \end{table}
-
-We can see that our baseline results are comparable to the ones found in literature, and therefore are a good reference for the privacy-preserving platform.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experimental Results - Comparison with the Baseline}
 \label{sec:ExperimentalResultsComparisonBaseline}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\todo{José: Mudar o nome desta Section.}
 
-It is important to mention that, after analyzing the results obtained using the VIPP toolkit to implement \ac{gc}, we verified that changing the amount of bits for the actual numeric precision of the data and model parameters affects the accuracy of the results. The degree of this error is depicted in Table \ref{table:avgErrorDT} and \ref{table:avgErrorKM}, for the experiments for \ac{dt} and \ac{k-m} respectively. It is to be noted that this error is computed versus the baseline prediction results, not the prediction labels from the dataset. 
+
+It is important to mention that, after analyzing the results obtained using the VIPP toolkit to implement \ac{gc}, we verified that changing the amount of bits for the actual numeric precision of the data and model parameters affects the accuracy of the results. The degree of this error is depicted in Tables \ref{table:avgErrorDT} and \ref{table:avgErrorKM}, for the experiments for \ac{dt} and \ac{k-m} respectively. It is to be noted that this error is computed versus the baseline prediction results, not the prediction labels from the dataset. 
 
 \begin{table}[htp]
 \centering
@@ -288,13 +273,13 @@ After analyzing the results obtained using the \ac{phe} and \ac{fhe} systems, we
 \section{Experimental Results - Execution Time}
 \label{sec:ExperimentalResultsExecutionTime}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\todo[inline]{José: Ver com o Prof. Miguel se mantemos tabelas aqui ou em apendice.}
+
 In order to better assess the execution time required by each privacy-preserving version of the different \ac{ml} algorithms, we will analyze each of the combinations separately. We do not present total execution times for the whole datasets because execution times per sample are independent of the dataset size, and execution times per sample are the expected costs in a real-life scenario where a large computer cluster is available and data samples are supplied in a continuous fashion.
 
 
 \subsection{\acl{gc} and \acl{dt}}
 
-We present the execution times obtained by using the toolkit to build a \ac{gc} implementation of \ac{dt} for all the datasets in the tables below. The results are presented in terms of average pre-computation times per data sample and runtimes per data sample. Table \ref{table:avgDTAllDatasets} presents the average pre-computation times for each data sample for all datasets.
+We present the execution times obtained by using the toolkit to build a \ac{gc} implementation of \ac{dt} for all the datasets in the tables below. The results are presented in terms of average pre-computation times per data sample and runtimes per data sample. Table \ref{table:avgDTAllDatasets} presents the average pre-computation times for each data sample for all datasets. We can observe that average pre-computation times are very similar to one another, despite the slight dependence on the size of the \ac{gc}, which is defined by the numeric precision. This means that pre-computation poses no restrictions regarding the scalability of our approach.
 
 
 \begin{table}[htp]
@@ -305,20 +290,17 @@ We present the execution times obtained by using the toolkit to build a \ac{gc} 
 \hline
 \multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{dataset}}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                             \\ \cline{2-6} 
 \multicolumn{1}{|c|}{}                                  & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
-Breast                                                  & 0.205           & 0.240            & 0.281            & 0.325            & 0.356            \\ \hline
 Pima                                                    & 0.219           & 0.285            & 0.310            & 0.344            & 0.356            \\ \hline
+Breast                                                  & 0.205           & 0.240            & 0.281            & 0.325            & 0.356            \\ \hline
 Credit                                                  & 0.224           & 0.253            & 0.271            & 0.290            & 0.315            \\ \hline
 Adult                                                   & 0.233           & 0.271            & 0.313            & 0.355            & 0.373            \\ \hline
 \end{tabular}
 \end{table}
 
 
-In Table \ref{table:avgDTAllDatasets} we can observe that average pre-computation times are very similar to one another, despite the slight dependence on the size of the \ac{gc}, which is defined by the numeric precision. This means that pre-computation poses no restrictions regarding the scalability of our approach.
-
-
 \begin{table}[htp]
 \centering
-\caption{\acs{gc}+\acs{dt}. Runtime per data sample, in seconds. Pima Indians Diabetes dataset.}
+\caption{\acs{gc}+\acs{dt}. Runtime per data sample, in seconds. \emph{Pima Indians Diabetes} dataset.}
 \label{table:runtimeDTPID}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
@@ -336,7 +318,7 @@ In Table \ref{table:avgDTAllDatasets} we can observe that average pre-computatio
 
 \begin{table}[htp]
 \centering
-\caption{\acs{gc}+\acs{dt}. Runtime per data sample, in seconds. Breast Cancer Wisconsin Diagnostic dataset.}
+\caption{\acs{gc}+\acs{dt}. Runtime per data sample, in seconds. \emph{Breast Cancer Wisconsin Diagnostic} dataset.}
 \label{table:runtimeDTBCW}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
@@ -354,7 +336,7 @@ In Table \ref{table:avgDTAllDatasets} we can observe that average pre-computatio
 
 \begin{table}[htp]
 \centering
-\caption{\acs{gc}+\acs{dt}. Runtime per data sample, in seconds. Credit Approval dataset.}
+\caption{\acs{gc}+\acs{dt}. Runtime per data sample, in seconds. \emph{Credit Approval} dataset.}
 \label{table:runtimeDTCA}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
@@ -371,7 +353,7 @@ In Table \ref{table:avgDTAllDatasets} we can observe that average pre-computatio
 
 \begin{table}[htp]
 \centering
-\caption{\acs{gc}+\acs{dt}. Runtime per data sample, in seconds. Adult Income dataset.}
+\caption{\acs{gc}+\acs{dt}. Runtime per data sample, in seconds. \emph{Adult Income} dataset.}
 \label{table:runtimeDTAI}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
@@ -389,35 +371,38 @@ In Table \ref{table:avgDTAllDatasets} we can observe that average pre-computatio
 \centering
 \subfigure[][]{%
 \label{fig:dt-gc-pima}%
-\includegraphics[height=2in]{images/graphs/Pima_dt_gc.pdf}}%
+\includegraphics[height=6.1cm]{images/graphs/Pima_dt_gc.pdf}}%
 \hspace{8pt}%
 \subfigure[][]{%
 \label{fig:dt-gc-BCWD}%
-\includegraphics[height=2in]{images/graphs/Breast_dt_gc.pdf}} \\
+\includegraphics[height=6.1cm]{images/graphs/Breast_dt_gc.pdf}} \\
 \subfigure[][]{%
 \label{fig:dt-gc-CAD}%
-\includegraphics[height=2in]{images/graphs/credit_dt_gc.pdf}}%
+\includegraphics[height=6.1cm]{images/graphs/credit_dt_gc.pdf}}%
 \hspace{8pt}%
 \subfigure[][]{%
 \label{fig:dt-gc-AID}%
-\includegraphics[height=2in]{images/graphs/adult_dt_gc.pdf}}%
+\includegraphics[height=6.1cm]{images/graphs/adult_dt_gc.pdf}}%
 \caption[\acs{gc}+\acs{dt}. Runtime per data sample, in seconds. All datasets.]{\acs{gc}+\acs{dt}. Runtime per data sample, in seconds.
-\subref{fig:dt-gc-pima} Pima Indians Diabetes Dataset;
-\subref{fig:dt-gc-BCWD} Breast Cancer Wisconsin Diagnostic Dataset;
-\subref{fig:dt-gc-CAD} Credit Approval Dataset; and,
-\subref{fig:dt-gc-AID} Adult Income Dataset.}%
+\subref{fig:dt-gc-pima} \emph{Pima Indians Diabetes} Dataset;
+\subref{fig:dt-gc-BCWD} \emph{Breast Cancer Wisconsin Diagnostic} Dataset;
+\subref{fig:dt-gc-CAD} \emph{Credit Approval} Dataset; and,
+\subref{fig:dt-gc-AID} \emph{Adult Income} Dataset.}%
 \label{fig:dt-gc}%
 \end{figure}
 
 
-Regarding the runtimes per data sample (Tables \ref{table:runtimeDTPID}, \ref{table:runtimeDTBCW}, \ref{table:runtimeDTCA}, \ref{table:runtimeDTAI}, and Figure \ref{fig:dt-gc}), we can observe that the results obtained eclipse the pre-computation times. Although they scale slightly sub-linearly with the numeric precision and the number of features, they scale super-linearly with the number of nodes in the \ac{dt}. However, this does not compromise the scalability of our approach, as increasing \ac{dt} depth only leads to an exponential increase in the number of nodes when fully expanded \ac{dt} are considered.
+Regarding the runtimes per data sample (
+%Tables \ref{table:runtimeDTPID}, \ref{table:runtimeDTBCW}, \ref{table:runtimeDTCA}, \ref{table:runtimeDTAI}, and 
+Figure \ref{fig:dt-gc}), we can observe that the results obtained dominate over the pre-computation times. Although they scale slightly sub-linearly with the numeric precision and the number of features, they scale super-linearly with the number of nodes in the \ac{dt}. This can be a problem in terms of scalability since we are using fully expanded \ac{dt}, which means that increasing \ac{dt} depth leads to an exponential increase in the number of nodes.
 
 
 \subsection{\acl{gc} and \acl{k-m}}
 \label{ssec:gcandKM}
 
 
-We present the execution times obtained by using the toolkit to build a \ac{gc} implementation of \ac{k-m} for all the datasets in the tables below. The results are presented in terms of average pre-computation times per data sample and runtimes per data sample. Table \ref{table:avgKMAllDatasets} presents the average pre-computation times for each data sample for all datasets.
+We present the execution times obtained by using the toolkit to build a \ac{gc} implementation of \ac{k-m} for all the datasets in the tables below. The results are presented in terms of average pre-computation times per data sample and runtimes per data sample. Table \ref{table:avgKMAllDatasets} presents the average pre-computation times for each data sample for all datasets. We can see that average pre-computation times are all very similar to one another despite the slight dependence on the \ac{gc} size, meaning that it does not impact the scalability of our solution.
+
 
 \begin{table}[htp]
 \centering
@@ -427,20 +412,19 @@ We present the execution times obtained by using the toolkit to build a \ac{gc} 
 \hline
 \multirow{2}{*}{\textbf{dataset}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                             \\ \cline{2-6} 
                                   & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
-Breast                            & 0.225           & 0.251            & 0.274            & 0.289            & 0.301            \\ \hline
 Pima                              & 0.260           & 0.283            & 0.307            & 0.331            & 0.339            \\ \hline
+Breast                            & 0.225           & 0.251            & 0.274            & 0.289            & 0.301            \\ \hline
 Credit                            & 0.226           & 0.249            & 0.253            & 0.265            & 0.272            \\ \hline
 Adult                             & 0.214           & 0.214            & 0.232            & 0.266            & 0.262            \\ \hline
 \end{tabular}
 \end{table}
 
-We can see in Table \ref{table:avgKMAllDatasets} that average pre-computation times are all very similar to one another despite the slight dependence on the \ac{gc} size, meaning that it does not impact the scalability of our solution.
 
 
 
 \begin{table}[htp]
 \centering
-\caption{\acs{gc}+\acs{k-m}. Runtime per data sample, in seconds. Pima Indians Diabetes dataset.}
+\caption{\acs{gc}+\acs{k-m}. Runtime per data sample, in seconds. \emph{Pima Indians Diabetes} dataset.}
 \label{table:runtimeKMPID}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
@@ -469,7 +453,7 @@ We can see in Table \ref{table:avgKMAllDatasets} that average pre-computation ti
 
 \begin{table}[htp]
 \centering
-\caption{\acs{gc}+\acs{k-m}. Runtime per data sample, in seconds. Breast Cancer Wisconsin Diagnostic dataset.}
+\caption{\acs{gc}+\acs{k-m}. Runtime per data sample, in seconds. \emph{Breast Cancer Wisconsin Diagnostic} dataset.}
 \label{table:runtimeKMBCW}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
@@ -499,7 +483,7 @@ We can see in Table \ref{table:avgKMAllDatasets} that average pre-computation ti
 
 \begin{table}[htp]
 \centering
-\caption{\acs{gc}+\acs{k-m}. Runtime per data sample, in seconds. Credit Approval dataset.}
+\caption{\acs{gc}+\acs{k-m}. Runtime per data sample, in seconds. \emph{Credit Approval} dataset.}
 \label{table:runtimeKMCA}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
@@ -528,7 +512,7 @@ We can see in Table \ref{table:avgKMAllDatasets} that average pre-computation ti
 
 \begin{table}[htp]
 \centering
-\caption{\acs{gc}+\acs{k-m}. Runtime per data sample, in seconds. Adult Income dataset.}
+\caption{\acs{gc}+\acs{k-m}. Runtime per data sample, in seconds. \emph{Adult Income} dataset.}
 \label{table:runtimeKMAI}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
@@ -559,42 +543,44 @@ We can see in Table \ref{table:avgKMAllDatasets} that average pre-computation ti
 \centering
 \subfigure[][]{%
 \label{fig:km-gc-pima}%
-\includegraphics[height=2in]{images/graphs/Pima_km_gc.pdf}}%
+\includegraphics[height=6.1cm]{images/graphs/Pima_km_gc.pdf}}%
 \hspace{8pt}%
 \subfigure[][]{%
 \label{fig:km-gc-BCWD}%
-\includegraphics[height=2in]{images/graphs/Breast_km_gc.pdf}} \\
+\includegraphics[height=6.1cm]{images/graphs/Breast_km_gc.pdf}} \\
 \subfigure[][]{%
 \label{fig:km-gc-CAD}%
-\includegraphics[height=2in]{images/graphs/credit_km_gc.pdf}}%
+\includegraphics[height=6.1cm]{images/graphs/credit_km_gc.pdf}}%
 \hspace{8pt}%
 \subfigure[][]{%
 \label{fig:km-gc-AID}%
-\includegraphics[height=2in]{images/graphs/adult_km_gc.pdf}}%
+\includegraphics[height=6.1cm]{images/graphs/adult_km_gc.pdf}}%
 \caption[\acs{gc}+\acs{k-m}. Runtime per data sample, in seconds. All datasets.]{\acs{gc}+\acs{k-m}. Runtime per data sample, in seconds.
-\subref{fig:km-gc-pima} Pima Indians Diabetes Dataset;
-\subref{fig:km-gc-BCWD} Breast Cancer Wisconsin Diagnostic Dataset;
-\subref{fig:km-gc-CAD} Credit Approval Dataset; and,
-\subref{fig:km-gc-AID} Adult Income Dataset.}%
+\subref{fig:km-gc-pima} \emph{Pima Indians Diabetes} Dataset;
+\subref{fig:km-gc-BCWD} \emph{Breast Cancer Wisconsin Diagnostic} Dataset;
+\subref{fig:km-gc-CAD} \emph{Credit Approval} Dataset; and,
+\subref{fig:km-gc-AID} \emph{Adult Income} Dataset.}%
 \label{fig:km-gc}%
 \end{figure}
 
-Regarding the runtimes per data sample (Tables \ref{table:runtimeKMPID}, \ref{table:runtimeKMBCW}, \ref{table:runtimeKMCA}, \ref{table:runtimeKMAI}, and Figure \ref{fig:km-gc}), we observe again that the results are much larger that the pre-computation times. They scale linearly with the number of features and slightly super-linearly with the number of clusters, none of which compromises the scalability of our approach. However, runtimes scale quadratically with the numeric precision, which is caused by the multiplications required to compute the Euclidean distances. Although this causes scalability issues for larges values of numeric precision, the results in Table \ref{table:avgErrorKM} showed that the loss of accuracy is negligible even when only 12 bits are considered, allowing us to safely ignore this issue. The runtimes per data sample are also considerably large for the instances with a large number of clusters, but in our baseline system, we verified that the best results were always obtained when less than 10 clusters were considered. Even if this was not the case, we could sacrifice a bit of accuracy by lowering the number of clusters considered in order to obtain much faster runtimes. Finally, it is important to mention that we did not computed all the entries in the tables above because of two factors: The execution times for the larger datasets were becoming very long as the number of clusters and numeric precision grew; Some examples were impossible to run due to insufficient RAM memory.
+Regarding the runtimes per data sample (
+%Tables \ref{table:runtimeKMPID}, \ref{table:runtimeKMBCW}, \ref{table:runtimeKMCA}, \ref{table:runtimeKMAI}, and 
+Figure \ref{fig:km-gc}), we observe again that the results are much larger that the pre-computation times. They scale linearly with the number of features and slightly super-linearly with the number of clusters, none of which compromises the scalability of our approach. However, runtimes scale quadratically with the numeric precision, which is caused by the multiplications required to compute the \ac{ed}. Although this causes scalability issues for large numeric precision, the results in Table \ref{table:avgErrorKM} show that the loss of accuracy is negligible even when only 12 bits are considered, allowing us to safely ignore this issue. The runtimes per data sample are also considerably large for the instances with a large number of clusters, but in our baseline system, we verified that the best results were always obtained when less than 10 clusters were considered. Even if this was not the case, we could sacrifice a small amount of accuracy by lowering the number of clusters considered in order to obtain much faster runtimes. Finally, it is important to mention that we did not compute all the entries in the tables above because the execution times for the larger datasets were becoming very long as the number of clusters and numeric precision grew and some examples were impossible to run due to insufficient RAM memory.
 
 
 
 \subsection{\acl{he} and \acl{lr}}
 \label{ssec:exec_he_lr}
 
-As mentioned in Section \ref{sec:MyContributions}, the results presented in this section were developed in the \ac{bard} project at Altran, and are presented for completeness purposes.
+As mentioned in Section \ref{sec:MyContributions}, the results presented in this section were developed by other team members in the \ac{bard} project at Altran, and are presented for completeness purposes.
 
 
-We present the execution times obtained by using the \ac{phe} and \ac{fhe} systems for all datasets in the tables bellow. For the \ac{fhe} system, we present the times for methods 1 (M1) and 2 (M2) in the same cell, for ease of comparison. The results are presented in terms of total execution time for the whole datasets and execution time per data sample. 
+We present the execution times obtained by using the \ac{phe} and \ac{fhe} systems for all datasets in the tables below. For the \ac{fhe} system, we present the times for methods M1 and M2 in the same cell, for ease of comparison. The results are presented in terms of execution time per data sample. 
 
 
 \begin{table}[htp]
 \centering
-\caption{\acs{phe}+\acs{lr}. Execution time in seconds. Pima Indians Diabetes Dataset.}
+\caption{\acs{phe}+\acs{lr}. Execution time in seconds. \emph{Pima Indians Diabetes} Dataset.}
 \label{table:LR_PHE_PIMA}
 \begin{tabular}{|l|l|l|l|}
 \hline
@@ -611,7 +597,7 @@ We present the execution times obtained by using the \ac{phe} and \ac{fhe} syste
 
 \begin{table}[htp]
 \centering
-\caption{\acs{phe}+\acs{lr}. Execution time in seconds. Breast Cancer Wisconsin Diagnostic Dataset.}
+\caption{\acs{phe}+\acs{lr}. Execution time in seconds. \emph{Breast Cancer Wisconsin Diagnostic} Dataset.}
 \label{table:LR_PHE_BCWD}
 \begin{tabular}{|l|l|l|l|}
 \hline
@@ -627,7 +613,7 @@ We present the execution times obtained by using the \ac{phe} and \ac{fhe} syste
 
 \begin{table}[htp]
 \centering
-\caption{\acs{phe}+\acs{lr}. Execution time in seconds. Credit Approval Dataset.}
+\caption{\acs{phe}+\acs{lr}. Execution time in seconds. \emph{Credit Approval} Dataset.}
 \label{table:LR_PHE_CAD}
 \begin{tabular}{|l|l|l|l|}
 \hline
@@ -643,7 +629,7 @@ We present the execution times obtained by using the \ac{phe} and \ac{fhe} syste
 
 \begin{table}[htp]
 \centering
-\caption{\acs{phe}+\acs{lr}. Execution time in seconds. Adult Income Dataset.}
+\caption{\acs{phe}+\acs{lr}. Execution time in seconds. \emph{Adult Income} Dataset.}
 \label{table:LR_PHE_AID}
 \begin{tabular}{|l|l|l|l|}
 \hline
@@ -661,28 +647,30 @@ We present the execution times obtained by using the \ac{phe} and \ac{fhe} syste
 \centering
 \subfigure[][]{%
 \label{fig:lr-phe-pima}%
-\includegraphics[height=2in]{images/graphs/Pima_lr_phe.pdf}}%
+\includegraphics[height=6.1cm]{images/graphs/Pima_lr_phe.pdf}}%
 \hspace{8pt}%
 \subfigure[][]{%
 \label{fig:lr-phe-BCWD}%
-\includegraphics[height=2in]{images/graphs/Breast_lr_phe.pdf}} \\
+\includegraphics[height=6.1cm]{images/graphs/Breast_lr_phe.pdf}} \\
 \subfigure[][]{%
 \label{fig:lr-phe-CAD}%
-\includegraphics[height=2in]{images/graphs/credit_lr_phe.pdf}}%
+\includegraphics[height=6.1cm]{images/graphs/credit_lr_phe.pdf}}%
 \hspace{8pt}%
 \subfigure[][]{%
 \label{fig:lr-phe-AID}%
-\includegraphics[height=2in]{images/graphs/adult_lr_phe.pdf}}%
+\includegraphics[height=6.1cm]{images/graphs/adult_lr_phe.pdf}}%
 \caption[\acs{phe}+\acs{lr}. Execution time per data sample, in seconds. All datasets.]{\acs{phe}+\acs{lr}. Execution time per data sample, in seconds.
-\subref{fig:lr-phe-pima} Pima Indians Diabetes Dataset;
-\subref{fig:lr-phe-BCWD} Breast Cancer Wisconsin Diagnostic Dataset;
-\subref{fig:lr-phe-CAD} Credit Approval Dataset; and,
-\subref{fig:lr-phe-AID} Adult Income Dataset.}%
+\subref{fig:lr-phe-pima} \emph{Pima Indians Diabetes} Dataset;
+\subref{fig:lr-phe-BCWD} \emph{Breast Cancer Wisconsin Diagnostic} Dataset;
+\subref{fig:lr-phe-CAD} \emph{Credit Approval} Dataset; and,
+\subref{fig:lr-phe-AID} \emph{Adult Income} Dataset.}%
 \label{fig:lr-phe}%
 \end{figure}
 
 
-When observing the execution times obtained using \ac{phe} (Tables \ref{table:LR_PHE_PIMA}, \ref{table:LR_PHE_BCWD}, \ref{table:LR_PHE_CAD}, \ref{table:LR_PHE_AID}, and Figure \ref{fig:lr-phe}), we see that a linear increase in encryption and computation times when the number of features in the samples increases, but a constant decryption time, independent of the number of features.
+When observing the execution times obtained using \ac{phe} (
+%Tables \ref{table:LR_PHE_PIMA}, \ref{table:LR_PHE_BCWD}, \ref{table:LR_PHE_CAD}, \ref{table:LR_PHE_AID}, and 
+Figure \ref{fig:lr-phe}), we see that a linear increase in encryption and computation times when the number of features in the samples increases, but a constant decryption time, independent of the number of features.
 We can also observe a linear increase in computation times, and a super-linear increase in encryption and decryption times, when the value of NBits increases. This can cause a problem of scalability, but it can be safely ignored since the execution times per sample are still very small.
 
 
@@ -720,14 +708,14 @@ When comparing \ac{phe} and \ac{fhe}, we observe that method M2 of \ac{fhe} has 
 \subsection{\acl{he} and \acl{svm}}
 \label{ssec:exec_he_svm}
 
-As mentioned in Section \ref{sec:MyContributions}, the results presented in this section were developed in the \ac{bard} project at Altran, and are presented for completeness purposes.
+Again, as mentioned in Section \ref{sec:MyContributions}, the results presented in this section were developed by other team members in the \ac{bard} project at Altran, and are presented for completeness purposes.
 
-We present the execution times obtained by using the \ac{phe} and \ac{fhe} systems for all datasets in the tables below. For the \ac{fhe} system, we present the times for methods 1 (M1) and 2 (M2) in the same cell, for ease of comparison. The results are presented in terms of total execution time for the whole datasets and execution time per data sample for the \ac{phe} case, and execution time per sample and support vector for the \ac{fhe} case.
+We present the execution times obtained by using the \ac{phe} and \ac{fhe} systems for all datasets in the tables below. Once again, for the \ac{fhe} system, we present the times for methods M1 and M2 in the same cell, for ease of comparison. The results are presented in terms of execution time per data sample for the \ac{phe} case, and execution time per sample and support vector for the \ac{fhe} case.
 
 
 \begin{table}[htp]
 \centering
-\caption{\acs{phe}+\acs{svm}. Execution time in seconds. Pima Indians Diabetes Dataset.}
+\caption{\acs{phe}+\acs{svm}. Execution time in seconds. \emph{Pima Indians Diabetes} Dataset.}
 \label{table:SVM_PHE_PIMA}
 \begin{tabular}{|l|l|l|l|}
 \hline
@@ -743,7 +731,7 @@ We present the execution times obtained by using the \ac{phe} and \ac{fhe} syste
 
 \begin{table}[htp]
 \centering
-\caption{\acs{phe}+\acs{svm}. Execution time in seconds. Breast Cancer Wisconsin Diagnostic Dataset.}
+\caption{\acs{phe}+\acs{svm}. Execution time in seconds. \emph{Breast Cancer Wisconsin Diagnostic} Dataset.}
 \label{table:SVM_PHE_BCWD}
 \begin{tabular}{|l|l|l|l|}
 \hline
@@ -759,7 +747,7 @@ We present the execution times obtained by using the \ac{phe} and \ac{fhe} syste
 
 \begin{table}[htp]
 \centering
-\caption{\acs{phe}+\acs{svm}. Execution time in seconds. Credit Approval Dataset.}
+\caption{\acs{phe}+\acs{svm}. Execution time in seconds. \emph{Credit Approval} Dataset.}
 \label{table:SVM_PHE_CAD}
 \begin{tabular}{|l|l|l|l|}
 \hline
@@ -775,7 +763,7 @@ We present the execution times obtained by using the \ac{phe} and \ac{fhe} syste
 
 \begin{table}[htp]
 \centering
-\caption{\acs{phe}+\acs{svm}. Execution time in seconds. Adult Income Dataset.}
+\caption{\acs{phe}+\acs{svm}. Execution time in seconds. \emph{Adult Income} Dataset.}
 \label{table:SVM_PHE_AID}
 \begin{tabular}{|l|l|l|l|}
 \hline
@@ -796,33 +784,35 @@ We present the execution times obtained by using the \ac{phe} and \ac{fhe} syste
 \centering
 \subfigure[][]{%
 \label{fig:svm-phe-pima}%
-\includegraphics[height=2in]{images/graphs/Pima_svm_phe.pdf}}%
+\includegraphics[height=6.1cm]{images/graphs/Pima_svm_phe.pdf}}%
 \hspace{8pt}%
 \subfigure[][]{%
 \label{fig:svm-phe-BCWD}%
-\includegraphics[height=2in]{images/graphs/Breast_svm_phe.pdf}} \\
+\includegraphics[height=6.1cm]{images/graphs/Breast_svm_phe.pdf}} \\
 \subfigure[][]{%
 \label{fig:svm-phe-CAD}%
-\includegraphics[height=2in]{images/graphs/credit_svm_phe.pdf}}%
+\includegraphics[height=6.1cm]{images/graphs/credit_svm_phe.pdf}}%
 \hspace{8pt}%
 \subfigure[][]{%
 \label{fig:svm-phe-AID}%
-\includegraphics[height=2in]{images/graphs/adult_svm_phe.pdf}}%
+\includegraphics[height=6.1cm]{images/graphs/adult_svm_phe.pdf}}%
 \caption[\acs{phe}+\acs{svm}. Execution time per data sample, in seconds. All datasets.]{\acs{phe}+\acs{svm}. Execution time per data sample, in seconds.
-\subref{fig:svm-phe-pima} Pima Indians Diabetes Dataset;
-\subref{fig:svm-phe-BCWD} Breast Cancer Wisconsin Diagnostic Dataset;
-\subref{fig:svm-phe-CAD} Credit Approval Dataset; and,
-\subref{fig:svm-phe-AID} Adult Income Dataset.}%
+\subref{fig:svm-phe-pima} \emph{Pima Indians Diabetes} Dataset;
+\subref{fig:svm-phe-BCWD} \emph{Breast Cancer Wisconsin Diagnostic} Dataset;
+\subref{fig:svm-phe-CAD} \emph{Credit Approval} Dataset; and,
+\subref{fig:svm-phe-AID} \emph{Adult Income} Dataset.}%
 \label{fig:svm-phe}%
 \end{figure}
 
 
 
-When observing the execution times obtained using \ac{phe} (Tables \ref{table:SVM_PHE_PIMA}, \ref{table:SVM_PHE_BCWD}, \ref{table:SVM_PHE_CAD}, \ref{table:SVM_PHE_AID}, and Figure \ref{fig:svm-phe}), we can see that computation times have a significant overhead for small amounts of number of features and number of Support Vectors, as they only affect the results in the Adult Income Dataset, where they seem to have a linear dependency. 
+When observing the execution times obtained using \ac{phe} (
+%Tables \ref{table:SVM_PHE_PIMA}, \ref{table:SVM_PHE_BCWD}, \ref{table:SVM_PHE_CAD}, \ref{table:SVM_PHE_AID}, and 
+Figure \ref{fig:svm-phe}), we can see that computation times have a significant overhead for small amounts of number of features and number of Support Vectors, as they only affect the results in the \emph{Adult Income} Dataset, where they seem to have a linear dependency. 
 We also observe a linear increase in encryption times with increasing the number of features and a linear increase in computation times with increasing NBits.
 Finally, we can see that decryption times are constant with increasing number of features and number of Support Vectors, but we verify that there is a slightly super-linear increase in encryption and decryption times with increasing NBits. This can cause a problem of scalability, but it can be safely ignored since the execution times per sample are still very small.
 
-Additionally, for \ac{svm} we obtained similar encryption times to the ones obtained for \ac{lr}, which is not surprising since the encryption is only done on one side of the protocol (due to the way the Paillier cruptosystem works). Also, we can observe that decryption times are comparable in both cases, as decryption only occurs once, when all operations have been performed.
+Additionally, for \ac{svm} we obtained similar encryption times to the ones obtained for \ac{lr}, which is not surprising since the encryption is only done on one side of the protocol (due to the way the Paillier cryptosystem works). Also, we can observe that decryption times are comparable in both cases, as decryption only occurs once, when all operations have been performed.
 
 
 
@@ -849,7 +839,7 @@ Adult & \begin{tabular}[c]{@{}l@{}}M1: 11.895\\   M2: 0.232\end{tabular} & \begi
 \label{fig:svm-fhe}
 \end{figure}
 
-When observing the execution times obtained using \ac{phe} (Table \ref{table:SVM_FHE} and Figure \ref{fig:svm-fhe}), we can see similar results to those obtained for \ac{lr}. In particular, we see that the packing used by method M2 greatly decreases the encryption and computation times, when compared with method M1, as well as making the encryption and computation times independent from both the number of features and the number of Support Vectors. 
+When observing the execution times obtained using \ac{fhe} (Table \ref{table:SVM_FHE} and Figure \ref{fig:svm-fhe}), we can see similar results to those obtained for \ac{lr}. In particular, we see that the packing used by method M2 greatly decreases the encryption and computation times, when compared with method M1, as well as making the encryption and computation times independent from both the number of features and the number of Support Vectors. 
 We can also observe that the decryption times are independent of the method used, the number of features and the number of Support Vectors.
 
 Once again, we can see that the method M2 is much more efficient than method M1, showing the obvious advantage of packing the features for each dataset in a single ciphertext before performing the computation.
@@ -862,7 +852,7 @@ When comparing \ac{phe} and \ac{fhe}, unlike what was observed for \ac{lr}, here
 \label{sec:CommunicationCosts}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Given that the communication cost is primarily defined by the cryptographic techniques considered and only secondarily by the \ac{ml} algorithms, we will focus on the former and address each of the specifics of the latter as needed. Given that cryptographic keys only need to be sent once and the ciphertext containing the desired result also only needs to be sent once, the bulk of the communication cost comes from the transmitting and receiving ciphertexts containing the actual data values. Since the amount of bytes sent by one of the parties is equal to the amount received by the other, and vice-versa, we will only present costs from one of the parties. We also do not present total communication costs for the whole datasets because communication costs per sample are independent of the dataset size, and communication costs per sample are the expected costs in a real-life scenario where a large computer cluster is available and data samples are supplied in a continuous fashion.
+As we will see in this Section, the communication cost is primarily defined by the cryptographic techniques considered and only secondarily by the \ac{ml} algorithms. We will focus on the former and address each of the specifics of the latter as needed. Given that cryptographic keys only need to be sent once and the ciphertext containing the desired result also only needs to be sent once, the bulk of the communication cost comes from the transmitting and receiving ciphertexts containing the actual data values. Since the amount of bytes sent by one of the parties is equal to the amount received by the other, and vice-versa, we will only present costs from one of the parties. We also do not present total communication costs for the whole datasets because communication costs per sample are independent of the dataset size, and communication costs per sample are the expected costs in a real-life scenario where a large computer cluster is available and data samples are supplied in a continuous fashion.
 
 
 \subsection{\acl{gc} and \acl{dt}}
@@ -888,7 +878,7 @@ Adult                    & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.34
 
 \begin{table}[htp]
 \centering
-\caption{\acs{gc}+\acs{dt}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. Pima Indians Diabetes Dataset.}
+\caption{\acs{gc}+\acs{dt}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. \emph{Pima Indians Diabetes} Dataset.}
 \label{table:computationCostsDT_PIMA}
 \begin{tabular}{|c|l|l|l|l|l|}
 \hline
@@ -906,7 +896,7 @@ Adult                    & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.34
 
 \begin{table}[htp]
 \centering
-\caption{\acs{gc}+\acs{dt}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. Breast Cancer Wisconsin Diagnostic Dataset.}
+\caption{\acs{gc}+\acs{dt}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. \emph{Breast Cancer Wisconsin Diagnostic} Dataset.}
 \label{table:computationCostsDT_BCWD}
 \begin{tabular}{|c|l|l|l|l|l|}
 \hline
@@ -924,7 +914,7 @@ Adult                    & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.34
 
 \begin{table}[htp]
 \centering
-\caption{\acs{gc}+\acs{dt}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. Credit Approval Dataset.}
+\caption{\acs{gc}+\acs{dt}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. \emph{Credit Approval} Dataset.}
 \label{table:computationCostsDT_CAD}
 \begin{tabular}{|c|l|l|l|l|l|}
 \hline
@@ -941,7 +931,7 @@ Adult                    & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.34
 
 \begin{table}[htp]
 \centering
-\caption{\acs{gc}+\acs{dt}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. Adult Income Dataset.}
+\caption{\acs{gc}+\acs{dt}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. \emph{Adult Income} Dataset.}
 \label{table:computationCostsDT_AID}
 \begin{tabular}{|c|l|l|l|l|l|}
 \hline
@@ -959,23 +949,23 @@ Adult                    & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.34
 \centering
 \subfigure[][]{%
 \label{fig:dt-gc-comm-pima}%
-\includegraphics[height=2in]{images/graphs/Pima_comm_dt_gc.pdf}}%
+\includegraphics[height=6.1cm]{images/graphs/Pima_comm_dt_gc.pdf}}%
 \hspace{8pt}%
 \subfigure[][]{%
 \label{fig:dt-gc-comm-BCWD}%
-\includegraphics[height=2in]{images/graphs/Breast_comm_dt_gc.pdf}} \\
+\includegraphics[height=6.1cm]{images/graphs/Breast_comm_dt_gc.pdf}} \\
 \subfigure[][]{%
 \label{fig:dt-gc-comm-CAD}%
-\includegraphics[height=2in]{images/graphs/credit_comm_dt_gc.pdf}}%
+\includegraphics[height=6.1cm]{images/graphs/credit_comm_dt_gc.pdf}}%
 \hspace{8pt}%
 \subfigure[][]{%
 \label{fig:dt-gc-comm-AID}%
-\includegraphics[height=2in]{images/graphs/adult_comm_dt_gc.pdf}}%
+\includegraphics[height=6.1cm]{images/graphs/adult_comm_dt_gc.pdf}}%
 \caption[\acs{gc}+\acs{dt}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. All datasets.]{\acs{gc}+\acs{dt}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator.
-\subref{fig:dt-gc-comm-pima} Pima Indians Diabetes Dataset;
-\subref{fig:dt-gc-comm-BCWD} Breast Cancer Wisconsin Diagnostic Dataset;
-\subref{fig:dt-gc-comm-CAD} Credit Approval Dataset; and,
-\subref{fig:dt-gc-comm-AID} Adult Income Dataset.}%
+\subref{fig:dt-gc-comm-pima} \emph{Pima Indians Diabetes} Dataset;
+\subref{fig:dt-gc-comm-BCWD} \emph{Breast Cancer Wisconsin Diagnostic} Dataset;
+\subref{fig:dt-gc-comm-CAD} \emph{Credit Approval} Dataset; and,
+\subref{fig:dt-gc-comm-AID} \emph{Adult Income} Dataset.}%
 \label{fig:dt-gc-comm}%
 \end{figure}
 
@@ -1008,7 +998,7 @@ Adult                    & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.34
 
 \begin{table}[htp]
 \centering
-\caption{\acs{gc}+\acs{k-m}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. Pima Indians Diabetes Dataset.}
+\caption{\acs{gc}+\acs{k-m}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. \emph{Pima Indians Diabetes} Dataset.}
 \label{table:computationCostsKM_PIMA}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
@@ -1038,7 +1028,7 @@ Adult                    & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.34
 
 \begin{table}[htp]
 \centering
-\caption{\acs{gc}+\acs{k-m}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. Breast Cancer Wisconsin Diagnostic Dataset.}
+\caption{\acs{gc}+\acs{k-m}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. \emph{Breast Cancer Wisconsin Diagnostic} Dataset.}
 \label{table:computationCostsKM_BCWD}
 \begin{tabular}{|c|l|l|l|l|l|}
 \hline
@@ -1067,7 +1057,7 @@ Adult                    & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.34
 
 \begin{table}[htp]
 \centering
-\caption{\acs{gc}+\acs{k-m}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. Credit Approval Dataset.}
+\caption{\acs{gc}+\acs{k-m}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. \emph{Credit Approval} Dataset.}
 \label{table:computationCostsKM_CAD}
 \begin{tabular}{|c|l|l|l|l|l|}
 \hline
@@ -1097,7 +1087,7 @@ Adult                    & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.34
 
 \begin{table}[htp]
 \centering
-\caption{\acs{gc}+\acs{k-m}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. Adult Income Dataset.}
+\caption{\acs{gc}+\acs{k-m}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. \emph{Adult Income} Dataset.}
 \label{table:computationCostsKM_AID}
 \begin{tabular}{|c|l|l|l|l|l|}
 \hline
@@ -1129,30 +1119,30 @@ Adult                    & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.34
 \centering
 \subfigure[][]{%
 \label{fig:km-gc-comm-pima}%
-\includegraphics[height=2in]{images/graphs/Pima_comm_km_gc.pdf}}%
+\includegraphics[height=6.1cm]{images/graphs/Pima_comm_km_gc.pdf}}%
 \hspace{8pt}%
 \subfigure[][]{%
 \label{fig:km-gc-comm-BCWD}%
-\includegraphics[height=2in]{images/graphs/Breast_comm_km_gc.pdf}} \\
+\includegraphics[height=6.1cm]{images/graphs/Breast_comm_km_gc.pdf}} \\
 \subfigure[][]{%
 \label{fig:km-gc-comm-CAD}%
-\includegraphics[height=2in]{images/graphs/credit_comm_km_gc.pdf}}%
+\includegraphics[height=6.1cm]{images/graphs/credit_comm_km_gc.pdf}}%
 \hspace{8pt}%
 \subfigure[][]{%
 \label{fig:km-gc-comm-AID}%
-\includegraphics[height=2in]{images/graphs/adult_comm_km_gc.pdf}}%
+\includegraphics[height=6.1cm]{images/graphs/adult_comm_km_gc.pdf}}%
 \caption[\acs{gc}+\acs{k-m}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. All datasets.]{\acs{gc}+\acs{k-m}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator.
-\subref{fig:km-gc-comm-pima} Pima Indians Diabetes Dataset;
-\subref{fig:km-gc-comm-BCWD} Breast Cancer Wisconsin Diagnostic Dataset;
-\subref{fig:km-gc-comm-CAD} Credit Approval Dataset; and,
-\subref{fig:km-gc-comm-AID} Adult Income Dataset.}%
+\subref{fig:km-gc-comm-pima} \emph{Pima Indians Diabetes} Dataset;
+\subref{fig:km-gc-comm-BCWD} \emph{Breast Cancer Wisconsin Diagnostic} Dataset;
+\subref{fig:km-gc-comm-CAD} \emph{Credit Approval} Dataset; and,
+\subref{fig:km-gc-comm-AID} \emph{Adult Income} Dataset.}%
 \label{fig:km-gc-comm}%
 \end{figure}
 
 
 In Table \ref{table:computationCostsKM}, we can see that all communication costs per data sample increase linearly with the variables of interest. Both the number of bytes sent and received by the \ac{gc} evaluator during pre-computation depend only on the numeric precision, and the amount of bytes sent during runtime depends only on the numeric precision and the number of features.
 
-Regarding the amount of bytes per data sample received during runtime (Tables \ref{table:computationCostsKM_PIMA}, \ref{table:computationCostsKM_BCWD}, \ref{table:computationCostsKM_CAD}, \ref{table:computationCostsKM_AID}, and Figure \ref{fig:km-gc-comm}), they depend linearly on the number of features and the number of clusters, and quadratically on the numeric precision. However, as we have seen before, the results on Table \ref{table:avgErrorKM} showed that the loss of accuracy is negligible even when only 12 bits are considered, meaning we can easily minimize its effects. Finally, it is important to mention that we did not computed all the entries in the tables above because of two factors: The execution times for the larger datasets were becoming very long as the number of clusters and numeric precision grew; Some examples were impossible to run due to insufficient RAM memory.
+Regarding the amount of bytes per data sample received during runtime (Tables \ref{table:computationCostsKM_PIMA}, \ref{table:computationCostsKM_BCWD}, \ref{table:computationCostsKM_CAD}, \ref{table:computationCostsKM_AID}, and Figure \ref{fig:km-gc-comm}), they depend linearly on the number of features and the number of clusters, and quadratically on the numeric precision. However, as we have seen before, the results on Table \ref{table:avgErrorKM} showed that the loss of accuracy is negligible even when only 12 bits are considered, meaning we can easily minimize its effects. Finally, it is important to mention that we did not compute all the entries in the tables above because the execution times for the larger datasets were becoming very long as the number of clusters and numeric precision grew and some examples were impossible to run due to insufficient RAM memory.
 
 
 \subsection{\acl{phe}}
@@ -1189,7 +1179,7 @@ where $N$ is the number of samples and $n$ is the number of features per sample.
 \end{table}
 
 
-As expected, the communication costs increase linearly with increasing NBits, the number of samples and the number of features. The communication costs for most datasets are considerably small, around a few megabytes. Even for the larger dataset, the Adult Income Dataset, the larger costs are due only to the much higher number of samples considered; the cost per sample is still around a few kilobytes.
+As expected, the communication costs increase linearly with increasing NBits, the number of samples and the number of features. The communication costs for most datasets are considerably small, around a few megabytes. Even for the larger dataset, the \emph{Adult Income} Dataset, the larger costs are due only to the much higher number of samples considered; the cost per sample is still around a few kilobytes.
 
 
 
@@ -1233,7 +1223,7 @@ Once again, the communication costs increase linearly with increasing NBits, the
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-To conclude this chapter, we now make some final observations on the obtained results, analyzing the pros and cons of our \ac{gc} and \ac{he} approaches.
+To conclude this chapter, we now make some final observations on the obtained results, analyzing the advantages and disadvantages of our \ac{gc} and \ac{he} approaches.
 
 Although we did not compare the performance of \ac{gc} and \ac{he} directly, for instance by choosing a \ac{ml} algorithm and implementing it using both privacy-preserving techniques, it is clear that the \ac{he} approach is adequate for \ac{ml} algorithms that rely on arithmetic operations, and the \ac{gc} approach is adequate for \ac{ml} algorithms that rely on non-arithmetic operations. An example pointing in this direction is the quadratic increase in runtime verified in the \ac{gc}+\ac{k-m} experiments, due to the need to perform multiplications to compute the \ac{ed}.
 

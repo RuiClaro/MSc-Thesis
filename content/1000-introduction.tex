@@ -17,15 +17,15 @@
 
 
 With the so-called ``Big Data revolution'', vast amounts of data are now being analyzed and processed by companies that take advantage of the enormous quantities of information that is generated every day\footnote{\url{http://www.vcloudnews.com/every-day-big-data-statistics-2-5-quintillion-bytes-of-data-created-daily/}}. The Big Data and Business Analytics market reflects this growth rate, expecting to hit the \$210 billion mark in the year 2020\footnote{\url{https://www.idc.com/getdoc.jsp?containerId=prUS42371417}}.
-Through this data processing, meaningful information can be obtained to improve existing systems or to discover new approaches in business models. An example of this is the deployment of \ac{dm} algorithms to better understand their customers and to devise better recommendation systems, in order to surpass their competitors in customer satisfaction. Another example lies in the field of healthcare, where it can be beneficial to match patient records from different hospitals in order to identify inefficiencies and develop best practices \cite{Lu2014}. 
+Through this data processing, meaningful information can be obtained to improve existing systems or to discover new approaches in business models. An example is the deployment of \ac{dm} algorithms by companies to better understand their customers and to devise better recommendation systems, in order to surpass their competitors in customer satisfaction. Another example lies in the field of healthcare, where it can be beneficial to match patient records from different hospitals in order to identify inefficiencies and develop best practices \cite{Lu2014}. 
 
-Most times data contain \ac{pii} of individuals, such as health records or daily routines. This kind of data cannot be freely processed because that leads to breaches of private information, such as the AOL Search Leak\footnote{\url{https://www.networkworld.com/article/2185187/security/15-worst-internet-privacy-scandals-of-all-time.html}} or the Microsoft Hotmail privacy breach\footnote{\url{https://www.networkworld.com/article/2185187/security/15-worst-internet-privacy-scandals-of-all-time.html}}. Due to these breaches, and despite the value that \ac{dm} adds to businesses and medical systems, consumers show an increasing concern in the privacy threats posed by it \cite{brankovic1999privacy}. The privacy of an individual may be violated due to, for example, unauthorized access to personal data, or the use of personal data for purposes other than the ones for which data were collected.
+Data often contain \ac{pii} of individuals, such as health records or daily routines. This kind of data cannot be freely processed because that leads to breaches of private information, such as the AOL Search Leak\footnote{\url{https://www.networkworld.com/article/2185187/security/15-worst-internet-privacy-scandals-of-all-time.html}} or the Microsoft Hotmail privacy breach\footnote{\url{https://www.networkworld.com/article/2185187/security/15-worst-internet-privacy-scandals-of-all-time.html}}. Due to these type of breaches, consumers show an increasing concern in the privacy threats posed by them \cite{brankovic1999privacy}. The privacy of an individual may be violated due to, for example, unauthorized access to personal data, or the use of personal data for purposes other than the ones for which data were collected.
 
-To deal with the privacy issues in \ac{dm}, a sub-field known as \ac{ppdm} has been gaining influence over the last years \cite{DAcquisto2015}. The objective of \ac{ppdm} is to guarantee the privacy of sensitive information, while at the same time to preserve the utility of the data for \ac{dm} purposes \cite{agrawal2000privacy}.
+To deal with the privacy issues in \ac{dm}, a sub-field known as \ac{ppdm} has been gaining attention over the last years \cite{DAcquisto2015}. The goal of \ac{ppdm} is to guarantee the privacy of sensitive information, while, at the same time, preserving the utility of the data for \ac{dm} purposes \cite{agrawal2000privacy}.
 This can be achieved by using one or more privacy-preserving techniques, such as \ac{dp} \cite{Danezis2015} or \ac{smpc} \cite{DAcquisto2015}.
 
 
-\ac{ml} algorithms in the context of Big Data processing are also producing significant results, so that it is possible to do knowledge learning from datasets in order to predict future labels (i.e. classes of data) or clusters (i.e. groups of related data) for new data. An example application of \ac{ml} algorithms in \ac{dm} is \textit{Classification} \cite{LeiXu2014}, in which a training set is processed in order to create a classifier for data, and then that classifier is used to predict class labels for new data. These applications show a great impact in the field of medicine as mentioned above, with Google's DeepMind building \ac{ml} algorithms to process admissions in hospitals faster\footnote{\url{https://deepmind.com/applied/deepmind-health/}}, and with IBM's Watson supporting medical personnel consider treatment options for their patients\footnote{\url{https://www.mskcc.org/about/innovative-collaborations/watson-oncology}}.
+\ac{ml} algorithms in the context of Big Data processing are also producing significant results, so it is possible to gather knowledge from datasets in order to predict future \emph{labels} (i.e. classes of data) or \emph{clusters} (i.e. groups of related data) as new data are acquired. An example application of \ac{ml} algorithms in \ac{dm} is \textit{Classification} \cite{LeiXu2014}. In Classification, a training set is processed in order to create a classifier for data, and then that classifier is used to predict class labels for new data. These applications show a great impact in the field of medicine as mentioned above. For example, DeepMind (Google) building \ac{ml} algorithms to process admissions in hospitals\footnote{\url{https://deepmind.com/applied/deepmind-health/}}, and with Watson (IBM) assisting medical personnel to consider treatment options for their patients\footnote{\url{https://www.mskcc.org/about/innovative-collaborations/watson-oncology}}.
 Some examples of \ac{ml} algorithms include \ac{dt}, \ac{k-nn}, and \ac{svm} \cite{LeiXu2014}.
 
 By combining \ac{ml} algorithms and privacy-preserving techniques, it is possible to create \ac{dm} processes that not only allow for knowledge learning on large datasets but also help maintain a level of privacy that is desirable by individuals and that complies with the applicable legislation \cite{DAcquisto2015}.
@@ -35,10 +35,14 @@ By combining \ac{ml} algorithms and privacy-preserving techniques, it is possibl
 \section{Contributions}
 \label{sec:Intro_Contributions}
 
-The main contribution of this thesis is the design and creation of a proof-of-concept platform for privacy-preserving distributed \ac{ml} computations without resorting to third parties. With it, we aim to give individuals a \ac{ml} platform without them having to build their own, meaning fewer maintenance costs derived from maintaining code developed or dedicated servers. Since the platform has its foundations on privacy-preserving techniques, it addresses satisfactorily the privacy demands that those individuals want for their data.
-We show in Section \ref{sec:usecaseHealthcare} possible usages for this platform, detailing the context of the data to process, the trade-offs that are required, etc. We also present in Section \ref{sec:components} the possible applications of the developed solution in a business environment.
+The main contribution of this thesis is the design and creation of a proof-of-concept platform for privacy-preserving distributed \ac{ml} computations. Since the platform has its foundations on privacy-preserving techniques, it addresses satisfactorily the privacy demands that individuals want for their data.
+We show a possible usage for this platform in the field of healthcare, detailing the typical scenario of privacy-preserving processing of \ac{emr} in Section \ref{sec:usecaseHealthcare}. 
+We also present in Section \ref{sec:components} the possible applications of the developed solution in a business environment.
 
-We provide in Chapter\ref{ch:Evaluation} a detailed comparison of four \ac{ml} algorithms (\ac{dt}, \ac{svm}, \ac{k-m} and \ac{lr}) combined with two privacy-preserving techniques (\ac{gc} and \ac{he}), allowing us to understand what is the right combination for each \ac{ml} algorithm, depending on the context of data and on the operations done by the algorithms.
+We provide a detailed comparison of four \ac{ml} algorithms: \ac{dt}, \ac{svm}, \ac{k-m} and \ac{lr}, combined with two privacy-preserving techniques: \ac{gc} and \ac{he}, allowing us to understand what is the right combination for each \ac{ml} algorithm, depending on the context of data and on the operations done by the algorithms. More details can be found in Chapter \ref{ch:Evaluation}.
+
+With our work, we aim to give individuals a \ac{ml} platform without them having to build their own, meaning fewer maintenance costs derived from maintaining code developed or dedicated servers.
+
 
 This thesis is part of a larger project developed in Altran (\ac{bard}), and the implementation was done by a team of developers. We detail in Section \ref{sec:MyContributions} what were our contributions to the project, and what results were developed in \ac{bard} and are presented in this thesis for completeness purposes.
 
@@ -50,15 +54,15 @@ This thesis is part of a larger project developed in Altran (\ac{bard}), and the
   %
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%{}
-\section{Structure of this Document}
+\section{Outline}
 \label{sec:Intro_StructureOfThisDocument}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The remainder of this thesis is structured as follows.
-In Chapter\ref{ch:RelatedWork} we present an overview on the related work about the \ac{ppml} paradigm.
+In Chapter \ref{ch:RelatedWork} we present an overview on the related work about the \ac{ppml} paradigm.
 Chapter \ref{ch:BARD} presents the project from Altran that this thesis is a part of.
-In Chapter\ref{ch:Implementation} we discuss the implementation specifications of the platform.
-Chapter \ref{ch:Evaluation} presents and discuss the results obtained with the implementation.
-Finally, in Chapter\ref{ch:ConclusionsAndFutureWork} we wrap up the thesis with the conclusions and propose directions for future work.
+In Chapter \ref{ch:Implementation} we discuss the implementation specifications of the platform.
+Chapter \ref{ch:Evaluation} presents the results obtained with the implementation.
+Finally, in Chapter \ref{ch:ConclusionsAndFutureWork} we wrap up the thesis with the conclusions and propose directions for future work.
 
   %
  %%%

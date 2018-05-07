@@ -5,14 +5,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-We now present the architectural specifications of \ac{bard}. The \ac{crisp} model described in Figure \ref{fig:crisp-dm} was used as a baseline for representing data life cycle. \ac{bard} focuses on Data Quality (e.g.: cleaning, annotation), Data Representation (e.g.: anonymization, ciphering) and Data Processing (e.g.: computation on ciphertext).
+We now present the architectural specifications of \ac{bard}. The \ac{crisp} model described in Figure \ref{fig:crisp-dm} was used as a baseline to represent the data life cycle. \ac{bard} focuses on Data Quality (e.g.: cleaning, annotation), Data Representation (e.g.: anonymization, ciphering) and Data Processing (e.g.: computation on ciphertext).
 
-The Data Quality step refers to the transformation of raw input data into a structured, consistent and, whenever possible, complete representation. An important aspect to mention in this step is that the data must be processed in plaintext by a trusted entity, meaning that this is done by the data owner or an entity in which the data owner trusts and has explicit permission to perform the operations.
-The Data Representation step refers to the protection of \ac{pii} contained in the data. This data should be: integrated using privacy-preserving data integration techniques; aggregated using anonymization techniques; and represented using either hashing techniques or homomorphic cryptosystems.
-The Data Processing step is done in two different approaches. On one hand, \ac{smpc} techniques, such as \ac{gc} or \ac{he}, are performed over the data. On the other hand, \ac{ml} algorithms, adapted to work with hashed or encrypted data, are used in performing knowledge learning.
+The \emph{Data Quality} step refers to the transformation of raw input data into a structured, consistent, and, whenever possible, complete representation. An important aspect to mention in this step is that the data must be processed in plaintext by a trusted entity, meaning that this is done by the data owner or an entity in which the data owner trusts and has explicit permission to perform the operations.
+The \emph{Data Representation} step refers to the protection of \ac{pii} contained in the data. This data should be: integrated using privacy-preserving data integration techniques; aggregated using anonymization techniques; and represented using either hashing techniques or homomorphic cryptosystems.
+The \emph{Data Processing} step is done in two different approaches. On one hand, \ac{smpc} techniques, such as \ac{gc} or \ac{he}, are performed over the data. On the other hand, \ac{ml} algorithms, adapted to work with hashed or encrypted data, are used in performing knowledge learning.
 
-We now describe the internal structure of \ac{bard}.
-As stated in the objectives, the main goal of \ac{bard} is to produce a platform that will provide mechanisms so that companies can perform privacy-preserving computations for \ac{ml} algorithms, that are respectful of user privacy, and comply with the legislation. A representation of the internal structure of that platform is described by the following components: 
+We now describe the internal components of a \ac{bard} solution.
+As stated in the objectives (Section \ref{sec:Objectives}), the main goal of \ac{bard} is to produce a platform that will provide mechanisms so that companies can perform privacy-preserving computations for \ac{ml} algorithms, that are respectful of user privacy, and comply with the legislation. A representation of a solution is described by the following components: 
 \begin{itemize}
 	\item \textbf{A dataset} to train the \ac{ml} algorithms, or the values representing the already trained algorithms.
 	\item \textbf{A sample} or a set of samples that represent the user inputs, to be predicted.
@@ -25,16 +25,16 @@ In Figure \ref{fig:bard-architecture} we present the architecture for \ac{bard},
 
 \begin{figure}[ht]
 \centering
-\label{fig:bard-architecture}
 \includegraphics[width=1\textwidth]{images/BARDArchitecture.pdf}
 \caption{Platform architecture for \acs{bard}.}
+\label{fig:bard-architecture}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Our Contributions to \acs{bard}}
+\section{Our Contributions to BARD}
 \label{sec:MyContributions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Our contributions to \ac{bard} project were the development of a solution using the toolkit VIPP for privacy-preserving computations using \ac{gc}. This includes the development of a baseline system, the adapted algorithms, the testing of the various toolkits and the actual development of the final solution with \ac{gc}.
 
-As mentioned in \ref{sec:Intro_Contributions}, this thesis is part of a project, and the development of the solution was done by a team. Some of the results shown in this thesis are presented for completeness only, as they were developed by the \ac{bard} team at Altran. Those results are presented in Sections \ref{ssec:exec_he_lr} and \ref{ssec:exec_he_svm}, for the results obtained using \ac{he} and \ac{lr}, and for the results using \ac{he} and \ac{svm}, respectively, and Sections \ref{ssec:comm_phe} and \ref{ssec:comm_fhe} for the communication costs of using \ac{phe} and \ac{fhe}. 
+As mentioned in \ref{sec:Intro_Contributions}, this thesis is part of a project, and the development of the solution was done by a team. Some of the results shown in this thesis are presented for completeness only, as they were developed by the \ac{bard} team at Altran. Those results are presented in Sections \ref{ssec:exec_he_lr} and \ref{ssec:exec_he_svm}, for the results obtained using \ac{he} and \ac{lr}, and for the results using \ac{he} and \ac{svm}, respectively, and Sections \ref{ssec:comm_phe} and \ref{ssec:comm_fhe} for the communication costs of using \ac{phe} and \ac{fhe}. All the remaining results were obtained by the author of this dissertation.

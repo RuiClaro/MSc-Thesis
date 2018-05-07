@@ -4,7 +4,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
- In this section, we will describe some of the techniques used in preserving Data Privacy, namely anonymization, \ac{dp}, \ac{smpc}, \ac{gc}, \ac{ot}, \ac{he} and \ac{fe}.
+ In this section, we will describe some of the techniques used in preserving Data Privacy, namely Anonymization, \ac{dp}, \ac{smpc}, \ac{gc}, \ac{ot}, \ac{he}, and \ac{fe}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -13,11 +13,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-Data anonymization is a type of information sanitization technique that has the final intent of privacy protection. This can be achieved by either removing or encrypting \ac{pii} from datasets so that the individuals whom the data describe remain anonymous \cite{raghunathan2013}.
+Data anonymization is a type of information sanitization technique that has the final intent of privacy protection. This can be achieved by either removing or encrypting \ac{pii} from datasets so that the individuals whom the data describes remain anonymous \cite{raghunathan2013}.
 
-Anonymization techniques use a variety of approaches, for example, suppression, where a piece of information (e.g., name, age) is removed from the dataset; generalization, where data is coarsened into less refined sets; perturbation, where data is modified by adding noise; and permutation, where sensitive associations between entities in the dataset are swapped.
+Anonymization techniques use a variety of approaches, for example, \emph{suppression}, where a piece of information (e.g., name, age) is removed from the dataset; \emph{generalization}, where data is coarsened into less refined sets; \emph{perturbation}, where data is modified by adding noise; and \emph{permutation}, where sensitive associations between entities in the dataset are swapped.
 
-The goals behind anonymization of data are tightly intertwined with the privacy goals we want to achieve for the data being processed. Usually, one or more techniques mentioned above are applied to the data until certain properties are met, for example, \textit{k-anonymity}, $\ell$\textit{-diversity} or \textit{t-closeness}.
+The goals behind anonymization of data are tightly intertwined with the privacy goals we want to achieve for the data being processed. Usually, one or more techniques mentioned above are applied to the data until certain properties are met, for example, \textit{k-anonymity}, $\ell$\textit{-diversity} or \textit{t-closeness}:
 
 \begin{itemize}
     \item \textit{k-anonymity} states that, for each individual whose data is released in some dataset, he must not be distinguishable from at least \textit{k} individuals that are also present in the release \cite{sweeney2002k}. 
@@ -34,7 +34,7 @@ The goals behind anonymization of data are tightly intertwined with the privacy 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-The concept of \acf{dp} arose due to recent Data Privacy breaches mentioned in Section \ref{ssec:ExamplesDataPrivacyBreaches}. The security standard for statistical databases, which states that access to a statistical database should not enable an adversary to learn anything about an individual that could not be learned without access, is not achievable because of the existence of auxiliary information, i.e., information available from sources other than the statistical database \cite{Dwork2006}.
+The concept of \acf{dp} arose due to recent Data Privacy breaches such as the ones mentioned in Section \ref{ssec:ExamplesDataPrivacyBreaches}. The security standard for statistical databases, which states that access to a statistical database should not enable an adversary to learn anything about an individual that could not be learned without access, is not achievable because of the existence of auxiliary information, i.e. information available from sources other than the statistical database \cite{Dwork2006}.
 
 \ac{dp} is a process of maximizing the accuracy of queries in statistical databases while minimizing the chances of identifying its records. The core of the procedure is based on \textit{randomized response} \cite{warner1965randomized}, giving the possibility to infer statistical information from the dataset, while still ensuring high levels of privacy.
 
@@ -47,9 +47,9 @@ Detailed information about \ac{dp} and algorithms designed to achieve it are des
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\acf{smpc} (also known as secure computation, multi-party computation, or privacy-preserving computation) is a protocol for different parties to jointly compute a function over their inputs while keeping those inputs private. The problem of computing functions while also preserving the privacy of the inputs is referred in the literature as a \ac{smpc} problem \cite{yao1982protocols}. Generally speaking, a \ac{smpc} problem deals with computing any probabilistic function on any input, while also ensuring the correctness of the computation and guaranteeing that no more information is revealed to a participant in the computation than what can be inferred from that participant's input and output \cite{goldwasser1997multi}. 
+\acf{smpc} (also known as secure computation, multi-party computation, or privacy-preserving computation) is a protocol for different parties to jointly compute a function over their inputs while keeping those inputs private. The problem of computing functions while also preserving the privacy of the inputs is referred in the literature as a \ac{smpc} problem \cite{yao1982protocols}. Generally speaking, a \ac{smpc} problem deals with computing any probabilistic function on any input, while also ensuring the correctness of the computation. It also guarantees that no more information is revealed to a participant in the computation than what can be inferred from that participant's input and output \cite{goldwasser1997multi}. 
 
-A strategy to solve these problems is to trust an external entity (a trusted third party), that can mediate the computation. This approach can be risky because it requires a third party that all participants agree to trust, which can sometimes be difficult to find. Sometimes, the data have such high degree of importance to the participants that even disclosing them to a trusted third party is not viable.
+A strategy to solve these problems is to trust an external entity (a \emph{trusted third party}), that can mediate the computation. This approach can be risky because it requires a third party that all participants agree to trust, which can sometimes be difficult to find. Sometimes, the data have such high degree of importance to the participants that even disclosing them to a trusted third party is not viable.
 
 When building a \ac{smpc} protocol, the most important properties that must be ensured are \textit{input privacy} and \textit{correctness} \cite{goldreich1998secure}:
 
@@ -61,9 +61,9 @@ When building a \ac{smpc} protocol, the most important properties that must be e
     \item The \textit{correctness} property relates to the existence of malicious parties that could try to deviate from the normal functioning of the protocol. In these cases, the protocol should prevent honest parties to output incorrect results. The approach to implementing the correctness property comes in two alternatives: either the protocol is robust, i.e. it guarantees that the honest parties compute the correct output; or the honest parties abort the computation if they find an error during the execution of the protocol.
 \end{itemize}
 
-The first implementation of secure computation was introduced as \ac{stpc} \cite{yao1982protocols}. It is a simplification of the problem of \ac{smpc}, and a known protocol for \ac{stpc} is Yao's \ac{gc} protocol, which is detailed in Subsection \ref{ssec:GarbledCircuits}. In \ac{stpc}, there are only two participants in the computation, and usually one is responsible for starting and encoding the computation mechanism, while the other is the one responsible for evaluating the computation. In \ac{smpc}, the parties have no special roles and, instead, the encoding is shared amongst the parties, by secret sharing, and the evaluation is made by a protocol. An example of a \ac{smpc} implementation is the FairplayMP \cite{ben2008fairplaymp}.
+The first implementation of secure computation was introduced as \ac{stpc} \cite{yao1982protocols}. It is a simplification of the problem of \ac{smpc}, and a known protocol for \ac{stpc} is Yao's \ac{gc} protocol, which is detailed in Subsection \ref{ssec:GarbledCircuits}. In \ac{stpc}, there are only two participants in the computation, and usually one is responsible for starting and encoding the computation mechanism, while the other is responsible for evaluating the computation. In \ac{smpc}, the parties have no special roles and, instead, the encoding is shared amongst the parties, by secret sharing, and the evaluation is made by a protocol. An example of a \ac{smpc} implementation is the FairplayMP \cite{ben2008fairplaymp}.
 
-Some recent implementations of \ac{smpc} protocols are based on \textit{Secret Sharing}. Secret Sharing allows one party to distribute a secret over a number of parties by distributing shares to each party. Three of the types of secret sharing techniques more commonly used are: Shamir Secret Sharing \cite{shamir1979share}, Additive Secret Sharing and Replicated Secret Sharing.
+Some recent implementations of \ac{smpc} protocols are based on \textit{Secret Sharing} that allows one party to distribute a secret over a number of parties by distributing shares to each party. Three of the types of secret sharing techniques more commonly used are: Shamir Secret Sharing \cite{shamir1979share}, Additive Secret Sharing and Replicated Secret Sharing.
 
 
 
@@ -80,6 +80,8 @@ Some recent implementations of \ac{smpc} protocols are based on \textit{Secret S
 
 An interesting implementation of \ac{ot} is the one done by Pinkas and Naor \cite{naor2005computationally}. In it, the authors describe an extension to the basic 1-out-of-2 \ac{ot} protocol, to a 1-out-of-\textit{N} protocol, and a \textit{k}-out-of-\textit{N} protocol.
 
+The use of \ac{ot} has been shown as a fundamental cornerstone in modern cryptography \cite{kilian1988founding}, and it is an essential building block for communication between parties in a \ac{smpc} protocol.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\acl{gc}} 
@@ -87,9 +89,9 @@ An interesting implementation of \ac{ot} is the one done by Pinkas and Naor \cit
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 
-Yao's \ac{gc} \cite{yao1986generate} are a cryptographic protocol that allows two mutually mistrusting parties to evaluate a function over their private inputs without resorting to a trusted third party. In other words, \ac{gc} allow parties holding inputs $x$ and $y$ to evaluate an arbitrary function $f(x,y)$ without leaking any information about their inputs beyond what is inferred from the function output. The idea behind \ac{gc} is that one party prepares an encrypted version of a circuit that computes $f(x,y)$ and the other party then computes the output of the circuit without learning any intermediate values.
+Yao's \acf{gc} \cite{yao1986generate} are a cryptographic protocol that allows two mutually mistrusting parties to evaluate a function over their private inputs without resorting to a trusted third party. In other words, \ac{gc} allow parties holding inputs $x$ and $y$ to evaluate an arbitrary function $f(x,y)$ without leaking any information about their inputs beyond what is inferred from the function output. The idea behind \ac{gc} is that one party prepares an encrypted version of a circuit that computes $f(x,y)$ and the other party then computes the output of the circuit without learning any intermediate values.
 
-Some optimizations have been proposed for Yao's \ac{gc}. Kolesnikov and Schneider \cite{kolesnikov2008improved} present a technique that eliminates the need to garble XOR gates. Pinkas \textit{et al.} present a technique that reduces the size of a garbled table from four to three ciphertexts \cite{pinkas2009secure}.
+Some optimizations have been proposed for Yao's \ac{gc}. Namely, Kolesnikov and Schneider \cite{kolesnikov2008improved} present a technique that eliminates the need to garble XOR gates. Pinkas \textit{et al.} present a technique that reduces the size of a garbled table from four to three ciphertexts \cite{pinkas2009secure}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -107,7 +109,7 @@ Homomorphic cryptosystems can be classified into two distinct groups: partially 
     \item In \ac{phe} only one operation is permitted, for example addition, multiplication or XOR. Some examples of existing partially homomorphic cryptosystems are:
     ElGamal cryptosystem \cite{elgamal1985public}; Unpadded RSA \cite{rivest1978method}; and Pailier cryptosystem \cite{paillier1999public}.
 
-    \item In \ac{fhe} it is possible to compute two different operations on the ciphertext, namely addition and multiplication. This concept was first introduced in the 70's \cite{rivest1978data}, and it remained so, until recently, when fully homomorphic implementations were developed, for instance, Gentry's cryptosystem \cite{gentry2009fully}.
+    \item In \ac{fhe} it is possible to compute two different operations on the ciphertext, namely addition and multiplication. This concept was first introduced in the 1970's \cite{rivest1978data}, and it remained a theoretical result, until recently, when fully homomorphic implementations were developed, for example, Gentry's cryptosystem \cite{gentry2009fully}.
 \end{itemize}
 
 
@@ -117,7 +119,7 @@ Homomorphic cryptosystems can be classified into two distinct groups: partially 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-In \acf{fe} systems, a decryption key allows a user to learn a specific function of the encryption data, while also stopping that same user from learning anything more about the encrypted data. In other words, having a secret key only allows for a specific computation of a function over the ciphertext \cite{boneh2011functional}. When comparing \ac{fe} with \ac{fhe}, the main difference is that, in an \ac{fhe} scheme, we compute an encryption of $f(x)$ from an encryption of $x$, whereas in an \ac{fe} scheme we compute, in the clear, $f(x)$ from an encryption of $x$. More details can be found in the literature \cite{alwen2013relationship}. 
+In \acf{fe} systems, a decryption key allows a user to learn a specific function of the encrypted data, while also stopping that same user from learning anything more about the encrypted data. In other words, having a secret key only allows for computation of a specific function over the ciphertext \cite{boneh2011functional}. When comparing \ac{fe} with \ac{fhe}, the main difference is that, in an \ac{fhe} scheme, we compute an encryption of $f(x)$ from an encryption of $x$, whereas in an \ac{fe} scheme we compute, in the clear, $f(x)$ from an encryption of $x$. More details can be found in the literature \cite{alwen2013relationship}. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
