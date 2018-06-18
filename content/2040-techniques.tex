@@ -51,7 +51,7 @@ Detailed information about \ac{dp} and algorithms designed to achieve it are des
 
 A strategy to solve these problems is to trust an external entity (a \emph{trusted third party}), that can mediate the computation. This approach can be risky because it requires a third party that all participants agree to trust, which can sometimes be difficult to find. Sometimes, the data have such high degree of importance to the participants that even disclosing them to a trusted third party is not viable.
 
-When building a \ac{smpc} protocol, the most important properties that must be ensured are \textit{input privacy} and \textit{correctness} \cite{goldreich1998secure}:
+When building a \ac{smpc} protocol, the most important properties that must be ensured are \textit{input privacy} and \textit{correctness} \cite{goldreich2009foundations}:
 
 \begin{itemize}
     
@@ -61,7 +61,7 @@ When building a \ac{smpc} protocol, the most important properties that must be e
     \item The \textit{correctness} property relates to the existence of malicious parties that could try to deviate from the normal functioning of the protocol. In these cases, the protocol should prevent honest parties to output incorrect results. The approach to implementing the correctness property comes in two alternatives: either the protocol is robust, i.e. it guarantees that the honest parties compute the correct output; or the honest parties abort the computation if they find an error during the execution of the protocol.
 \end{itemize}
 
-The first implementation of secure computation was introduced as \ac{stpc} \cite{yao1982protocols}. It is a simplification of the problem of \ac{smpc}, and a known protocol for \ac{stpc} is Yao's \ac{gc} protocol, which is detailed in Subsection \ref{ssec:GarbledCircuits}. In \ac{stpc}, there are only two participants in the computation, and usually one is responsible for starting and encoding the computation mechanism, while the other is responsible for evaluating the computation. In \ac{smpc}, the parties have no special roles and, instead, the encoding is shared amongst the parties, by secret sharing, and the evaluation is made by a protocol. An example of a \ac{smpc} implementation is the FairplayMP \cite{ben2008fairplaymp}.
+The first implementation of secure computation was introduced as \ac{stpc} \cite{yao1982protocols}. It is a simplification of the problem of \ac{smpc}, and a known protocol for \ac{stpc} is Yao's \ac{gc} protocol, which is detailed in Section \ref{ssec:GarbledCircuits}. In \ac{stpc}, there are only two participants in the computation, and usually one is responsible for starting and encoding the computation mechanism, while the other is responsible for evaluating the computation. In \ac{smpc}, the parties have no special roles and, instead, the encoding is shared amongst the parties, by secret sharing, and the evaluation is made by a protocol. An example of a \ac{smpc} implementation is the FairplayMP \cite{ben2008fairplaymp}.
 
 Some recent implementations of \ac{smpc} protocols are based on \textit{Secret Sharing} that allows one party to distribute a secret over a number of parties by distributing shares to each party. Three of the types of secret sharing techniques more commonly used are: Shamir Secret Sharing \cite{shamir1979share}, Additive Secret Sharing and Replicated Secret Sharing.
 
@@ -102,7 +102,7 @@ Some optimizations have been proposed for Yao's \ac{gc}. Namely, Kolesnikov and 
 
 \acf{he} \cite{rivest1978data} is a cryptographic technique that allows computations to be carried out over the ciphertexts, so that, when decrypted, the resulting plaintext reflects the computation made. In other words, \ac{he} allows to make some computation over the ciphertext, for example, addition, without decrypting it, and the result is the same as making that computation on the plaintext. This is of great importance because it allows chaining multiple services that make computations on a ciphertext, without the need to expose the data to those services. 
 
-Homomorphic cryptosystems can be classified into two distinct groups: partially homomorphic cryptosystems and fully homomorphic cryptosystems.
+Homomorphic cryptosystems can be classified into two distinct groups: partially homomorphic cryptosystems and fully homomorphic cryptosystems:
 
 \begin{itemize}
     

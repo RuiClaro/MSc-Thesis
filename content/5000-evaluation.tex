@@ -9,7 +9,7 @@
 \label{ch:Evaluation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this Chapter we describe the experiments that were conducted regarding the implementation of \ac{ml} algorithms using privacy-preserving techniques made to prove the concept of the platform. In Section \ref{sec:EvaluationMetrics}, we present the metrics used in the experiments. Section \ref{sec:ExperimentalSetup} describes the setup that was used to run the experiments, as well as the toolkits used and the parameters chosen for those toolkits. In Section \ref{sec:ExperimentalResultsBaseline}, we present the best baseline results obtained for the datasets in question and in Section \ref{sec:ExperimentalResultsComparisonBaseline} we compare those results with the ones obtained using the toolkits. In Section \ref{sec:ExperimentalResultsExecutionTime}, we present the execution times for the combinations of \ac{ml} algorithms and privacy-preserving techniques that were implemented, and in Section \ref{sec:CommunicationCosts} we present the communication costs for those combinations. Finally, in Section \ref{sec:ExperimentalResultsConclusion} we make some final observations about the obtained results.
+In this Chapter we describe the experiments that were conducted regarding the implementation of \ac{ml} algorithms using privacy-preserving techniques made to prove the concept of the platform. In Section \ref{sec:EvaluationMetrics}, we present the metrics used in the experiments. Section \ref{sec:ExperimentalSetup} describes the setup that was used to run the experiments, as well as the toolkits used and the parameters chosen for those toolkits. In Section \ref{sec:ExperimentalResultsBaseline}, we present the best baseline results obtained for the datasets in question and in Section \ref{sec:ExperimentalResultsComparisonBaseline} we compare those results with the ones obtained using the toolkits. In Section \ref{sec:ExperimentalResultsExecutionTime}, we present the execution times for the combinations of \ac{ml} algorithms and privacy-preserving techniques that were implemented. In Section \ref{sec:CommunicationCosts} we present the communication costs for those combinations. Finally, in Section \ref{sec:ExperimentalResultsConclusion} we make some final observations about the obtained results.
 
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -26,6 +26,7 @@ To evaluate our implementation, a set of metrics was considered, namely: \emph{a
 \centering
 \caption{Binary confusion matrix.}
 \label{table:notation}
+\vspace*{0.2cm}
 \begin{tabular}{cc|c|c|} 
 \cline{3-3}\cline{4-4}
                                                          &    & \multicolumn{2}{c|}{\textbf{Real label}}                             \\ 
@@ -81,20 +82,20 @@ All the experiments were performed using a machine with an Intel Core i5-4300M C
 
 For obtaining the experimental results, we started by applying the preprocessing techniques mentioned in Section \ref{sec:DataPreProcessingImplementation} to the datasets described in Table \ref{table:datasets}. As described before, all datasets that were composed of a single file were split into three sets: training, validation and testing sets, with the proportion $70/15/15$. Each \ac{ml} model was trained using the training set, the best model configuration was chosen using the validation set, and the model performance was evaluated using the testing set.
 
-Taking into account that the baseline implementation was done using \textit{scikit-learn}, we could not explicitly observe the operations done in the toolkit since they were made in a ``black box'' mode. This could lead to an inability to distinguish prediction errors caused by the privacy-preserving systems and caused by the implementation of the prediction equations. To solve this problem, we implemented the evaluation prediction processes of the \ac{ml} algorithms without using the toolkit, i.e. directly from the algorithm equations.
+Taking into account that the baseline implementation was done using \textit{scikit-learn}, we could not explicitly observe the operations done in the toolkit since they were made in a black box. This could lead to an inability to distinguish prediction errors caused by the privacy-preserving systems and caused by the implementation of the prediction equations. To solve this problem, we implemented the prediction processes of the \ac{ml} algorithms without using the toolkit, i.e. directly from the algorithm equations.
 We successfully recreated the prediction processes by retrieving from the toolkit the specifications for each \ac{ml} model.
 
 \begin{itemize}
   
     \item For the \ac{dt}, we needed to retrieve all of the model, i.e. the binary tree, so that we could traverse it according to each testing sample, comparing the feature with the threshold of each node, and choosing which branch of the tree to follow, until a label is reached. 
 
-    \item In the case of \ac{svm}, we retrieved from the toolkit all the coefficients needed to compute Equation (\ref{eq:SVM3}), namely the support vectors $x_{SV}^{(i)}$, the $\alpha_i$ coefficients for each support vector, the kernel function $k({\vec {x_{i}}},{\vec {x_{j}}})$ that was used (linear or polynomial), the exponent for the polynomial kernel if needed, and the scalar value $b$.
+    \item In the case of \ac{svm}, we retrieved from the toolkit all the coefficients needed to compute Equation \ref{eq:SVM3}, namely the support vectors $x_{SV}^{(i)}$, the $\alpha_i$ coefficients for each support vector, the kernel function $k({\vec {x_{i}}},{\vec {x_{j}}})$ that was used (linear or polynomial), the exponent for the polynomial kernel if needed, and the scalar value $b$.
 
     %\item In the case of \ac{k-nn}, since training does not exist, there was no need to use the toolkit, so no information was retrieved from it, and it was not required to do an expanded version of the algorithm.
 
     \item For \ac{k-m}, we just required from the toolkit the centroids for each cluster, as well as the prediction labels associated with each one. The classification of each testing sample was done by discovering which centroid was closest to it.
 
-    \item In \ac{lr}, we extracted the $\beta=(\beta_0,\beta_1,...,\beta_n)$ that appear in Equation (\ref{eq:LR3}). $\beta_0$ is the intercept from the linear regression, and $\beta_i$ are each regression coefficient that are multiplied by each feature of the sample.
+    \item In \ac{lr}, we extracted the $\beta=(\beta_0,\beta_1,...,\beta_n)$ that appear in Equation \ref{eq:LR3}. $\beta_0$ is the intercept from the linear regression, and $\beta_i$ are each regression coefficient that are multiplied by each feature of the sample.
 
 \end{itemize}
 
@@ -148,12 +149,15 @@ For the experiments using \ac{fhe}, no parameter search was made, since adequate
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Experimental Results - Baseline}
+\section{Baseline Results}
 \label{sec:ExperimentalResultsBaseline}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-We now show the experimental results obtained by applying different \ac{ml} algorithms to the datasets mentioned above. In each Subsection below, for each dataset, we present the different \ac{ml} algorithms and parameters. The results shown in the following tables are the ones obtained in the testing sets using the parameters that provided the best accuracy or F-Measure results with the validation set. We also present results found in the literature, for comparison.
+We now show the experimental results obtained by applying different \ac{ml} algorithms to the datasets mentioned above.
+In terms of execution time results for the baseline, we were able to observe that they are in the order of milliseconds per data sample.
+
+In each Section below, for each dataset, we present the different \ac{ml} algorithms and parameters. The results shown in the following tables are the ones obtained in the testing sets using the parameters that provided the best accuracy or F-Measure results with the validation set. We also present results found in the literature, for comparison.
 
 \subsection{\emph{Pima Indians Diabetes} Dataset}
 
@@ -161,15 +165,16 @@ We present the best baseline results obtained in the testing set for the \emph{P
 
 \begin{table}[htp]
 \centering
-\caption{Baseline results. \emph{Pima Indians Diabetes} Dataset. ``A'' represents Accuracy, ``F'' represents F-Measure.}
+\caption{Baseline results, in percentage. \emph{Pima Indians Diabetes} Dataset. ``A'' represents Accuracy, ``F'' represents F-Measure.}
 \label{table:baselinePID}
+\vspace*{0.2cm}
 \begin{tabular}{|l|c|c|c|c|c|c|}
 \hline
-\multirow{2}{*}{\textbf{ML algorithm}} & \multirow{2}{*}{\textbf{DT}} & \multirow{2}{*}{\textbf{k-Means}} & \multirow{2}{*}{\textbf{LR}} & \multicolumn{3}{c|}{\textbf{SVM}} \\ \cline{5-7} 
- &  &  & & Linear & Poly & RBF  \\ \hline
-Baseline & \begin{tabular}[c]{@{}l@{}}A: 73.04\%\\   F: 63.53\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 72.17\%\\ F: 52.94\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 75.65\%\\   F: 58.82\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 75.65\%\\   F: 61.11\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 76.52\%\\   F: 59.70\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 77.39\%\\   F: 62.86\%\end{tabular}  \\ \hline
+\multirow{1}{*}{\textbf{ML}} & \multirow{2}{*}{\textbf{DT}} & \multirow{2}{*}{\textbf{k-Means}} & \multirow{2}{*}{\textbf{LR}} & \multicolumn{3}{c|}{\textbf{SVM}} \\ \cline{5-7} 
+\textbf{algorithm} &  &  & & Linear & Poly & RBF  \\ \hline
+Baseline & \begin{tabular}[c]{@{}l@{}}A: 73.04\\   F: 63.53\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 72.17\\ F: 52.94\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 75.65\\   F: 58.82\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 75.65\\   F: 61.11\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 76.52\\   F: 59.70\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 77.39\\   F: 62.86\end{tabular}  \\ \hline
 
-Literature  & \begin{tabular}[c]{@{}l@{}}A: 75.39\%\cite{anwar2014global}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 73.7\%\cite{eggermont2004genetic}\\   F: -\end{tabular}  & \begin{tabular}[c]{@{}l@{}}A: 77.95\%\cite{anwar2014global}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 80.2\%\cite{abdillah2016diagnosis}\\   F: -\end{tabular} \\ \hline
+Literature  & \begin{tabular}[c]{@{}l@{}}A: 75.39\cite{anwar2014global}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 73.7\cite{eggermont2004genetic}\\   F: -\end{tabular}  & \begin{tabular}[c]{@{}l@{}}A: 77.95\cite{anwar2014global}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 80.2\cite{abdillah2016diagnosis}\\   F: -\end{tabular} \\ \hline
 \end{tabular}
 \end{table}
 
@@ -179,15 +184,16 @@ We present the best baseline results obtained in the testing set for the \emph{B
 
 \begin{table}[htp]
 \centering
-\caption{Baseline results. \emph{Breast Cancer Wisconsin Diagnostic} Dataset. ``A'' represents Accuracy, ``F'' represents F-Measure.}
+\caption{Baseline results, in percentage. \emph{Breast Cancer Wisconsin Diagnostic} Dataset. ``A'' represents Accuracy, ``F'' represents F-Measure.}
 \label{table:baselineBCW}
+\vspace*{0.2cm}
 \begin{tabular}{|l|c|c|c|c|c|c|}
 \hline
-\multirow{2}{*}{\textbf{ML algorithm}} & \multirow{2}{*}{\textbf{DT}} & \multirow{2}{*}{\textbf{k-Means}} & \multirow{2}{*}{\textbf{LR}} & \multicolumn{3}{c|}{\textbf{SVM}} \\ \cline{5-7} 
- &  &  & & Linear & Poly & RBF  \\ \hline
-Baseline & \begin{tabular}[c]{@{}l@{}}A: 92.94\%\\   F: 90.91\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 91.76\%\\ F: 90.91\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 95.29\%\\   F: 93.75\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 94.12\%\\   F: 92.06\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 94.12\%\\   F: 92.31\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 94.12\%\\   F: 92.06\%\end{tabular}  \\ \hline
+\multirow{1}{*}{\textbf{ML}} & \multirow{2}{*}{\textbf{DT}} & \multirow{2}{*}{\textbf{k-Means}} & \multirow{2}{*}{\textbf{LR}} & \multicolumn{3}{c|}{\textbf{SVM}} \\ \cline{5-7} 
+\textbf{algorithm} &  &  & & Linear & Poly & RBF  \\ \hline
+Baseline & \begin{tabular}[c]{@{}l@{}}A: 92.94\\   F: 90.91\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 91.76\\ F: 90.91\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 95.29\\   F: 93.75\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 94.12\\   F: 92.06\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 94.12\\   F: 92.31\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 94.12\\   F: 92.06\end{tabular}  \\ \hline
 
-Literature  & \begin{tabular}[c]{@{}l@{}}A: 95.13\%\cite{asri2016using}\\   F: 94.88\%\cite{asri2016using}\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 92.79\%\tablefootnote{\url{https://www.linkedin.com/pulse/using-k-means-clustering-tableau-diagnose-breast-cancer-mayand-tiwari}}\\   F: -\end{tabular}  & \begin{tabular}[c]{@{}l@{}}A: 93.50\%\cite{ramadevi2015evaluation}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 97.54\%\cite{you2010comparative}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 97.13\%\cite{asri2016using}\\   F: 96.25\%\cite{asri2016using}\end{tabular} \\ \hline
+Literature  & \begin{tabular}[c]{@{}l@{}}A: 95.13\cite{asri2016using}\\   F: 94.88\cite{asri2016using}\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 92.79\tablefootnote{\url{https://www.linkedin.com/pulse/using-k-means-clustering-tableau-diagnose-breast-cancer-mayand-tiwari}}\\   F: -\end{tabular}  & \begin{tabular}[c]{@{}l@{}}A: 93.50\cite{ramadevi2015evaluation}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 97.54\cite{you2010comparative}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 97.13\cite{asri2016using}\\   F: 96.25\cite{asri2016using}\end{tabular} \\ \hline
 \end{tabular}
 \end{table}
 
@@ -196,15 +202,16 @@ Literature  & \begin{tabular}[c]{@{}l@{}}A: 95.13\%\cite{asri2016using}\\   F: 9
 We present the best baseline results obtained in the testing set for the \emph{Credit Approval} Dataset in Table \ref{table:baselineCAD}. We obtained results that are similar to the ones found in the literature.
 \begin{table}[htp]
 \centering
-\caption{Baseline results. \emph{Credit Approval} Dataset. ``A'' represents Accuracy, ``F'' represents F-Measure.}
+\caption{Baseline results, in percentage. \emph{Credit Approval} Dataset. ``A'' represents Accuracy, ``F'' represents F-Measure.}
 \label{table:baselineCAD}
+\vspace*{0.2cm}
 \begin{tabular}{|l|c|c|c|c|c|c|}
 \hline
-\multirow{2}{*}{\textbf{ML algorithm}} & \multirow{2}{*}{\textbf{DT}} & \multirow{2}{*}{\textbf{k-Means}} & \multirow{2}{*}{\textbf{LR}} & \multicolumn{3}{c|}{\textbf{SVM}} \\ \cline{5-7} 
- &  &  & & Linear & Poly & RBF  \\ \hline
-Baseline & \begin{tabular}[c]{@{}l@{}}A: 78.64\%\\   F: 75.00\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 83.50\%\\ F: 81.32\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.44\%\\   F: 84.21\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.44\%\\   F: 84.54\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.43\%\\   F: 83.87\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.47\%\\   F: 83.33\%\end{tabular}  \\ \hline
+\multirow{1}{*}{\textbf{ML}} & \multirow{2}{*}{\textbf{DT}} & \multirow{2}{*}{\textbf{k-Means}} & \multirow{2}{*}{\textbf{LR}} & \multicolumn{3}{c|}{\textbf{SVM}} \\ \cline{5-7} 
+\textbf{algorithm} &  &  & & Linear & Poly & RBF  \\ \hline
+Baseline & \begin{tabular}[c]{@{}l@{}}A: 78.64\\   F: 75.00\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 83.50\\ F: 81.32\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.44\\   F: 84.21\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.44\\   F: 84.54\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.43\\   F: 83.87\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.47\\   F: 83.33\end{tabular}  \\ \hline
 
-Literature  & \begin{tabular}[c]{@{}l@{}}A: 85.5\%\tablefootnote{\label{refref}\url{http://docplayer.net/storage/53/32532528/1505920161/lql-Akt2A2T_EvaGfgnQww/32532528.pdf}}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 86.3\%\cite{eggermont2004genetic}\\   F: -\end{tabular}  & \begin{tabular}[c]{@{}l@{}}A: 87.9\%\cite{chitra2013automatic}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 86.2\%\footref{refref}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.8\%\cite{chitra2013automatic}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.5\%\footref{refref}\\   F: -\end{tabular} \\ \hline
+Literature  & \begin{tabular}[c]{@{}l@{}}A: 85.5\tablefootnote{\label{refref}\url{http://docplayer.net/storage/53/32532528/1505920161/lql-Akt2A2T_EvaGfgnQww/32532528.pdf}}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 86.3\cite{eggermont2004genetic}\\   F: -\end{tabular}  & \begin{tabular}[c]{@{}l@{}}A: 87.9\cite{chitra2013automatic}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 86.2\footref{refref}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.8\cite{chitra2013automatic}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.5\footref{refref}\\   F: -\end{tabular} \\ \hline
 \end{tabular}
 \end{table}
 
@@ -214,21 +221,22 @@ We present the best baseline results obtained in the testing set for the \emph{A
 
 \begin{table}[htp]
 \centering
-\caption{Baseline results. \emph{Adult Income} Dataset. ``A'' represents Accuracy, ``F'' represents F-Measure.}
+\caption{Baseline results, in percentage. \emph{Adult Income} Dataset. ``A'' represents Accuracy, ``F'' represents F-Measure.}
 \label{table:baselineAI}
+\vspace*{0.2cm}
 \begin{tabular}{|l|c|c|c|c|c|c|}
 \hline
-\multirow{2}{*}{\textbf{ML algorithm}} & \multirow{2}{*}{\textbf{DT}} & \multirow{2}{*}{\textbf{k-Means}} & \multirow{2}{*}{\textbf{LR}} & \multicolumn{3}{c|}{\textbf{SVM}} \\ \cline{5-7} 
- &  &  & & Linear & Poly & RBF  \\ \hline
-Baseline & \begin{tabular}[c]{@{}l@{}}A: 85.56\%\\   F: 67.37\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 81.95\%\\ F: 55.80\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.08\%\\   F: 66.87\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 69.67\%\\   F: 57.04\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 80.82\%\\   F: 65.91\%\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 82.79\%\\   F: 61.15\%\end{tabular}  \\ \hline
+\multirow{1}{*}{\textbf{ML}} & \multirow{2}{*}{\textbf{DT}} & \multirow{2}{*}{\textbf{k-Means}} & \multirow{2}{*}{\textbf{LR}} & \multicolumn{3}{c|}{\textbf{SVM}} \\ \cline{5-7} 
+\textbf{algorithm} &  &  & & Linear & Poly & RBF  \\ \hline
+Baseline & \begin{tabular}[c]{@{}l@{}}A: 85.56\\   F: 67.37\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 81.95\\ F: 55.80\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 85.08\\   F: 66.87\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 69.67\\   F: 57.04\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 80.82\\   F: 65.91\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 82.79\\   F: 61.15\end{tabular}  \\ \hline
 
-Literature  & \begin{tabular}[c]{@{}l@{}}A: 82.20\%\cite{anwar2014global}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular}  & \begin{tabular}[c]{@{}l@{}}A: 80.00\%\cite{anwar2014global}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.55\%\tablefootnote{\url{http://www.dudonwai.com/docs/gt-omscs-cs7641-a1.pdf?pdf=gt-omscs-cs7641-a1}}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.93\%\cite{lazar2004income}\\   F: -\end{tabular} \\ \hline
+Literature  & \begin{tabular}[c]{@{}l@{}}A: 82.20\cite{anwar2014global}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular}  & \begin{tabular}[c]{@{}l@{}}A: 80.00\cite{anwar2014global}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: -\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.55\tablefootnote{\url{http://www.dudonwai.com/docs/gt-omscs-cs7641-a1.pdf?pdf=gt-omscs-cs7641-a1}}\\   F: -\end{tabular} & \begin{tabular}[c]{@{}l@{}}A: 84.93\cite{lazar2004income}\\   F: -\end{tabular} \\ \hline
 \end{tabular}
 \end{table}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Experimental Results - Comparison with the Baseline}
+\section{Comparison with the Baseline Results}
 \label{sec:ExperimentalResultsComparisonBaseline}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -239,7 +247,8 @@ It is important to mention that, after analyzing the results obtained using the 
 \centering
 \caption{\acs{gc}+\acs{dt}. Average label prediction error when compared with the baseline.}
 \label{table:avgErrorDT}
-\begin{tabular}{|l|l|l|l|l|}
+\vspace*{0.2cm}
+\begin{tabular}{|l|r|r|r|r|}
 \hline
 \textbf{bits} & \textbf{Pima Indians} & \textbf{Breast Cancer} & \textbf{Credit Approval} & \textbf{Adult Income} \\ \hline
 8    & 1.88\%       & 0.55\%        & 8.70\%          & 0.00\%       \\ \hline
@@ -254,7 +263,8 @@ It is important to mention that, after analyzing the results obtained using the 
 \centering
 \caption{\acs{gc}+\acs{k-m}. Average label prediction error when compared with the baseline.}
 \label{table:avgErrorKM}
-\begin{tabular}{|l|l|l|l|l|}
+\vspace*{0.2cm}
+\begin{tabular}{|l|r|r|r|r|}
 \hline
 \textbf{bits} & \textbf{Pima Indians} & \textbf{Breast Cancer} & \textbf{Credit Approval} & \textbf{Adult Income} \\ \hline
 8    & 2.03\%       & 3.07\%        &    0.05\%       &     0.02\%   \\ \hline
@@ -270,7 +280,7 @@ By observing these tables, we can conclude that the loss of prediction performan
 After analyzing the results obtained using the \ac{phe} and \ac{fhe} systems, we verified that all predicted labels and almost all function evaluation outputs match the baseline. The few examples when an exact match does not happen come mostly from the \ac{svm} scoring evaluation function implemented in HElib, and are most likely caused by the accumulation of the intrinsic noise generated every time an operation is performed between two ciphertexts. Therefore, we can conclude that our privacy-preserving versions of the \ac{ml} algorithms using \ac{phe} and \ac{fhe} have no relevant loss of prediction performance.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Experimental Results - Execution Time}
+\section{Execution Time Results}
 \label{sec:ExperimentalResultsExecutionTime}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -286,9 +296,10 @@ We present the execution times obtained by using the toolkit to build a \ac{gc} 
 \centering
 \caption{\acs{gc}+\acs{dt}. Average pre-computation times per data sample, in seconds. All datasets.}
 \label{table:avgDTAllDatasets}
-\begin{tabular}{|l|l|l|l|l|l|}
+\vspace*{0.2cm}
+\begin{tabular}{|l|r|r|r|r|r|}
 \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{dataset}}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                             \\ \cline{2-6} 
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{Dataset}}} & \multicolumn{5}{c|}{\textbf{Numeric Precision}}                                             \\ \cline{2-6} 
 \multicolumn{1}{|c|}{}                                  & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
 Pima                                                    & 0.219           & 0.285            & 0.310            & 0.344            & 0.356            \\ \hline
 Breast                                                  & 0.205           & 0.240            & 0.281            & 0.325            & 0.356            \\ \hline
@@ -298,76 +309,8 @@ Adult                                                   & 0.233           & 0.27
 \end{table}
 
 
-\begin{table}[htp]
-\centering
-\caption{\acs{gc}+\acs{dt}. Runtime per data sample, in seconds. \emph{Pima Indians Diabetes} dataset.}
-\label{table:runtimeDTPID}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-\multirow{2}{*}{\textbf{DT depth}} & \multicolumn{5}{c|}{\textbf{numeric precision}}         \\ \cline{2-6} 
-                          & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
-1                         & 0.374  & 0.502   & 0.663   & 0.782   & 0.901   \\ \hline
-4                         & 0.457  & 0.548   & 0.677   & 0.888   & 1.087   \\ \hline
-6                         & 0.654  & 0.877   & 1.051   & 1.177   & 1.195   \\ \hline
-8                         & 1.622  & 1.689   & 1.889   & 2.099   & 2.180   \\ \hline
-10                        & 3.469  & 3.644   & 3.112   & 4.300   & 4.343   \\ \hline
-12                        & 7.884  & 9.727   & 12.459  & 16.270  & 17.488  \\ \hline
-13                        & 16.289 & 18.353  & 20.926  & 25.120  & 33.508  \\ \hline
-\end{tabular}
-\end{table}
 
-\begin{table}[htp]
-\centering
-\caption{\acs{gc}+\acs{dt}. Runtime per data sample, in seconds. \emph{Breast Cancer Wisconsin Diagnostic} dataset.}
-\label{table:runtimeDTBCW}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-\multirow{2}{*}{\textbf{DT depth}} & \multicolumn{5}{c|}{\textbf{numeric precision}}         \\ \cline{2-6} 
-                          & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
-1                         & 1.015  & 1.383   & 1.735   & 2.082   & 2.442   \\ \hline
-3                         & 1.057  & 1.425   & 1.804   & 2.187   & 2.550   \\ \hline
-4                         & 1.107  & 1.533   & 1.920   & 2.319   & 2.724   \\ \hline
-5                         & 1.307  & 1.713   & 2.122   & 2.665   & 2.974   \\ \hline
-6                         & 1.538  & 2.030   & 2.522   & 2.939   & 3.330   \\ \hline
-7                         & 1.966  & 2.393   & 2.823   & 3.507   & 3.787   \\ \hline
-\end{tabular}
-\end{table}
-
-
-\begin{table}[htp]
-\centering
-\caption{\acs{gc}+\acs{dt}. Runtime per data sample, in seconds. \emph{Credit Approval} dataset.}
-\label{table:runtimeDTCA}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-\multirow{2}{*}{\textbf{DT depth}} & \multicolumn{5}{c|}{\textbf{numeric precision}}         \\ \cline{2-6} 
-                          & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
-2                         & 1.598  & 2.333   & 2.956   & 3.591   & 4.190   \\ \hline
-5                         & 1.852  & 2.603   & 3.295   & 3.953   & 4.576   \\ \hline
-7                         & 2.702  & 3.600   & 4.359   & 5.743   & 5.848   \\ \hline
-8                         & 3.365  & 4.280   & 6.541   & 7.337   & 8.998   \\ \hline
-9                         & 4.511  & 6.930   & 8.202   & 10.990  & 12.227  \\ \hline
-\end{tabular}
-\end{table}
-
-
-\begin{table}[htp]
-\centering
-\caption{\acs{gc}+\acs{dt}. Runtime per data sample, in seconds. \emph{Adult Income} dataset.}
-\label{table:runtimeDTAI}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-\multirow{2}{*}{\textbf{DT depth}} & \multicolumn{5}{c|}{\textbf{numeric precision}}         \\ \cline{2-6} 
-                          & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
-5                         & 3.777  & 5.169   & 6.502   & 8.171   & 9.424   \\ \hline
-6                         & 4.111  & 5.774   & 7.074   & 8.813   & 10.816  \\ \hline
-9                         & 9.256  & 13.864  & 20.294  & 24.314  & 27.236  \\ \hline
-10                        & 17.167 & 23.056  & 30.553  & 39.114  & 54.987  \\ \hline
-\end{tabular}
-\end{table}
-
-
-\begin{figure}[hpt]%
+\begin{figure}[!h]%
 \centering
 \subfigure[][]{%
 \label{fig:dt-gc-pima}%
@@ -392,9 +335,8 @@ Adult                                                   & 0.233           & 0.27
 \end{figure}
 
 
-Regarding the runtimes per data sample (
-%Tables \ref{table:runtimeDTPID}, \ref{table:runtimeDTBCW}, \ref{table:runtimeDTCA}, \ref{table:runtimeDTAI}, and 
-Figure \ref{fig:dt-gc}), we can observe that the results obtained dominate over the pre-computation times. Although they scale slightly sub-linearly with the numeric precision and the number of features, they scale super-linearly with the number of nodes in the \ac{dt}. This can be a problem in terms of scalability since we are using fully expanded \ac{dt}, which means that increasing \ac{dt} depth leads to an exponential increase in the number of nodes.
+Regarding the runtimes per data sample (Figure \ref{fig:dt-gc}), we can observe that the results obtained dominate over the pre-computation times. Although they scale slightly sub-linearly with the numeric precision and the number of features, they scale super-linearly with the number of nodes in the \ac{dt}. This can be a problem in terms of scalability since we are using fully expanded \ac{dt}, which means that increasing \ac{dt} depth leads to an exponential increase in the number of nodes. When comparing these results with those of the baseline, they are many orders of magnitude above, with the non-privacy-preserving approach in the order of milliseconds, and the privacy-preserving approach varying from seconds to hundreds of seconds. 
+More detailed results are presented on Section \ref{app:gcdt_exec}.
 
 
 \subsection{\acl{gc} and \acl{k-m}}
@@ -403,14 +345,14 @@ Figure \ref{fig:dt-gc}), we can observe that the results obtained dominate over 
 
 We present the execution times obtained by using the toolkit to build a \ac{gc} implementation of \ac{k-m} for all the datasets in the tables below. The results are presented in terms of average pre-computation times per data sample and runtimes per data sample. Table \ref{table:avgKMAllDatasets} presents the average pre-computation times for each data sample for all datasets. We can see that average pre-computation times are all very similar to one another despite the slight dependence on the \ac{gc} size, meaning that it does not impact the scalability of our solution.
 
-
 \begin{table}[htp]
 \centering
 \caption{\acs{gc}+\acs{k-m}. Average pre-computation times per data sample, in seconds.}
 \label{table:avgKMAllDatasets}
-\begin{tabular}{|l|l|l|l|l|l|}
+\vspace*{0.2cm}
+\begin{tabular}{|l|r|r|r|r|r|}
 \hline
-\multirow{2}{*}{\textbf{dataset}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                             \\ \cline{2-6} 
+\multirow{2}{*}{\textbf{Dataset}} & \multicolumn{5}{c|}{\textbf{Numeric Precision}}                                             \\ \cline{2-6} 
                                   & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
 Pima                              & 0.260           & 0.283            & 0.307            & 0.331            & 0.339            \\ \hline
 Breast                            & 0.225           & 0.251            & 0.274            & 0.289            & 0.301            \\ \hline
@@ -419,127 +361,9 @@ Adult                             & 0.214           & 0.214            & 0.232  
 \end{tabular}
 \end{table}
 
+Regarding the runtimes per data sample (Figure \ref{fig:km-gc}), we observe again that the results are much larger that the pre-computation times. They scale linearly with the number of features and slightly super-linearly with the number of clusters, none of which compromises the scalability of our approach. However, runtimes scale quadratically with the numeric precision, which is caused by the multiplications required to compute the \ac{ed}. Although this causes scalability issues for large numeric precision, the results in Table \ref{table:avgErrorKM} show that the loss of accuracy is negligible even when only 12 bits are considered, allowing us to safely ignore this issue. The runtimes per data sample are also considerably large for the instances with a large number of clusters, but in our baseline system, we verified that the best results were always obtained when less than 10 clusters were considered. Even if this was not the case, we could sacrifice a small amount of accuracy by lowering the number of clusters considered in order to obtain much faster runtimes. When comparing these results with those of the baseline, they are many orders of magnitude above, with the non-privacy-preserving approach in the order of milliseconds, and the privacy-preserving approach varying from seconds to hundreds of seconds. Finally, it is important to mention that we did not compute all the entries in the tables above because the execution times for the larger datasets were becoming very long as the number of clusters and numeric precision grew and some examples were impossible to run due to insufficient RAM memory. More detailed results are presented on Section \ref{app:gckm_exec}.
 
-
-
-\begin{table}[htp]
-\centering
-\caption{\acs{gc}+\acs{k-m}. Runtime per data sample, in seconds. \emph{Pima Indians Diabetes} dataset.}
-\label{table:runtimeKMPID}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-\multirow{2}{*}{\textbf{number clusters}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                              \\ \cline{2-6}
-                                          & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
-2                                & 0.629           & 0.848            & 1.163            & 1.350            & 1.533            \\ \hline
-3                                & 0.813           & 1.055            & 1.270            & 1.494            & 1.761            \\ \hline
-4                                & 0.852           & 1.143            & 1.429            & 1.664            & 1.969            \\ \hline
-5                                & 0.943           & 1.246            & 1.531            & 1.824            & 2.066            \\ \hline
-6                                & 1.140           & 1.261            & 1.513            & 2.266            & 2.145            \\ \hline
-7                                & 1.124           & 1.319            & 1.620            & 2.319            & 2.188            \\ \hline
-8                                & 1.178           & 1.339            & 1.697            & 2.130            & 2.337            \\ \hline
-9                                & 1.227           & 1.464            & 2.356            & 2.178            & 2.504            \\ \hline
-10                               & 1.228           & 1.544            & 2.439            & 2.497            & 3.717            \\ \hline
-20                               & 1.568           & 1.896            & 3.374            & 3.952            & 5.751            \\ \hline
-30                               & 2.142           & 2.223            & 3.794            & 5.315            & 7.346            \\ \hline
-40                               & 1.762           & 3.379            & 5.099            & 6.941            & 9.697            \\ \hline
-50                               & 1.803           & 3.670            & 5.979            & 8.300            & 12.376           \\ \hline
-60                               & 3.005           & 4.927            & 7.025            & 12.218           & 16.839           \\ \hline
-70                               & 3.420           & 5.250            & 7.616            & 15.795           & 19.339           \\ \hline
-80                               & 3.513           & 6.187            & 8.649            & 15.795           & 21.302           \\ \hline
-90                               & 3.490           & 6.239            & 12.278           & 16.691           & 23.669           \\ \hline
-100                              & 3.580           & 7.876            & 14.497           & 23.599           & 32.248           \\ \hline
-\end{tabular}
-\end{table}
-
-\begin{table}[htp]
-\centering
-\caption{\acs{gc}+\acs{k-m}. Runtime per data sample, in seconds. \emph{Breast Cancer Wisconsin Diagnostic} dataset.}
-\label{table:runtimeKMBCW}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-\multirow{2}{*}{\textbf{number clusters}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                             \\ \cline{2-6} 
-                                          & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
-2                                & 1.619           & 2.102            & 2.788            & 3.616            & 3.838            \\ \hline
-3                                & 1.868           & 2.451            & 3.037            & 3.550            & 5.674            \\ \hline
-4                                & 1.800           & 3.082            & 3.180            & 5.028            & 5.604            \\ \hline
-5                                & 1.912           & 2.598            & 4.760            & 5.410            & 7.402            \\ \hline
-6                                & 2.062           & 2.707            & 4.872            & 5.275            & 7.951            \\ \hline
-7                                & 2.351           & 2.882            & 5.133            & 7.149            & 7.906            \\ \hline
-8                                & 2.930           & 2.805            & 4.978            & 6.946            & 9.124            \\ \hline
-9                                & 2.570           & 3.917            & 4.935            & 7.044            & 9.136            \\ \hline
-10                               & 2.291           & 4.215            & 5.990            & 7.349            & 10.802           \\ \hline
-20                               & 4.223           & 6.797            & 9.580            & 14.877           & 25.232           \\ \hline
-30                               & 5.269           & 9.234            & 15.693           & 24.228           & 36.767           \\ \hline
-40                               & 7.126           & 14.724           & 25.754           & 37.984           & 49.574           \\ \hline
-50                               & 7.885           & 14.701           & 24.245           & 40.602           & 67.651           \\ \hline
-60                               & 9.156           & 19.862           & 35.970           & 56.269           & -                \\ \hline
-70                               & 11.585          & 23.550           & 41.306           & -                & -                \\ \hline
-80                               & 11.433          & 23.367           & 45.067           & -                & -                \\ \hline
-90                               & 13.642          & 27.030           & 53.124           & -                & -                \\ \hline
-100                              & 16.684          & 32.046           & 59.372           & -                & -                \\ \hline
-\end{tabular}
-\end{table}
-
-
-\begin{table}[htp]
-\centering
-\caption{\acs{gc}+\acs{k-m}. Runtime per data sample, in seconds. \emph{Credit Approval} dataset.}
-\label{table:runtimeKMCA}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-\multirow{2}{*}{\textbf{number clusters}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                              \\ \cline{2-6}
-                                          & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
-2                                & 2.541           & 3.652            & 4.151            & 5.729            & 6.837            \\ \hline
-3                                & 2.615           & 3.752            & 5.547            & 6.369            & 8.512            \\ \hline
-4                                & 2.902           & 3.663            & 5.934            & 8.114            & 9.692            \\ \hline
-5                                & 3.016           & 5.036            & 5.825            & 8.633            & 10.725           \\ \hline
-6                                & 3.129           & 5.359            & 7.474            & 9.820            & 12.961           \\ \hline
-7                                & 3.058           & 5.216            & 7.463            & 10.031           & 16.429           \\ \hline
-8                                & 3.033           & 5.360            & 7.912            & 11.342           & 15.633           \\ \hline
-9                                & 3.082           & 5.326            & 8.911            & 13.911           & 19.112           \\ \hline
-10                               & 4.196           & 6.569            & 9.412            & 14.731           & 18.997           \\ \hline
-20                               & 6.368           & 10.641           & 19.121           & 28.797           & 44.666           \\ \hline
-30                               & 9.060           & 17.660           & 28.409           & 49.931           & -                \\ \hline
-40                               & 11.152          & 25.673           & 42.835           & -                & -                \\ \hline
-50                               & 14.681          & 27.539           & 54.795           & -                & -                \\ \hline
-60                               & 18.326          & 37.088           & -                & -                & -                \\ \hline
-70                               & 19.318          & 41.164           & -                & -                & -                \\ \hline
-80                               & 23.371          & 56.422           & -                & -                & -                \\ \hline
-90                               & 27.361          & 62.862           & -                & -                & -                \\ \hline
-100                              & 27.908          & 67.835           & -                & -                & -                \\ \hline
-\end{tabular}
-\end{table}
-
-\begin{table}[htp]
-\centering
-\caption{\acs{gc}+\acs{k-m}. Runtime per data sample, in seconds. \emph{Adult Income} dataset.}
-\label{table:runtimeKMAI}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-\multirow{2}{*}{\textbf{number clusters}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                              \\ \cline{2-6}
-                                          & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
-2                                & 4.703           & 5.536            & 8.098            & 11.307           & 13.672           \\ \hline
-3                                & 4.361           & 7.535            & 9.620            & 14.500           & 18.896           \\ \hline
-4                                & 4.396           & 6.986            & 10.364           & 15.635           & 20.343           \\ \hline
-5                                & 6.083           & 8.688            & 11.681           & 17.928           & 25.292           \\ \hline
-6                                & 5.587           & 11.307           & 15.884           & 23.006           & 31.464           \\ \hline
-7                                & 6.441           & 10.278           & 15.981           & 24.306           & 31.277           \\ \hline
-8                                & 6.394           & 10.871           & 17.157           & 27.155           & 38.732           \\ \hline
-9                                & 8.029           & 12.958           & 21.050           & 32.607           & 48.497           \\ \hline
-10                               & 8.706           & 14.956           & 24.468           & 32.010           & 47.241           \\ \hline
-20                               & 14.834          & 24.567           & 41.386           & -                & -                \\ \hline
-30                               & 19.150          & 39.870           & -                & -                & -                \\ \hline
-40                               & 27.248          & 60.023           & -                & -                & -                \\ \hline
-50                               & 33.243          & -                & -                & -                & -                \\ \hline
-60                               & 42.933          & -                & -                & -                & -                \\ \hline
-70                               & 52.514          & -                & -                & -                & -                \\ \hline
-80                               & 61.952          & -                & -                & -                & -                \\ \hline
-90                               & -               & -                & -                & -                & -                \\ \hline
-100                              & -               & -                & -                & -                & -                \\ \hline
-\end{tabular}
-\end{table}
-
-\begin{figure}[hpt]%
+\begin{figure}[t!]%
 \centering
 \subfigure[][]{%
 \label{fig:km-gc-pima}%
@@ -561,89 +385,21 @@ Adult                             & 0.214           & 0.214            & 0.232  
 \subref{fig:km-gc-CAD} \emph{Credit Approval} Dataset; and,
 \subref{fig:km-gc-AID} \emph{Adult Income} Dataset.}%
 \label{fig:km-gc}%
+%\vspace*{-1.5cm}
 \end{figure}
-
-Regarding the runtimes per data sample (
-%Tables \ref{table:runtimeKMPID}, \ref{table:runtimeKMBCW}, \ref{table:runtimeKMCA}, \ref{table:runtimeKMAI}, and 
-Figure \ref{fig:km-gc}), we observe again that the results are much larger that the pre-computation times. They scale linearly with the number of features and slightly super-linearly with the number of clusters, none of which compromises the scalability of our approach. However, runtimes scale quadratically with the numeric precision, which is caused by the multiplications required to compute the \ac{ed}. Although this causes scalability issues for large numeric precision, the results in Table \ref{table:avgErrorKM} show that the loss of accuracy is negligible even when only 12 bits are considered, allowing us to safely ignore this issue. The runtimes per data sample are also considerably large for the instances with a large number of clusters, but in our baseline system, we verified that the best results were always obtained when less than 10 clusters were considered. Even if this was not the case, we could sacrifice a small amount of accuracy by lowering the number of clusters considered in order to obtain much faster runtimes. Finally, it is important to mention that we did not compute all the entries in the tables above because the execution times for the larger datasets were becoming very long as the number of clusters and numeric precision grew and some examples were impossible to run due to insufficient RAM memory.
-
 
 
 \subsection{\acl{he} and \acl{lr}}
 \label{ssec:exec_he_lr}
 
+%\vspace*{0.2cm}
 As mentioned in Section \ref{sec:MyContributions}, the results presented in this section were developed by other team members in the \ac{bard} project at Altran, and are presented for completeness purposes.
 
-
+\vspace*{0.4cm}
 We present the execution times obtained by using the \ac{phe} and \ac{fhe} systems for all datasets in the tables below. For the \ac{fhe} system, we present the times for methods M1 and M2 in the same cell, for ease of comparison. The results are presented in terms of execution time per data sample. 
 
-
-\begin{table}[htp]
-\centering
-\caption{\acs{phe}+\acs{lr}. Execution time in seconds. \emph{Pima Indians Diabetes} Dataset.}
-\label{table:LR_PHE_PIMA}
-\begin{tabular}{|l|l|l|l|}
-\hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}}  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\  \textbf{data sample} \end{tabular}} \\ \cline{2-4} 
-\multicolumn{1}{|c|}{}    & \multicolumn{1}{c|}{encryption}  & \multicolumn{1}{c|}{computation}  & \multicolumn{1}{c|}{decryption}  \\ \hline
-128                            & 0.002                            & 0.001                             & 0.000                            \\ \hline
-256                            & 0.005                            & 0.001                             & 0.000                            \\ \hline
-512                            & 0.014                            & 0.003                             & 0.002                            \\ \hline
-1024                           & 0.035                            & 0.004                             & 0.005                            \\ \hline
-2048                           & 0.168                            & 0.014                             & 0.025                            \\ \hline
-\end{tabular}
-\end{table}
-
-
-\begin{table}[htp]
-\centering
-\caption{\acs{phe}+\acs{lr}. Execution time in seconds. \emph{Breast Cancer Wisconsin Diagnostic} Dataset.}
-\label{table:LR_PHE_BCWD}
-\begin{tabular}{|l|l|l|l|}
-\hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}}  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\  \textbf{data sample} \end{tabular}} \\ \cline{2-4} 
-\multicolumn{1}{|c|}{}    & \multicolumn{1}{c|}{encryption}  & \multicolumn{1}{c|}{computation}  & \multicolumn{1}{c|}{decryption}  \\ \hline
-128                           & 0.005                            & 0.002                             & 0.000                            \\ \hline
-256                           & 0.013                            & 0.004                             & 0.000                            \\ \hline
-512                           & 0.024                            & 0.005                             & 0.001                            \\ \hline
-1024                          & 0.100                            & 0.018                             & 0.005                            \\ \hline
-2048                          & 0.570                            & 0.028                             & 0.020                            \\ \hline
-\end{tabular}
-\end{table}
-
-\begin{table}[htp]
-\centering
-\caption{\acs{phe}+\acs{lr}. Execution time in seconds. \emph{Credit Approval} Dataset.}
-\label{table:LR_PHE_CAD}
-\begin{tabular}{|l|l|l|l|}
-\hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}}  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\  \textbf{data sample} \end{tabular}} \\ \cline{2-4} 
-\multicolumn{1}{|c|}{}    & \multicolumn{1}{c|}{encryption}  & \multicolumn{1}{c|}{computation}  & \multicolumn{1}{c|}{decryption}  \\ \hline
-128                           & 0.008                            & 0.004                             & 0.000                            \\ \hline
-256                           & 0.012                            & 0.006                             & 0.000                            \\ \hline
-512                           & 0.035                            & 0.013                             & 0.001                            \\ \hline
-1024                          & 0.170                            & 0.026                             & 0.004                            \\ \hline
-2048                          & 0.970                            & 0.045                             & 0.018                            \\ \hline
-\end{tabular}
-\end{table}
-
-\begin{table}[htp]
-\centering
-\caption{\acs{phe}+\acs{lr}. Execution time in seconds. \emph{Adult Income} Dataset.}
-\label{table:LR_PHE_AID}
-\begin{tabular}{|l|l|l|l|}
-\hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}}  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\  \textbf{data sample} \end{tabular}} \\ \cline{2-4} 
-\multicolumn{1}{|c|}{}    & \multicolumn{1}{c|}{encryption}  & \multicolumn{1}{c|}{computation}  & \multicolumn{1}{c|}{decryption}  \\ \hline
-128                           & 0.011                            & 0.008                             & 0.000                            \\ \hline
-256                           & 0.020                            & 0.016                             & 0.000                            \\ \hline
-512                           & 0.070                            & 0.023                             & 0.001                            \\ \hline
-1024                          & 0.334                            & 0.058                             & 0.003                            \\ \hline
-2048                          & 2.106                            & 0.124                             & 0.019                            \\ \hline
-\end{tabular}
-\end{table}
-
-\begin{figure}[hpt]%
+\begin{figure}[bh!]%
+\vspace*{-0.2cm}
 \centering
 \subfigure[][]{%
 \label{fig:lr-phe-pima}%
@@ -668,37 +424,19 @@ We present the execution times obtained by using the \ac{phe} and \ac{fhe} syste
 \end{figure}
 
 
-When observing the execution times obtained using \ac{phe} (
-%Tables \ref{table:LR_PHE_PIMA}, \ref{table:LR_PHE_BCWD}, \ref{table:LR_PHE_CAD}, \ref{table:LR_PHE_AID}, and 
-Figure \ref{fig:lr-phe}), we see that a linear increase in encryption and computation times when the number of features in the samples increases, but a constant decryption time, independent of the number of features.
-We can also observe a linear increase in computation times, and a super-linear increase in encryption and decryption times, when the value of NBits increases. This can cause a problem of scalability, but it can be safely ignored since the execution times per sample are still very small.
+When observing the execution times obtained using \ac{phe} (Figure \ref{fig:lr-phe}), we see that a linear increase in encryption and computation times when the number of features in the samples increases, but a constant decryption time, independent of the number of features.
+We can also observe a linear increase in computation times, and a super-linear increase in encryption and decryption times, when the value of NBits increases. This can cause a problem of scalability, but it can be safely ignored since the execution times per sample are still very small.  When comparing these results with those of the baseline, the non-privacy-preserving results are in the order of milliseconds, and the privacy-preserving approach varies from deciseconds ($10^{-1}$s) to seconds. More detailed results are presented on Section \ref{app:phelr_exec}.
 
-
-\begin{table}[htp]
+\begin{figure}[b!]
 \centering
-\caption{\acs{fhe}+\acs{lr}. Execution time in seconds. All Datasets.}
-\label{table:LR_FHE}
-\begin{tabular}{|l|l|l|l|}
-\hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{dataset}}}  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\   \textbf{data sample}\end{tabular}}  \\ \cline{2-4} 
-\multicolumn{1}{|c|}{}    & \multicolumn{1}{c|}{encryption}    & \multicolumn{1}{c|}{computation}              & \multicolumn{1}{c|}{decryption}           \\ \hline
-Pima    & \begin{tabular}[c]{@{}l@{}}M1: 2.193\\   M2: 0.168\end{tabular}  & \begin{tabular}[c]{@{}l@{}}M1: 0.049\\   M2: 0.005\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.036\\   M2: 0.036\end{tabular} \\ \hline
-Breast   & \begin{tabular}[c]{@{}l@{}}M1: 7.494\\   M2: 0.168\end{tabular}  & \begin{tabular}[c]{@{}l@{}}M1: 0.169\\   M2: 0.005\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.036\\   M2: 0.036\end{tabular} \\ \hline
-Credit  & \begin{tabular}[c]{@{}l@{}}M1: 12.467\\   M2: 0.180\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.296\\   M2: 0.006\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.038\\   M2: 0.038\end{tabular} \\ \hline
-Adult   & \begin{tabular}[c]{@{}l@{}}M1: 24.253\\   M2: 0.169\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.590\\   M2: 0.005\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.036\\   M2: 0.036\end{tabular} \\ \hline
-\end{tabular}
-\end{table}
-
-\begin{figure}[hpt]
-\centering
-\includegraphics[width=0.60\textwidth]{images/graphs/lr_fhe.pdf}
+\includegraphics[width=0.65\textwidth]{images/graphs/lr_fhe.pdf}
 \caption[\acs{fhe}+\acs{lr}. Execution time per data sample, in seconds. All datasets.]{\acs{fhe}+\acs{lr}. Execution time per data sample, in seconds. All Datasets.}
 \label{fig:lr-fhe}
 \end{figure}
 
 
-When analyzing the results obtained using \ac{fhe} (Table \ref{table:LR_FHE} and Figure \ref{fig:lr-fhe}), we can observe that the packing used by method M2 greatly decreases the encryption and computation times, when compared to method M1. We also observe that method M2 makes the encryption and computation times independent from the number of features.
-Overall, we see that method M2 is much more efficient that method M1, showing the obvious advantage of packing the features for each dataset in a single ciphertext before performing any computation.
+When analyzing the results obtained using \ac{fhe} (Figure \ref{fig:lr-fhe}), we can observe that the packing used by method M2 greatly decreases the encryption and computation times, when compared to method M1. We also observe that method M2 makes the encryption and computation times independent from the number of features.
+Overall, we see that method M2 is much more efficient that method M1, showing the obvious advantage of packing the features for each dataset in a single ciphertext before performing any computation. More detailed results are presented on Section \ref{app:fhelr_exec}.
 
 When comparing \ac{phe} and \ac{fhe}, we observe that method M2 of \ac{fhe} has lower execution times than \ac{phe}, despite the complexity of the algorithm behind it. The only possible justification for this is the positive effect caused by feature packing, especially due to the gains in encryption time.
 
@@ -708,79 +446,14 @@ When comparing \ac{phe} and \ac{fhe}, we observe that method M2 of \ac{fhe} has 
 \subsection{\acl{he} and \acl{svm}}
 \label{ssec:exec_he_svm}
 
+\vspace*{-0.4cm}
 Again, as mentioned in Section \ref{sec:MyContributions}, the results presented in this section were developed by other team members in the \ac{bard} project at Altran, and are presented for completeness purposes.
 
+\vspace*{-0.2cm}
 We present the execution times obtained by using the \ac{phe} and \ac{fhe} systems for all datasets in the tables below. Once again, for the \ac{fhe} system, we present the times for methods M1 and M2 in the same cell, for ease of comparison. The results are presented in terms of execution time per data sample for the \ac{phe} case, and execution time per sample and support vector for the \ac{fhe} case.
 
-
-\begin{table}[htp]
-\centering
-\caption{\acs{phe}+\acs{svm}. Execution time in seconds. \emph{Pima Indians Diabetes} Dataset.}
-\label{table:SVM_PHE_PIMA}
-\begin{tabular}{|l|l|l|l|}
-\hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}}  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\  \textbf{data sample} \end{tabular}} \\ \cline{2-4} 
-\multicolumn{1}{|c|}{}    & \multicolumn{1}{c|}{encryption}  & \multicolumn{1}{c|}{computation}  & \multicolumn{1}{c|}{decryption}  \\ \hline
-128                            & 0.001                            & 0.033                             & 0.000                            \\ \hline
-256                            & 0.001                            & 0.054                             & 0.000                            \\ \hline
-512                            & 0.005                            & 0.096                             & 0.001                            \\ \hline
-1024                           & 0.024                            & 0.221                             & 0.003                            \\ \hline
-2048                           & 0.185                            & 0.747                             & 0.025                            \\ \hline
-\end{tabular}
-\end{table}
-
-\begin{table}[htp]
-\centering
-\caption{\acs{phe}+\acs{svm}. Execution time in seconds. \emph{Breast Cancer Wisconsin Diagnostic} Dataset.}
-\label{table:SVM_PHE_BCWD}
-\begin{tabular}{|l|l|l|l|}
-\hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}}  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\  \textbf{data sample} \end{tabular}} \\ \cline{2-4} 
-\multicolumn{1}{|c|}{}    & \multicolumn{1}{c|}{encryption}  & \multicolumn{1}{c|}{computation}  & \multicolumn{1}{c|}{decryption}  \\ \hline
-128                           & 0.002                            & 0.026                             & 0.000                            \\ \hline
-256                           & 0.005                            & 0.043                             & 0.000                            \\ \hline
-512                           & 0.018                            & 0.085                             & 0.001                            \\ \hline
-1024                          & 0.093                            & 0.213                             & 0.003                            \\ \hline
-2048                          & 0.572                            & 0.663                             & 0.019                            \\ \hline
-\end{tabular}
-\end{table}
-
-\begin{table}[htp]
-\centering
-\caption{\acs{phe}+\acs{svm}. Execution time in seconds. \emph{Credit Approval} Dataset.}
-\label{table:SVM_PHE_CAD}
-\begin{tabular}{|l|l|l|l|}
-\hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}}  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\  \textbf{data sample} \end{tabular}} \\ \cline{2-4} 
-\multicolumn{1}{|c|}{}    & \multicolumn{1}{c|}{encryption}  & \multicolumn{1}{c|}{computation}  & \multicolumn{1}{c|}{decryption}  \\ \hline
-128                           & 0.003                            & 0.026                             & 0.000                            \\ \hline
-256                           & 0.008                            & 0.042                             & 0.000                            \\ \hline
-512                           & 0.030                            & 0.084                             & 0.001                            \\ \hline
-1024                          & 0.155                            & 0.208                             & 0.003                            \\ \hline
-2048                          & 0.964                            & 0.593                             & 0.019                            \\ \hline
-\end{tabular}
-\end{table}
-
-\begin{table}[htp]
-\centering
-\caption{\acs{phe}+\acs{svm}. Execution time in seconds. \emph{Adult Income} Dataset.}
-\label{table:SVM_PHE_AID}
-\begin{tabular}{|l|l|l|l|}
-\hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}}  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\  \textbf{data sample} \end{tabular}} \\ \cline{2-4} 
-\multicolumn{1}{|c|}{}    & \multicolumn{1}{c|}{encryption}  & \multicolumn{1}{c|}{computation}  & \multicolumn{1}{c|}{decryption}  \\ \hline
-128                           & 0.007                            & 0.317                             & 0.000                            \\ \hline
-256                           & 0.016                            & 0.492                             & 0.000                            \\ \hline
-512                           & 0.066                            & 1.051                             & 0.001                            \\ \hline
-1024                          & 0.344                            & 2.504                             & 0.003                            \\ \hline
-2048                          & 2.057                            & 6.982                             & 0.019                            \\ \hline
-\end{tabular}
-\end{table}
-
-
-
-
-\begin{figure}[hpt]%
+\begin{figure}[b!]%
+\vspace*{-0.4cm}
 \centering
 \subfigure[][]{%
 \label{fig:svm-phe-pima}%
@@ -789,6 +462,7 @@ We present the execution times obtained by using the \ac{phe} and \ac{fhe} syste
 \subfigure[][]{%
 \label{fig:svm-phe-BCWD}%
 \includegraphics[height=6.1cm]{images/graphs/Breast_svm_phe.pdf}} \\
+\vspace*{-0.2cm}
 \subfigure[][]{%
 \label{fig:svm-phe-CAD}%
 \includegraphics[height=6.1cm]{images/graphs/credit_svm_phe.pdf}}%
@@ -796,59 +470,42 @@ We present the execution times obtained by using the \ac{phe} and \ac{fhe} syste
 \subfigure[][]{%
 \label{fig:svm-phe-AID}%
 \includegraphics[height=6.1cm]{images/graphs/adult_svm_phe.pdf}}%
+\vspace*{-0.2cm}
 \caption[\acs{phe}+\acs{svm}. Execution time per data sample, in seconds. All datasets.]{\acs{phe}+\acs{svm}. Execution time per data sample, in seconds.
 \subref{fig:svm-phe-pima} \emph{Pima Indians Diabetes} Dataset;
 \subref{fig:svm-phe-BCWD} \emph{Breast Cancer Wisconsin Diagnostic} Dataset;
 \subref{fig:svm-phe-CAD} \emph{Credit Approval} Dataset; and,
 \subref{fig:svm-phe-AID} \emph{Adult Income} Dataset.}%
 \label{fig:svm-phe}%
+\vspace*{-0.3cm}
 \end{figure}
 
-
-
-When observing the execution times obtained using \ac{phe} (
-%Tables \ref{table:SVM_PHE_PIMA}, \ref{table:SVM_PHE_BCWD}, \ref{table:SVM_PHE_CAD}, \ref{table:SVM_PHE_AID}, and 
-Figure \ref{fig:svm-phe}), we can see that computation times have a significant overhead for small amounts of number of features and number of Support Vectors, as they only affect the results in the \emph{Adult Income} Dataset, where they seem to have a linear dependency. 
-We also observe a linear increase in encryption times with increasing the number of features and a linear increase in computation times with increasing NBits.
+When observing the execution times obtained using \ac{phe} (Figure \ref{fig:svm-phe}), we can see that computation times have a significant overhead for small amounts of number of features and number of Support Vectors, as they only affect the results in the \emph{Adult Income} Dataset, where they seem to have a linear dependency. 
+We also observe a linear increase in encryption times with increasing the number of features and a linear increase in computation times with increasing NBits. When comparing these results with those of the baseline, the non-privacy-preserving results are in the order of milliseconds, and the privacy-preserving approach varies from deciseconds ($10^{-1}$s) to seconds.
 Finally, we can see that decryption times are constant with increasing number of features and number of Support Vectors, but we verify that there is a slightly super-linear increase in encryption and decryption times with increasing NBits. This can cause a problem of scalability, but it can be safely ignored since the execution times per sample are still very small.
-
 Additionally, for \ac{svm} we obtained similar encryption times to the ones obtained for \ac{lr}, which is not surprising since the encryption is only done on one side of the protocol (due to the way the Paillier cryptosystem works). Also, we can observe that decryption times are comparable in both cases, as decryption only occurs once, when all operations have been performed.
+More detailed results are presented on Section \ref{app:phesvm_exec}.
 
 
 
-\begin{table}[htp]
-\centering
-\caption{\acs{fhe}+\acs{svm}. Execution time in seconds. All Datasets.}
-\label{table:SVM_FHE}
-\begin{tabular}{|l|l|l|l|}
-\hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{dataset}}}  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\   \textbf{data sample}\end{tabular}}  \\ \cline{2-4} 
-\multicolumn{1}{|c|}{}    & \multicolumn{1}{c|}{encryption}    & \multicolumn{1}{c|}{computation}              & \multicolumn{1}{c|}{decryption}           \\ \hline
-Pima & \begin{tabular}[c]{@{}l@{}}M1: 1.127\\   M2: 0.231\end{tabular}  & \begin{tabular}[c]{@{}l@{}}M1: 0.104\\   M2: 0.199\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.058\\   M2: 0.052\end{tabular} \\ \hline
-Breast & \begin{tabular}[c]{@{}l@{}}M1: 4.100\\   M2: 0.233\end{tabular}  & \begin{tabular}[c]{@{}l@{}}M1: 0.359\\   M2: 0.200\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.058\\   M2: 0.053\end{tabular} \\ \hline
-Credit & \begin{tabular}[c]{@{}l@{}}M1: 5.892\\   M2: 0.235\end{tabular}  & \begin{tabular}[c]{@{}l@{}}M1: 0.615\\   M2: 0.201\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.059\\   M2: 0.053\end{tabular} \\ \hline
-Adult & \begin{tabular}[c]{@{}l@{}}M1: 11.895\\   M2: 0.232\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 1.296\\   M2: 0.199\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.057\\   M2: 0.053\end{tabular} \\ \hline
-\end{tabular}
-\end{table}
-
-
-\begin{figure}[hpt]
+\begin{figure}[b!]
 \centering
 \includegraphics[width=0.60\textwidth]{images/graphs/svm_fhe.pdf}
 \caption{\acs{fhe}+\acs{svm}. Execution time per data sample, in seconds. All datasets.}
 \label{fig:svm-fhe}
 \end{figure}
 
-When observing the execution times obtained using \ac{fhe} (Table \ref{table:SVM_FHE} and Figure \ref{fig:svm-fhe}), we can see similar results to those obtained for \ac{lr}. In particular, we see that the packing used by method M2 greatly decreases the encryption and computation times, when compared with method M1, as well as making the encryption and computation times independent from both the number of features and the number of Support Vectors. 
-We can also observe that the decryption times are independent of the method used, the number of features and the number of Support Vectors.
+When observing the execution times obtained using \ac{fhe} (Figure \ref{fig:svm-fhe}), we can see similar results to those obtained for \ac{lr}. In particular, we see that the packing used by method M2 greatly decreases the encryption and computation times, when compared with method M1, as well as making the encryption and computation times independent from both the number of features and the number of Support Vectors. 
+We can also observe that the decryption times are independent of the method used, the number of features and the number of Support Vectors. More detailed results are presented on Section \ref{app:fhesvm_exec}.
 
-Once again, we can see that the method M2 is much more efficient than method M1, showing the obvious advantage of packing the features for each dataset in a single ciphertext before performing the computation.
+Once again, we can see that the method M2 is much more efficient than method M1, showing the obvious advantage of packing the features for each dataset in a single ciphertext before performing the computation. 
 
 When comparing \ac{phe} and \ac{fhe}, unlike what was observed for \ac{lr}, here the former has lower execution times that the latter. Even considering the feature packing of method M2, the fact that many multiplications have to be made (one for each Support Vector) overwhelms \ac{fhe} when compared with \ac{phe} for evaluating an \ac{svm}.
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Experimental Results - Communication Cost}
+\section{Communication Cost Results}
 \label{sec:CommunicationCosts}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -864,9 +521,10 @@ We present the communication costs obtained by using a \ac{gc} implementation of
 \centering
 \caption{\acs{gc}+\acs{dt}. Average amount of bytes per data sample (in kB) sent during pre-computation (PC-S), received during pre-computation (PC-R) and sent during runtime (R-S) by the \ac{gc} evaluator. All datasets.}
 \label{table:computationCostsDT}
+\vspace*{0.2cm}
 \begin{tabular}{|c|l|l|l|l|l|}
 \hline
-\multirow{2}{*}{\textbf{dataset}} & \multicolumn{5}{c|}{\textbf{numeric precision}}  \\ \cline{2-6} 
+\multirow{2}{*}{\textbf{Dataset}} & \multicolumn{5}{c|}{\textbf{Numeric Precision}}  \\ \cline{2-6} 
  & \multicolumn{1}{c|}{8 bits}  & \multicolumn{1}{c|}{12 bits}   & \multicolumn{1}{c|}{16 bits}    & \multicolumn{1}{c|}{20 bits}  & \multicolumn{1}{c|}{24 bits} \\ \hline
 Pima                     & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.342\\   R-S: 8.441\end{tabular}   & \begin{tabular}[c]{@{}l@{}}PC-S: 1.583\\   PC-R: 3.513\\   R-S: 12.662\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.110\\   PC-R: 4.685\\   R-S: 16.883\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.638\\   PC-R: 5.856\\   R-S: 21.104\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 3.166\\   PC-R: 7.027\\   R-S: 25.324\end{tabular}  \\ \hline
 Breast                   & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.342\\   R-S: 31.656\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 1.583\\   PC-R: 3.514\\   R-S: 47.483\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.110\\   PC-R: 4.685\\   R-S: 63.311\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.638\\   PC-R: 5.856\\   R-S: 79.139\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 3.165\\   PC-R: 7.027\\   R-S: 94.967\end{tabular}  \\ \hline
@@ -875,77 +533,7 @@ Adult                    & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.34
 \end{tabular}
 \end{table}
 
-
-\begin{table}[htp]
-\centering
-\caption{\acs{gc}+\acs{dt}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. \emph{Pima Indians Diabetes} Dataset.}
-\label{table:computationCostsDT_PIMA}
-\begin{tabular}{|c|l|l|l|l|l|}
-\hline
-\multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}DT\\ depth\end{tabular}}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                                                                                                                                    \\ \cline{2-6} 
- & \multicolumn{1}{c|}{8 bits} & \multicolumn{1}{c|}{12 bits} & \multicolumn{1}{c|}{16 bits} & \multicolumn{1}{c|}{20 bits} & \multicolumn{1}{c|}{24 bits} \\ \hline
-1                                                                   & 23.542                               & 34.941                                & 46.339                                & 57.743                                & 69.137                                \\ \hline
-4                                                                   & 90.858                               & 131.485                               & 172.120                               & 212.741                               & 253.369                               \\ \hline
-6                                                                   & 321.667                              & 462.496                               & 603.318                               & 744.170                               & 885.012                               \\ \hline
-8                                                                   & 1244.83                              & 1786.52                               & 2328.19                               & 2869.91                               & 3411.55                               \\ \hline
-10                                                                  & 4937.70                              & 7082.78                               & 9227.74                               & 11372.8                               & 13517.9                               \\ \hline
-12                                                                  & 19708.8                              & 28267.3                               & 36825.7                               & 45384.2                               & 53942.9                               \\ \hline
-13                                                                  & 39403.7                              & 56513.5                               & 73623.3                               & 90733.1                               & 107843                                \\ \hline
-\end{tabular}
-\end{table}
-
-\begin{table}[htp]
-\centering
-\caption{\acs{gc}+\acs{dt}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. \emph{Breast Cancer Wisconsin Diagnostic} Dataset.}
-\label{table:computationCostsDT_BCWD}
-\begin{tabular}{|c|l|l|l|l|l|}
-\hline
-\multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}DT\\ depth\end{tabular}}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                                                                                                                                      \\ \cline{2-6} 
- & \multicolumn{1}{c|}{8 bits} & \multicolumn{1}{c|}{12 bits} & \multicolumn{1}{c|}{16 bits} & \multicolumn{1}{c|}{20 bits} & \multicolumn{1}{c|}{24 bits} \\ \hline
-1                                                                   & 85.280                               & 127.547                               & 169.814                               & 212.084                               & 254.348                               \\ \hline
-3                                                                   & 175.738                              & 261.128                               & 346.551                               & 431.980                               & 517.377                               \\ \hline
-4                                                                   & 296.296                              & 439.239                               & 582.210                               & 725.153                               & 868.094                               \\ \hline
-5                                                      & 537.460                              & 795.483                               & 1053.44                               & 1311.47                               & 1569.51                               \\ \hline
-6                                                                   & 1019.83                              & 1507.91                               & 1996.08                               & 2484.10                               & 2972.24                               \\ \hline
-7                                                                   & 1984.46                              & 2932.86                               & 3881.12                               & 4829.36                               & 5777.78                               \\ \hline
-\end{tabular}
-\end{table}
-
-
-\begin{table}[htp]
-\centering
-\caption{\acs{gc}+\acs{dt}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. \emph{Credit Approval} Dataset.}
-\label{table:computationCostsDT_CAD}
-\begin{tabular}{|c|l|l|l|l|l|}
-\hline
-\multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}DT\\ depth\end{tabular}}} & \multicolumn{5}{c|}{\textbf{numeric precision}} \\ \cline{2-6} 
- & \multicolumn{1}{c|}{8 bits} & \multicolumn{1}{c|}{12 bits} & \multicolumn{1}{c|}{16 bits} & \multicolumn{1}{c|}{20 bits} & \multicolumn{1}{c|}{24 bits} \\ \hline
-2                                                                   & 193.908                              & 289.759                               & 385.628                               & 481.480                               & 577.331                               \\ \hline
-5                                                                   & 889.564                              & 1323.15                               & 1756.74                               & 2190.37                               & 2623.99                               \\ \hline
-7                                                                   & 3274.64                              & 4866.18                               & 6457.81                               & 8049.41                               & 9640.96                               \\ \hline
-8                                                                   & 6454.73                              & 9590.25                               & 12725.9                               & 15861.4                               & 18997.0                               \\ \hline
-9                                                                   & 12815.1                              & 19038.6                               & 25262.1                               & 31485.6                               & 37709.3                               \\ \hline
-\end{tabular}
-\end{table}
-
-
-\begin{table}[htp]
-\centering
-\caption{\acs{gc}+\acs{dt}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. \emph{Adult Income} Dataset.}
-\label{table:computationCostsDT_AID}
-\begin{tabular}{|c|l|l|l|l|l|}
-\hline
-\multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}DT\\ depth\end{tabular}}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                                                                                                                                      \\ \cline{2-6} 
- & \multicolumn{1}{c|}{8 bits} & \multicolumn{1}{c|}{12 bits} & \multicolumn{1}{c|}{16 bits} & \multicolumn{1}{c|}{20 bits} & \multicolumn{1}{c|}{24 bits} \\ \hline
-5                                                                   & 1843.72                              & 2753.97                               & 3664.21                               & 4574.43                               & 5484.64                               \\ \hline
-6                                                                   & 3485.83                              & 5205.30                               & 6924.63                               & 8643.95                               & 10363.3                               \\ \hline
-9                                                                   & 26476.2                              & 39523.2                               & 52569.9                               & 65617.1                               & 78663.8                               \\ \hline
-10                                                                  & 52751.1                              & 78743.8                               & 104736                                & 130729                                & 156721                                \\ \hline
-\end{tabular}
-\end{table}
-
-
-\begin{figure}[hpt]%
+\begin{figure}[!h]%
 \centering
 \subfigure[][]{%
 \label{fig:dt-gc-comm-pima}%
@@ -971,7 +559,7 @@ Adult                    & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.34
 
 In Table \ref{table:computationCostsDT}, we can see that all communication costs per data sample increase linearly with the variables of interest. Both the number of bytes sent and received by the \ac{gc} evaluator during pre-computation depend only on the numeric precision, and the amount of bytes sent during runtime depends only on the numeric precision and the number of features.
 
-Regarding the amount of bytes per data sample received during runtime (Tables \ref{table:computationCostsDT_PIMA}, \ref{table:computationCostsDT_BCWD}, \ref{table:computationCostsDT_CAD}, \ref{table:computationCostsDT_AID}, and Figure \ref{fig:dt-gc-comm}), they depend linearly on the numeric precision, on the number of features and on the number of \ac{dt} nodes, and therefore do not compromise the scalability of our approach. For larger \ac{dt}, the communication cost gets considerably large, but it can be easily minimized by using the original \ac{dt} instead of the fully expanded ones.
+Regarding the amount of bytes per data sample received during runtime (Figure \ref{fig:dt-gc-comm}), they depend linearly on the numeric precision, on the number of features and on the number of \ac{dt} nodes, and therefore do not compromise the scalability of our approach. For larger \ac{dt}, the communication cost gets considerably large, but it can be easily minimized by using the original \ac{dt} instead of the fully expanded ones. More detailed results are presented on Section \ref{app:gcdt_comm}.
 
 
 
@@ -985,9 +573,10 @@ We present the communication costs obtained by using a \ac{gc} implementation of
 \centering
 \caption{\acs{gc}+\acs{k-m}. Average amount of bytes per data sample (in kB) sent during pre-computation (PC-S), received during pre-computation (PC-R) and sent during runtime (R-S) by the \ac{gc} evaluator. All datasets.}
 \label{table:computationCostsKM}
+\vspace*{0.2cm}
 \begin{tabular}{|c|l|l|l|l|l|}
 \hline
-\multirow{2}{*}{\textbf{dataset}} & \multicolumn{5}{c|}{\textbf{numeric precision}} \\ \cline{2-6} 
+\multirow{2}{*}{\textbf{Dataset}} & \multicolumn{5}{c|}{\textbf{Numeric Precision}} \\ \cline{2-6} 
 & \multicolumn{1}{c|}{8 bits}                                                 & \multicolumn{1}{c|}{12 bits}                                                & \multicolumn{1}{c|}{16 bits}                                                & \multicolumn{1}{c|}{20 bits}                                                & \multicolumn{1}{c|}{24 bits}                                                \\ \hline
 Pima                     & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.342\\   R-S: 8.442\end{tabular}   & \begin{tabular}[c]{@{}l@{}}PC-S: 1.583\\   PC-R: 3.514\\   R-S: 12.662\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.110\\   PC-R: 4.685\\   R-S: 16.883\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.638\\   PC-R: 5.856\\   R-S: 21.104\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 3.166\\   PC-R: 7.027\\   R-S: 25.324\end{tabular}  \\ \hline
 Breast                   & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.342\\   R-S: 31.656\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 1.583\\   PC-R: 3.514\\   R-S: 47.483\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.110\\   PC-R: 4.685\\   R-S: 63.311\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 2.638\\   PC-R: 5.856\\   R-S: 79.139\end{tabular}  & \begin{tabular}[c]{@{}l@{}}PC-S: 3.166\\   PC-R: 7.027\\   R-S: 94.967\end{tabular}  \\ \hline
@@ -996,126 +585,9 @@ Adult                    & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.34
 \end{tabular}
 \end{table}
 
-\begin{table}[htp]
-\centering
-\caption{\acs{gc}+\acs{k-m}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. \emph{Pima Indians Diabetes} Dataset.}
-\label{table:computationCostsKM_PIMA}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-\multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}l@{}}number\\ clusters\end{tabular}}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                             \\ \cline{2-6} 
-& 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
-2                                                                          & 309.849         & 591.326          & 961.850          & 1421.45          & 1970.15          \\ \hline
-3                                                                          & 456.502         & 874.347          & 1425.81          & 2110.88          & 2929.57          \\ \hline
-4                                                                          & 603.113         & 1157.36          & 1889.79          & 2800.34          & 3889.04          \\ \hline
-5                                                                          & 749.726         & 1440.35          & 2353.72          & 3489.77          & 4848.50          \\ \hline
-6                                                                          & 896.376         & 1723.41          & 2817.74          & 4179.15          & 5807.92          \\ \hline
-7                                                                          & 1042.96         & 2006.43          & 3281.61          & 4868.58          & 6767.40          \\ \hline
-8                                                                          & 1189.58         & 2289.42          & 3745.53          & 5557.99          & 7726.80          \\ \hline
-9                                                                          & 1336.19         & 2572.47          & 4209.50          & 6247.40          & 8686.30          \\ \hline
-10                                                                         & 1482.85         & 2855.49          & 4673.53          & 6936.81          & 9645.61          \\ \hline
-20                                                                         & 2949.03         & 5685.65          & 9312.94          & 13831.1          & 19240.0          \\ \hline
-30                                                                         & 4415.20         & 8515.81          & 13952.4          & 20725.3          & 28834.3          \\ \hline
-40                                                                         & 5881.34         & 11345.9          & 18592.0          & 27619.6          & 38428.7          \\ \hline
-50                                                                         & 7347.55         & 14176.2          & 23231.6          & 34514.1          & 48023.0          \\ \hline
-60                                                                         & 8813.84         & 17006.3          & 27871.1          & 41408.0          & 57617.9          \\ \hline
-70                                                                         & 10280.0         & 19836.4          & 32510.5          & 48302.4          & 67211.9          \\ \hline
-80                                                                         & 11746.1         & 22665.5          & 37510.1          & 55196.6          & 76806.3          \\ \hline
-90                                                                         & 13212.4         & 25496.9          & 41789.7          & 62090.9          & 86400.4          \\ \hline
-100                                                                        & 14678.6         & 28326.8          & 46429.1          & 68985.2          & 95995.1          \\ \hline
-\end{tabular}
-\end{table}
 
 
-\begin{table}[htp]
-\centering
-\caption{\acs{gc}+\acs{k-m}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. \emph{Breast Cancer Wisconsin Diagnostic} Dataset.}
-\label{table:computationCostsKM_BCWD}
-\begin{tabular}{|c|l|l|l|l|l|}
-\hline
-\multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}number\\ clusters\end{tabular}}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                                                                                                                                      \\ \cline{2-6} 
-& \multicolumn{1}{c|}{8 bits} & \multicolumn{1}{c|}{12 bits} & \multicolumn{1}{c|}{16 bits} & \multicolumn{1}{c|}{20 bits} & \multicolumn{1}{c|}{24 bits} \\ \hline
-2                                                                          & 1160.22                              & 2215.08                               & 3604.00                               & 5326.97                               & 7383.92                               \\ \hline
-3                                                                          & 1706.36                              & 3271.44                               & 5337.51                               & 7904.74                               & 10973.1                               \\ \hline
-4                                                                          & 2252.49                              & 4327.76                               & 7071.10                               & 10482.5                               & 14562.2                               \\ \hline
-5                                                                          & 2798.68                              & 5384.18                               & 8804.74                               & 13060.4                               & 18151.1                               \\ \hline
-6                                                                          & 3344.74                              & 6440.50                               & 10538.2                               & 15638.3                               & 21740.2                               \\ \hline
-7                                                                          & 3890.90                              & 7496.85                               & 12271.9                               & 18215.9                               & 25329.3                               \\ \hline
-8                                                                          & 4437.04                              & 8553.14                               & 14005.4                               & 20793.9                               & 28918.7                               \\ \hline
-9                                                                          & 4983.15                              & 9609.47                               & 15739.1                               & 23371.7                               & 32507.7                               \\ \hline
-10                                                                         & 5529.26                              & 10666.0                               & 17472.6                               & 25949.5                               & 36096.7                               \\ \hline
-20                                                                         & 10990.4                              & 21229.2                               & 34808.3                               & 51728.0                               & 71987.3                               \\ \hline
-30                                                                         & 16451.7                              & 31792.6                               & 52144.1                               & 77506.3                               & 107878                                \\ \hline
-40                                                                         & 21913.0                              & 42356.3                               & 69479.9                               & 103284                                & 143769                                \\ \hline
-50                                                                         & 27374.2                              & 52919.6                               & 86815.3                               & 129062                                & 179660                                \\ \hline
-60                                                                         & 32835.5                              & 63482.7                               & 104151                                & 154841                                & -                                     \\ \hline
-70                                                                         & 38296.9                              & 74046.3                               & 121487                                & -                                     & -                                     \\ \hline
-80                                                                         & 43758.2                              & 84609.9                               & 138822                                & -                                     & -                                     \\ \hline
-90                                                                         & 49219.1                              & 95173.1                               & 156159                                & -                                     & -                                     \\ \hline
-100                                                                        & 54680.5                              & 105737                                & 173494                                & -                                     & -                                     \\ \hline
-\end{tabular}
-\end{table}
-
-\begin{table}[htp]
-\centering
-\caption{\acs{gc}+\acs{k-m}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. \emph{Credit Approval} Dataset.}
-\label{table:computationCostsKM_CAD}
-\begin{tabular}{|c|l|l|l|l|l|}
-\hline
-\multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}number\\ clusters\end{tabular}}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                                                                                                                                      \\ \cline{2-6} 
-& \multicolumn{1}{c|}{8 bits} & \multicolumn{1}{c|}{12 bits} & \multicolumn{1}{c|}{16 bits} & \multicolumn{1}{c|}{20 bits} & \multicolumn{1}{c|}{24 bits} \\ \hline
-2                                                                          & 1972.05                              & 3765.09                               & 6126.07                               & 9054.88                               & 12551.6                               \\ \hline
-3                                                                          & 2899.50                              & 5559.67                               & 9071.71                               & 13435.4                               & 18650.7                               \\ \hline
-4                                                                          & 3827.13                              & 7354.19                               & 12017.0                               & 17815.7                               & 24750.1                               \\ \hline
-5                                                                          & 4754.49                              & 9148.68                               & 14962.5                               & 22196.1                               & 30849.3                               \\ \hline
-6                                                                          & 5682.00                              & 10943.2                               & 17908.1                               & 26576.5                               & 36948.4                               \\ \hline
-7                                                                          & 6609.56                              & 12737.8                               & 20853.7                               & 30956.8                               & 43047.6                               \\ \hline
-8                                                                          & 7536.99                              & 14532.3                               & 23799.2                               & 35337.2                               & 49146.9                               \\ \hline
-9                                                                          & 8464.34                              & 16326.9                               & 26744.6                               & 39717.9                               & 55246.2                               \\ \hline
-10                                                                         & 9391.91                              & 18121.3                               & 29690.1                               & 44098.0                               & 61345.4                               \\ \hline
-20                                                                         & 18666.6                              & 36066.6                               & 59145.0                               & 87901.8                               & 122338                                \\ \hline
-30                                                                         & 27941.7                              & 54011.9                               & 88600.0                               & 131706                                & -                                     \\ \hline
-40                                                                         & 37216.4                              & 71957.2                               & 118055                                & -                                     & -                                     \\ \hline
-50                                                                         & 46491.1                              & 89902.4                               & 147510                                & -                                     & -                                     \\ \hline
-60                                                                         & 55765.9                              & 107848                                & -                                     & -                                     & -                                     \\ \hline
-70                                                                         & 65040.7                              & 125793                                & -                                     & -                                     & -                                     \\ \hline
-80                                                                         & 74315.8                              & 143738                                & -                                     & -                                     & -                                     \\ \hline
-90                                                                         & 83590.5                              & 161683                                & -                                     & -                                     & -                                     \\ \hline
-100                                                                        & 92865.1                              & 179629                                & -                                     & -                                     & -                                     \\ \hline
-\end{tabular}
-\end{table}
-
-
-\begin{table}[htp]
-\centering
-\caption{\acs{gc}+\acs{k-m}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. \emph{Adult Income} Dataset.}
-\label{table:computationCostsKM_AID}
-\begin{tabular}{|c|l|l|l|l|l|}
-\hline
-\multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}number\\ clusters\end{tabular}}} & \multicolumn{5}{c|}{\textbf{numeric precision}}                                                                                                                                                      \\ \cline{2-6} 
-& \multicolumn{1}{c|}{8 bits} & \multicolumn{1}{c|}{12 bits} & \multicolumn{1}{c|}{16 bits} & \multicolumn{1}{c|}{20 bits} & \multicolumn{1}{c|}{24 bits} \\ \hline
-2                                                                          & 4174.78                              & 7971.66                               & 12971.1                               & 19173.0                               & 26577.5                               \\ \hline
-3                                                                          & 6136.87                              & 11769.3                               & 19205.7                               & 28445.8                               & 39489.5                               \\ \hline
-4                                                                          & 8098.94                              & 15567.1                               & 25440.1                               & 37718.2                               & 52401.5                               \\ \hline
-5                                                                          & 10061.2                              & 19364.8                               & 31675.0                               & 46990.8                               & 65313.5                               \\ \hline
-6                                                                          & 12023.2                              & 23162.6                               & 37909.2                               & 56263.7                               & 78225.4                               \\ \hline
-7                                                                          & 13985.3                              & 26960.3                               & 44143.4                               & 65536.3                               & 91137.4                               \\ \hline
-8                                                                          & 15947.4                              & 30757.9                               & 50378.0                               & 74808.8                               & 104049                                \\ \hline
-9                                                                          & 17909.6                              & 34555.5                               & 56612.9                               & 84081.3                               & 116961                                \\ \hline
-10                                                                         & 19871.7                              & 38353.1                               & 62847.2                               & 93354.2                               & 129873                                \\ \hline
-20                                                                         & 39493.0                              & 76330.2                               & 125193                                & -                                     & -                                     \\ \hline
-30                                                                         & 59114.1                              & 114307                                & -                                     & -                                     & -                                     \\ \hline
-40                                                                         & 78735.3                              & 152284                                & -                                     & -                                     & -                                     \\ \hline
-50                                                                         & 98356.6                              & -                                     & -                                     & -                                     & -                                     \\ \hline
-60                                                                         & 117978                               & -                                     & -                                     & -                                     & -                                     \\ \hline
-70                                                                         & 137598                               & -                                     & -                                     & -                                     & -                                     \\ \hline
-80                                                                         & 157221                               & -                                     & -                                     & -                                     & -                                     \\ \hline
-90                                                                         & -                                    & -                                     & -                                     & -                                     & -                                     \\ \hline
-100                                                                        & -                                    & -                                     & -                                     & -                                     & -                                     \\ \hline
-\end{tabular}
-\end{table}
-
-
-\begin{figure}[hpt]%
+\begin{figure}[!h]%
 \centering
 \subfigure[][]{%
 \label{fig:km-gc-comm-pima}%
@@ -1124,6 +596,7 @@ Adult                    & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.34
 \subfigure[][]{%
 \label{fig:km-gc-comm-BCWD}%
 \includegraphics[height=6.1cm]{images/graphs/Breast_comm_km_gc.pdf}} \\
+\vspace*{-0.2cm}
 \subfigure[][]{%
 \label{fig:km-gc-comm-CAD}%
 \includegraphics[height=6.1cm]{images/graphs/credit_comm_km_gc.pdf}}%
@@ -1131,19 +604,22 @@ Adult                    & \begin{tabular}[c]{@{}l@{}}PC-S: 1.055\\   PC-R: 2.34
 \subfigure[][]{%
 \label{fig:km-gc-comm-AID}%
 \includegraphics[height=6.1cm]{images/graphs/adult_comm_km_gc.pdf}}%
+\vspace*{-0.2cm}
 \caption[\acs{gc}+\acs{k-m}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. All datasets.]{\acs{gc}+\acs{k-m}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator.
 \subref{fig:km-gc-comm-pima} \emph{Pima Indians Diabetes} Dataset;
 \subref{fig:km-gc-comm-BCWD} \emph{Breast Cancer Wisconsin Diagnostic} Dataset;
 \subref{fig:km-gc-comm-CAD} \emph{Credit Approval} Dataset; and,
 \subref{fig:km-gc-comm-AID} \emph{Adult Income} Dataset.}%
 \label{fig:km-gc-comm}%
+\vspace*{-0.2cm}
 \end{figure}
 
 
 In Table \ref{table:computationCostsKM}, we can see that all communication costs per data sample increase linearly with the variables of interest. Both the number of bytes sent and received by the \ac{gc} evaluator during pre-computation depend only on the numeric precision, and the amount of bytes sent during runtime depends only on the numeric precision and the number of features.
 
-Regarding the amount of bytes per data sample received during runtime (Tables \ref{table:computationCostsKM_PIMA}, \ref{table:computationCostsKM_BCWD}, \ref{table:computationCostsKM_CAD}, \ref{table:computationCostsKM_AID}, and Figure \ref{fig:km-gc-comm}), they depend linearly on the number of features and the number of clusters, and quadratically on the numeric precision. However, as we have seen before, the results on Table \ref{table:avgErrorKM} showed that the loss of accuracy is negligible even when only 12 bits are considered, meaning we can easily minimize its effects. Finally, it is important to mention that we did not compute all the entries in the tables above because the execution times for the larger datasets were becoming very long as the number of clusters and numeric precision grew and some examples were impossible to run due to insufficient RAM memory.
+Regarding the amount of bytes per data sample received during runtime (Figure \ref{fig:km-gc-comm}), they depend linearly on the number of features and the number of clusters, and quadratically on the numeric precision. However, as we have seen before, the results on Table \ref{table:avgErrorKM} showed that the loss of accuracy is negligible even when only 12 bits are considered, meaning we can easily minimize its effects. Finally, it is important to mention that we did not compute all the entries in the tables above because the execution times for the larger datasets were becoming very long as the number of clusters and numeric precision grew and some examples were impossible to run due to insufficient RAM memory. More detailed results are presented on Section \ref{app:gckm_comm}.
 
+%Tables \ref{table:computationCostsKM_PIMA}, \ref{table:computationCostsKM_BCWD}, \ref{table:computationCostsKM_CAD}, \ref{table:computationCostsKM_AID}, and 
 
 \subsection{\acl{phe}}
 \label{ssec:comm_phe}
@@ -1155,20 +631,22 @@ For the \ac{phe} systems, both the key size and the ciphertexts size depend only
 Under the assumption that one of the parties owns the data to be evaluated and the other owns the evaluation model and has the computational power to perform the evaluation, we only need to determine the communication cost of transmitting the data to be evaluated from one party to the other. This cost is independent of the \ac{ml} algorithm considered.
 
 For each of the data samples, each individual feature value needs to be encrypted. The communication cost, in bits, is therefore given by:
-
 \begin{equation}
 \label{eq:PHE_commCost}
 cost_{comm} = \underbrace{2(2\text{NBits})}_{\text{public key}} + \underbrace{Nn(2\text{NBits})}_{\text{ciphered data}} + \underbrace{2\text{NBits}}_{\text{ciphered result}} 
 \end{equation}
-where $N$ is the number of samples and $n$ is the number of features per sample. As mentioned before, the ciphertexts containing the actual data overwhelm the other contributions. We present the communication costs for the datasets considered in Table \ref{table:PHECommCost}.
+where $N$ is the number of samples and $n$ is the number of features per sample.
+
+As mentioned before, the ciphertexts containing the actual data overwhelm the other contributions. We present the communication costs for the datasets considered in Table \ref{table:PHECommCost}.
 
 \begin{table}[htp]
 \centering
 \caption{\acs{phe}. Communication costs in kilobytes (kB). All datasets.}
 \label{table:PHECommCost}
-\begin{tabular}{|c|l|l|l|l|}
+\vspace*{0.2cm}
+\begin{tabular}{|c|r|r|r|r|}
 \hline
-\multirow{2}{*}{\textbf{NBits}} & \textbf{Pima}          & \textbf{Breast Cancer} & \textbf{Credit Approval} & \textbf{Adult Income}   \\ \cline{2-5}
+\multirow{2}{*}{\textbf{NBits}} & \multicolumn{1}{c|}{\textbf{Pima}}          & \multicolumn{1}{c|}{\textbf{Breast Cancer}} & \multicolumn{1}{c|}{\textbf{Credit Approval}} & \multicolumn{1}{c|}{\textbf{Adult Income}}   \\ \cline{2-5}
                        & cost / sample & cost / sample & cost / sample   & cost / sample  \\ \hline
 128       & 0.352        & 1.056          & 1.728          & 3.552         \\ \hline
 256       & 0.704        & 2.112          & 3.456          & 7.104         \\ \hline
@@ -1193,7 +671,6 @@ Considering the \ac{fhe} system used by the HElib toolkit, there was no easy way
 Under the assumption that one of the parties owns the data to be evaluated and the other owns the evaluation model and has the computational power to perform the evaluation, we only need to determine the communication cost of transmitting the data to be evaluated from one party to the other. This cost is independent of the \ac{ml} algorithm considered.
 
 For each of the data samples, each individual feature value needs to be encrypted. The communication cost, in bits, is therefore given by:
-
 \begin{equation}
 \label{eq:FHE_commCost}
 cost_{comm} = \underbrace{w_{key}}_{public key} + \underbrace{Nnw_{ciphertext}}_{ciphered data} + \underbrace{w_{ciphertext}}_{ciphered result}
@@ -1205,6 +682,7 @@ where $N$ is the number of samples and $n$ is the number of features per sample.
 \centering
 \caption{\acs{fhe}. Communication costs in Megabytes (MB). All datasets.}
 \label{table:FHECommCost}
+\vspace*{0.2cm}
 \begin{tabular}{|l|l|l|l|}
 \hline
 \textbf{Pima}          & \textbf{Breast Cancer} & \textbf{Credit Approval} & \textbf{Adult Income}   \\ \hline
@@ -1218,19 +696,20 @@ Once again, the communication costs increase linearly with increasing NBits, the
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Experimental Results - Conclusions}
+\section{Discussion}
 \label{sec:ExperimentalResultsConclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-To conclude this chapter, we now make some final observations on the obtained results, analyzing the advantages and disadvantages of our \ac{gc} and \ac{he} approaches.
+We now make some final observations on the obtained results, analyzing the advantages and disadvantages of our \ac{gc} and \ac{he} approaches.
 
 Although we did not compare the performance of \ac{gc} and \ac{he} directly, for instance by choosing a \ac{ml} algorithm and implementing it using both privacy-preserving techniques, it is clear that the \ac{he} approach is adequate for \ac{ml} algorithms that rely on arithmetic operations, and the \ac{gc} approach is adequate for \ac{ml} algorithms that rely on non-arithmetic operations. An example pointing in this direction is the quadratic increase in runtime verified in the \ac{gc}+\ac{k-m} experiments, due to the need to perform multiplications to compute the \ac{ed}.
 
 An important remark on our experiments with \ac{gc} is related to our choice to only analyze fully expanded \ac{dt} instead of the original ones, in order to prevent any information leakage regarding the shape of the original tree. However, in most cases this causes an exponential growth of the number of nodes with increasing tree depths, leading to proportional increases in both the execution times and the communication costs.
-  
 
-Another important conclusion with our experiments with \ac{he} is when each of the techniques should be used. We verified that \ac{phe} is, in fact, usable in practice but under some restrictions (e.g.: if there is no need for complex composition of operations and if data is separated between client and server), while \ac{fhe} is more flexible but still too computationally expensive. However, due to the data packing ``trick'', \ac{fhe} can be more efficient than \ac{phe} for evaluating some \ac{ml} algorithms (e.g.: \ac{lr}).
+We were also able to observe that the execution time increases by five orders of magnitude when comparing the baseline results with the privacy-preserving approach.
+
+Another important conclusion with our experiments with \ac{he} is when each of the techniques should be used. We verified that \ac{phe} is, in fact, usable in practice but under some restrictions (e.g.: if there is no need for complex composition of operations and if data is separated between client and server), while \ac{fhe} is more flexible but still too computationally expensive. However, by using the coefficient packing in method M2, \ac{fhe} can be more efficient than \ac{phe} for evaluating some \ac{ml} algorithms (e.g.: \ac{lr}).
 
 
 
@@ -1247,11 +726,21 @@ Another important conclusion with our experiments with \ac{he} is when each of t
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-In this chapter, we detailed the experiments that were conducted in implementing our solution. In Section \ref{sec:EvaluationMetrics}, we presented the metric used in evaluating the results obtained.
-Section \ref{sec:ExperimentalSetup} detailed the setup that was used to run the experiments, as well as the toolkits used.
-In Section \ref{sec:ExperimentalResultsBaseline}, we presented the baseline results obtained for the datasets in question, and in Section \ref{sec:ExperimentalResultsComparisonBaseline} we compared those results with the ones obtained using the toolkits.
-In Section \ref{sec:ExperimentalResultsExecutionTime}, we presented the execution times for the implementation, and in Section \ref{sec:CommunicationCosts} we presented the communication costs for the implementation.
-Finally, in Section \ref{sec:ExperimentalResultsConclusion}, we made the final observations on the results obtained.
+In this chapter, we detailed the experiments that were conducted in implementing our solution.
+We presented the metrics used in evaluating the results obtained, as well as the setup and toolkits that were used to run the experiments.
+The results we obtained using privacy-preserving algorithms, when compared with the ones obtained with the baseline, show that the loss of prediction performance is very small, as long as the numeric precision is 16 bits or more. 
+We observed that \ac{ml} algorithms that rely on arithmetic operations have better performance with the \ac{he} approach. On the contrary, the \ac{gc} approach has better performance for \ac{ml} algorithms that rely on non-arithmetic operations.
+We also observed the differences between \ac{phe} and \ac{fhe}, and were able to discern when each of the techniques should be used.
+
+
+
+
+
+% In Section \ref{sec:EvaluationMetrics}, we presented the metric used in evaluating the results obtained.
+% Section \ref{sec:ExperimentalSetup} detailed the setup that was used to run the experiments, as well as the toolkits used.
+% In Section \ref{sec:ExperimentalResultsBaseline}, we presented the baseline results obtained for the datasets in question, and in Section \ref{sec:ExperimentalResultsComparisonBaseline} we compared those results with the ones obtained using the toolkits.
+% In Section \ref{sec:ExperimentalResultsExecutionTime}, we presented the execution times for the implementation, and in Section \ref{sec:CommunicationCosts} we presented the communication costs for the implementation.
+% Finally, in Section \ref{sec:ExperimentalResultsConclusion}, we made the final observations on the results obtained.
 
 
   %

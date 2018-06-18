@@ -15,11 +15,11 @@
  %%%
   %
 
-Big data is very useful for the operation and improvement of everyday services, but because data contain private information about individuals, it cannot be freely processed because it leads to breaches of private information. Privacy-preserving processing techniques can be helpful in mitigating this problem.
+Big data is very useful for the operation and improvement of everyday services, but because data contain private information about individuals, it cannot be freely processed because it can lead to breaches of privacy. Privacy-preserving processing techniques can be helpful in mitigating this problem.
 
-In this thesis we have presented \acs{bard}, a privacy-preserving \ac{ml} platform to provide companies with the means to apply the privacy-preserving paradigm in their Big Data operations. We discussed the existing techniques that provide the level of privacy compliant with the laws in force and matched those techniques with the most commonly used \ac{ml} algorithms.
+In this work we have presented \acs{bard}, a privacy-preserving \ac{ml} platform to provide companies with the means to apply the privacy-preserving paradigm in their Big Data operations. We discussed the existing techniques that provide the level of privacy compliant with the laws in force and matched those techniques with the most commonly used \ac{ml} algorithms.
 
-We evaluated our solution using publicly available datasets that reflect subjects of relevance. We show that the platform is generic and can be used for other use cases. We compared two privacy-preserving techniques, \ac{gc} and \ac{he}, and identified their limitations, when computing comparisons or arithmetic operations. We were also able to observe the overhead that is caused by these techniques when compared to a baseline that is significant.
+We evaluated our solution using publicly available datasets that reflect subjects of relevance. We show that the platform is generic and can be used for other use cases. We compared two privacy-preserving techniques, \ac{gc} and \ac{he}, and identified their limitations when computing comparisons or arithmetic operations. We were also able to observe the overhead that is caused by these techniques when compared to a baseline that is significant.
 
 With this work, we contributed to provide accurate privacy-preserving \ac{ml} platforms that achieve a level of privacy compliant with the laws in force while also maintaining the quality of data for knowledge learning.
 
@@ -31,12 +31,13 @@ With this work, we contributed to provide accurate privacy-preserving \ac{ml} pl
 %%%%%%%%%%%%%%%%%%%%%%
 
 
-For future work, we propose the following 
-points to enhance the functionalities of the platform and its performance: 
-extend the platform to work with more \ac{ml} algorithms (ex: Neural Networks or Naive Bayes), so that the platform can be used for more purposes (ex: Deep Learning); 
-optimize the \ac{smpc} techniques used, to improve the performance of the platform; 
-implement and test the \ac{smpc} techniques using other toolkits, also to improve the performance of the platform.
-
+For future work, we propose the following enhancements to the functionalities of the platform and its performance: 
+\begin{itemize}
+	\item Extend the platform to work with more \ac{ml} algorithms (ex: Neural Networks or Naive Bayes), so that the platform can be used for more purposes (ex: Deep Learning); 
+	\item Optimize the \ac{smpc} techniques used, to improve the performance of the platform; 
+	\item Implement and test the \ac{smpc} techniques using other toolkits, also to improve the performance.
+	\item Build a catalog of platform applications where lessons learned with actual deployments of the technology can be shared with industry practitioners and also with the scientific community to guide future research in new improved algorithms.
+\end{itemize}
 
   %
  %%%

@@ -20,8 +20,8 @@ As stated in the objectives (Section \ref{sec:Objectives}), the main goal of \ac
 	\item \textbf{A set of toolkits} for each of the techniques used.
 \end{itemize}
 
-These components altogether allow the user of the platform to perform privacy-preserving \ac{ml} over data of his own choosing.
-In Figure \ref{fig:bard-architecture} we present the architecture for \ac{bard}, showing the components and steps that were taken in the design and implementation of the platform.
+These components altogether allow the user of the platform to perform \ac{ppml} over data of his own choosing.
+In Figure \ref{fig:bard-architecture} we present the architecture for \ac{bard}. With it, we aim at providing companies a way to integrate their Big Data systems processes with privacy-preserving ML algorithms, allowing them to provide additional data privacy guarantees to their clients.
 
 \begin{figure}[ht]
 \centering
@@ -30,6 +30,15 @@ In Figure \ref{fig:bard-architecture} we present the architecture for \ac{bard},
 \label{fig:bard-architecture}
 \end{figure}
 
+We assume that only two parties exist: the client and the server. 
+The client represents a user or an individual who owns the data and wishes to perform some processing over it. 
+The server represents a cloud or service provider who has the computational capabilities and know-how to perform such processing.
+The data are provided by the client in the form of a dataset. 
+That dataset is then pre-processed and the data are sanitized, to remove outliers and missing values.
+The model training is performed in the usual manner. 
+The model evaluation process is the main focus of our work, and it is were the privacy-preserving techniques are deployed. 
+In the end of the flow, the platform produces the prediction results.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Our Contributions to BARD}
 \label{sec:MyContributions}
@@ -37,4 +46,4 @@ In Figure \ref{fig:bard-architecture} we present the architecture for \ac{bard},
 
 Our contributions to \ac{bard} project were the development of a solution using the toolkit VIPP for privacy-preserving computations using \ac{gc}. This includes the development of a baseline system, the adapted algorithms, the testing of the various toolkits and the actual development of the final solution with \ac{gc}.
 
-As mentioned in \ref{sec:Intro_Contributions}, this thesis is part of a project, and the development of the solution was done by a team. Some of the results shown in this thesis are presented for completeness only, as they were developed by the \ac{bard} team at Altran. Those results are presented in Sections \ref{ssec:exec_he_lr} and \ref{ssec:exec_he_svm}, for the results obtained using \ac{he} and \ac{lr}, and for the results using \ac{he} and \ac{svm}, respectively, and Sections \ref{ssec:comm_phe} and \ref{ssec:comm_fhe} for the communication costs of using \ac{phe} and \ac{fhe}. All the remaining results were obtained by the author of this dissertation.
+As mentioned in Section \ref{sec:Intro_Contributions}, this work is part of a project, and the development of the solution was done by a team. Some of the results shown in this dissertation are presented for completeness only, as they were developed by the \ac{bard} team at Altran. Those results are presented in Sections \ref{ssec:exec_he_lr} and \ref{ssec:exec_he_svm}, for the results obtained using \ac{he} and \ac{lr}, and for the results using \ac{he} and \ac{svm}, respectively, and Sections \ref{ssec:comm_phe} and \ref{ssec:comm_fhe} for the communication costs of using \ac{phe} and \ac{fhe}. All the remaining results were obtained by the author of this dissertation.

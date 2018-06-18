@@ -19,16 +19,16 @@ We now describe a typical use case scenario for privacy-preserving processing of
 
 	\item \textbf{Actors involved:} Healthcare institutions, patients, medical staff.
 
-	\item \textbf{Preconditions:} Access to data and to \ac{emr} of patients. Consent from each patient regarding the processing of his/her data.
+	\item \textbf{Preconditions:} Access to data and to \ac{emr} of patients. Consent from each patient regarding the processing of his data.
 
 	\item \textbf{Basic Flow:} 
 	
 	\begin{enumerate}
 		\item The institution supplies the platform with data to train the models for one or more \ac{ml} algorithms. This training must be done in an encrypted and/or anonymized domain.
 
-		\item A new patient arrives at the institution and it is asked if he/she consents to the use of the platform to speed up his/her diagnosis, including consent to data collection and data processing. If the patient agrees, the process can continue.
+		\item A new patient arrives at the institution and it is asked if he consents to the use of the platform to speed up his diagnosis, including consent to data collection and data processing. If the patient agrees, the process can continue.
 
-		\item Patient data are collected by the medical staff, including his/her symptoms, medical history, etc.
+		\item Patient data are collected by the medical staff, including his symptoms, medical history, etc.
 
 		\item These data are supplied to the platform, and the platform performs one or more predictions, depending on the number of models the platform has, using privacy-preserving techniques to do so.
 
@@ -39,7 +39,7 @@ We now describe a typical use case scenario for privacy-preserving processing of
 
 	\end{enumerate}
 
-	\item \textbf{PostConditions:} The platform has received data from the institution. The platform has trained different instantiations of \ac{ml} algorithms. The platform successfully predicted the labels for the new samples.
+	\item \textbf{Postconditions:} The platform has received data from the institution. The platform has trained different instantiations of \ac{ml} algorithms. The platform successfully predicted the labels for the new samples.
 
 \end{itemize}
 

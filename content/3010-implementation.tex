@@ -7,13 +7,14 @@
 \label{sec:DatasetsImplementation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-For running the experiments, we used datasets that are normally considered in the literature, namely the \emph{Breast Cancer Wisconsin Diagnostic} dataset\footnote{\url{https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)}}, the \emph{Pima Indians Diabetes} dataset\footnote{\url{https://archive.ics.uci.edu/ml/datasets/pima+indians+diabetes}}, the \emph{Credit Approval} dataset\footnote{\url{http://archive.ics.uci.edu/ml/datasets/credit+approval}}, and the \emph{Adult Income} dataset \footnote{\url{https://archive.ics.uci.edu/ml/datasets/adult}}. Table \ref{table:datasets} presents a brief description of each dataset, and the number of features after the preprocessing techniques presented in Subsection \ref{sec:DataPreProcessingImplementation}.
+For running the experiments, we used datasets that are normally considered in the literature, namely the \emph{Breast Cancer Wisconsin Diagnostic} dataset\footnote{\url{https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)}}, the \emph{Pima Indians Diabetes} dataset\footnote{\url{https://archive.ics.uci.edu/ml/datasets/pima+indians+diabetes}}, the \emph{Credit Approval} dataset\footnote{\url{http://archive.ics.uci.edu/ml/datasets/credit+approval}}, and the \emph{Adult Income} dataset \footnote{\url{https://archive.ics.uci.edu/ml/datasets/adult}}. Table \ref{table:datasets} presents a brief description of each dataset, and the number of features after the preprocessing techniques presented in Section \ref{sec:DataPreProcessingImplementation}.
 
 
 \begin{table}[ht]
 \centering
 \caption{Datasets used in the evaluation of \acs{bard}.}
 \label{table:datasets}
+\vspace*{0.2cm}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Dataset}        & \textbf{Subject} & \textbf{Instances} & \textbf{\#Features} & \textbf{\begin{tabular}[c]{@{}l@{}}\#Features after\\ one-hot encoding\end{tabular}} \\ \hline
@@ -93,7 +94,7 @@ where $x_i$ is the feature value of interest of the testing sample and $\theta_{
 \ac{svm} \cite{cortes1995support} are supervised learning models used for classification and regression analysis. A \ac{svm} model represents the examples as points in space, mapped so that the margin between the two classes for the data is as wide as possible. The vectors that define this margin, or \textit{hyperplane}, are called support vectors. For classifying new samples, they are mapped in that space and predicts which class they belong to based on which side of the gap they lie.
 
 For calculating the \ac{svm} for linear classification, and in the case of a \textit{hard-margin}, i.e. when the training data is linearly separable, we select two parallel hyperplanes so that the distance between them is as large as possible.
-These hyperplanes can be described by the Equations (\ref{eq:SVM1}).
+These hyperplanes can be described by the Equations \ref{eq:SVM1}.
 \begin{equation}
 \label{eq:SVM1}
 \begin{split}
@@ -101,11 +102,9 @@ These hyperplanes can be described by the Equations (\ref{eq:SVM1}).
 \vec{w}.\vec{x}-b&=-1
 \end{split}
 \end{equation}
-
 where $\vec{w}$ is the normal vector to each hyperplane, $\vec{x}$ is the training set and $b$ is a scalar number.
 To maximize the distance between hyperplanes, we minimize the value of $||\vec{w}||$ subject to ${\displaystyle y_{i}({\vec {w}}\cdot {\vec {x}}_{i}-b)\geq 1,}$ for ${\displaystyle i=1,\,\ldots ,\,n} $, where the $y_{i}$ are either $1$ or $-1$, depending on the class label, and $n$ is the number of samples in the training set.
-In the case where the data is not linearly separable (\textit{soft-margin}), we minimize instead the \textit{hinge} loss function given by the Equation (\ref{eq:SVM2}).
-
+In the case where the data is not linearly separable (\textit{soft-margin}), we minimize instead the \textit{hinge} loss function given by the Equation \ref{eq:SVM2}.
 \begin{equation}
 \label{eq:SVM2}
 f(w,\lambda)={\displaystyle \left[{\frac {1}{n}}\sum _{i=1}^{n}\max \left(0,1-y_{i}({\vec {w}}\cdot {\vec {x}}_{i}-b)\right)\right]+\lambda \lVert {\vec {w}}\rVert ^{2}}
@@ -125,8 +124,7 @@ For \ac{svm} non-linear classification, we use a \textit{kernel trick} \cite{sch
 \end{itemize}
 
 
-The classification of new samples in \ac{svm} is done using the scoring function in (\ref{eq:SVM3}), where each testing sample $x$ is attributed to a prediction label.
-
+The classification of new samples in \ac{svm} is done using the scoring function in \ref{eq:SVM3}, where each testing sample $x$ is attributed to a prediction label.
 \begin{equation}
 \label{eq:SVM3}
 f_{\text{SVM}}(x)=\sum_{i=1}^m \alpha_i K (x_{SV}^{(i)},x)+b
@@ -152,9 +150,9 @@ where $\alpha_i$ is the coefficient associated with the support vector $x_{SV}^{
     \item Each instance is assigned to its closest cluster. This is done by calculating the \ac{ed} between each instance and each cluster center. Then, the lowest distance indicates which cluster the instance must be assigned to.
     \item Each cluster center is updated to be the mean of all the instances assigned to it.
 \end{enumerate}
-The algorithm stops when the centroids no longer change position. This means that, depending on the data, it is not guaranteed that the optimal solution is found.
+The algorithm stops when the centroids no longer change position. This means that, depending on the data, it is not guaranteed that the optimal solution is found \cite{hartigan1979algorithm}.
 
-The classification of each testing sample is done similarly to step 1., i.e. by computing the \ac{ed} of the new sample with each centroid, discovering the cluster whose centroid is closest to it. The label of the cluster becomes the predicted label of the sample. Equation (\ref{eq:kmeans}) describes the prediction:
+The classification of each testing sample is done similarly to step 1., i.e. by computing the \ac{ed} of the new sample with each centroid, discovering the cluster whose centroid is closest to it. The label of the cluster becomes the predicted label of the sample. Equation \ref{eq:kmeans} describes the prediction:
 \begin{equation}
 \label{eq:kmeans}
 f_{\text{k-M}}(x)= \operatorname*{argmin}_C d_{E}(x,C_j)
@@ -169,23 +167,18 @@ where $C$ are the centroids of each cluster, $x$ is the testing sample and $d_E$
 
 \ac{lr} \cite{walker1967estimation} is a regression model in which the dependent variable is categorical. This variable is usually binary, i.e. it can only take two values, usually $0$ or $1$ that represents opposite outcomes such as ``win/lose'' or ``healthy/sick''.
 This binary logistic model is used to estimate the probability of a binary response based on one or more variables.
-To define \ac{lr}, one must begin with the logistic function, which in turn is given by Equation (\ref{eq:LR1}).
-
+To define \ac{lr}, one must begin with the logistic function, which in turn is given by Equation \ref{eq:LR1}.
 \begin{equation}
 \label{eq:LR1}
 \sigma (t)={\frac {e^{t}}{e^{t}+1}}={\frac {1}{1+e^{-t}}}
 \end{equation}
-
-where $t$ is the input. If we express $t$ as $t=\beta _{0}+\beta _{1}x$, we can write the logistic function as in Equation (\ref{eq:LR2}).
-
+where $t$ is the input. If we express $t$ as $t=\beta _{0}+\beta _{1}x$, we can write the logistic function as in Equation \ref{eq:LR2}.
 \begin{equation}
 \label{eq:LR2}
 F(x)={\frac {1}{1+e^{-(\beta _{0}+\beta _{1}x)}}}
 \end{equation}
 
-
-To classify testing samples we use Equation (\ref{eq:LR3}) to attribute a prediction label to each sample $x$.
-
+To classify testing samples we use Equation \ref{eq:LR3} to attribute a prediction label to each sample $x$.
 \begin{equation}
 \label{eq:LR3}
 f_{\text{LR}}(x)=\beta_0+\sum_{i=1}^m \beta_i x_i
@@ -199,7 +192,7 @@ f_{\text{LR}}(x)=\beta_0+\sum_{i=1}^m \beta_i x_i
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 In the final step of our implementation, we made adjustments to the evaluation processes of the \ac{ml} algorithms discussed above, so that we could apply two privacy-preserving techniques, namely \ac{gc}, described in Section \ref{ssec:GarbledCircuits}, and \ac{he}, described in Section \ref{ssec:HomomorphicEncryption}.
-These two techniques offer different means to obtain privacy-preserving computations, and we must consider them when choosing which \ac{ml} algorithm to use with each cryptographic algorithm. \ac{gc} builds ciphered Boolean circuits, which means that most of the computations are possible to implement on them. However, arithmetic computations require a large number of logic gates, creating an overhead that makes \ac{gc} very slow. So, for some of the \ac{ml} algorithms, we used a \ac{he} system, since it offers arithmetic operations as a core operation. Due to these constraints, we decided to adapt the \ac{dt} and \ac{k-m} to be evaluated using \ac{gc}, and \ac{svm} and \ac{lr} to be evaluated using \ac{he}.
+These two techniques offer different means to obtain privacy-preserving computations, and we must consider them when choosing which \ac{ml} algorithm to use with each cryptographic algorithm. \ac{gc} builds ciphered Boolean circuits, and most of the computations are possible to implement on them. However, arithmetic computations require a large number of logic gates, creating an overhead that makes \ac{gc} very slow. So, for some of the \ac{ml} algorithms, we used a \ac{he} system, since it offers arithmetic operations as a core operation. Due to these constraints, we decided to adapt the \ac{dt} and \ac{k-m} to be evaluated using \ac{gc}, and \ac{svm} and \ac{lr} to be evaluated using \ac{he}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -209,17 +202,18 @@ These two techniques offer different means to obtain privacy-preserving computat
 
 The process of evaluating a \ac{dt} in a privacy-preserving context is similar to evaluating in the usual manner, as described in Section \ref{ssec:DecisionTrees}. The main differences are the use of ciphered Boolean circuits instead of operations, i.e. basic operations such as additions, comparisons, are replaced with logic gates, and the evaluation of the \ac{dt} involves evaluating every single node in it. Although the use of \ac{gc} effectively hides the \ac{dt} evaluation process from unwanted parties, it does not hide the sparseness of the \ac{dt}, which could leak some relevant information about the original data, meaning that the use of expanded \ac{dt} is preferable for preserving privacy.
 
-
-In Figure \ref{fig:DTNode} we show how the computations are done inside each node of the \ac{dt}. Each node contains the \textit{featureID}, the ID of the feature to be selected from the sample to be classified, and the \textit{threshold}, the value that is compared against the selected feature and that decides which branch of the tree to follow next. The first \ac{mux} gate selects from the sample the feature to be compared. The greater-than gate compares the selected feature with the threshold. Then, the value from the comparison ($0$ or $1$) is used as a selection bit in the second \ac{mux} to choose the \textit{next\textunderscore featureID} and \textit{next\textunderscore threshold} for the next node in the tree. 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.50\textwidth]{images/decision_tree_node.pdf}
   \caption{Boolean circuit of each node in a \acs{dt}.}
   \label{fig:DTNode}
 \end{figure}
+In Figure \ref{fig:DTNode} we show how the computations are done inside each node of the \ac{dt}. Each node contains the \textit{featureID}, the ID of the feature to be selected from the sample to be classified, and the \textit{threshold}, the value that is compared against the selected feature and that decides which branch of the tree to follow next. The first \ac{mux} gate selects from the sample the feature to be compared. The greater-than gate compares the selected feature with the threshold. Then, the value from the comparison ($0$ or $1$) is used as a selection bit in the second \ac{mux} to choose the \textit{next\textunderscore featureID} and \textit{next\textunderscore threshold} for the next node in the tree. 
+
 
 
 It is also important to mention that the trees that we used are always complete, i.e. the number of nodes $n$ is always the maximum possible, and it can be defined as $n=2^{h+1}-1$, where $h$ is the \textit{height} of the tree. We can see in Figure \ref{fig:ExpansionBinaryTrees} the implications of this expansion of the binary trees.
+
 \begin{figure}[ht]
 	\centering
 	\mbox{
@@ -235,8 +229,6 @@ It is also important to mention that the trees that we used are always complete,
 	\caption{Expansion of binary trees.}
     \label{fig:ExpansionBinaryTrees}
 \end{figure}
-
-
 In Figure \ref{fig:Tree} we have a binary \ac{dt} with $height=3$ and with different path lengths to the leaves, depending on the branch of the tree taken, but on the tree in Figure \ref{fig:CompleteTree}, all paths have the same length. With this, we can effectively hide the sparseness of the tree, which could leak relevant information about the original data. However, this solution increases exponentially the total amount of nodes that need to be evaluated, and that decreases performance significantly, as we will see in Chapter \ref{ch:Evaluation}.
                 
 
@@ -247,11 +239,7 @@ In Figure \ref{fig:Tree} we have a binary \ac{dt} with $height=3$ and with diffe
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 As in the previous section, evaluating the \ac{k-m} algorithm in a privacy-preserving manner is similar to evaluating it in the usual manner. We took the operations in the prediction step and transformed them into Boolean circuits, with logic gates such as multiplexers, adders, etc.
-
-In Figure \ref{fig:kmeans} we show how we designed the circuit to represent the \ac{k-m} prediction. The $d_E$ blocks represent the operations to calculate the \ac{ed} between the sample and each centroid provided by the \ac{k-m} model. The ARGMIN block determines which of the \ac{ed} is the smallest.
-
 
 \begin{figure}[ht]
   \centering
@@ -259,11 +247,9 @@ In Figure \ref{fig:kmeans} we show how we designed the circuit to represent the 
   \caption{Boolean Circuit of the prediction of the \ac{k-m} algorithm.}
   \label{fig:kmeans}
 \end{figure}
-
+In Figure \ref{fig:kmeans} we show how we designed the circuit to represent the \ac{k-m} prediction. The $d_E$ blocks represent the operations to calculate the \ac{ed} between the sample and each centroid provided by the \ac{k-m} model. The ARGMIN block determines which of the \ac{ed} is the smallest.
 
 As shown in the results in Section \ref{ssec:gcandKM}, there is an exponential decrease in performance when the number of clusters increases or the sample has a larger number of features. This is caused by the multiplications necessary for computing the \ac{ed}. Usually, this is a reason to use \ac{he} instead, but the algorithm to implement comparisons using \ac{he} is very complex to implement and requires considerable computational power \cite{blake2004strong}.
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -271,13 +257,13 @@ As shown in the results in Section \ref{ssec:gcandKM}, there is an exponential d
 \label{ssec:HEandLR}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-For the \ac{lr} algorithm, in order to use a \ac{fhe} system, the prediction function described in (\ref{eq:LR3}) must be converted to:
+For the \ac{lr} algorithm, in order to use a \ac{fhe} system, the prediction function described in \ref{eq:LR3} must be converted to:
 \begin{equation}
 \label{eq:he_lr1}
 f_{FHE}(x) = D_k \Bigg( E_k(\beta_0) + \sum_{i=0}^m E_k(\beta_i) \centerdot E_k(x_i) \Bigg)
 \end{equation}
 where $E_k$ represents the encryption operation and $D_k$ represents the decryption operation using the key $k$.
-Converting Equation (\ref{eq:he_lr1}) to be computed using a \ac{phe} system is straightforward, but this can only be done under two assumptions: 1) the data to be evaluated ($x$) and the model parameters ($\beta_0,\beta_1,\ldots,\beta_m$) must come from two different parties, and 2) the owner of the model parameters must be the one processing the data. Under these assumptions, the linear prediction function for a multiplicative \ac{phe} system becomes:
+Converting Equation \ref{eq:he_lr1} to be computed using a \ac{phe} system is straightforward, but this can only be done under two assumptions: 1) the data to be evaluated ($x$) and the model parameters ($\beta_0,\beta_1,\ldots,\beta_m$) must come from two different parties, and 2) the owner of the model parameters must be the one processing the data. Under these assumptions, the linear prediction function for a multiplicative \ac{phe} system becomes:
 \begin{equation}
 \label{eq:he_lr2}
 f_{PHE}(x) = D_k \Bigg(E_k(\beta_0) \centerdot \prod_{i=1}^m E_k(x_i)^{\beta_i}         \Bigg)
@@ -289,7 +275,7 @@ f_{PHE}(x) = D_k \Bigg(E_k(\beta_0) \centerdot \prod_{i=1}^m E_k(x_i)^{\beta_i} 
 \label{ssec:HEandSVM}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-For the \ac{svm} algorithm, we only considered the linear kernel, as it simplifies the scoring function. The Equation (\ref{eq:SVM3}) is then simplified to the following:
+For the \ac{svm} algorithm, we only considered the linear kernel, as it simplifies the scoring function. The Equation \ref{eq:SVM3} is then simplified to the following:
 \begin{equation}
 \label{eq:he_svm1}
 f(x)=\sum_{i=1}^m \alpha_i x_{SV}^{(i)}x+b = \sum_{i=1}^m \alpha_i \sum_{j=1}^n x_j x_{SV}^{(i,j)} + b
@@ -300,8 +286,8 @@ To compute this function using a \ac{fhe} system, we must convert it to:
 f_{FHE}(x) = D_k\Bigg( \sum_{i=1}^m E_k(\alpha_i) \centerdot \sum_{j=i}^n E_k(x_j) \centerdot E_k(x_{SV}^{(i,j)}) + E_k(b)\Bigg)
 \end{equation}
 where $E_k$ represents the encryption operation and $D_k$ represents the decryption operation using the key $k$.
-Like in the previous Subsection, converting it to be computed using a \ac{phe} system is equally straightforward, but this must be done under the same two assumptions: 1) the data to be evaluated ($x$) and the model parameters ($\alpha_i$,$x_{SV}^{(i,j)}$,$b$) must come from two different parties, and 2) the owner of the model parameters must be the one processing the data. Under these assumptions, the scoring function for a multiplicative \ac{phe} system becomes:
+Like in the previous Section, converting it to be computed using a \ac{phe} system is equally straightforward, but this must be done under the same two assumptions: 1) the data to be evaluated ($x$) and the model parameters ($\alpha_i$,$x_{SV}^{(i,j)}$,$b$) must come from two different parties, and 2) the owner of the model parameters must be the one processing the data. Under these assumptions, the scoring function for a multiplicative \ac{phe} system becomes:
 \begin{equation}
 \label{eq:he_svm3}
-f_{FHE}(x) = D_k\Bigg( \prod_{i=1}^m \bigg(\prod_{j=1}^n E_k(x_i)^{x_{SV}^{(i,j)}} \bigg)^{\alpha_i} \centerdot E_k(b) \Bigg)
+f_{PHE}(x) = D_k\Bigg( \prod_{i=1}^m \bigg(\prod_{j=1}^n E_k(x_i)^{x_{SV}^{(i,j)}} \bigg)^{\alpha_i} \centerdot E_k(b) \Bigg)
 \end{equation}

@@ -9,13 +9,16 @@
 \label{ch:Implementation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-When building a platform for \ac{ppml}, we must go beyond the traditional steps in data processing mentioned in Section \ref{sec:PrivacyImplicationsPersonalDataProcessing} and in Figure \ref{fig:crisp-dm}, and also have an increased care when preprocessing data to incorporate the cryptographic techniques.
+When building a platform for \ac{ppml}, we must go beyond the traditional steps in data processing considered in the \acs{crisp} model, discussed in Section \ref{sec:PrivacyImplicationsPersonalDataProcessing} and in Figure \ref{fig:crisp-dm}, and also have an increased care when preprocessing data to incorporate the cryptographic techniques.
 
-This Chapter describes the work that was done in implementing a \ac{ppml} platform. In Section \ref{sec:StructureImplementation}, we start off with a description of the structure we followed in implementing and evaluating the platform.
-In Section \ref{sec:DatasetsImplementation}, we offer a description of the datasets chosen to test our platform. Then, we explain the preprocessing that was done to those datasets, in Section \ref{sec:DataPreProcessingImplementation}.
+
+This Chapter describes the work that was done in implementing a \ac{ppml} platform.
+In Section \ref{sec:components} we present the conceptual view of our platform.
+For understanding the applicability of the solution developed, we detail in Section \ref{sec:usecaseHealthcare} a use case for our implementation. 
+In Section \ref{sec:StructureImplementation}, we describe the structure we followed in implementing and evaluating the platform.
+In Section \ref{sec:DatasetsImplementation} we offer a description of the datasets chosen to test our platform. Then, we explain the preprocessing that was done to those datasets, in Section \ref{sec:DataPreProcessingImplementation}.
 Section \ref{sec:BaselineImplementation} presents the baseline implementation of the chosen \ac{ml} algorithms, resorting to a widely used \ac{ml} toolkit for Python.
-In Section \ref{sec:CryptoDomainImplementation}, we present the cryptographic protocols used, why we used them, and how we implemented them, mentioning which toolkits were used.
-For understanding the applicability of the solution developed, we detail in Section \ref{sec:usecaseHealthcare} a use case for our implementation. Finally in Section \ref{sec:components} we present a possible usage for our implementation, in the form of a toolkit that could be used in a business environment.
+In Section \ref{sec:CryptoDomainImplementation}, we present the cryptographic protocols used, why we used them, and how we implemented them.
 
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -53,7 +56,7 @@ It is important to mention that the processes in Steps 2 and 3 where implemented
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.80\textwidth]{images/ImplementationSteps.pdf}
+    \includegraphics[width=0.95\textwidth]{images/ImplementationSteps.pdf}
     \caption{Steps and Processes of the implementation.}
     \label{fig:steps}
  \end{figure}
@@ -78,10 +81,13 @@ It is important to mention that the processes in Steps 2 and 3 where implemented
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-In this Chapter, we discussed the implementation of a privacy-preserving \ac{ml} platform. We started by describing the datasets chosen to evaluate the platform in Section \ref{sec:DatasetsImplementation}, and then we explained the preprocessing step in Section \ref{sec:DataPreProcessingImplementation}.
+In this Chapter, we discussed the implementation of a privacy-preserving \ac{ml} platform. 
+We started by describing in Section \ref{sec:components} the conceptual view of our platform.
+For understanding the uses of the solution developed, we detailed in Section \ref{sec:usecaseHealthcare} a use case for our platform.
+We described the datasets chosen to evaluate the platform in Section \ref{sec:DatasetsImplementation}, and then we explained the preprocessing step in Section \ref{sec:DataPreProcessingImplementation}.
 Section \ref{sec:BaselineImplementation} presented the implementation of the baseline for the chosen \ac{ml} algorithms.
-In Section \ref{sec:CryptoDomainImplementation}, we detailed which cryptographic protocols we used, why we used them, and how we implemented them, mentioning which toolkits were used.
-For understanding the uses of the solution developed, we detailed in Section \ref{sec:usecaseHealthcare} a use case for our implementation, and finally in Section \ref{sec:components} we presented a possible usage for our implementation, in the form of a toolkit that could be used in a business environment.
+In Section \ref{sec:CryptoDomainImplementation}, we detailed which cryptographic protocols we used, why we used them, and how we implemented them.
+
 
 
   %

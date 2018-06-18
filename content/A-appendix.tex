@@ -1,0 +1,624 @@
+
+\chapter{Detailed Results}
+\label{app:1}
+
+This appendix contains the tables detailing the experimental results for the execution times and communication costs considered in Chapter \ref{ch:Evaluation}.
+
+\section{Execution Time}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Garbled Circuits and Decision Trees}
+\label{app:gcdt_exec}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{table}[!h]
+\centering
+\caption{\acs{gc}+\acs{dt}. Runtime per data sample, in seconds. \emph{Pima Indians Diabetes} dataset.}
+\label{table:runtimeDTPID}
+\vspace*{0.2cm}
+\begin{tabular}{|l|r|r|r|r|r|}
+\hline
+\multirow{2}{*}{\textbf{DT Depth}} & \multicolumn{5}{c|}{\textbf{Numeric Precision}}         \\ \cline{2-6} 
+                          & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
+1                         & 0.374  & 0.502   & 0.663   & 0.782   & 0.901   \\ \hline
+4                         & 0.457  & 0.548   & 0.677   & 0.888   & 1.087   \\ \hline
+6                         & 0.654  & 0.877   & 1.051   & 1.177   & 1.195   \\ \hline
+8                         & 1.622  & 1.689   & 1.889   & 2.099   & 2.180   \\ \hline
+10                        & 3.469  & 3.644   & 3.112   & 4.300   & 4.343   \\ \hline
+12                        & 7.884  & 9.727   & 12.459  & 16.270  & 17.488  \\ \hline
+13                        & 16.289 & 18.353  & 20.926  & 25.120  & 33.508  \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[!h]
+\centering
+\caption{\acs{gc}+\acs{dt}. Runtime per data sample, in seconds. \emph{Breast Cancer Wisconsin Diagnostic} dataset.}
+\label{table:runtimeDTBCW}
+\vspace*{0.2cm}
+\begin{tabular}{|l|r|r|r|r|r|}
+\hline
+\multirow{2}{*}{\textbf{DT Depth}} & \multicolumn{5}{c|}{\textbf{Numeric Precision}}         \\ \cline{2-6} 
+                          & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
+1                         & 1.015  & 1.383   & 1.735   & 2.082   & 2.442   \\ \hline
+3                         & 1.057  & 1.425   & 1.804   & 2.187   & 2.550   \\ \hline
+4                         & 1.107  & 1.533   & 1.920   & 2.319   & 2.724   \\ \hline
+5                         & 1.307  & 1.713   & 2.122   & 2.665   & 2.974   \\ \hline
+6                         & 1.538  & 2.030   & 2.522   & 2.939   & 3.330   \\ \hline
+7                         & 1.966  & 2.393   & 2.823   & 3.507   & 3.787   \\ \hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[!h]
+\centering
+\caption{\acs{gc}+\acs{dt}. Runtime per data sample, in seconds. \emph{Credit Approval} dataset.}
+\label{table:runtimeDTCA}
+\vspace*{0.2cm}
+\begin{tabular}{|l|r|r|r|r|r|}
+\hline
+\multirow{2}{*}{\textbf{DT Depth}} & \multicolumn{5}{c|}{\textbf{Numeric Precision}}         \\ \cline{2-6} 
+                          & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
+2                         & 1.598  & 2.333   & 2.956   & 3.591   & 4.190   \\ \hline
+5                         & 1.852  & 2.603   & 3.295   & 3.953   & 4.576   \\ \hline
+7                         & 2.702  & 3.600   & 4.359   & 5.743   & 5.848   \\ \hline
+8                         & 3.365  & 4.280   & 6.541   & 7.337   & 8.998   \\ \hline
+9                         & 4.511  & 6.930   & 8.202   & 10.990  & 12.227  \\ \hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[!h]
+\centering
+\caption{\acs{gc}+\acs{dt}. Runtime per data sample, in seconds. \emph{Adult Income} dataset.}
+\label{table:runtimeDTAI}
+\vspace*{0.2cm}
+\begin{tabular}{|l|r|r|r|r|r|}
+\hline
+\multirow{2}{*}{\textbf{DT Depth}} & \multicolumn{5}{c|}{\textbf{Numeric Precision}}         \\ \cline{2-6} 
+                          & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
+5                         & 3.777  & 5.169   & 6.502   & 8.171   & 9.424   \\ \hline
+6                         & 4.111  & 5.774   & 7.074   & 8.813   & 10.816  \\ \hline
+9                         & 9.256  & 13.864  & 20.294  & 24.314  & 27.236  \\ \hline
+10                        & 17.167 & 23.056  & 30.553  & 39.114  & 54.987  \\ \hline
+\end{tabular}
+\end{table}
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Garbled Circuits and \textit{k}-Means}
+\label{app:gckm_exec}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{table}[h]
+\centering
+\caption{\acs{gc}+\acs{k-m}. Runtime per data sample, in seconds. \emph{Pima Indians Diabetes} dataset.}
+\label{table:runtimeKMPID}
+\vspace*{0.2cm}
+\begin{tabular}{|l|r|r|r|r|r|}
+\hline
+\multirow{2}{*}{\textbf{Number Clusters}} & \multicolumn{5}{c|}{\textbf{Numeric Precision}}                                              \\ \cline{2-6}
+                                          & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
+2                                & 0.629           & 0.848            & 1.163            & 1.350            & 1.533            \\ \hline
+3                                & 0.813           & 1.055            & 1.270            & 1.494            & 1.761            \\ \hline
+4                                & 0.852           & 1.143            & 1.429            & 1.664            & 1.969            \\ \hline
+5                                & 0.943           & 1.246            & 1.531            & 1.824            & 2.066            \\ \hline
+6                                & 1.140           & 1.261            & 1.513            & 2.266            & 2.145            \\ \hline
+7                                & 1.124           & 1.319            & 1.620            & 2.319            & 2.188            \\ \hline
+8                                & 1.178           & 1.339            & 1.697            & 2.130            & 2.337            \\ \hline
+9                                & 1.227           & 1.464            & 2.356            & 2.178            & 2.504            \\ \hline
+10                               & 1.228           & 1.544            & 2.439            & 2.497            & 3.717            \\ \hline
+20                               & 1.568           & 1.896            & 3.374            & 3.952            & 5.751            \\ \hline
+30                               & 2.142           & 2.223            & 3.794            & 5.315            & 7.346            \\ \hline
+40                               & 1.762           & 3.379            & 5.099            & 6.941            & 9.697            \\ \hline
+50                               & 1.803           & 3.670            & 5.979            & 8.300            & 12.376           \\ \hline
+60                               & 3.005           & 4.927            & 7.025            & 12.218           & 16.839           \\ \hline
+70                               & 3.420           & 5.250            & 7.616            & 15.795           & 19.339           \\ \hline
+80                               & 3.513           & 6.187            & 8.649            & 15.795           & 21.302           \\ \hline
+90                               & 3.490           & 6.239            & 12.278           & 16.691           & 23.669           \\ \hline
+100                              & 3.580           & 7.876            & 14.497           & 23.599           & 32.248           \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{\acs{gc}+\acs{k-m}. Runtime per data sample, in seconds. \emph{Breast Cancer Wisconsin Diagnostic} dataset.}
+\label{table:runtimeKMBCW}
+\vspace*{0.2cm}
+\begin{tabular}{|l|r|r|r|r|r|}
+\hline
+\multirow{2}{*}{\textbf{Number Clusters}} & \multicolumn{5}{c|}{\textbf{Numeric Precision}}                                             \\ \cline{2-6} 
+                                          & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
+2                                & 1.619           & 2.102            & 2.788            & 3.616            & 3.838            \\ \hline
+3                                & 1.868           & 2.451            & 3.037            & 3.550            & 5.674            \\ \hline
+4                                & 1.800           & 3.082            & 3.180            & 5.028            & 5.604            \\ \hline
+5                                & 1.912           & 2.598            & 4.760            & 5.410            & 7.402            \\ \hline
+6                                & 2.062           & 2.707            & 4.872            & 5.275            & 7.951            \\ \hline
+7                                & 2.351           & 2.882            & 5.133            & 7.149            & 7.906            \\ \hline
+8                                & 2.930           & 2.805            & 4.978            & 6.946            & 9.124            \\ \hline
+9                                & 2.570           & 3.917            & 4.935            & 7.044            & 9.136            \\ \hline
+10                               & 2.291           & 4.215            & 5.990            & 7.349            & 10.802           \\ \hline
+20                               & 4.223           & 6.797            & 9.580            & 14.877           & 25.232           \\ \hline
+30                               & 5.269           & 9.234            & 15.693           & 24.228           & 36.767           \\ \hline
+40                               & 7.126           & 14.724           & 25.754           & 37.984           & 49.574           \\ \hline
+50                               & 7.885           & 14.701           & 24.245           & 40.602           & 67.651           \\ \hline
+60                               & 9.156           & 19.862           & 35.970           & 56.269           & -                \\ \hline
+70                               & 11.585          & 23.550           & 41.306           & -                & -                \\ \hline
+80                               & 11.433          & 23.367           & 45.067           & -                & -                \\ \hline
+90                               & 13.642          & 27.030           & 53.124           & -                & -                \\ \hline
+100                              & 16.684          & 32.046           & 59.372           & -                & -                \\ \hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[h]
+\centering
+\caption{\acs{gc}+\acs{k-m}. Runtime per data sample, in seconds. \emph{Credit Approval} dataset.}
+\label{table:runtimeKMCA}
+\vspace*{0.2cm}
+\begin{tabular}{|l|r|r|r|r|r|}
+\hline
+\multirow{2}{*}{\textbf{Number Clusters}} & \multicolumn{5}{c|}{\textbf{Numeric Precision}}                                              \\ \cline{2-6}
+                                          & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
+2                                & 2.541           & 3.652            & 4.151            & 5.729            & 6.837            \\ \hline
+3                                & 2.615           & 3.752            & 5.547            & 6.369            & 8.512            \\ \hline
+4                                & 2.902           & 3.663            & 5.934            & 8.114            & 9.692            \\ \hline
+5                                & 3.016           & 5.036            & 5.825            & 8.633            & 10.725           \\ \hline
+6                                & 3.129           & 5.359            & 7.474            & 9.820            & 12.961           \\ \hline
+7                                & 3.058           & 5.216            & 7.463            & 10.031           & 16.429           \\ \hline
+8                                & 3.033           & 5.360            & 7.912            & 11.342           & 15.633           \\ \hline
+9                                & 3.082           & 5.326            & 8.911            & 13.911           & 19.112           \\ \hline
+10                               & 4.196           & 6.569            & 9.412            & 14.731           & 18.997           \\ \hline
+20                               & 6.368           & 10.641           & 19.121           & 28.797           & 44.666           \\ \hline
+30                               & 9.060           & 17.660           & 28.409           & 49.931           & -                \\ \hline
+40                               & 11.152          & 25.673           & 42.835           & -                & -                \\ \hline
+50                               & 14.681          & 27.539           & 54.795           & -                & -                \\ \hline
+60                               & 18.326          & 37.088           & -                & -                & -                \\ \hline
+70                               & 19.318          & 41.164           & -                & -                & -                \\ \hline
+80                               & 23.371          & 56.422           & -                & -                & -                \\ \hline
+90                               & 27.361          & 62.862           & -                & -                & -                \\ \hline
+100                              & 27.908          & 67.835           & -                & -                & -                \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{\acs{gc}+\acs{k-m}. Runtime per data sample, in seconds. \emph{Adult Income} dataset.}
+\label{table:runtimeKMAI}
+\vspace*{0.2cm}
+\begin{tabular}{|l|r|r|r|r|r|}
+\hline
+\multirow{2}{*}{\textbf{Number Clusters}} & \multicolumn{5}{c|}{\textbf{Numeric Precision}}                                              \\ \cline{2-6}
+                                          & 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
+2                                & 4.703           & 5.536            & 8.098            & 11.307           & 13.672           \\ \hline
+3                                & 4.361           & 7.535            & 9.620            & 14.500           & 18.896           \\ \hline
+4                                & 4.396           & 6.986            & 10.364           & 15.635           & 20.343           \\ \hline
+5                                & 6.083           & 8.688            & 11.681           & 17.928           & 25.292           \\ \hline
+6                                & 5.587           & 11.307           & 15.884           & 23.006           & 31.464           \\ \hline
+7                                & 6.441           & 10.278           & 15.981           & 24.306           & 31.277           \\ \hline
+8                                & 6.394           & 10.871           & 17.157           & 27.155           & 38.732           \\ \hline
+9                                & 8.029           & 12.958           & 21.050           & 32.607           & 48.497           \\ \hline
+10                               & 8.706           & 14.956           & 24.468           & 32.010           & 47.241           \\ \hline
+20                               & 14.834          & 24.567           & 41.386           & -                & -                \\ \hline
+30                               & 19.150          & 39.870           & -                & -                & -                \\ \hline
+40                               & 27.248          & 60.023           & -                & -                & -                \\ \hline
+50                               & 33.243          & -                & -                & -                & -                \\ \hline
+60                               & 42.933          & -                & -                & -                & -                \\ \hline
+70                               & 52.514          & -                & -                & -                & -                \\ \hline
+80                               & 61.952          & -                & -                & -                & -                \\ \hline
+90                               & -               & -                & -                & -                & -                \\ \hline
+100                              & -               & -                & -                & -                & -                \\ \hline
+\end{tabular}
+\end{table}
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Partially Homomorphic Encryption and Logistic Regression}
+\label{app:phelr_exec}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{table}[h]
+\centering
+\caption{\acs{phe}+\acs{lr}. Execution time in seconds. \emph{Pima Indians Diabetes} Dataset.}
+\label{table:LR_PHE_PIMA}
+\vspace*{0.2cm}
+\begin{tabular}{|l|r|r|r|}
+\hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}}  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\  \textbf{data sample} \end{tabular}} \\ \cline{2-4} 
+\multicolumn{1}{|c|}{}    & \multicolumn{1}{c|}{encryption}  & \multicolumn{1}{c|}{computation}  & \multicolumn{1}{c|}{decryption}  \\ \hline
+128                            & 0.002                            & 0.001                             & 0.000                            \\ \hline
+256                            & 0.005                            & 0.001                             & 0.000                            \\ \hline
+512                            & 0.014                            & 0.003                             & 0.002                            \\ \hline
+1024                           & 0.035                            & 0.004                             & 0.005                            \\ \hline
+2048                           & 0.168                            & 0.014                             & 0.025                            \\ \hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[h]
+\centering
+\caption{\acs{phe}+\acs{lr}. Execution time in seconds. \emph{Breast Cancer Wisconsin Diagnostic} Dataset.}
+\label{table:LR_PHE_BCWD}
+\vspace*{0.2cm}
+\begin{tabular}{|l|r|r|r|}
+\hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}}  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\  \textbf{data sample} \end{tabular}} \\ \cline{2-4} 
+\multicolumn{1}{|c|}{}    & \multicolumn{1}{c|}{encryption}  & \multicolumn{1}{c|}{computation}  & \multicolumn{1}{c|}{decryption}  \\ \hline
+128                           & 0.005                            & 0.002                             & 0.000                            \\ \hline
+256                           & 0.013                            & 0.004                             & 0.000                            \\ \hline
+512                           & 0.024                            & 0.005                             & 0.001                            \\ \hline
+1024                          & 0.100                            & 0.018                             & 0.005                            \\ \hline
+2048                          & 0.570                            & 0.028                             & 0.020                            \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{\acs{phe}+\acs{lr}. Execution time in seconds. \emph{Credit Approval} Dataset.}
+\label{table:LR_PHE_CAD}
+\vspace*{0.2cm}
+\begin{tabular}{|l|r|r|r|}
+\hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}}  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\  \textbf{data sample} \end{tabular}} \\ \cline{2-4} 
+\multicolumn{1}{|c|}{}    & \multicolumn{1}{c|}{encryption}  & \multicolumn{1}{c|}{computation}  & \multicolumn{1}{c|}{decryption}  \\ \hline
+128                           & 0.008                            & 0.004                             & 0.000                            \\ \hline
+256                           & 0.012                            & 0.006                             & 0.000                            \\ \hline
+512                           & 0.035                            & 0.013                             & 0.001                            \\ \hline
+1024                          & 0.170                            & 0.026                             & 0.004                            \\ \hline
+2048                          & 0.970                            & 0.045                             & 0.018                            \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{\acs{phe}+\acs{lr}. Execution time in seconds. \emph{Adult Income} Dataset.}
+\label{table:LR_PHE_AID}
+\vspace*{0.2cm}
+\begin{tabular}{|l|r|r|r|}
+\hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}}  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\  \textbf{data sample} \end{tabular}} \\ \cline{2-4} 
+\multicolumn{1}{|c|}{}    & \multicolumn{1}{c|}{encryption}  & \multicolumn{1}{c|}{computation}  & \multicolumn{1}{c|}{decryption}  \\ \hline
+128                           & 0.011                            & 0.008                             & 0.000                            \\ \hline
+256                           & 0.020                            & 0.016                             & 0.000                            \\ \hline
+512                           & 0.070                            & 0.023                             & 0.001                            \\ \hline
+1024                          & 0.334                            & 0.058                             & 0.003                            \\ \hline
+2048                          & 2.106                            & 0.124                             & 0.019                            \\ \hline
+\end{tabular}
+\end{table}
+
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Fully Homomorphic Encryption and Logistic Regression}
+\label{app:fhelr_exec}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{table}[h]
+\centering
+\caption{\acs{fhe}+\acs{lr}. Execution time in seconds. All Datasets.}
+\label{table:LR_FHE}
+\vspace*{0.2cm}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{Dataset}}}  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\   \textbf{data sample}\end{tabular}}  \\ \cline{2-4} 
+\multicolumn{1}{|c|}{}    & \multicolumn{1}{c|}{encryption}    & \multicolumn{1}{c|}{computation}              & \multicolumn{1}{c|}{decryption}           \\ \hline
+Pima    & \begin{tabular}[c]{@{}l@{}}M1: 2.193\\   M2: 0.168\end{tabular}  & \begin{tabular}[c]{@{}l@{}}M1: 0.049\\   M2: 0.005\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.036\\   M2: 0.036\end{tabular} \\ \hline
+Breast   & \begin{tabular}[c]{@{}l@{}}M1: 7.494\\   M2: 0.168\end{tabular}  & \begin{tabular}[c]{@{}l@{}}M1: 0.169\\   M2: 0.005\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.036\\   M2: 0.036\end{tabular} \\ \hline
+Credit  & \begin{tabular}[c]{@{}l@{}}M1: 12.467\\   M2: 0.180\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.296\\   M2: 0.006\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.038\\   M2: 0.038\end{tabular} \\ \hline
+Adult   & \begin{tabular}[c]{@{}l@{}}M1: 24.253\\   M2: 0.169\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.590\\   M2: 0.005\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.036\\   M2: 0.036\end{tabular} \\ \hline
+\end{tabular}
+\end{table}
+
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Partially Homomorphic Encryption and Support Vector Machines}
+\label{app:phesvm_exec}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{table}[h]
+\centering
+\caption{\acs{phe}+\acs{svm}. Execution time in seconds. \emph{Pima Indians Diabetes} Dataset.}
+\label{table:SVM_PHE_PIMA}
+\vspace*{0.2cm}
+\begin{tabular}{|l|r|r|r|}
+\hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}}  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\  \textbf{data sample} \end{tabular}} \\ \cline{2-4} 
+\multicolumn{1}{|c|}{}    & \multicolumn{1}{c|}{encryption}  & \multicolumn{1}{c|}{computation}  & \multicolumn{1}{c|}{decryption}  \\ \hline
+128                            & 0.001                            & 0.033                             & 0.000                            \\ \hline
+256                            & 0.001                            & 0.054                             & 0.000                            \\ \hline
+512                            & 0.005                            & 0.096                             & 0.001                            \\ \hline
+1024                           & 0.024                            & 0.221                             & 0.003                            \\ \hline
+2048                           & 0.185                            & 0.747                             & 0.025                            \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{\acs{phe}+\acs{svm}. Execution time in seconds. \emph{Breast Cancer Wisconsin Diagnostic} Dataset.}
+\label{table:SVM_PHE_BCWD}
+\vspace*{0.2cm}
+\begin{tabular}{|l|r|r|r|}
+\hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}}  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\  \textbf{data sample} \end{tabular}} \\ \cline{2-4} 
+\multicolumn{1}{|c|}{}    & \multicolumn{1}{c|}{encryption}  & \multicolumn{1}{c|}{computation}  & \multicolumn{1}{c|}{decryption}  \\ \hline
+128                           & 0.002                            & 0.026                             & 0.000                            \\ \hline
+256                           & 0.005                            & 0.043                             & 0.000                            \\ \hline
+512                           & 0.018                            & 0.085                             & 0.001                            \\ \hline
+1024                          & 0.093                            & 0.213                             & 0.003                            \\ \hline
+2048                          & 0.572                            & 0.663                             & 0.019                            \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{\acs{phe}+\acs{svm}. Execution time in seconds. \emph{Credit Approval} Dataset.}
+\label{table:SVM_PHE_CAD}
+\vspace*{0.2cm}
+\begin{tabular}{|l|r|r|r|}
+\hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}}  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\  \textbf{data sample} \end{tabular}} \\ \cline{2-4} 
+\multicolumn{1}{|c|}{}    & \multicolumn{1}{c|}{encryption}  & \multicolumn{1}{c|}{computation}  & \multicolumn{1}{c|}{decryption}  \\ \hline
+128                           & 0.003                            & 0.026                             & 0.000                            \\ \hline
+256                           & 0.008                            & 0.042                             & 0.000                            \\ \hline
+512                           & 0.030                            & 0.084                             & 0.001                            \\ \hline
+1024                          & 0.155                            & 0.208                             & 0.003                            \\ \hline
+2048                          & 0.964                            & 0.593                             & 0.019                            \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{\acs{phe}+\acs{svm}. Execution time in seconds. \emph{Adult Income} Dataset.}
+\label{table:SVM_PHE_AID}
+\vspace*{0.2cm}
+\begin{tabular}{|l|r|r|r|}
+\hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{NBits}}}  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\  \textbf{data sample} \end{tabular}} \\ \cline{2-4} 
+\multicolumn{1}{|c|}{}    & \multicolumn{1}{c|}{encryption}  & \multicolumn{1}{c|}{computation}  & \multicolumn{1}{c|}{decryption}  \\ \hline
+128                           & 0.007                            & 0.317                             & 0.000                            \\ \hline
+256                           & 0.016                            & 0.492                             & 0.000                            \\ \hline
+512                           & 0.066                            & 1.051                             & 0.001                            \\ \hline
+1024                          & 0.344                            & 2.504                             & 0.003                            \\ \hline
+2048                          & 2.057                            & 6.982                             & 0.019                            \\ \hline
+\end{tabular}
+\end{table}
+
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Fully Homomorphic Encryption and Support Vector Machines}
+\label{app:fhesvm_exec}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{table}[h]
+\centering
+\caption{\acs{fhe}+\acs{svm}. Execution time in seconds. All Datasets.}
+\label{table:SVM_FHE}
+\vspace*{0.2cm}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{Dataset}}}  & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}\textbf{Execution time /}\\   \textbf{data sample}\end{tabular}}  \\ \cline{2-4} 
+\multicolumn{1}{|c|}{}    & \multicolumn{1}{c|}{encryption}    & \multicolumn{1}{c|}{computation}              & \multicolumn{1}{c|}{decryption}           \\ \hline
+Pima & \begin{tabular}[c]{@{}l@{}}M1: 1.127\\   M2: 0.231\end{tabular}  & \begin{tabular}[c]{@{}l@{}}M1: 0.104\\   M2: 0.199\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.058\\   M2: 0.052\end{tabular} \\ \hline
+Breast & \begin{tabular}[c]{@{}l@{}}M1: 4.100\\   M2: 0.233\end{tabular}  & \begin{tabular}[c]{@{}l@{}}M1: 0.359\\   M2: 0.200\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.058\\   M2: 0.053\end{tabular} \\ \hline
+Credit & \begin{tabular}[c]{@{}l@{}}M1: 5.892\\   M2: 0.235\end{tabular}  & \begin{tabular}[c]{@{}l@{}}M1: 0.615\\   M2: 0.201\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.059\\   M2: 0.053\end{tabular} \\ \hline
+Adult & \begin{tabular}[c]{@{}l@{}}M1: 11.895\\   M2: 0.232\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 1.296\\   M2: 0.199\end{tabular} & \begin{tabular}[c]{@{}l@{}}M1: 0.057\\   M2: 0.053\end{tabular} \\ \hline
+\end{tabular}
+\end{table}
+
+
+\clearpage
+
+\section{Communication Cost}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Garbled Circuits and Decision Trees}
+\label{app:gcdt_comm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{table}[h]
+\centering
+\caption{\acs{gc}+\acs{dt}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. \emph{Pima Indians Diabetes} Dataset.}
+\label{table:computationCostsDT_PIMA}
+\vspace*{0.2cm}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}DT\\ Depth\end{tabular}}} & \multicolumn{5}{c|}{\textbf{Numeric Precision}}                                                                                                                                                    \\ \cline{2-6} 
+ & \multicolumn{1}{c|}{8 bits} & \multicolumn{1}{c|}{12 bits} & \multicolumn{1}{c|}{16 bits} & \multicolumn{1}{c|}{20 bits} & \multicolumn{1}{c|}{24 bits} \\ \hline
+1                                                                   & 23.542                               & 34.941                                & 46.339                                & 57.743                                & 69.137                                \\ \hline
+4                                                                   & 90.858                               & 131.485                               & 172.120                               & 212.741                               & 253.369                               \\ \hline
+6                                                                   & 321.667                              & 462.496                               & 603.318                               & 744.170                               & 885.012                               \\ \hline
+8                                                                   & 1244.83                              & 1786.52                               & 2328.19                               & 2869.91                               & 3411.55                               \\ \hline
+10                                                                  & 4937.70                              & 7082.78                               & 9227.74                               & 11372.8                               & 13517.9                               \\ \hline
+12                                                                  & 19708.8                              & 28267.3                               & 36825.7                               & 45384.2                               & 53942.9                               \\ \hline
+13                                                                  & 39403.7                              & 56513.5                               & 73623.3                               & 90733.1                               & 107843                                \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{\acs{gc}+\acs{dt}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. \emph{Breast Cancer Wisconsin Diagnostic} Dataset.}
+\label{table:computationCostsDT_BCWD}
+\vspace*{0.2cm}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}DT\\ Depth\end{tabular}}} & \multicolumn{5}{c|}{\textbf{Numeric Precision}}                                                                                                                                                      \\ \cline{2-6} 
+ & \multicolumn{1}{c|}{8 bits} & \multicolumn{1}{c|}{12 bits} & \multicolumn{1}{c|}{16 bits} & \multicolumn{1}{c|}{20 bits} & \multicolumn{1}{c|}{24 bits} \\ \hline
+1                                                                   & 85.280                               & 127.547                               & 169.814                               & 212.084                               & 254.348                               \\ \hline
+3                                                                   & 175.738                              & 261.128                               & 346.551                               & 431.980                               & 517.377                               \\ \hline
+4                                                                   & 296.296                              & 439.239                               & 582.210                               & 725.153                               & 868.094                               \\ \hline
+5                                                      & 537.460                              & 795.483                               & 1053.44                               & 1311.47                               & 1569.51                               \\ \hline
+6                                                                   & 1019.83                              & 1507.91                               & 1996.08                               & 2484.10                               & 2972.24                               \\ \hline
+7                                                                   & 1984.46                              & 2932.86                               & 3881.12                               & 4829.36                               & 5777.78                               \\ \hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[!h]
+\centering
+\caption{\acs{gc}+\acs{dt}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. \emph{Credit Approval} Dataset.}
+\label{table:computationCostsDT_CAD}
+\vspace*{0.2cm}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}DT\\ Depth\end{tabular}}} & \multicolumn{5}{c|}{\textbf{Numeric Precision}} \\ \cline{2-6} 
+ & \multicolumn{1}{c|}{8 bits} & \multicolumn{1}{c|}{12 bits} & \multicolumn{1}{c|}{16 bits} & \multicolumn{1}{c|}{20 bits} & \multicolumn{1}{c|}{24 bits} \\ \hline
+2                                                                   & 193.908                              & 289.759                               & 385.628                               & 481.480                               & 577.331                               \\ \hline
+5                                                                   & 889.564                              & 1323.15                               & 1756.74                               & 2190.37                               & 2623.99                               \\ \hline
+7                                                                   & 3274.64                              & 4866.18                               & 6457.81                               & 8049.41                               & 9640.96                               \\ \hline
+8                                                                   & 6454.73                              & 9590.25                               & 12725.9                               & 15861.4                               & 18997.0                               \\ \hline
+9                                                                   & 12815.1                              & 19038.6                               & 25262.1                               & 31485.6                               & 37709.3                               \\ \hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[h]
+\centering
+\caption{\acs{gc}+\acs{dt}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. \emph{Adult Income} Dataset.}
+\label{table:computationCostsDT_AID}
+\vspace*{0.2cm}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}DT\\ Depth\end{tabular}}} & \multicolumn{5}{c|}{\textbf{Numeric Precision}}                                                                                                                                                      \\ \cline{2-6} 
+ & \multicolumn{1}{c|}{8 bits} & \multicolumn{1}{c|}{12 bits} & \multicolumn{1}{c|}{16 bits} & \multicolumn{1}{c|}{20 bits} & \multicolumn{1}{c|}{24 bits} \\ \hline
+5                                                                   & 1843.72                              & 2753.97                               & 3664.21                               & 4574.43                               & 5484.64                               \\ \hline
+6                                                                   & 3485.83                              & 5205.30                               & 6924.63                               & 8643.95                               & 10363.3                               \\ \hline
+9                                                                   & 26476.2                              & 39523.2                               & 52569.9                               & 65617.1                               & 78663.8                               \\ \hline
+10                                                                  & 52751.1                              & 78743.8                               & 104736                                & 130729                                & 156721                                \\ \hline
+\end{tabular}
+\end{table}
+
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Garbled Circuits and \textit{k}-Means}
+\label{app:gckm_comm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{table}[h]
+\centering
+\caption{\acs{gc}+\acs{k-m}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. \emph{Pima Indians Diabetes} Dataset.}
+\label{table:computationCostsKM_PIMA}
+\vspace*{0.2cm}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}l@{}}Number\\ Clusters\end{tabular}}} & \multicolumn{5}{c|}{\textbf{Numeric Precision}}                                             \\ \cline{2-6} 
+& 8 bits & 12 bits & 16 bits & 20 bits & 24 bits \\ \hline
+2                                                                          & 309.849         & 591.326          & 961.850          & 1421.45          & 1970.15          \\ \hline
+3                                                                          & 456.502         & 874.347          & 1425.81          & 2110.88          & 2929.57          \\ \hline
+4                                                                          & 603.113         & 1157.36          & 1889.79          & 2800.34          & 3889.04          \\ \hline
+5                                                                          & 749.726         & 1440.35          & 2353.72          & 3489.77          & 4848.50          \\ \hline
+6                                                                          & 896.376         & 1723.41          & 2817.74          & 4179.15          & 5807.92          \\ \hline
+7                                                                          & 1042.96         & 2006.43          & 3281.61          & 4868.58          & 6767.40          \\ \hline
+8                                                                          & 1189.58         & 2289.42          & 3745.53          & 5557.99          & 7726.80          \\ \hline
+9                                                                          & 1336.19         & 2572.47          & 4209.50          & 6247.40          & 8686.30          \\ \hline
+10                                                                         & 1482.85         & 2855.49          & 4673.53          & 6936.81          & 9645.61          \\ \hline
+20                                                                         & 2949.03         & 5685.65          & 9312.94          & 13831.1          & 19240.0          \\ \hline
+30                                                                         & 4415.20         & 8515.81          & 13952.4          & 20725.3          & 28834.3          \\ \hline
+40                                                                         & 5881.34         & 11345.9          & 18592.0          & 27619.6          & 38428.7          \\ \hline
+50                                                                         & 7347.55         & 14176.2          & 23231.6          & 34514.1          & 48023.0          \\ \hline
+60                                                                         & 8813.84         & 17006.3          & 27871.1          & 41408.0          & 57617.9          \\ \hline
+70                                                                         & 10280.0         & 19836.4          & 32510.5          & 48302.4          & 67211.9          \\ \hline
+80                                                                         & 11746.1         & 22665.5          & 37510.1          & 55196.6          & 76806.3          \\ \hline
+90                                                                         & 13212.4         & 25496.9          & 41789.7          & 62090.9          & 86400.4          \\ \hline
+100                                                                        & 14678.6         & 28326.8          & 46429.1          & 68985.2          & 95995.1          \\ \hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[h]
+\centering
+\caption{\acs{gc}+\acs{k-m}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. \emph{Breast Cancer Wisconsin Diagnostic} Dataset.}
+\label{table:computationCostsKM_BCWD}
+\vspace*{0.2cm}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}Number\\ Clusters\end{tabular}}} & \multicolumn{5}{c|}{\textbf{Numeric Precision}}                                                                                                                                                      \\ \cline{2-6} 
+& \multicolumn{1}{c|}{8 bits} & \multicolumn{1}{c|}{12 bits} & \multicolumn{1}{c|}{16 bits} & \multicolumn{1}{c|}{20 bits} & \multicolumn{1}{c|}{24 bits} \\ \hline
+2                                                                          & 1160.22                              & 2215.08                               & 3604.00                               & 5326.97                               & 7383.92                               \\ \hline
+3                                                                          & 1706.36                              & 3271.44                               & 5337.51                               & 7904.74                               & 10973.1                               \\ \hline
+4                                                                          & 2252.49                              & 4327.76                               & 7071.10                               & 10482.5                               & 14562.2                               \\ \hline
+5                                                                          & 2798.68                              & 5384.18                               & 8804.74                               & 13060.4                               & 18151.1                               \\ \hline
+6                                                                          & 3344.74                              & 6440.50                               & 10538.2                               & 15638.3                               & 21740.2                               \\ \hline
+7                                                                          & 3890.90                              & 7496.85                               & 12271.9                               & 18215.9                               & 25329.3                               \\ \hline
+8                                                                          & 4437.04                              & 8553.14                               & 14005.4                               & 20793.9                               & 28918.7                               \\ \hline
+9                                                                          & 4983.15                              & 9609.47                               & 15739.1                               & 23371.7                               & 32507.7                               \\ \hline
+10                                                                         & 5529.26                              & 10666.0                               & 17472.6                               & 25949.5                               & 36096.7                               \\ \hline
+20                                                                         & 10990.4                              & 21229.2                               & 34808.3                               & 51728.0                               & 71987.3                               \\ \hline
+30                                                                         & 16451.7                              & 31792.6                               & 52144.1                               & 77506.3                               & 107878                                \\ \hline
+40                                                                         & 21913.0                              & 42356.3                               & 69479.9                               & 103284                                & 143769                                \\ \hline
+50                                                                         & 27374.2                              & 52919.6                               & 86815.3                               & 129062                                & 179660                                \\ \hline
+60                                                                         & 32835.5                              & 63482.7                               & 104151                                & 154841                                & -                                     \\ \hline
+70                                                                         & 38296.9                              & 74046.3                               & 121487                                & -                                     & -                                     \\ \hline
+80                                                                         & 43758.2                              & 84609.9                               & 138822                                & -                                     & -                                     \\ \hline
+90                                                                         & 49219.1                              & 95173.1                               & 156159                                & -                                     & -                                     \\ \hline
+100                                                                        & 54680.5                              & 105737                                & 173494                                & -                                     & -                                     \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{\acs{gc}+\acs{k-m}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. \emph{Credit Approval} Dataset.}
+\label{table:computationCostsKM_CAD}
+\vspace*{0.2cm}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}Number\\ Clusters\end{tabular}}} & \multicolumn{5}{c|}{\textbf{Numeric Precision}}                                                                                                                                                      \\ \cline{2-6} 
+& \multicolumn{1}{c|}{8 bits} & \multicolumn{1}{c|}{12 bits} & \multicolumn{1}{c|}{16 bits} & \multicolumn{1}{c|}{20 bits} & \multicolumn{1}{c|}{24 bits} \\ \hline
+2                                                                          & 1972.05                              & 3765.09                               & 6126.07                               & 9054.88                               & 12551.6                               \\ \hline
+3                                                                          & 2899.50                              & 5559.67                               & 9071.71                               & 13435.4                               & 18650.7                               \\ \hline
+4                                                                          & 3827.13                              & 7354.19                               & 12017.0                               & 17815.7                               & 24750.1                               \\ \hline
+5                                                                          & 4754.49                              & 9148.68                               & 14962.5                               & 22196.1                               & 30849.3                               \\ \hline
+6                                                                          & 5682.00                              & 10943.2                               & 17908.1                               & 26576.5                               & 36948.4                               \\ \hline
+7                                                                          & 6609.56                              & 12737.8                               & 20853.7                               & 30956.8                               & 43047.6                               \\ \hline
+8                                                                          & 7536.99                              & 14532.3                               & 23799.2                               & 35337.2                               & 49146.9                               \\ \hline
+9                                                                          & 8464.34                              & 16326.9                               & 26744.6                               & 39717.9                               & 55246.2                               \\ \hline
+10                                                                         & 9391.91                              & 18121.3                               & 29690.1                               & 44098.0                               & 61345.4                               \\ \hline
+20                                                                         & 18666.6                              & 36066.6                               & 59145.0                               & 87901.8                               & 122338                                \\ \hline
+30                                                                         & 27941.7                              & 54011.9                               & 88600.0                               & 131706                                & -                                     \\ \hline
+40                                                                         & 37216.4                              & 71957.2                               & 118055                                & -                                     & -                                     \\ \hline
+50                                                                         & 46491.1                              & 89902.4                               & 147510                                & -                                     & -                                     \\ \hline
+60                                                                         & 55765.9                              & 107848                                & -                                     & -                                     & -                                     \\ \hline
+70                                                                         & 65040.7                              & 125793                                & -                                     & -                                     & -                                     \\ \hline
+80                                                                         & 74315.8                              & 143738                                & -                                     & -                                     & -                                     \\ \hline
+90                                                                         & 83590.5                              & 161683                                & -                                     & -                                     & -                                     \\ \hline
+100                                                                        & 92865.1                              & 179629                                & -                                     & -                                     & -                                     \\ \hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[h]
+\centering
+\caption{\acs{gc}+\acs{k-m}. Amount of bytes per data sample (in kB) received during runtime by the \ac{gc} evaluator. \emph{Adult Income} Dataset.}
+\label{table:computationCostsKM_AID}
+\vspace*{0.2cm}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}Number\\ Clusters\end{tabular}}} & \multicolumn{5}{c|}{\textbf{Numeric Precision}}                                                                                                                                                      \\ \cline{2-6} 
+& \multicolumn{1}{c|}{8 bits} & \multicolumn{1}{c|}{12 bits} & \multicolumn{1}{c|}{16 bits} & \multicolumn{1}{c|}{20 bits} & \multicolumn{1}{c|}{24 bits} \\ \hline
+2                                                                          & 4174.78                              & 7971.66                               & 12971.1                               & 19173.0                               & 26577.5                               \\ \hline
+3                                                                          & 6136.87                              & 11769.3                               & 19205.7                               & 28445.8                               & 39489.5                               \\ \hline
+4                                                                          & 8098.94                              & 15567.1                               & 25440.1                               & 37718.2                               & 52401.5                               \\ \hline
+5                                                                          & 10061.2                              & 19364.8                               & 31675.0                               & 46990.8                               & 65313.5                               \\ \hline
+6                                                                          & 12023.2                              & 23162.6                               & 37909.2                               & 56263.7                               & 78225.4                               \\ \hline
+7                                                                          & 13985.3                              & 26960.3                               & 44143.4                               & 65536.3                               & 91137.4                               \\ \hline
+8                                                                          & 15947.4                              & 30757.9                               & 50378.0                               & 74808.8                               & 104049                                \\ \hline
+9                                                                          & 17909.6                              & 34555.5                               & 56612.9                               & 84081.3                               & 116961                                \\ \hline
+10                                                                         & 19871.7                              & 38353.1                               & 62847.2                               & 93354.2                               & 129873                                \\ \hline
+20                                                                         & 39493.0                              & 76330.2                               & 125193                                & -                                     & -                                     \\ \hline
+30                                                                         & 59114.1                              & 114307                                & -                                     & -                                     & -                                     \\ \hline
+40                                                                         & 78735.3                              & 152284                                & -                                     & -                                     & -                                     \\ \hline
+50                                                                         & 98356.6                              & -                                     & -                                     & -                                     & -                                     \\ \hline
+60                                                                         & 117978                               & -                                     & -                                     & -                                     & -                                     \\ \hline
+70                                                                         & 137598                               & -                                     & -                                     & -                                     & -                                     \\ \hline
+80                                                                         & 157221                               & -                                     & -                                     & -                                     & -                                     \\ \hline
+90                                                                         & -                                    & -                                     & -                                     & -                                     & -                                     \\ \hline
+100                                                                        & -                                    & -                                     & -                                     & -                                     & -                                     \\ \hline
+\end{tabular}
+\end{table}
+
+
